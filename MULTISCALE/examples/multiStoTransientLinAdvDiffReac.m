@@ -26,6 +26,7 @@ pathname = fullfile(getfemobjectoptions('path'),'MULTISCALE',...
 if ~exist(pathname,'dir')
     mkdir(pathname);
 end
+fontsize = 16;
 formats = {'fig','epsc'};
 renderer = 'OpenGL';
 
@@ -484,7 +485,7 @@ if displaySolution
     h4 = plotfacets(glob.S,5,'FaceColor',[0.63 0.13 0.94],'EdgeColor','none');
     h5 = plotfacets(glob.S,17,'FaceColor',[1 0.5 0],'EdgeColor','none');
     hold off
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     l = legend([h1(1),h2(1),h3(1),h4(1),h5(1)],'$\Omega_1$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$','Location','NorthEast');
     set(l,'Interpreter','latex')
     mysaveas(pathname,'domain',formats,renderer);
@@ -494,7 +495,7 @@ if displaySolution
     clf
     plot(phi,Sadv);
     colorbar
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     hold on
     ampl = 6;
     quiver(v,Sadv,ampl,'k');
@@ -512,7 +513,7 @@ if displaySolution
         plot(phi_patch{k},Sadv_patch{k});
     end
     colorbar
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     ampl = 6;
     v_out = calc_P(Sadv,Sadv_out)*v;
     quiver(v_out,Sadv_out,ampl,'k');
@@ -545,7 +546,7 @@ if displaySolution
         leg_patch{k} = ['$\Lambda_{' num2str(k) '}$'];
     end
     hold off
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     l = legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
         '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},'Location','NorthEast');
     set(l,'Interpreter','latex')
@@ -573,7 +574,7 @@ if displaySolution
         leg_patch{k} = ['$\Lambda_{' num2str(k) '}$'];
     end
     hold off
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     l = legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
         '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},'Location','NorthEast');
     set(l,'Interpreter','latex')

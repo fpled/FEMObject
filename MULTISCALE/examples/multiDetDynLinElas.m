@@ -19,6 +19,7 @@ pathname = fullfile(getfemobjectoptions('path'),'MULTISCALE',...
 if ~exist(pathname,'dir')
     mkdir(pathname);
 end
+fontsize = 16;
 formats = {'fig','epsc'};
 renderer = 'OpenGL';
 
@@ -312,7 +313,7 @@ if displaySolution
         leg_patch{k} = ['$\Lambda_{' num2str(k) '}$'];
     end
     hold off
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     l = legend([h1(1),h2(1),h3(1),h_patch{:}],'$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},'Location','NorthEastOutside');
     set(l,'Interpreter','latex')
     axis image
@@ -339,7 +340,7 @@ if displaySolution
         leg_patch{k} = ['$\Lambda_{' num2str(k) '}$'];
     end
     hold off
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     % l = legend([h1(1),h2(1),h3(1),h_patch{:}],...
     %     '$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},'Location','NorthEastOutside');
     % set(l,'Interpreter','latex')
