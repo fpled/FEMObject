@@ -24,12 +24,12 @@ if indim==2
     P{7} = [0,-a];
 elseif indim==3
     P{1} = [0,0,0];
-    P{3} = [a-b,0,0];
-    P{4} = [a,0,0];
-    P{5} = [a,a,0];
-    P{6} = [-a,a,0];
-    P{7} = [-a,-a,0];
-    P{8} = [0,-a,0];
+    P{2} = [a-b,0,0];
+    P{3} = [a,0,0];
+    P{4} = [a,a,0];
+    P{5} = [-a,a,0];
+    P{6} = [-a,-a,0];
+    P{7} = [0,-a,0];
 end
 
 G = GMSHFILE();
@@ -37,8 +37,10 @@ if nargin>=2 && ischar(filename)
     G = setfile(G,filename);
 end
 
-G = createpoints(G,P(1),clC,1);
-G = createpoints(G,P(2:7),clD,2:7);
+% G = createpoints(G,P(1),clC,1);
+% G = createpoints(G,P(2:7),clD,2:7);
+G = createpoints(G,P(1:3),clC,1:3);
+G = createpoints(G,P(4:7),clD,4:7);
 G = createcontour(G,1:7,1:7,8);
 G = createplanesurface(G,8,1);
 if indim==3
