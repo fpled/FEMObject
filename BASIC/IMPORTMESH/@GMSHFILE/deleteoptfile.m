@@ -6,6 +6,10 @@ if nargin==2
 end
 file = getfilemsh(u);
 file = [file '.opt'];
-
-commande = ['rm ' file ';'];
+if ispc
+    commande = 'del';
+else
+    commande = 'rm';
+end
+commande = [commande ' ' file ';'];
 dos(commande);
