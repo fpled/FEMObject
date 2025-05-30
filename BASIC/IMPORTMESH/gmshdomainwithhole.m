@@ -63,7 +63,7 @@ if ~isempty(numberembeddedpoints)
     G = embedpointsinsurface(G,numberembeddedpoints,1);
 end
 if ~isempty(numberembeddedlines)
-    G = embedlinesinsurface(G,numberembeddedlines,1);
+    G = embedcurvesinsurface(G,numberembeddedlines,1);
     if ~noduplicate
         physicalgroup = 1;
         G = createphysicalpoint(G,numberpointsinembeddedlines,1);

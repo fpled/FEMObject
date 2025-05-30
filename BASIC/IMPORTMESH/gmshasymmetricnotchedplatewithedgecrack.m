@@ -69,7 +69,7 @@ G = createplanesurface(G,numlines(end),1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);
 end
-G = embedlineinsurface(G,1,1);
+G = embedcurveinsurface(G,1,1);
 if ~noduplicate
     openboundaryphysicalgroup = 1;
     physicalgroup = 1;

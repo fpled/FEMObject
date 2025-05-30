@@ -35,15 +35,19 @@ G = GMSHFILE();
 PD = getvertices(D);
 G = createpoints(G,PD(1:4),clD,numberpoints);
 G = createcontour(G,numberpoints(1:4),numberlines,numberlineloop);
-if D.dim==3 || ~isempty(numbersurface)
+if getdim(D)==3 || ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);
-end
-G = createpoints(G,P,clP,numberembeddedpoints);
-if D.dim==3 || ~isempty(numbersurface)
-    G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
-    if D.dim==3
+    if getdim(D)==3
         vect = PD{5}-PD{1};
         G = extrude(G,vect,'Surface',numbersurface);
+    end
+end
+if ~isempty(numbersurface)
+    G = createpoints(G,P,clP,numberembeddedpoints);
+    if getdim(D)==2
+        G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
+    elseif getdim(D)==3
+        G = embedpointsinvolume(G,numberembeddedpoints,numbersurface);
     end
     if ischarin('recombine',varargin)
         G = recombinesurface(G,numbersurface);

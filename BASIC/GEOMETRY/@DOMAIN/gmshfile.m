@@ -20,9 +20,9 @@ G = GMSHFILE();
 P = getvertices(D);
 G = createpoints(G,P(1:4),cl,numberpoints);
 G = createcontour(G,numberpoints(1:4),numberlines,numberlineloop);
-if D.dim==3 || ~isempty(numbersurface)
+if getdim(D)==3 || ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);
-    if D.dim==3
+    if getdim(D)==3
         vect = P{5}-P{1};
         G = extrude(G,vect,'Surface',numbersurface,varargin{:});
     end

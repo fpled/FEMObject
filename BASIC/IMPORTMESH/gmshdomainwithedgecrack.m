@@ -30,7 +30,7 @@ if indim==2
     if ischarin('recombine',varargin)
         G = recombinesurface(G,1);
     end
-    G = embedlineinsurface(G,1,1);
+    G = embedcurveinsurface(G,1,1);
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
@@ -48,11 +48,11 @@ elseif indim==3
     G = createpoints(G,PD,clD,5:12);
     G = createcontour(G,[1 8 7 6 5],5:9,2);
     G = createplanesurface(G,2,2);
-    G = embedlineinsurface(G,1,2);
+    G = embedcurveinsurface(G,1,2);
     
     G = createcontour(G,[4 9 10 11 12],10:14,3);
     G = createplanesurface(G,3,3);
-    G = embedlineinsurface(G,3,3);
+    G = embedcurveinsurface(G,3,3);
     
     G = createlines(G,[[7 11];[12 8]],15:16);
     G = createlineloop(G,-[6 16 13 15],4);
@@ -64,7 +64,7 @@ elseif indim==3
     
     G = createlineloop(G,[-9 -18 -10 -14 16 -5],6);
     G = createplanesurface(G,6,6);
-    G = embedlineinsurface(G,4,6);
+    G = embedcurveinsurface(G,4,6);
     
     G = createlineloop(G,[15 -12 -17 -7],7);
     G = createplanesurface(G,7,7);

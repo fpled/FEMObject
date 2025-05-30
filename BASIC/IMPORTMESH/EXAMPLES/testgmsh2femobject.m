@@ -236,7 +236,7 @@ subplot(1,2,2)
 plotparamelem(Sq,'group')
 
 %% Asymmetric notched plate with single edge crack
-unit = 1e-3; % for mm
+unit = 1e-3; % [mm]
 a = 1*unit; % crack length
 b = 6*unit; % crack offset from the centerline
 c = 0.025*unit; % notch width

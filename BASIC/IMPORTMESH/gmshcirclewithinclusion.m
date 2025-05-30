@@ -43,6 +43,7 @@ for j=1:length(I)
         elseif isa(I{j},'CIRCLE') || isa(I{j},'ELLIPSE')
             GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines(1:end-1),numlines(end),j+1,varargin{:});
         end
+        GI = createphysicalsurface(GI,j+1,j+1);
         numlineloop = [numlineloop,-numlines(1:end-1)];
     end
     G = G+GI;
@@ -58,7 +59,7 @@ if ~isempty(numberembeddedpoints)
     G = embedpointsinsurface(G,numberembeddedpoints,1);
 end
 if ~isempty(numberembeddedlines)
-    G = embedlinesinsurface(G,numberembeddedlines,1);
+    G = embedcurvesinsurface(G,numberembeddedlines,1);
 end
 G = createphysicalsurface(G,1,1);
 varargin = delonlycharin('recombine',varargin);

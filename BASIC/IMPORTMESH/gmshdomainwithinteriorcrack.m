@@ -30,7 +30,7 @@ if indim==2
     for j=1:length(C)
         GC = gmshfile(C{j},clC(j),numpoints([2*j-1,2*j]),numlines(j));
         G = G+GC;
-        G = embedlineinsurface(G,numlines(j),1);
+        G = embedcurveinsurface(G,numlines(j),1);
     end
     if ~noduplicate
         physicalgroup = 1;
