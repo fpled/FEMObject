@@ -40,11 +40,16 @@ end
 %% Computation of projectors of strain/stress tensor onto volumetric/spherical/hydrostatic expansion (or tensile bulk) and deviatoric parts for generalized Amor decomposition
 %% Computation of projectors of strain/stress tensor onto positive (tensile) and negative (compressive) parts for generalized Freddi decomposition
 % Projectors for transformed strain/stress tensor
-% if ~isempty(strfind(lower(model),'amor')) % for compatibility with Matlab version < 9.1 (R2016b)
-if contains(model,'amor','IgnoreCase',true) % for Matlab versions >= 9.1 (R2016b)
+if verLessThan('matlab','9.1') % compatibility (<R2016b)
+    projAmor = ~isempty(strfind(lower(model),'amor'));
+    projFreddi = ~isempty(strfind(lower(model),'freddi'));
+else
+    projAmor = contains(model,'amor','IgnoreCase',true);
+    projFreddi = contains(model,'freddi','IgnoreCase',true);
+end
+if projAmor
     [Ppt,Pmt] = calc_proj_Amor(mat,elem,xnode,xgauss,set); % projectors for strain tensor in Voigt notation
-% elseif ~isempty(strfind(lower(model),'freddi')) % for compatibility with Matlab version < 9.1 (R2016b)
-elseif contains(model,'freddi','IgnoreCase',true) % for Matlab versions >= 9.1 (R2016b)
+elseif projFreddi
     [Ppt,Pmt] = calc_proj_Miehe(mat,elem,xnode,xgauss,set); % projectors for strain tensor in Voigt notation
 else
     error(['Wrong phase field model ' model])

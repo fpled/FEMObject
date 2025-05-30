@@ -52,12 +52,17 @@ end
 %% Check stiffness/compliance operator decomposition
 % tol = 1e-12;
 % D = calc_opmat(mat,elem,xnode,xgauss); % stiffness operator in Voigt notation
+% if verLessThan('matlab','9.1') % compatibility (<R2016b)
+%     projAmor = ~isempty(strfind(lower(model),'amor'));
+% else
+%     projAmor = contains(model,'amor','IgnoreCase',true);
+% end
 % if strcmpi(split,'stress')
 %     % C = inv(D); % compliance operator in Voigt notation
 %     % Cpp = D\(Pp*B); % damaged part of compliance operator in Voigt notation
 %     % Cmm = D\(Pm*B); % undamaged part of compliance operator in Voigt notation
 %     % decompC = max(norm(C - (Cpp+Cmm))/norm(C),[],'all'); if decompC>tol, decompC, end
-%     % if contains(model,'amor','IgnoreCase',true)
+%     % if projAmor
 %     %     decompC = max(norm(C - (Cp+Cm))/norm(C),[],'all'); if decompC>tol, decompC, end
 %     % end
 %     % decompCse = max(norm(C*se - (Cp+Cm)*se)/norm(C*se),[],'all'); if decompCse>tol, decompCse, end
@@ -71,7 +76,7 @@ end
 %     Dpp = D*B*Pp; % damaged part of stiffness operator in Voigt notation
 %     Dmm = D*B*Pm; % undamaged part of stiffness operator in Voigt notation
 %     decompD = max(norm(D - (Dpp+Dmm))/norm(D),[],'all'); if decompD>tol, decompD, end
-%     if contains(model,'amor','IgnoreCase',true)
+%     if projAmor
 %         decompD = max(norm(D - (Dp+Dm))/norm(D),[],'all'); if decompD>tol, decompD, end
 %     end
 %     decompDse = max(norm(D*se - (Dp+Dm)*se)/norm(D*se),[],'all'); if decompDse>tol, decompDse, end
