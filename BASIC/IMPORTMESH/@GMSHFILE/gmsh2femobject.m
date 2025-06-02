@@ -21,4 +21,4 @@ if ~ismesh(file)
     file = mesh(file,max(dim),varargin{:});
 end
 
-M = gmsh2femobject_model(indim,getfilemsh(file),dim,varargin{:});
+M = gmsh2femobject_model(indim,getfile(file,'.msh'),dim,varargin{:});

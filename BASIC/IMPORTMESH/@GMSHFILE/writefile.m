@@ -4,7 +4,7 @@ function u = writefile(u,file)
 if nargin==2
     u = setfile(u,file);
 end
-file = getfilegeo(u);
+file = getfile(u,'.geo');
 
 fid = fopen(file,'w');
 fprintf(fid,u.string);

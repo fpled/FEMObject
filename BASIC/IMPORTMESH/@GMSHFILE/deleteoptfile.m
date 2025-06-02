@@ -4,12 +4,11 @@ function u = deleteoptfile(u,file)
 if nargin==2
     u = setfile(u,file);
 end
-file = getfilemsh(u);
-file = [file '.opt'];
+file = getfile(u,'.msh.opt');
 if ispc
-    commande = 'del';
+    command = 'del';
 else
-    commande = 'rm';
+    command = 'rm';
 end
-commande = [commande ' ' file ';'];
-dos(commande);
+command = [command ' ' file ';'];
+dos(command);

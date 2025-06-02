@@ -31,8 +31,7 @@ end
 if nargin==11
     u = setfile(u,file);
 end
-file = getfilemsh(u);
-file = [file '.opt'];
+file = getfile(u,'.msh.opt');
 
 fid = fopen(file,'w');
 fprintf(fid,'Plugin(Crack).Dimension = %u;\n',dim);

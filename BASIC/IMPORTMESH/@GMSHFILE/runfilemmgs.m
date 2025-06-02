@@ -1,10 +1,16 @@
-function u = runfilemmgs(u,options)
-% function u = runfilemmgs(u,options)
+function u = runfilemmgs(u,ext,options)
+% function u = runfilemmgs(u,ext,options)
 
-tempo = getfemobjectoptions('mmgpath');
-commande = [tempo 'mmgs_O3 ' getfilemsh(u)];
-if nargin==2
-    commande = [commande ' ' options];
+if nargin==1 || isempty(ext)
+    ext = '.msh';
 end
-dos(commande);
+command = ['mmgs_O3 ' getfile(u,ext)];
+
+if nargin==3
+    command = [command ' ' options];
+end
+
+pathname = getfemobjectoptions('mmgpath');
+command = fullfile(pathname,command);
+dos(command);
 u.ismesh = 1;

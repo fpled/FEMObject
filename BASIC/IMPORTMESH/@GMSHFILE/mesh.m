@@ -20,9 +20,13 @@ if ischarin('gmshoptions',varargin)
     options = [options ' ' getcharin('gmshoptions',varargin)];
 end
 
-if isempty(strfind(options,'-format')) % for compatibility with Matlab version < 9.1 (R2016b)
-% if ~contains(options,'-format') % for Matlab versions >= 9.1 (R2016b)
+if verLessThan('matlab','9.1') % compatibility (<R2016b)
+    noFormat = isempty(strfind(options,'-format'));
+else
+    noFormat = ~contains(options,'-format');
+end
+if noFormat
     options = [options ' -format msh2'];
 end
 
-u = runfile(u,options);
+u = runfile(u,'.geo',options);
