@@ -196,8 +196,7 @@ classdef Interface
             hg = hggroup;
             set(h(:),'Parent',hg);
             if p.Results.legend
-                l = legend(hg,['$\Gamma_{' num2str(interface.number) '}$'],'Location','NorthEastOutside');
-                set(l,'Interpreter',p.Results.Interpreter)
+                legend(hg,['$\Gamma_{' num2str(interface.number) '}$'],'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
             end
             set(gca,'FontSize',p.Results.FontSize)
             

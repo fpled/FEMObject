@@ -48,8 +48,7 @@ if nargin==1 || isempty(varargin) || ischar(varargin{1})
         set(h(:),'Parent',hg);
     end
     if p.Results.legend
-        l = legend(hg,'$\Omega$','Location','NorthEastOutside');
-        set(l,'Interpreter',p.Results.Interpreter)
+        legend(hg,'$\Omega$','Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
     end
     set(gca,'FontSize',p.Results.FontSize)
 else
@@ -131,8 +130,7 @@ else
         end
     end
     if p.Results.legend
-        l = legend([hg{:}],leg{:},'Location','NorthEastOutside');
-        set(l,'Interpreter',p.Results.Interpreter)
+        legend([hg{:}],leg{:},'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
     end
     set(gca,'FontSize',p.Results.FontSize)
 end

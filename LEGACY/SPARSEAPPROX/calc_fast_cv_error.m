@@ -45,6 +45,12 @@ end
 err = zeros(1,n);
 delta = zeros(size(y));
 
+if N==1
+    err(:) = Inf;
+    delta(:) = Inf;
+    return
+end
+
 % create a random partition of nearly equal size for leave-one-out or k-fold cross-validation on N observations
 switch cv
     case 'leaveout'

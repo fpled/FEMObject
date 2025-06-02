@@ -23,8 +23,7 @@ for i=1:plotstep:length(t)
     hg = hggroup;
     set(h(:),'Parent',hg);
     if leg
-        l = legend(hg,'$\Omega$');
-        set(l,'Interpreter',interpreter)
+        legend(hg,'$\Omega$','Interpreter',interpreter)
     end
     set(gca,'FontSize',fontsize)
     

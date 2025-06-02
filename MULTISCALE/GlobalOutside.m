@@ -320,8 +320,7 @@ classdef GlobalOutside
                     hg = hggroup;
                     set(h(:),'Parent',hg);
                     if p.Results.legend
-                        l = legend(hg,'$\Omega \setminus \Lambda$','Location','NorthEastOutside');
-                        set(l,'Interpreter',p.Results.Interpreter)
+                        legend(hg,'$\Omega \setminus \Lambda$','Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                     end
                     set(gca,'FontSize',p.Results.FontSize)
                 case 2
@@ -338,8 +337,8 @@ classdef GlobalOutside
                         set(h(:),'Parent',hg);
                         set(h_patch(:),'Parent',hg_patch);
                         if p.Results.legend
-                            l = legend([hg,hg_patch],'$\Omega \setminus \Lambda$',['$\Lambda_{' num2str(patch.number) '}$'],'Location','NorthEastOutside');
-                            set(l,'Interpreter',p.Results.Interpreter)
+                            legend([hg,hg_patch],'$\Omega \setminus \Lambda$',['$\Lambda_{' num2str(patch.number) '}$'],...
+                                'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                         end
                         set(gca,'FontSize',p.Results.FontSize)
                     elseif isa(varargin{1},'Patches')
@@ -368,8 +367,7 @@ classdef GlobalOutside
                             end
                         end
                         if p.Results.legend
-                            l = legend([hg{:}],leg{:},'Location','NorthEastOutside');
-                            set(l,'Interpreter',p.Results.Interpreter)
+                            legend([hg{:}],leg{:},'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                         end
                         set(gca,'FontSize',p.Results.FontSize)
                     elseif isa(varargin{1},'Interface')
@@ -385,8 +383,8 @@ classdef GlobalOutside
                         set(h(:),'Parent',hg);
                         set(h_interface(:),'Parent',hg_interface);
                         if p.Results.legend
-                            l = legend([hg,hg_interface],'$\Omega \setminus \Lambda$',['$\Gamma_{' num2str(interface.number) '}$'],'Location','NorthEastOutside');
-                            set(l,'Interpreter',p.Results.Interpreter)
+                            legend([hg,hg_interface],'$\Omega \setminus \Lambda$',['$\Gamma_{' num2str(interface.number) '}$'],...
+                                'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                         end
                         set(gca,'FontSize',p.Results.FontSize)
                     elseif isa(varargin{1},'Interfaces')
@@ -415,8 +413,7 @@ classdef GlobalOutside
                             end
                         end
                         if p.Results.legend
-                            l = legend([hg{:}],leg{:},'Location','NorthEastOutside');
-                            set(l,'Interpreter',p.Results.Interpreter)
+                            legend([hg{:}],leg{:},'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                         end
                         set(gca,'FontSize',p.Results.FontSize)
                     end

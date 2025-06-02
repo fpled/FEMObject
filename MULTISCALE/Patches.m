@@ -283,8 +283,7 @@ classdef Patches
                     leg{k} = ['$\Lambda_{' num2str(patch.number) '}$'];
                 end
                 if p.Results.legend
-                    l = legend([hg{:}],leg{:},'Location','NorthEastOutside');
-                    set(l,'Interpreter',p.Results.Interpreter)
+                    legend([hg{:}],leg{:},'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
                 end
                 set(gca,'FontSize',p.Results.FontSize)
             end

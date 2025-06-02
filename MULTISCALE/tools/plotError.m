@@ -54,8 +54,7 @@ set(gca,'FontSize',p.Results.FontSize)
 xlabel('Number of iterations')
 ylabel('Error indicator')
 if p.Results.legend
-    l = legend(leg{:});
-    set(l,'Interpreter',p.Results.Interpreter)
+    legend(leg{:},'Interpreter',p.Results.Interpreter)
 end
 
 end

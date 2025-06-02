@@ -25,8 +25,7 @@ end
 hg = hggroup;
 set(h(:),'Parent',hg);
 if p.Results.legend
-    l = legend(hg,'$\Omega$');
-    set(l,'Interpreter',p.Results.Interpreter)
+    legend(hg,'$\Omega$','Interpreter',p.Results.Interpreter)
 end
 set(gca,'FontSize',p.Results.FontSize)
 

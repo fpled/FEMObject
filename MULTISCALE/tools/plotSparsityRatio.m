@@ -40,8 +40,7 @@ ylim([0 1.1]);
 xlabel('Number of iterations')
 ylabel('Sparsity ratio')
 if p.Results.legend
-    l = legend(leg{:});
-    set(l,'Interpreter',p.Results.Interpreter)
+    legend(leg{:},'Interpreter',p.Results.Interpreter)
 end
 
 end

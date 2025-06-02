@@ -33,10 +33,10 @@ set(h_out(:),'Parent',hg_out);
 set(h_patch(:),'Parent',hg_patch);
 set(h(:),'Parent',hg);
 if p.Results.legend
-    l = legend([hg_out,hg_patch,h],'$\Omega \setminus \Lambda$',...
+    legend([hg_out,hg_patch,h],'$\Omega \setminus \Lambda$',...
         ['$\Lambda_{' num2str(patch.number) '}$'],...
-        ['$i \in \partial(\Omega \setminus \Lambda) \cap \partial \Lambda_{' num2str(patch.number) '}$'],'Location','NorthEastOutside');
-    set(l,'Interpreter',p.Results.Interpreter)
+        ['$i \in \partial(\Omega \setminus \Lambda) \cap \partial \Lambda_{' num2str(patch.number) '}$'],...
+        'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
 end
 set(gca,'FontSize',p.Results.FontSize)
 

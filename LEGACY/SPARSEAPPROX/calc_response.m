@@ -1,5 +1,5 @@
 function [y,s] = calc_response(fun,x,n,varargin)
-% function [y,s] = calc_response_leastsquares(fun,x,n,varargin)
+% function [y,s] = calc_response(fun,x,n,varargin)
 % Compute response matrix y returned by function fun applied to sample matrix x
 % fun : function_handle of random variables
 % x : sample matrix

@@ -3,12 +3,12 @@ function video_indices(PC,varargin)
 % Make a video of the adaptive construction of the multi-index set of
 % POLYCHAOS PC projected on dimension dim using adaptive algorithm
 % PC: cell of POLYCHAOS
-% dim: dimension, 1:min(3,PC{end}.M) by default
+% dim: dimension, 1:min(3,getM(PC{end})) by default
 % filename: movie filename, 'mutli_index_set.avi' by default
 % pathname: movie pathname, './' by default
 
 p = inputParser;
-addParameter(p,'dim',1:min(3,PC{end}.M),@isnumeric);
+addParameter(p,'dim',1:min(3,getM(PC{end})),@isnumeric);
 addParameter(p,'pause',false,@islogical);
 addParameter(p,'filename','multi_index_set',@ischar);
 addParameter(p,'pathname','./',@ischar);

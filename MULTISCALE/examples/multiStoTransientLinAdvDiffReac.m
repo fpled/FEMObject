@@ -486,8 +486,8 @@ if displaySolution
     h5 = plotfacets(glob.S,17,'FaceColor',[1 0.5 0],'EdgeColor','none');
     hold off
     set(gca,'FontSize',fontsize)
-    l = legend([h1(1),h2(1),h3(1),h4(1),h5(1)],'$\Omega_1$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$','Location','NorthEast');
-    set(l,'Interpreter','latex')
+    legend([h1(1),h2(1),h3(1),h4(1),h5(1)],'$\Omega_1$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',...
+        'Location','NorthEast','Interpreter','latex')
     mysaveas(pathname,'domain',formats,renderer);
     mymatlab2tikz(pathname,'domain.tex');
     
@@ -547,9 +547,9 @@ if displaySolution
     end
     hold off
     set(gca,'FontSize',fontsize)
-    l = legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
-        '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},'Location','NorthEast');
-    set(l,'Interpreter','latex')
+    legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
+        '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},...
+        'Location','NorthEast','Interpreter','latex')
     mysaveas(pathname,'domain_global_patches',formats,renderer);
     mymatlab2tikz(pathname,'domain_global_patches.tex');
     
@@ -575,9 +575,9 @@ if displaySolution
     end
     hold off
     set(gca,'FontSize',fontsize)
-    l = legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
-        '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},'Location','NorthEast');
-    set(l,'Interpreter','latex')
+    legend([h1(1),h2(1),h3(1),h4(1),h5(1),h_patch{:}],...
+        '$\Omega_1 \setminus \Lambda$','$\Omega_2$','$\Omega_3$','$\Gamma_D^1$','$\Gamma_D^2$',leg_patch{:},...
+        'Location','NorthEast','Interpreter','latex')
     mysaveas(pathname,'mesh_global_patches',formats,renderer);
     
     %% Display evolutions of error indicator, stagnation indicator, CPU time w.r.t. number of iterations for stationary solution
@@ -978,10 +978,9 @@ if displaySolution
     set(gca,'FontSize',16)
     xlabel('Time [s]')
     ylabel('Concentration of pollutant')
-    l = legend({['$' num2str((probs(2)-probs(1))*100) '\%$ confidence interval - multiscale'],...
+    legend({['$' num2str((probs(2)-probs(1))*100) '\%$ confidence interval - multiscale'],...
         ['$' num2str((probs(2)-probs(1))*100) '\%$ confidence interval - monoscale'],...
-        'mean value - multiscale','mean value - monoscale'});
-    set(l,'Interpreter','latex')
+        'mean value - multiscale','mean value - monoscale'},'Interpreter','latex')
     mysaveas(pathname,'quantity_of_interest',formats,renderer);
     mymatlab2tikz(pathname,'quantity_of_interest.tex');
     

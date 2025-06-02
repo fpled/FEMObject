@@ -736,8 +736,7 @@ classdef Patch
             hg = hggroup;
             set(h(:),'Parent',hg);
             if p.Results.legend
-                l = legend(hg,['$\Lambda_{' num2str(patch.number) '}$'],'Location','NorthEastOutside');
-                set(l,'Interpreter',p.Results.Interpreter)
+                legend(hg,['$\Lambda_{' num2str(patch.number) '}$'],'Location','NorthEastOutside','Interpreter',p.Results.Interpreter)
             end
             set(gca,'FontSize',p.Results.FontSize)
             

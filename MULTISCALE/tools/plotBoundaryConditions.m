@@ -23,8 +23,7 @@ hold on
 [hD,leg] = plotbcond(S);
 
 if p.Results.legend
-    % l = legend(g,'$\Omega$',hD,leg{:});
-    % set(l,'Interpreter',p.Results.Interpreter)
+    % legend(g,'$\Omega$',hD,leg{:},'Interpreter',p.Results.Interpreter)
     legend(hD,leg{:});
 else
     legend('off');

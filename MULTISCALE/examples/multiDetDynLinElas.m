@@ -314,8 +314,8 @@ if displaySolution
     end
     hold off
     set(gca,'FontSize',fontsize)
-    l = legend([h1(1),h2(1),h3(1),h_patch{:}],'$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},'Location','NorthEastOutside');
-    set(l,'Interpreter','latex')
+    legend([h1(1),h2(1),h3(1),h_patch{:}],'$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},...
+        'Location','NorthEastOutside','Interpreter','latex')
     axis image
     axis off
     mysaveas(pathname,'domain_global_patches',formats,renderer);
@@ -341,9 +341,9 @@ if displaySolution
     end
     hold off
     set(gca,'FontSize',fontsize)
-    % l = legend([h1(1),h2(1),h3(1),h_patch{:}],...
-    %     '$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},'Location','NorthEastOutside');
-    % set(l,'Interpreter','latex')
+    legend([h1(1),h2(1),h3(1),h_patch{:}],...
+        '$\Omega \setminus \Lambda$','$\Gamma_D$','$\Gamma_N$',leg_patch{:},...
+        'Location','NorthEastOutside','Interpreter','latex')
     mysaveas(pathname,'mesh_global_patches',formats,renderer);
     
     %% Display evolutions of error indicator, stagnation indicator, CPU time w.r.t. number of iterations
