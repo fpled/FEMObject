@@ -975,7 +975,7 @@ if displaySolution
     plot(mean_boutput_ref,'-r','LineWidth',1);
     grid on
     box on
-    set(gca,'FontSize',16)
+    set(gca,'FontSize',fontsize)
     xlabel('Time [s]')
     ylabel('Concentration of pollutant')
     legend({['$' num2str((probs(2)-probs(1))*100) '\%$ confidence interval - multiscale'],...
