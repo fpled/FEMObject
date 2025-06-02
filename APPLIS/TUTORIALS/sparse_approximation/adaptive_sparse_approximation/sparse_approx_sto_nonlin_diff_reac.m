@@ -2,7 +2,7 @@
 %%---------------------------------------------------%%
 
 % clc
-clear all
+clearvars
 close all
 
 % Parallel computing

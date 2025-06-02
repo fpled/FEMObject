@@ -1,28 +1,23 @@
-%% Adaptive sparse polynomial approximation - Anisotropic function %%
-%%-----------------------------------------------------------------%%
-% [Chkifa, Cohen, Schwab, 2014, FCM]
+%% Adaptive sparse polynomial approximation - Geometric brownian %%
+%%---------------------------------------------------------------%%
 
 % clc
-clear all
+clearvars
 close all
+rng('default');
 
 %% Random variables
-M = 16; % number of random variables
-rv = RVUNIFORM(0,1);
+M = 10; % number of random variables
+rv = RVNORMAL(0,1);
 RV = RANDVARS(repmat({rv},1,M));
 
-%% Anisotropic function
-% y = x_3*sin(x_4+x_16)
-fun = @(x) (x(:,3).*sin(x(:,4)+x(:,16)))';
-
-% y = 1/(1 + sum_{j=1}^{M}(g_j*x_j)) with g_j = 3/(5*j^3)
-% fun = @(x) (1./(ones(1,size(x,1))+3./(5.*(1:size(x,2)).^3)*x'));
-
-% y = 1/(1 + (sum_{j=1}^{M}(g_j*x_j))^2) with g_j = 5/(j^3)
-% fun = @(x) (1./(ones(1,size(x,1))+(5./((1:size(x,2)).^3)*x').^2));
-
-% y = 1/(1 + sum_{j=1}^{M}(g_j*x_j)) with g_j = 10^(-j)
-% fun = @(x) (1./(ones(1,size(x,1))+(10.^(-(1:size(x,2))))*x'));
+%% Geometric brownian
+c = -1;
+s = 0.5;
+T = 1;
+m = 101; % output size
+n = m-1;
+fun = @(x) geometric_brownian(x,c,s,T,n)';
 
 %% Resolution using adaptive sparse approximation and least-squares minimization
 
@@ -52,7 +47,7 @@ opts.bulkparam = 0.5; % bulk parameter in (0,1) such that energy(S_n)>=bulkparam
 funtr = @(x) fun(transfer(RANDVARS(PC),RANDVARS(RV),x));
 
 % Sampling
-N = 2; % (initial) number of samples (regression points)
+N = 1; % (initial) number of samples (regression points)
 opts.sampling = 'adaptive'; % sampling strategy ('fixed' or 'adaptive')
 opts.addsample = 0.1; % percentage of additional samples if 0 < addsample < 1
                       % number of additional samples if addsample > 1
@@ -64,8 +59,8 @@ regul = ''; % type of regularization ('' or 'l0' or 'l1')
 % Cross-validation
 cv = 'leaveout'; % type of cross-validation procedure ('leaveout' or 'kfold')
 k = 10; % number of folds (only for k-fold cross-validation procedure)
-opts.tol = 1e-6; % prescribed tolerance for cross-validation error
-opts.tolstagn = 1e-1; % prescribed stagnation tolerance for cross-validation error
+opts.tol = 1e-3; % prescribed tolerance for cross-validation error
+opts.tolstagn = 5e-2; % prescribed stagnation tolerance for cross-validation error
 opts.toloverfit = 1.1; % prescribed tolerance to detect overfitting for cross-validation error such that err>=toloverfit*err_old
 opts.correction = true; % correction for cross-validation error
 
@@ -86,13 +81,18 @@ disp(['I = ' num2str(size(getindices(PC),1)) ' multi-indices']);
 % disp('Set of multi-indices = '); % P-by-(M+1) matrix
 % disp(num2str(getindices(PC)));
 disp(['eta = ' num2str(getSparsityRatio(u)) ' (sparsity index or ratio)'])
-fprintf('error = %.4e (cross-validation error)\n',err)
-fprintf('elapsed time = %f s\n',time);
-disp(' ')
+fprintf('error = %e (cross-validation error)\n',norm(err))
+fprintf('elapsed time = %f s\n',time)
+
+%% Display random evaluations of Brownian motion
+xi = cell2mat(random(RV));
+Xref = fun(xi);
+Xpc = randomeval(u,xi);
+plot_geometric_brownian(Xref,Xpc);
 
 %% Display evolution of multi-index set
-video_indices(PC_seq,'dim',[3 4 16])
-video_indices(PC_seq,'dim',[1 2 4])
+video_indices(PC_seq,'dim',[1 3 5])
+video_indices(PC_seq,'dim',[1 7 10])
 
 %% Display evolution of cross-validation error indicator, dimension of stochastic space and number of samples w.r.t. number of iterations
 % plot_adaptive_algorithm(err_seq,PC_seq,N_seq);
@@ -104,8 +104,8 @@ video_indices(PC_seq,'dim',[1 2 4])
 % plot_cv_error_indicator_vs_dim_stochastic_space(err_seq,PC_seq);
 
 %% Display multi-index set
-dim = [3 4 16];
+dim = [1 3 5];
 plot_multi_index_set(PC,'dim',dim,'legend',false)
 
-dim = [1 2 4];
+dim = [1 7 10];
 plot_multi_index_set(PC,'dim',dim,'legend',false)

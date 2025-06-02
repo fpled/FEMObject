@@ -8,8 +8,9 @@
 % [Blatman, Sudret, 2011, JCP]
 
 % clc
-clear all
+clearvars
 close all
+rng('default');
 
 %% Random variables
 M = 3; % number of random variables
@@ -50,7 +51,7 @@ opts.bulkparam = 0.5; % bulk parameter in (0,1) such that energy(S_n)>=bulkparam
 funtr = @(x) fun(transfer(RANDVARS(PC),RANDVARS(RV),x));
 
 % Sampling
-N = 2; % (initial) number of samples (regression points)
+N = 1; % (initial) number of samples (regression points)
 opts.sampling = 'adaptive'; % sampling strategy ('fixed' or 'adaptive')
 opts.addsample = 0.1; % percentage of additional samples if 0 < addsample < 1
                       % number of additional samples if addsample > 1
@@ -62,8 +63,8 @@ regul = ''; % type of regularization ('' or 'l0' or 'l1')
 % Cross-validation
 cv = 'leaveout'; % type of cross-validation procedure ('leaveout' or 'kfold')
 k = 10; % number of folds (only for k-fold cross-validation procedure)
-opts.tol = 1e-3; % prescribed tolerance for cross-validation error
-opts.tolstagn = 1e-1; % prescribed stagnation tolerance for cross-validation error
+opts.tol = 1e-4; % prescribed tolerance for cross-validation error
+opts.tolstagn = 5e-2; % prescribed stagnation tolerance for cross-validation error
 opts.toloverfit = 1.1; % prescribed tolerance to detect overfitting for cross-validation error such that err>=toloverfit*err_old
 opts.correction = true; % correction for cross-validation error
 
@@ -84,9 +85,8 @@ disp(['I = ' num2str(size(getindices(PC),1)) ' multi-indices']);
 % disp('Set of multi-indices = '); % P-by-(M+1) matrix
 % disp(num2str(getindices(PC)));
 disp(['eta = ' num2str(getSparsityRatio(u)) ' (sparsity index or ratio)'])
-fprintf('error = %1.4e (cross-validation error)\n',err)
-fprintf('elapsed time = %f s\n',time);
-disp(' ')
+fprintf('error = %e (cross-validation error)\n',err)
+fprintf('elapsed time = %f s\n',time)
 
 %% Display evolution of multi-index set
 dim = 1:3;
@@ -136,6 +136,7 @@ num.S3T = num.S3 + num.S13 + num.S23 + num.S123;
 fanal = '%10.5f';
 fnum = '%9.5f';
 ferr = '%14.4e';
+fprintf('\n')
 disp('+-------------------+------------+-----------+----------------+')
 disp('| Quantity \ Value  | Analytical | Numerical | Relative error |')
 disp('+-------------------+------------+-----------+----------------+')

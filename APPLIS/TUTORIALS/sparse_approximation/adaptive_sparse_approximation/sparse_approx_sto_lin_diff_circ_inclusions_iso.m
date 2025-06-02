@@ -5,7 +5,7 @@
 % [Chkifa, Cohen, Migliorati, Nobile, Tempone, 2015, ESAIM:M2AN]
 
 % clc
-clear all
+clearvars
 close all
 
 % Parallel computing

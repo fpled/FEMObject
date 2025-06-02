@@ -1,5 +1,5 @@
-function plot_geometric_brownian_kl(Xref,Xpc,varargin)
-% function geometric_brownian_kl(Xref,Xpc,varargin)
+function plot_geometric_brownian(Xref,Xpc,varargin)
+% function geometric_brownian(Xref,Xpc,varargin)
 % Display geometric Brownian motion
 
 p = inputParser;
@@ -15,8 +15,8 @@ parse(p,varargin{:})
 figure('Name','Evolution of Brownian motion w.r.t. time')
 % set(gcf,'Name','Evolution of Brownian motion w.r.t. time')
 clf
-t = linspace(0,1,size(Xref,1));
-plot(t,[Xref,Xpc],'LineWidth',p.Results.LineWidth);
+t = linspace(0,1,length(Xref));
+plot(t,[Xref(:),Xpc(:)],'LineWidth',p.Results.LineWidth);
 if p.Results.grid
     grid on
 end
@@ -27,8 +27,7 @@ set(gca,'FontSize',p.Results.FontSize)
 xlabel('Time')
 ylabel('Brownian motion')
 if p.Results.legend
-    l = legend({'$B_t^{\mathrm{ref}}$','$B_t^{\mathrm{approx}}$'});
-    set(l,'Interpreter',p.Results.Interpreter)
+    legend({'$B_t^{\mathrm{ref}}$','$B_t^{\mathrm{approx}}$'},'Interpreter',p.Results.Interpreter)
 end
 
 end

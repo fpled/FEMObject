@@ -3,8 +3,9 @@
 % [Sudret, 2008, RESS]
 
 % clc
-clear all
+clearvars
 close all
+rng('default');
 
 %% Random variables
 M = 3; % number of random variables
@@ -44,7 +45,7 @@ opts.bulkparam = 0.5; % bulk parameter in (0,1) such that energy(S_n)>=bulkparam
 funtr = @(x) fun(transfer(RANDVARS(PC),RANDVARS(RV),x));
 
 % Sampling
-N = 2; % (initial) number of samples (regression points)
+N = 1; % (initial) number of samples (regression points)
 opts.sampling = 'adaptive'; % sampling strategy ('fixed' or 'adaptive')
 opts.addsample = 0.1; % percentage of additional samples if 0 < addsample < 1
                       % number of additional samples if addsample > 1
@@ -78,9 +79,8 @@ disp(['I = ' num2str(size(getindices(PC),1)) ' multi-indices']);
 % disp('Set of multi-indices = '); % P-by-(M+1) matrix
 % disp(num2str(getindices(PC)));
 disp(['eta = ' num2str(getSparsityRatio(u)) ' (sparsity index or ratio)'])
-fprintf('error = %.4e (cross-validation error)\n',err)
-fprintf('elapsed time = %f s\n',time);
-disp(' ')
+fprintf('error = %e (cross-validation error)\n',err)
+fprintf('elapsed time = %f s\n',time)
 
 %% Display evolution of multi-index set
 dim = 1:3;
@@ -131,6 +131,7 @@ if q==2
     fanal = '%10.5f';
     fnum = '%9.5f';
     ferr = '%14.4e';
+    fprintf('\n')
     disp('+-------------------+------------+-----------+----------------+')
     disp('| Quantity \ Value  | Analytical | Numerical | Relative error |')
     disp('+-------------------+------------+-----------+----------------+')
