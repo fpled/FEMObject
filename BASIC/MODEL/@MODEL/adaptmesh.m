@@ -57,6 +57,9 @@ end
 % end
 % if meshOutput
 %     G = exportfile(G,'.mesh','msh2',varargin{:});
+% else
+%     G = exportfile(G,'.msh','msh2',varargin{:});
+%     G = exportfile(G,'.msh','msh2',varargin{:}); % export twice for renumbering of mesh nodes/elements
 % end
 
 %% NodeData field in msh file
