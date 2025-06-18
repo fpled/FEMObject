@@ -1,5 +1,5 @@
 function my = meanmvksdensity(y,x,xi,varargin)
-% function my = meanmvksdensity(y,x,xi,'bandwidth',bw)
+% function my = meanmvksdensity(y,x,xi,'Bandwidth',bw)
 % Computes a mean estimate my of the sample (multivariate) data
 % in the n-by-dy matrix y and the sample (multivariate) data
 % in the n-by-d matrix x, evaluated at the points in xi, using the required
@@ -13,12 +13,12 @@ function my = meanmvksdensity(y,x,xi,varargin)
 % The estimation is based on a product Gaussian kernel function.
 
 if nargin<=3 || isempty(varargin)
-    error('Required argument value for bandwidth')
+    error('Required argument value for Bandwidth')
 else
-    if ischarin('bandwidth',varargin)
-        bw = getcharin('bandwidth',varargin);
+    if ischarin('Bandwidth',varargin)
+        bw = getcharin('Bandwidth',varargin);
     else
-        error('Required argument value for bandwidth')
+        error('Required argument value for Bandwidth')
     end
 end
 

@@ -1,6 +1,6 @@
 function [fy,xiy,bwy,bwx] = conditionalksdensity(y,x,varargin)
 % function [fy,xiy,bwy,bwx] = conditionalksdensity(y,x)
-% function [fy,xiy,bwy,bwx] = conditionalksdensity(y,x,'npoints',npts)
+% function [fy,xiy,bwy,bwx] = conditionalksdensity(y,x,'NumPoints',npts)
 % Computes a conditional probability density estimate fy for the sample (univariate) data
 % in the vector y given the sample (multivariate) data in the n-by-d matrix x.
 % conditionalksdensity evaluates the conditional density estimate at npts equally-spaced points xiy
@@ -38,7 +38,7 @@ else
         varargin(1) = [];
         m = size(xiy,1);
     else
-        m = getcharin('npoints',varargin,100);
+        m = getcharin('NumPoints',varargin,100);
     end
 end
 
@@ -70,14 +70,14 @@ parfor i=1:n
     end
     xix = x(i,:);
     if verLessThan('matlab','9.0') % compatibility (<R2016a)
-        fyx = mymvksdensity([y,x],[xiy,repmat(xix,m,1)],'bandwidth',[bwy,bwx]);
+        fyx = mymvksdensity([y,x],[xiy,repmat(xix,m,1)],'Bandwidth',[bwy,bwx]);
     else
-        fyx = mvksdensity([y,x],[xiy,repmat(xix,m,1)],'bandwidth',[bwy,bwx]);
+        fyx = mvksdensity([y,x],[xiy,repmat(xix,m,1)],'Bandwidth',[bwy,bwx]);
     end
     if verLessThan('matlab','9.0') % compatibility (<R2016a)
-        fx = mymvksdensity(x,xix,'bandwidth',bwx);
+        fx = mymvksdensity(x,xix,'Bandwidth',bwx);
     else
-        fx = mvksdensity(x,xix,'bandwidth',bwx);
+        fx = mvksdensity(x,xix,'Bandwidth',bwx);
     end
     fy(:,i) = fyx/fx;
 end
@@ -85,9 +85,9 @@ textprogressbar(' done');
 
 %% For loop version for computing fyx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
-%     fyx = mymvksdensity([y,x],[repmat(xiy,n,1),kron(x,ones(m,1))],'bandwidth',[bwy,bwx]);
+%     fyx = mymvksdensity([y,x],[repmat(xiy,n,1),kron(x,ones(m,1))],'Bandwidth',[bwy,bwx]);
 % else
-%     fyx = mvksdensity([y,x],[repmat(xiy,n,1),kron(x,ones(m,1))],'bandwidth',[bwy,bwx]);
+%     fyx = mvksdensity([y,x],[repmat(xiy,n,1),kron(x,ones(m,1))],'Bandwidth',[bwy,bwx]);
 % end
 % fyx = reshape(fyx,[m,n]);
 
@@ -107,18 +107,18 @@ textprogressbar(' done');
 %     end
 %     xix = x(i,:);
 %     if verLessThan('matlab','9.0') % compatibility (<R2016a)
-%         fyx(:,i) = mymvksdensity([y,x],[xiy,repmat(xix,m,1)],'bandwidth',[bwy,bwx]);
+%         fyx(:,i) = mymvksdensity([y,x],[xiy,repmat(xix,m,1)],'Bandwidth',[bwy,bwx]);
 %     else
-%         fyx(:,i) = mvksdensity([y,x],[xiy,repmat(xix,m,1)],'bandwidth',[bwy,bwx]);
+%         fyx(:,i) = mvksdensity([y,x],[xiy,repmat(xix,m,1)],'Bandwidth',[bwy,bwx]);
 %     end
 % end
 % textprogressbar(' done');
 
 %% For loop version for computing fx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
-%     fx = mymvksdensity(x,x,'bandwidth',bwx);
+%     fx = mymvksdensity(x,x,'Bandwidth',bwx);
 % else
-%     fx = mvksdensity(x,x,'bandwidth',bwx);
+%     fx = mvksdensity(x,x,'Bandwidth',bwx);
 % end
 
 % if verLessThan('matlab','9.1') % compatibility (<R2016b)

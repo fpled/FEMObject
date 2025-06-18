@@ -1,6 +1,6 @@
 function [f,xi,bw] = myksdensity(x,varargin)
 % function [f,xi,bw] = myksdensity(x)
-% function [f,xi,bw] = myksdensity(x,'bandwidth',bw,'npoints',npts)
+% function [f,xi,bw] = myksdensity(x,'Bandwidth',bw,'NumPoints',npts)
 % Computes a probability density estimate f for the sample (univariate) data
 % in the vector x.
 % myksdensity evaluates the density estimate at npts equally-spaced points xi
@@ -11,7 +11,7 @@ function [f,xi,bw] = myksdensity(x,varargin)
 % parameter (bandwidth bw) that is a function of the number of points.
 % 
 % function [f,xi,bw] = myksdensity(x,pts)
-% function [f,xi,bw] = myksdensity(x,pts,'bandwidth',bw)
+% function [f,xi,bw] = myksdensity(x,pts,'Bandwidth',bw)
 % Computes a probability density estimate f for the sample (univariate) data
 % in the vector x, evaluated at the points in the vector pts. 
 % Here, xi and pts contain identical values.
@@ -33,10 +33,10 @@ else
         varargin(1) = [];
         m = size(xi,1);
     else
-        m = getcharin('npoints',varargin,100);
+        m = getcharin('NumPoints',varargin,100);
     end
-    if ischarin('bandwidth',varargin)
-        bw = getcharin('bandwidth',varargin);
+    if ischarin('Bandwidth',varargin)
+        bw = getcharin('Bandwidth',varargin);
     else
         % sig = std(x,0); % classical estimate of std
         sig = mad(x,1) / 0.6745; % robust estimate of std

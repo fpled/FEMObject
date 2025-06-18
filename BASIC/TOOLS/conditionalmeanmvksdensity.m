@@ -46,18 +46,18 @@ parfor i=1:n
         send(q,i);
     end
     xix = x(i,:);
-    myx = meanmvksdensity(y,x,xix,'bandwidth',bwx);
+    myx = meanmvksdensity(y,x,xix,'Bandwidth',bwx);
     if verLessThan('matlab','9.0') % compatibility (<R2016a)
-        fx = mymvksdensity(x,xix,'bandwidth',bwx);
+        fx = mymvksdensity(x,xix,'Bandwidth',bwx);
     else
-        fx = mvksdensity(x,xix,'bandwidth',bwx);
+        fx = mvksdensity(x,xix,'Bandwidth',bwx);
     end
     my(:,i) = myx/fx;
 end
 textprogressbar(' done');
 
 %% For loop version for computing myx (lesser efficiency)
-% myx = meanmvksdensity(y,x,x,'bandwidth',bwx);
+% myx = meanmvksdensity(y,x,x,'Bandwidth',bwx);
 % myx = reshape(myx,[1,n]);
 
 %% Parfor loop version for computing myx
@@ -75,15 +75,15 @@ textprogressbar(' done');
 %         send(q,i);
 %     end
 %     xix = x(i,:);
-%     myx(:,i) = meanmvksdensity(y,x,xix,'bandwidth',bwx);
+%     myx(:,i) = meanmvksdensity(y,x,xix,'Bandwidth',bwx);
 % end
 % textprogressbar(' done');
 
 %% For loop version for computing fx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
-%     fx = mymvksdensity(x,x,'bandwidth',bwx);
+%     fx = mymvksdensity(x,x,'Bandwidth',bwx);
 % else
-%     fx = mvksdensity(x,x,'bandwidth',bwx);
+%     fx = mvksdensity(x,x,'Bandwidth',bwx);
 % end
 
 % if verLessThan('matlab','9.1') % compatibility (<R2016b)
