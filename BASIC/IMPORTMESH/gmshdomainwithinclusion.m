@@ -50,7 +50,7 @@ for j=1:length(I)
     numpoints = numpoints+5;
     numlines = numlines+5;
 end
-G = createlineloop(G,numlineloop,numlines(end));
+G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);

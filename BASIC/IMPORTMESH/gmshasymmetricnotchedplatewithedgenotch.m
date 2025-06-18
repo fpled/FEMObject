@@ -119,7 +119,7 @@ for j=1:length(H)
     numpoints = numpoints+5;
     numlines = numlines+5;
 end
-G = createlineloop(G,numlineloop,numlines(end));
+G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);
@@ -134,7 +134,7 @@ else%if ischarin('c',varargin)
     % circular notch
     numlinecrack = 3:6;
 end
-G = createphysicalline(G,numlinecrack,1);
+G = createphysicalcurve(G,numlinecrack,1);
 G = createphysicalsurface(G,1,1);
 varargin = delonlycharin({'recombine','refinecrack'},varargin);
 

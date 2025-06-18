@@ -11,4 +11,4 @@ seg = [1:length(numberpoints);2:length(numberpoints),1];
 seg = numberpoints(seg)';
 
 u = createcircles(u,numbercenter,seg,numberlines);
-u = createlineloop(u,reverse*numberlines,numberlineloop);
+u = createcurveloop(u,reverse*numberlines,numberlineloop);

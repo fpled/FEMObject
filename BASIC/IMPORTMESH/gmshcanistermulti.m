@@ -58,14 +58,14 @@ G = createpoints(G,P(15:16),cl2,15:16);
 G = createcontour(G,1:12,1:12,1);
 
 G = createlines(G,[[11 13];[13 14];[14 12]],13:15);
-G = createlineloop(G,[-11,13:15],2);
+G = createcurveloop(G,[-11,13:15],2);
 G = createplanesurface(G,2,2);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,2);
 end
 
 G = createlines(G,[[13 15];[15 16];[16 14]],16:18);
-G = createlineloop(G,[-14,16:18],3);
+G = createcurveloop(G,[-14,16:18],3);
 G = createplanesurface(G,3,3);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,3);
@@ -85,7 +85,7 @@ for j=1:length(I)
     numpoints = numpoints+5;
     numlines = numlines+5;
 end
-G = createlineloop(G,numlineloop,numlines(end));
+G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);

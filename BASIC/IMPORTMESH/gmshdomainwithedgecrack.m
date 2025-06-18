@@ -35,7 +35,7 @@ if indim==2
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
         G = createphysicalpoint(G,2,openboundaryphysicalgroup);
-        G = createphysicalline(G,1,physicalgroup);
+        G = createphysicalcurve(G,1,physicalgroup);
     end
     G = createphysicalsurface(G,1,1);
     
@@ -55,18 +55,18 @@ elseif indim==3
     G = embedcurveinsurface(G,3,3);
     
     G = createlines(G,[[7 11];[12 8]],15:16);
-    G = createlineloop(G,-[6 16 13 15],4);
+    G = createcurveloop(G,-[6 16 13 15],4);
     G = createplanesurface(G,4,4);
     
     G = createlines(G,[[6 10];[9 5]],17:18);
-    G = createlineloop(G,[-8 17 -11 18],5);
+    G = createcurveloop(G,[-8 17 -11 18],5);
     G = createplanesurface(G,5,5);
     
-    G = createlineloop(G,[-9 -18 -10 -14 16 -5],6);
+    G = createcurveloop(G,[-9 -18 -10 -14 16 -5],6);
     G = createplanesurface(G,6,6);
     G = embedcurveinsurface(G,4,6);
     
-    G = createlineloop(G,[15 -12 -17 -7],7);
+    G = createcurveloop(G,[15 -12 -17 -7],7);
     G = createplanesurface(G,7,7);
     
     if ischarin('recombine',varargin)
@@ -85,7 +85,7 @@ elseif indim==3
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
         G = createphysicalpoint(G,[1 4],openboundaryphysicalgroup);
-        G = createphysicalline(G,[1 3 4],openboundaryphysicalgroup);
+        G = createphysicalcurve(G,[1 3 4],openboundaryphysicalgroup);
         G = createphysicalsurface(G,1,physicalgroup);
     end
     G = createphysicalvolume(G,1,1);

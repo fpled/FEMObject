@@ -64,7 +64,7 @@ for j=1:length(H)
     numpoints = numpoints+5;
     numlines = numlines+5;
 end
-G = createlineloop(G,numlineloop,numlines(end));
+G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);
@@ -74,7 +74,7 @@ if ~noduplicate
     openboundaryphysicalgroup = 1;
     physicalgroup = 1;
     G = createphysicalpoint(G,3,openboundaryphysicalgroup);
-    G = createphysicalline(G,1,physicalgroup);
+    G = createphysicalcurve(G,1,physicalgroup);
 end
 G = createphysicalsurface(G,1,1);
 

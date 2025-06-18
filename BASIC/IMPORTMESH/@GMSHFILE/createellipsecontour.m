@@ -6,4 +6,4 @@ maj = numberpoints;
 seg = numberpoints(seg)';
 
 u = createellipses(u,numbercenter,seg,maj,numberlines);
-u = createlineloop(u,numberlines,numberlineloop);
+u = createcurveloop(u,numberlines,numberlineloop);

@@ -35,13 +35,13 @@ if indim==2
         P{2} = PC{2} - [0,c/2];
         G = createpoints(G,P,clC,[8,1]);
         G = createcontour(G,1:8,1:8,1);
-        G = createphysicalline(G,[1 7 8],1);
+        % G = createphysicalcurve(G,[1 7 8],1);
     elseif ischarin('v',varargin)
         % V (triangular) notch
         P = PC{2};
         G = createpoints(G,P,clC,1);
         G = createcontour(G,1:7,1:7,1);
-        G = createphysicalline(G,[1 7],1);
+        % G = createphysicalcurve(G,[1 7],1);
     else%if ischarin('c',varargin)
         % circular (rounded) notch
         P{1} = PC{2} + [-c/2,c/2];
@@ -52,8 +52,8 @@ if indim==2
         G = createcircle(G,10,8:9,1);
         G = createcircle(G,10,[9,1],2);
         G = createlines(G,[1:7;2:8]',3:9);
-        G = createlineloop(G,1:9,1);
-        G = createphysicalline(G,[1 2 3 9],1);
+        G = createcurveloop(G,1:9,1);
+        % G = createphysicalcurve(G,[1 2 3 9],1);
     end
     G = createplanesurface(G,1,1);
     if ischarin('recombine',varargin)
@@ -89,32 +89,32 @@ elseif indim==3
         G = createplanesurface(G,2,2);
         
         G = createlines(G,[[7 1];[2 8]],9:10);
-        G = createlineloop(G,[9 -1 10 -7],3);
+        G = createcurveloop(G,[9 -1 10 -7],3);
         G = createplanesurface(G,3,3);
         
         G = createlines(G,[[3 13];[13 14];[14 15];[15 16];[16 5]],11:15);
-        G = createlineloop(G,[-4 11:15 -8 -10],4);
+        G = createcurveloop(G,[-4 11:15 -8 -10],4);
         G = createplanesurface(G,4,4);
         
         G = createlines(G,[[6 12];[12 11];[11 10];[10 9];[9 4]],16:20);
-        G = createlineloop(G,[-6 16:20 -2 -9],5);
+        G = createcurveloop(G,[-6 16:20 -2 -9],5);
         G = createplanesurface(G,5,5);
         
         G = createlines(G,[[14 10];[9 13]],21:22);
-        G = createlineloop(G,-[12 21 19 22],6);
+        G = createcurveloop(G,-[12 21 19 22],6);
         G = createplanesurface(G,6,6);
         
         G = createlines(G,[[15 11];[12 16]],23:24);
-        G = createlineloop(G,[-14 23 -17 24],7);
+        G = createcurveloop(G,[-14 23 -17 24],7);
         G = createplanesurface(G,7,7);
         
-        G = createlineloop(G,[-15 -24 -16 -5],8);
+        G = createcurveloop(G,[-15 -24 -16 -5],8);
         G = createplanesurface(G,8,8);
         
-        G = createlineloop(G,[-11 -3 -20 22],9);
+        G = createcurveloop(G,[-11 -3 -20 22],9);
         G = createplanesurface(G,9,9);
         
-        G = createlineloop(G,[21 -18 -23 -13],10);
+        G = createcurveloop(G,[21 -18 -23 -13],10);
         G = createplanesurface(G,10,10);
         
         if ischarin('recombine',varargin)
@@ -130,7 +130,7 @@ elseif indim==3
             G = recombinesurface(G,10);
         end
         G = createsurfaceloop(G,1:10,1);
-        G = createphysicalsurface(G,[1 2 3],1);
+        % G = createphysicalsurface(G,[1 2 3],1);
 
     elseif ischarin('v',varargin)
         % V (triangular) notch
@@ -140,32 +140,32 @@ elseif indim==3
         G = createplanesurface(G,1,1);
         
         G = createlines(G,[[2 5];[5 6];[6 1]],5:7);
-        G = createlineloop(G,[5:7 -1],2);
+        G = createcurveloop(G,[5:7 -1],2);
         G = createplanesurface(G,2,2);
         
         G = createlines(G,[[3 11];[11 12];[12 13];[13 14];[14 5]],8:12);
-        G = createlineloop(G,[-4 8:12 -5],3);
+        G = createcurveloop(G,[-4 8:12 -5],3);
         G = createplanesurface(G,3,3);
         
         G = createlines(G,[[6 10];[10 9];[9 8];[8 7];[7 4]],13:17);
-        G = createlineloop(G,[-7 13:17 -2],4);
+        G = createcurveloop(G,[-7 13:17 -2],4);
         G = createplanesurface(G,4,4);
         
         G = createlines(G,[[12 8];[7 11]],18:19);
-        G = createlineloop(G,-[9 18 16 19],5);
+        G = createcurveloop(G,-[9 18 16 19],5);
         G = createplanesurface(G,5,5);
         
         G = createlines(G,[[13 9];[10 14]],20:21);
-        G = createlineloop(G,[-11 20 -14 21],6);
+        G = createcurveloop(G,[-11 20 -14 21],6);
         G = createplanesurface(G,6,6);
         
-        G = createlineloop(G,[-12 -21 -13 -6],7);
+        G = createcurveloop(G,[-12 -21 -13 -6],7);
         G = createplanesurface(G,7,7);
         
-        G = createlineloop(G,[-8 -3 -17 19],8);
+        G = createcurveloop(G,[-8 -3 -17 19],8);
         G = createplanesurface(G,8,8);
         
-        G = createlineloop(G,[18 -15 -20 -10],9);
+        G = createcurveloop(G,[18 -15 -20 -10],9);
         G = createplanesurface(G,9,9);
         
         if ischarin('recombine',varargin)
@@ -180,8 +180,8 @@ elseif indim==3
             G = recombinesurface(G,9);
         end
         G = createsurfaceloop(G,1:9,1);
-        G = createphysicalline(G,1,1);
-        G = createphysicalsurface(G,[1 2],1);
+        % G = createphysicalcurve(G,1,1);
+        % G = createphysicalsurface(G,[1 2],1);
 
     else%if ischarin('c',varargin)
         % circular (rounded) cuboid notch
@@ -214,28 +214,28 @@ elseif indim==3
         G = createsurface(G,4,4);
         
         G = createlines(G,[[3 13];[13 14];[14 15];[15 16];[16 5]],11:15);
-        G = createlineloop(G,[-4 11:15 -8 25 27],5);
+        G = createcurveloop(G,[-4 11:15 -8 25 27],5);
         G = createplanesurface(G,5,5);
         
         G = createlines(G,[[6 12];[12 11];[11 10];[10 9];[9 4]],16:20);
-        G = createlineloop(G,[-6 16:20 -2 -26 -9],6);
+        G = createcurveloop(G,[-6 16:20 -2 -26 -9],6);
         G = createplanesurface(G,6,6);
         
         G = createlines(G,[[14 10];[9 13]],21:22);
-        G = createlineloop(G,-[12 21 19 22],7);
+        G = createcurveloop(G,-[12 21 19 22],7);
         G = createplanesurface(G,7,7);
         
         G = createlines(G,[[15 11];[12 16]],23:24);
-        G = createlineloop(G,[-14 23 -17 24],8);
+        G = createcurveloop(G,[-14 23 -17 24],8);
         G = createplanesurface(G,8,8);
         
-        G = createlineloop(G,[-15 -24 -16 -5],9);
+        G = createcurveloop(G,[-15 -24 -16 -5],9);
         G = createplanesurface(G,9,9);
         
-        G = createlineloop(G,[-11 -3 -20 22],10);
+        G = createcurveloop(G,[-11 -3 -20 22],10);
         G = createplanesurface(G,10,10);
         
-        G = createlineloop(G,[21 -18 -23 -13],11);
+        G = createcurveloop(G,[21 -18 -23 -13],11);
         G = createplanesurface(G,11,11);
         
         if ischarin('recombine',varargin)
@@ -252,7 +252,7 @@ elseif indim==3
             G = recombinesurface(G,11);
         end
         G = createsurfaceloop(G,1:11,1);
-        G = createphysicalsurface(G,[1 2 3 4],1);
+        % G = createphysicalsurface(G,[1 2 3 4],1);
 
     end
     G = createvolume(G,1,1);

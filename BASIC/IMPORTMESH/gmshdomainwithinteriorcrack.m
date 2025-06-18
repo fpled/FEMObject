@@ -35,7 +35,7 @@ if indim==2
     if ~noduplicate
         physicalgroup = 1;
         G = createphysicalpoint(G,numpoints,1);
-        G = createphysicalline(G,numlines,physicalgroup);
+        G = createphysicalcurve(G,numlines,physicalgroup);
     end
     G = createphysicalsurface(G,1,1);
 elseif indim==3
@@ -50,7 +50,7 @@ elseif indim==3
     end
     if ~noduplicate
         physicalgroup = 1;
-        G = createphysicalline(G,numlines,1);
+        G = createphysicalcurve(G,numlines,1);
         G = createphysicalsurface(G,numbersurface,physicalgroup);
     end
     G = createphysicalvolume(G,1,1);

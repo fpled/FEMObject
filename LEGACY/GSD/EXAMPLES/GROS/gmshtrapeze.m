@@ -32,7 +32,7 @@ P{14} = [cx,cy+r,0];
 G=createpoints(G,P(10:14),lc2,10:14);
 G=createcirclecontour(G,10,11:14,9:12,102);
 
-G = createlineloop(G,[1:4,-[5:8],-[9:12]],200);
+G = createcurveloop(G,[1:4,-[5:8],-[9:12]],200);
 
 G = createplanesurface(G,200,1);
 

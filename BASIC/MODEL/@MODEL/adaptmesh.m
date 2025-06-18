@@ -35,23 +35,29 @@ end
 % if ~outputFile
 %     options = [options ' -out ' getfile(G,'.mesh')];
 % end
+% 
 % switch dim
 %     case 2
 %         if verLessThan('matlab','9.1') % compatibility (<R2016b)
-%             meshOutput = ~isempty(strfind(options,'.mesh'));
 %             opt3dMedit = ~isempty(strfind(options,'-3dMedit'));
 %         else
-%             meshOutput = contains(options,'.mesh');
 %             opt3dMedit = contains(options,'-3dMedit');
 %         end
-%         if meshOutput && ~opt3dMedit
+%         if ~opt3dMedit
 %             options = [options ' -3dMedit 2']; % to load a 2D .mesh file created with Gmsh (coordinates in 3D) and to produce a Gmsh 2D .mesh file (coordinates in 3D)
 %         end
 %         G = runfilemmg2d(G,'.mesh',options);
 %     case 3
 %         G = runfilemmg3d(G,'.mesh',options);
 % end
-% G = exportfile(G,'.mesh','msh2',varargin{:});
+% if verLessThan('matlab','9.1') % compatibility (<R2016b)
+%     meshOutput = ~isempty(strfind(options,'.mesh'));
+% else
+%     meshOutput = contains(options,'.mesh');
+% end
+% if meshOutput
+%     G = exportfile(G,'.mesh','msh2',varargin{:});
+% end
 
 %% NodeData field in msh file
 if ~outputFile

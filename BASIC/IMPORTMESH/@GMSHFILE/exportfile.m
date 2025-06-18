@@ -26,6 +26,7 @@ if nargin<3 || isempty(format)
 end
 
 options = [' -save -format ' format];
+% options = [' -save -format ' format ' -preserve_numbering_msh2'];
 
 if ischarin('gmshoptions',varargin)
     options = [options ' ' getcharin('gmshoptions',varargin)];

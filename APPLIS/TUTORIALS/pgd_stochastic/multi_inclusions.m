@@ -30,7 +30,7 @@ pmax = pmax+5;
 lmax = lmax+5;
 smax = smax+1;
 
-G = createlineloop(G,lineloop,lmax+1);
+G = createcurveloop(G,lineloop,lmax+1);
 G = createplanesurface(G,lmax+1,1);
 S = gmsh2femobject(2,G);
 % figure(1)
