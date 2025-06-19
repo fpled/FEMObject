@@ -71,9 +71,9 @@ if verLessThan('matlab','9.1') % compatibility (<R2016b)
 else
     mshOutput = contains(options,'.msh');
 end
-if mshOutput
-    G = deletenodedata(G);
-end
+% if mshOutput
+%     G = deletenodedata(G);
+% end
 G = appendnodedata(G,q);
 switch dim
     case 2
@@ -92,7 +92,9 @@ switch dim
     case 3
         G = runfilemmg3d(G,'.msh',options);
 end
-G = exportfile(G,'.mesh','msh2',varargin{:});
+if meshOutput
+    G = exportfile(G,'.mesh','msh2',varargin{:});
+end
 
 n=max(nargout,1);
 varargout = cell(1,n);
