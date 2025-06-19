@@ -68,8 +68,10 @@ if ~outputFile
 end
 if verLessThan('matlab','9.1') % compatibility (<R2016b)
     mshOutput = ~isempty(strfind(options,'.msh'));
+    meshOutput = ~isempty(strfind(options,'.mesh'));
 else
     mshOutput = contains(options,'.msh');
+    meshOutput = contains(options,'.mesh');
 end
 % if mshOutput
 %     G = deletenodedata(G);
