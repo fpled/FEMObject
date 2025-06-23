@@ -10,11 +10,11 @@ if nargin<3 || isempty(options)
     options = '-format msh2';
 else
     if verLessThan('matlab','9.1') % compatibility (<R2016b)
-        noFormat = isempty(strfind(options,'-format'));
+        contain = @(str,pat) ~isempty(strfind(str,pat));
     else
-        noFormat = ~contains(options,'-format');
+        contain = @contains;
     end
-    if noFormat
+    if ~contain(options,'-format')
         options = [options ' -format msh2'];
     end
 end

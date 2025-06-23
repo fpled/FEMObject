@@ -41,15 +41,13 @@ end
 %% Computation of projectors of strain/stress tensor onto positive (tensile) and negative (compressive) parts for generalized Freddi decomposition
 % Projectors for transformed strain/stress tensor
 if verLessThan('matlab','9.1') % compatibility (<R2016b)
-    projAmor = ~isempty(strfind(lower(model),'amor'));
-    projFreddi = ~isempty(strfind(lower(model),'freddi'));
+    contain = @(str,pat) ~isempty(strfind(lower(str),pat));
 else
-    projAmor = contains(model,'amor','IgnoreCase',true);
-    projFreddi = contains(model,'freddi','IgnoreCase',true);
+    contain = @(str,pat) contains(str,pat,'IgnoreCase',true);
 end
-if projAmor
+if contain(model,'amor')
     [Ppt,Pmt] = calc_proj_Amor(mat,elem,xnode,xgauss,set); % projectors for strain tensor in Voigt notation
-elseif projFreddi
+elseif contain(model,'freddi')
     [Ppt,Pmt] = calc_proj_Miehe(mat,elem,xnode,xgauss,set); % projectors for strain tensor in Voigt notation
 else
     error(['Wrong phase field model ' model])

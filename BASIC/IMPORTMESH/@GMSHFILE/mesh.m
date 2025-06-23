@@ -10,22 +10,23 @@ if nargin==1
     error('rentrer les options de gsmh')
 end
 
+if verLessThan('matlab','9.1') % compatibility (<R2016b)
+    contain = @(str,pat) ~isempty(strfind(str,pat));
+else
+    contain = @contains;
+end
+
 if ~isempty(options) && isa(options,'double')
     options = [' -' num2str(options)];
 else
-    options =  '';
+    options = '';
 end
 
 if ischarin('gmshoptions',varargin)
     options = [options ' ' getcharin('gmshoptions',varargin)];
 end
 
-if verLessThan('matlab','9.1') % compatibility (<R2016b)
-    noFormat = isempty(strfind(options,'-format'));
-else
-    noFormat = ~contains(options,'-format');
-end
-if noFormat
+if ~contain(options,'-format')
     options = [options ' -format msh2'];
 end
 

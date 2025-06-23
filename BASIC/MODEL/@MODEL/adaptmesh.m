@@ -7,6 +7,12 @@ if ~isa(M,'MODEL')
     return
 end
 
+if verLessThan('matlab','9.1') % compatibility (<R2016b)
+    contain = @(str,pat) ~isempty(strfind(str,pat));
+else
+    contain = @contains;
+end
+
 if israndom(q)
     error('la solution est aleatoire')
 end
@@ -21,72 +27,42 @@ if nargin>=3 && ischar(filename)
 end
 
 options = getcharin('mmgoptions',varargin);
-if verLessThan('matlab','9.1') % compatibility (<R2016b)
-    outputFile = ~isempty(strfind(options,'-out'));
-else
-    outputFile = contains(options,'-out');
-end
 
 %% sol file as size map for mesh file
 % G = exportfile(G,'.msh','mesh',varargin{:});
-% G = writefilesol(G,3,q); % indim=3 for 2D .mesh file generated using Gmsh (coordinates in 3D)
-%                          % indim=2 for 2D .mesh file generated using Medit (coordinates in 2D)
+% G = writefilesol(G,3,q); % indim=3 for 2D .mesh file generated using Gmsh (coordinates in 3D), indim=2 for 2D .mesh file generated using Medit (coordinates in 2D)
 % options = [' -sol ' getfilesol(G) ' ' options];
-% if ~outputFile
-%     options = [options ' -out ' getfile(G,'.mesh')];
+% if ~contain(options,'-out')
+%     % options = [options ' -out ' getfile(G,'.mesh')]; % output .mesh file
+%     options = [options ' -out ' getfile(G,'.msh')]; % output .msh file
 % end
 % 
 % switch dim
 %     case 2
-%         if verLessThan('matlab','9.1') % compatibility (<R2016b)
-%             opt3dMedit = ~isempty(strfind(options,'-3dMedit'));
-%         else
-%             opt3dMedit = contains(options,'-3dMedit');
-%         end
-%         if ~opt3dMedit
+%         if ~contain(options,'3dMedit')
 %             options = [options ' -3dMedit 2']; % to load a 2D .mesh file created with Gmsh (coordinates in 3D) and to produce a Gmsh 2D .mesh file (coordinates in 3D)
 %         end
 %         G = runfilemmg2d(G,'.mesh',options);
 %     case 3
 %         G = runfilemmg3d(G,'.mesh',options);
 % end
-% if verLessThan('matlab','9.1') % compatibility (<R2016b)
-%     meshOutput = ~isempty(strfind(options,'.mesh'));
-% else
-%     meshOutput = contains(options,'.mesh');
-% end
-% if meshOutput
+% 
+% if contain(options,'.mesh')
 %     G = exportfile(G,'.mesh','msh2',varargin{:});
-% else
+% elseif contain(options,'.msh')
 %     G = exportfile(G,'.msh','msh2',varargin{:});
 %     G = exportfile(G,'.msh','msh2',varargin{:}); % export twice for renumbering of mesh nodes/elements
 % end
 
 %% NodeData field in msh file
-if ~outputFile
-    options = [options ' -out ' getfile(G,'.mesh')];
+if ~contain(options,'-out')
+    % options = [options ' -out ' getfile(G,'.mesh')]; % output .mesh file
+    options = [options ' -out ' getfile(G,'.msh')]; % output .msh file
 end
-if verLessThan('matlab','9.1') % compatibility (<R2016b)
-    mshOutput = ~isempty(strfind(options,'.msh'));
-    meshOutput = ~isempty(strfind(options,'.mesh'));
-else
-    mshOutput = contains(options,'.msh');
-    meshOutput = contains(options,'.mesh');
-end
-% if mshOutput
-%     G = deletenodedata(G);
-% end
-G = appendnodedata(G,q);
+G = updatenodedata(G,q);
 switch dim
     case 2
-        if verLessThan('matlab','9.1') % compatibility (<R2016b)
-            meshOutput = ~isempty(strfind(options,'.mesh'));
-            opt3dMedit = ~isempty(strfind(options,'-3dMedit'));
-        else
-            meshOutput = contains(options,'.mesh');
-            opt3dMedit = contains(options,'-3dMedit');
-        end
-        if meshOutput && ~opt3dMedit
+        if contain(options,'.mesh') && ~contain(options,'-3dMedit')
             options = [options ' -3dMedit 1']; % to force mmg2d to produce a 2D .mesh file readable by Gmsh (not anymore compatible with Medit)
             % options = [options ' -3dMedit 2']; % it also works
         end
@@ -94,7 +70,7 @@ switch dim
     case 3
         G = runfilemmg3d(G,'.msh',options);
 end
-if meshOutput
+if contain(options,'.mesh')
     G = exportfile(G,'.mesh','msh2',varargin{:});
 end
 
