@@ -19,7 +19,7 @@ end
 if ~iscell(H)
     H = {H};
 end
-if length(clH)==1
+if isscalar(clH)
     clH = repmat(clH,1,length(H));
 end
 

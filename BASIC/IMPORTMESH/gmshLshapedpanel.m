@@ -45,7 +45,7 @@ G = createcontour(G,1:7,1:7,8);
 G = createplanesurface(G,8,1);
 if indim==3
     vect = [0,0,t];
-    G = extrude(G,vect,'Surface',numbersurface,varargin{:});
+    G = extrude(G,vect,'Surface',1,varargin{:});
 end
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);

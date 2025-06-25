@@ -19,7 +19,7 @@ end
 if ~iscell(C)
     C = {C};
 end
-if length(clC)==1
+if isscalar(clC)
     clC = repmat(clC,1,length(C));
 end
 

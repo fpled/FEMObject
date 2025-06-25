@@ -19,6 +19,8 @@ end
 PD = getvertices(D);
 
 if indim==2
+    PC = getvertices(C);
+    C = LIGNE(min(PC{:}),max(PC{:}));
     if ischarin('refinecrack',varargin)
         G = gmshfile(C,clC,[2 1],1);
     else

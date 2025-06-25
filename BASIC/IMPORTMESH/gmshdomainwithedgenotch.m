@@ -19,8 +19,9 @@ PD = getvertices(D);
 PC = getvertices(C);
 
 if indim==2
-    PB{1} = PC{1} + [0,c/2];
-    PB{2} = PC{1} - [0,c/2];
+    PC1 = min(PC{:});
+    PB{1} = PC1 + [0,c/2];
+    PB{2} = PC1 - [0,c/2];
     G = GMSHFILE();
     if ischarin('refinecrack',varargin)
         clB = clC;
@@ -29,25 +30,26 @@ if indim==2
     end
     G = createpoints(G,PB,clB,[7,2]);
     G = createpoints(G,PD,clD,3:6);
+    PC2 = max(PC{:});
     if ischarin('r',varargin)
         % rectangular notch
-        P{1} = PC{2} + [0,c/2];
-        P{2} = PC{2} - [0,c/2];
+        P{1} = PC2 + [0,c/2];
+        P{2} = PC2 - [0,c/2];
         G = createpoints(G,P,clC,[8,1]);
         G = createcontour(G,1:8,1:8,1);
         % G = createphysicalcurve(G,[1 7 8],1);
     elseif ischarin('v',varargin)
         % V (triangular) notch
-        P = PC{2};
+        P = PC2;
         G = createpoints(G,P,clC,1);
         G = createcontour(G,1:7,1:7,1);
         % G = createphysicalcurve(G,[1 7],1);
     else%if ischarin('c',varargin)
         % circular (rounded) notch
-        P{1} = PC{2} + [-c/2,c/2];
-        P{2} = PC{2};
-        P{3} = PC{2} - [c/2,c/2];
-        P{4} = PC{2} - [c/2,0];
+        P{1} = PC2 + [-c/2,c/2];
+        P{2} = PC2;
+        P{3} = PC2 - [c/2,c/2];
+        P{4} = PC2 - [c/2,0];
         G = createpoints(G,P,clC,[8,9,1,10]);
         G = createcircle(G,10,8:9,1);
         G = createcircle(G,10,[9,1],2);

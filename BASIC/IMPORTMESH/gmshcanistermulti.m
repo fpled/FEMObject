@@ -15,7 +15,7 @@ end
 if ~iscell(I)
     I = {I};
 end
-if length(clI)==1
+if isscalar(clI)
     clI = repmat(clI,1,length(I));
 end
 
