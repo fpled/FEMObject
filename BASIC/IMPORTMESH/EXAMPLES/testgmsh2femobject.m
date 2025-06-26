@@ -10,7 +10,7 @@ L3 = LIGNE([0.7,0.2],[0.9,0.1]);
 
 b = 1; % domain length
 a = 0.2*b; % crack length
-e = 0.025*b; % excentricity
+e = 0.025*b; % eccentricity
 La = LIGNE([0.0,b/2+e],[a,b/2+e]);
 Lb = LIGNE([b-a,b/2-e],[b,b/2-e]);
 
@@ -254,13 +254,13 @@ plotparamelem(Strefcrack,'group')
 subplot(2,2,4)
 plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge cracks
-St = gmshdomainwithtwoedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_edge_cracks_tri');
-Sq = gmshdomainwithtwoedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_edge_cracks_quad',2,'recombine');
-Strefcrack = gmshdomainwithtwoedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_edge_cracks_refined_tri',2,'refinecrack');
-Sqrefcrack = gmshdomainwithtwoedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_edge_cracks_refined_quad',2,'recombine','refinecrack');
+%% Domain with two asymmetric edge cracks
+St = gmshdomainwithtwoasymmetricedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_tri');
+Sq = gmshdomainwithtwoasymmetricedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_quad',2,'recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_refined_tri',2,'refinecrack');
+Sqrefcrack = gmshdomainwithtwoasymmetricedgecracks(D,La,Lb,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_refined_quad',2,'recombine','refinecrack');
 
-figure('Name','Domain with two edge cracks')
+figure('Name','Domain with two asymmetric edge cracks')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -271,14 +271,14 @@ plotparamelem(Strefcrack,'group')
 subplot(2,2,4)
 plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge circular notches
+%% Domain with two asymmetric edge circular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_c_tri',2,'c');
-Sq = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_c_quad',2,'c','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_c_refined_tri',2,'c','refinecrack');
-Sqrefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_c_refined_quad',2,'c','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_tri',2,'c');
+Sq = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_quad',2,'c','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_refined_tri',2,'c','refinecrack');
+Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_refined_quad',2,'c','recombine','refinecrack');
 
-figure('Name','Domain with two edge circular notches')
+figure('Name','Domain with two asymmetric edge circular notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -289,14 +289,14 @@ plotparamelem(Strefcrack,'group')
 subplot(2,2,4)
 plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge rectangular notches
+%% Domain with two asymmetric edge rectangular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_r_tri',2,'r');
-Sq = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_r_quad',2,'r','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_r_refined_tri',2,'r','refinecrack');
-Sqrefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_r_refined_quad',2,'r','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_tri',2,'r');
+Sq = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_quad',2,'r','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_refined_tri',2,'r','refinecrack');
+Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_refined_quad',2,'r','recombine','refinecrack');
 
-figure('Name','Domain with two edge rectangular notches')
+figure('Name','Domain with two asymmetric edge rectangular notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -307,14 +307,14 @@ plotparamelem(Strefcrack,'group')
 subplot(2,2,4)
 plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge V notches
+%% Domain with two asymmetric edge V notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_v_tri',2,'v');
-Sq = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_v_quad',2,'v','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_v_refined_tri',2,'v','refinecrack');
-Sqrefcrack = gmshdomainwithtwoedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_edge_notches_v_refined_quad',2,'v','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_tri',2,'v');
+Sq = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_quad',2,'v','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_refined_tri',2,'v','refinecrack');
+Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,La,Lb,c,0.05,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_refined_quad',2,'v','recombine','refinecrack');
 
-figure('Name','Domain with single edge V notch')
+figure('Name','Domain with two asymmetric edge V notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -455,7 +455,7 @@ Q = QUADRANGLE([0.0,b,0.0],[a,b,0.0],[a,b,e],[0.0,b,e]);
 
 b = 1; % domain size
 a = 0.2*b; % crack length
-e = 0.025*b; % excentricity
+e = 0.025*b; % eccentricity
 Qa = QUADRANGLE([0.0,b/2+e,0.0],[a,b/2+e,0.0],[a,b/2+e,b],[0.0,b/2+e,b]);
 Qb = QUADRANGLE([b,b/2-e,0.0],[b-a,b/2-e,0.0],[b-a,b/2-e,b],[b,b/2-e,b]);
 
@@ -552,13 +552,13 @@ plotparamelem(Strefcrack,'group')
 % subplot(2,2,4)
 % plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge cracks
-St = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_tet');
-% Sq = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_cub',3,'recombine');
-Strefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_refined_tet',3,'refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_refined_cub',3,'recombine','refinecrack');
+%% Domain with two asymmetric edge cracks
+St = gmshdomainwithtwoasymmetricedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_tet');
+% Sq = gmshdomainwithtwoasymmetricedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_cub',3,'recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_refined_tet',3,'refinecrack');
+% Sqrefcrack = gmshdomainwithtwoasymmetricedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_cracks_refined_cub',3,'recombine','refinecrack');
 
-figure('Name','Domain with two edge cracks')
+figure('Name','Domain with two asymmetric edge cracks')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -569,14 +569,14 @@ plotparamelem(Strefcrack,'group')
 % subplot(2,2,4)
 % plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge circular notches
+%% Domain with two asymmetric edge circular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_tet',3,'c');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_cub',3,'c','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_refined_tet',3,'c','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_refined_cub',3,'c','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_tet',3,'c');
+% Sq = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_cub',3,'c','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_refined_tet',3,'c','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_c_refined_cub',3,'c','recombine','refinecrack');
 
-figure('Name','Domain with two edge circular notches')
+figure('Name','Domain with two asymmetric edge circular notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -587,14 +587,14 @@ plotparamelem(Strefcrack,'group')
 % subplot(2,2,4)
 % plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge rectangular notches
+%% Domain with two asymmetric edge rectangular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_tet',3,'r');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_cub',3,'r','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_refined_tet',3,'r','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_refined_cub',3,'r','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_tet',3,'r');
+% Sq = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_cub',3,'r','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_refined_tet',3,'r','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_r_refined_cub',3,'r','recombine','refinecrack');
 
-figure('Name','Domain with two edge rectangular notches')
+figure('Name','Domain with two asymmetric edge rectangular notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
@@ -605,14 +605,14 @@ plotparamelem(Strefcrack,'group')
 % subplot(2,2,4)
 % plotparamelem(Sqrefcrack,'group')
 
-%% Domain with two edge V notches
+%% Domain with two asymmetric edge V notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_tet',3,'v');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_cub',3,'v','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_refined_tet',3,'v','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_refined_cub',3,'v','recombine','refinecrack');
+St = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_tet',3,'v');
+% Sq = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_cub',3,'v','recombine');
+Strefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_refined_tet',3,'v','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoasymmetricedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_asymmetric_edge_notches_v_refined_cub',3,'v','recombine','refinecrack');
 
-figure('Name','Domain with two edge V notches')
+figure('Name','Domain with two asymmetric edge V notches')
 clf
 subplot(2,2,1)
 plotparamelem(St,'group')
