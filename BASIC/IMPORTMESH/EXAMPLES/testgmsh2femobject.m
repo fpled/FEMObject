@@ -471,8 +471,8 @@ plotparamelem(St,'group')
 % plotparamelem(Sq,'group')
 
 %% Domain with point
-St = gmsh(D,P,0.1,0.05,'filename','gmsh_domain_with_point_tet');
-% Sq = gmsh(D,P,0.1,0.05,'filename','gmsh_domain_with_point_cub','recombine');
+St = gmsh(D,P,0.1,0.01,'filename','gmsh_domain_with_point_tet');
+% Sq = gmsh(D,P,0.1,0.01,'filename','gmsh_domain_with_point_cub','recombine');
 
 figure('Name','Domain with point')
 clf
@@ -482,10 +482,10 @@ plotparamelem(St,'group')
 % plotparamelem(Sq,'group')
 
 %% Domain with single edge crack
-St = gmshdomainwithedgecrack(D,Q,0.1,0.005,'gmsh_domain_with_edge_crack_tet');
-% Sq = gmshdomainwithedgecrack(D,Q,0.1,0.005,'gmsh_domain_with_edge_crack_cub',3,'recombine');
-Strefcrack = gmshdomainwithedgecrack(D,Q,0.05,0.01,'gmsh_domain_with_edge_crack_refined_tet',3,'refinecrack');
-% Sqrefcrack = gmshdomainwithedgecrack(D,Q,0.05,0.01,'gmsh_domain_with_edge_crack_refined_cub',3,'recombine','refinecrack');
+St = gmshdomainwithedgecrack(D,Q,0.1,0.01,'gmsh_domain_with_edge_crack_tet');
+% Sq = gmshdomainwithedgecrack(D,Q,0.1,0.01,'gmsh_domain_with_edge_crack_cub',3,'recombine');
+Strefcrack = gmshdomainwithedgecrack(D,Q,0.1,0.01,'gmsh_domain_with_edge_crack_refined_tet',3,'refinecrack');
+% Sqrefcrack = gmshdomainwithedgecrack(D,Q,0.1,0.01,'gmsh_domain_with_edge_crack_refined_cub',3,'recombine','refinecrack');
 
 figure('Name','Domain with single edge crack')
 clf
@@ -500,10 +500,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with single edge circular notch
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_c_tet',3,'c');
-% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_c_cub',3,'c','recombine');
-Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_c_refined_tet',3,'c','refinecrack');
-% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_c_refined_cub',3,'c','recombine','refinecrack');
+St = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_c_tet',3,'c');
+% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_c_cub',3,'c','recombine');
+Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_c_refined_tet',3,'c','refinecrack');
+% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_c_refined_cub',3,'c','recombine','refinecrack');
 
 figure('Name','Domain with single edge circular notch')
 clf
@@ -518,10 +518,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with single edge rectangular notch
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_r_tet',3,'r');
-% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_r_cub',3,'r','recombine');
-Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_r_refined_tet',3,'r','refinecrack');
-% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_r_refined_cub',3,'r','recombine','refinecrack');
+St = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_r_tet',3,'r');
+% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_r_cub',3,'r','recombine');
+Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_r_refined_tet',3,'r','refinecrack');
+% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_r_refined_cub',3,'r','recombine','refinecrack');
 
 figure('Name','Domain with single edge rectangular notch')
 clf
@@ -536,10 +536,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with single edge V notch
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_v_tet',3,'v');
-% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_v_cub',3,'v','recombine');
-Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_v_refined_tet',3,'v','refinecrack');
-% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.005,'gmsh_domain_with_edge_notch_v_refined_cub',3,'v','recombine','refinecrack');
+St = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_v_tet',3,'v');
+% Sq = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_v_cub',3,'v','recombine');
+Strefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_v_refined_tet',3,'v','refinecrack');
+% Sqrefcrack = gmshdomainwithedgenotch(D,Q,c,0.1,0.01,'gmsh_domain_with_edge_notch_v_refined_cub',3,'v','recombine','refinecrack');
 
 figure('Name','Domain with single edge V notch')
 clf
@@ -553,10 +553,10 @@ plotparamelem(Strefcrack,'group')
 % plotparamelem(Sqrefcrack,'group')
 
 %% Domain with two edge cracks
-St = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.005,'gmsh_domain_with_two_edge_cracks_tet');
-% Sq = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.005,'gmsh_domain_with_two_edge_cracks_cub',3,'recombine');
-Strefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.005,'gmsh_domain_with_two_edge_cracks_refined_tet',3,'refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.005,'gmsh_domain_with_two_edge_cracks_refined_cub',3,'recombine','refinecrack');
+St = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_tet');
+% Sq = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_cub',3,'recombine');
+Strefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_refined_tet',3,'refinecrack');
+% Sqrefcrack = gmshdomainwithtwoedgecracks(D,Qa,Qb,0.1,0.01,'gmsh_domain_with_two_edge_cracks_refined_cub',3,'recombine','refinecrack');
 
 figure('Name','Domain with two edge cracks')
 clf
@@ -571,10 +571,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with two edge circular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_c_tet',3,'c');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_c_cub',3,'c','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_c_refined_tet',3,'c','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_c_refined_cub',3,'c','recombine','refinecrack');
+St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_tet',3,'c');
+% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_cub',3,'c','recombine');
+Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_refined_tet',3,'c','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_c_refined_cub',3,'c','recombine','refinecrack');
 
 figure('Name','Domain with two edge circular notches')
 clf
@@ -589,10 +589,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with two edge rectangular notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_r_tet',3,'r');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_r_cub',3,'r','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_r_refined_tet',3,'r','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_r_refined_cub',3,'r','recombine','refinecrack');
+St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_tet',3,'r');
+% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_cub',3,'r','recombine');
+Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_refined_tet',3,'r','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_r_refined_cub',3,'r','recombine','refinecrack');
 
 figure('Name','Domain with two edge rectangular notches')
 clf
@@ -607,10 +607,10 @@ plotparamelem(Strefcrack,'group')
 
 %% Domain with two edge V notches
 c = max(getsize(D))/100; % notch width
-St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_v_tet',3,'v');
-% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_v_cub',3,'v','recombine');
-Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_v_refined_tet',3,'v','refinecrack');
-% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.005,'gmsh_domain_with_two_edge_notches_v_refined_cub',3,'v','recombine','refinecrack');
+St = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_tet',3,'v');
+% Sq = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_cub',3,'v','recombine');
+Strefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_refined_tet',3,'v','refinecrack');
+% Sqrefcrack = gmshdomainwithtwoedgenotches(D,Qa,Qb,c,0.1,0.01,'gmsh_domain_with_two_edge_notches_v_refined_cub',3,'v','recombine','refinecrack');
 
 figure('Name','Domain with two edge V notches')
 clf
