@@ -72,7 +72,7 @@ for i=1:param.maxorder
     
     
     if param.display
-        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('order #%d \n',i)
     end
     
@@ -182,7 +182,7 @@ for i=1:param.maxorder
             fprintf('%d ',param.node);
             fprintf('iteration #%d - stagnation = %d\n',kkk,erriter(kkk))
         elseif param.display && param.node && kkk==1
-            fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end;
+            fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end
             fprintf('iteration #%d- %.1d ',kkk,erriter(kkk))
         elseif param.display && param.node && kkk~=1
             fprintf('#%d- %.1d ',kkk,erriter(kkk))
@@ -287,7 +287,7 @@ for i=1:param.maxorder
             errorder(i)= sqrt(min(abs(u.alpha))^2/sum(u.alpha.^2));
     end
     if param.display
-        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('order #%d - error = %d \n',i,errorder(i))
     end
     u0=u;
@@ -304,10 +304,10 @@ for i=1:param.maxorder
 end
 if (nargout==1)&&param.display;
     if errorder(i)>=param.tol
-        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('---> no convergence - ')
     else
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('---> convergence    - ')
     end
     fprintf('order #%d - error = %d\n',i,errorder(i))

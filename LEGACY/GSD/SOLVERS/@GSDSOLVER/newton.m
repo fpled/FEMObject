@@ -111,7 +111,7 @@ else
     fprintf('\nNewton stopped at iteration #%d with residual error %.2d\n',i,err);
 end
 
-added=[];for i=1:length(result.solver);added=[added,result.solver{i}.addedfunctions];end;
+added=[];for i=1:length(result.solver);added=[added,result.solver{i}.addedfunctions];end
 
 fprintf('\n %3d added radial functions\n',sum(added))
 disp(added)

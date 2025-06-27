@@ -214,7 +214,7 @@ for j=1:nbfoncmax %%%%%%%%%%%%%%%% BOUCLE NOUVELLES FONCTIONS
         
         if affiche
             fprintf('  iteration %3d -> erreur = %.3e  \r',i,errorpf(i));
-        end;
+        end
         
         l0=l;U0=U;alpha0=alpha;
         

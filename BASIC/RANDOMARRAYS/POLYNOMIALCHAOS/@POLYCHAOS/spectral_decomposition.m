@@ -76,7 +76,7 @@ errorpf(i)=abs((result.rayg{j}(i)-(i>1)*result.rayg{j}(i-(i>1)))/result.rayg{j}(
             
 if display_ 
     fprintf('iteration %3d -> erreur = %.3e  \r',i,errorpf(i)); 
-end;
+end
 
 l0=l;U0=U;alpha0=alpha;
 if errorpf(i)<paramradial.pfixtol 
@@ -90,7 +90,7 @@ radalpha=[radalpha,alpha];
 
 errorrayg = sqrt(alpha.^2/sum(radalpha.^2));
 
-if errorrayg< 10*eps ;
+if errorrayg< 10*eps
 fprintf('exacte avec %d fonctions -> erreur = %.3e \n',result.nfonctions,result.error(j))
 break
 end

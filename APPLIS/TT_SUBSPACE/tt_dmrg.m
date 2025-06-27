@@ -134,12 +134,12 @@ end
 
 
 function opts = default_opts(opts)
-    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end;
-    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-6; end;
-    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-6; end;
-    if ~isfield(opts,'svd_tol'); opts.svd_tol = 1e-7; end;
-    if ~isfield(opts,'max_svd_rank'); opts.max_svd_rank = 20; end;
-    if ~isfield(opts,'display'); opts.display = true; end;
+    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end
+    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-6; end
+    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-6; end
+    if ~isfield(opts,'svd_tol'); opts.svd_tol = 1e-7; end
+    if ~isfield(opts,'max_svd_rank'); opts.max_svd_rank = 20; end
+    if ~isfield(opts,'display'); opts.display = true; end
 end
 
 function [L,D,R]=svd_eps(x,tol)

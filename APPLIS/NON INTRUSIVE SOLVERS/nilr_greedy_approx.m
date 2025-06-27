@@ -40,5 +40,5 @@ end
 end
 
 function opts = defaultopts(opts)
-    if ~isfield(opts,'maxcorrec');opts.maxcorrec = 10;end;
+    if ~isfield(opts,'maxcorrec');opts.maxcorrec = 10;end
 end

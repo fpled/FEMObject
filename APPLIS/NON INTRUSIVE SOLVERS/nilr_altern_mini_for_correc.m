@@ -139,9 +139,9 @@ end
 
 function opts = defaultopts(opts)
     % Parameters for alternating minim
-    if ~isfield(opts,'rank');opts.rank = 10; end;
-    if ~isfield(opts,'maxiter');opts.maxiter = 10; end;
-    if ~isfield(opts,'tol');opts.tol = 1e-8; end;
+    if ~isfield(opts,'rank');opts.rank = 10; end
+    if ~isfield(opts,'maxiter');opts.maxiter = 10; end
+    if ~isfield(opts,'tol');opts.tol = 1e-8; end
     
     % Parameters for local optimization
     if ~isfield(opts,'fminuncopt')

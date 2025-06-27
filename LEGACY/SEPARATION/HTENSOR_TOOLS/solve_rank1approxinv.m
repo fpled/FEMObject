@@ -180,10 +180,10 @@ end
 end
 
 function opts = defaultopts(opts,order)
-    if ~isfield(opts,'maxiter');opts.maxiter = 10;end;
-    if ~isfield(opts,'stagcrit');opts.stagcrit = 5e-2;end;
-    if ~isfield(opts,'residual');opts.residual = 0;end;
-    if ~isfield(opts,'display');opts.display = 1;end;
-    if ~isfield(opts,'symmetric');opts.symmetric = 0;end;
-    if ~isfield(opts,'sparse');opts.sparse = zeros(1,order);end;
+    if ~isfield(opts,'maxiter');opts.maxiter = 10;end
+    if ~isfield(opts,'stagcrit');opts.stagcrit = 5e-2;end
+    if ~isfield(opts,'residual');opts.residual = 0;end
+    if ~isfield(opts,'display');opts.display = 1;end
+    if ~isfield(opts,'symmetric');opts.symmetric = 0;end
+    if ~isfield(opts,'sparse');opts.sparse = zeros(1,order);end
 end

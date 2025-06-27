@@ -29,7 +29,7 @@ switch NbRva
 	for i = 1 : OrderPol
 	  Indices(i+1,1) = i;
 	  Indices(i+1,2) = i;
-	end;
+    end
 	
  otherwise % Higher dimensional Polynomial Chaoses
 	
@@ -45,7 +45,7 @@ switch NbRva
 		if (FirstThisOrder == 0) 
 		  for i=1 : MM
 			t(i) = i;
-		  end;
+          end
 		  FirstThisOrder = 1; 
 		else
 		  % Regular incrementation
@@ -55,27 +55,27 @@ switch NbRva
 			j = MM;
 			while (t(j) == j + CurrentOrder)
 			  j = j - 1;
-			end;
+            end
 			t(j) = t(j) + 1 ;
 			for k =(j + 1) :  MM 
 			  t(k) = t(j) + k - j;
-			end;
-		  end;
-		end;
+            end
+          end
+        end
 		
 		% Direct Translating t into PsiBasis{n}
 		Indices(n,M) = t(1) -1;
 		for i=2 : MM 
 		  Indices(n,M+1-i) = t(i) - t(i-1) -1;
-		end;
+        end
 		Indices(n,1) = NbRva + CurrentOrder - t(MM) -1;
 		Indices(n,M+1) = CurrentOrder;
 		% End of generation of order CurrentOrder
 		if (t(1) == (CurrentOrder+1))
 		  EndGenere = EndGenere + 1;
-		end;
-	  end;
-	end;
+        end
+      end
+    end
      case 2
      
     for k=1:M
@@ -90,8 +90,8 @@ switch NbRva
 
      end
 
-end;
+end
 else
     Indices=zeros(0,1);
-end;
+end
   

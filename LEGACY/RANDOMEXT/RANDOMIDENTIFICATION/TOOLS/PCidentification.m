@@ -303,7 +303,7 @@ else
             L= myfunvrais(phi0,Nbs);
             atilde0 = atildefun(phi0);
         else
-            atilde0 = zeros(n,P);for i=n;atilde0(i,i)=1;end;
+            atilde0 = zeros(n,P);for i=n;atilde0(i,i)=1;end
             L = myfunvrais(atilde0,Nbs);
         end
     end

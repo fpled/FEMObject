@@ -113,12 +113,12 @@ residual(residual<0)=0;
 end
 
 function opts = default_opts(opts)
-    if ~isfield(opts,'display'); opts.display= true; end;
-    if ~isfield(opts,'tol'); opts.tol = 1e-12; end;
+    if ~isfield(opts,'display'); opts.display= true; end
+    if ~isfield(opts,'tol'); opts.tol = 1e-12; end
     
-%     if ~isfield(opts,'orth'); opts.orth = true; end;
-%     if ~isfield(opts,'metric'); opts.metric = @(x) norm(x,Inf); end;
-%     if ~isfield(opts,'dot'); opts.dot = []; end;
+%     if ~isfield(opts,'orth'); opts.orth = true; end
+%     if ~isfield(opts,'metric'); opts.metric = @(x) norm(x,Inf); end
+%     if ~isfield(opts,'dot'); opts.dot = []; end
 end
 
 

@@ -63,12 +63,11 @@ function u = tt_subspace(A,b,opts)
 end
 
 function opts = defaultopts(opts)
-    if ~isfield(opts,'optim_core'); opts.optim_core = 'als'; end;
-    if ~isfield(opts,'opts_optim_core'); opts.opts_optim_core = struct(); ...
-    end;
-    if ~isfield(opts,'opts_rankone'); opts.opts_rankone = struct(); end;
-    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end;
-    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-5; end;
-    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-5; end;
-    if ~isfield(opts,'display'); opts.display = true; end;
+    if ~isfield(opts,'optim_core'); opts.optim_core = 'als'; end
+    if ~isfield(opts,'opts_optim_core'); opts.opts_optim_core = struct(); end
+    if ~isfield(opts,'opts_rankone'); opts.opts_rankone = struct(); end
+    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end
+    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-5; end
+    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-5; end
+    if ~isfield(opts,'display'); opts.display = true; end
 end

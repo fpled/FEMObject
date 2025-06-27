@@ -145,7 +145,7 @@ errorpf(i)=norm(l-l0)/(1/2*norm(l)+1/2*norm(l0));
 
 if display_ 
     fprintf('  iteration %3d -> erreur = %.3e  \r',i,errorpf(i)); 
-end;
+end
 
 l0=l;U0=U;alpha0=alpha;
 

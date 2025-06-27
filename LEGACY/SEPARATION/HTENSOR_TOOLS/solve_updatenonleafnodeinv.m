@@ -16,7 +16,7 @@ function [P] = solve_updatenonleafnodeinv(A,P,t,opts)
 if nargin == 3
     opts.residual = 0;
 else
-    if ~isfield(opts,'residual');opts.residual=0;end;
+    if ~isfield(opts,'residual');opts.residual=0;end
 end
 
 N = numel(P.B{t});

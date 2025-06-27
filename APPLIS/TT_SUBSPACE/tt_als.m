@@ -110,9 +110,9 @@ function u = tt_als(A,b,u,opts)
 end
 
 function opts = default_opts(opts)
-    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end;
-    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-6; end;
-    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-6; end;
-    if ~isfield(opts,'display'); opts.display = true; end;
+    if ~isfield(opts,'max_iter'); opts.max_iter = 10; end
+    if ~isfield(opts,'stag_tol'); opts.stag_tol = 1e-6; end
+    if ~isfield(opts,'res_tol'); opts.res_tol = 1e-6; end
+    if ~isfield(opts,'display'); opts.display = true; end
 end
 

@@ -116,11 +116,11 @@ J = J(1:r-1);
 end
 
 function opts = default_opts(opts,M,N)
-if ~isfield(opts,'max_rank'); opts.max_rank = 20; end;
-if ~isfield(opts,'tol'); opts.tol = 1e-12; end;
-if ~isfield(opts,'pivot_search'); opts.pivot_search = 'max'; end;
+if ~isfield(opts,'max_rank'); opts.max_rank = 20; end
+if ~isfield(opts,'tol'); opts.tol = 1e-12; end
+if ~isfield(opts,'pivot_search'); opts.pivot_search = 'max'; end
 % Error criterion
-if ~isfield(opts,'err_crit'); opts.err_crit = 'stagnation'; end;
+if ~isfield(opts,'err_crit'); opts.err_crit = 'stagnation'; end
 if strcmp(opts.err_crit,'test_set')
     if ~isfield(opts,'err_card_test_set')
         opts.err_card_test_set = M + N;

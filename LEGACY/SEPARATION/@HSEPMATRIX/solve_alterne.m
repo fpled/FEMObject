@@ -71,7 +71,7 @@ end
 for i=1:param.maxorder
     
     if param.display
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('order #%d \n',i)
     end
     
@@ -126,7 +126,7 @@ for i=1:param.maxorder
         result.alpha{i}(kkk)=alpha;
         result.alphatilde{i}(kkk)=alphatilde;
         if param.display
-            fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+            fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
             fprintf('iteration #%d - stagnation = %d\n',kkk,erriter(kkk))
         end
         % Detection de stabilisation :
@@ -143,7 +143,7 @@ for i=1:param.maxorder
     end  %%%%  END ITERATION ALTERNEE
     
     if param.display
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         for dd=1:U.dim
             fprintf('Dim %d Rang %d     ',dd,U.F{1,dd}.m) ;
         end
@@ -206,7 +206,7 @@ for i=1:param.maxorder
     
     
     if param.node==1%root==1 || param.display
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('order #%d - error = %d \n',i,errorder(i))
     end
     u0=u;
@@ -224,10 +224,10 @@ end
 
 if (nargout==1)&&param.display;
     if errorder(i)>=param.tol
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('---> no convergence - ')
     else
-        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end;
+        fprintf('%d ',param.node);for cpt=1:param.depth, fprintf('      ');end
         fprintf('---> convergence    - ')
     end
     fprintf('order #%d - error = %d\n',i,errorder(i))

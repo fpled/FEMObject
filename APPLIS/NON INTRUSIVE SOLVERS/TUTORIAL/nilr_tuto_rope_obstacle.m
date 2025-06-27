@@ -109,8 +109,8 @@ opts.fminuncopt = optimset('GradObj','on','LargeScale','off',...
             'MaxIter',200,'TolFun',100*eps,'TolX',100*eps);
 opts.PC = PC;
 
-if isfield(opts,'v_init');opts = rmfield(opts,'v_init');end;
-if isfield(opts,'lambda_init');opts = rmfield(opts,'lambda_init');end;
+if isfield(opts,'v_init');opts = rmfield(opts,'v_init');end
+if isfield(opts,'lambda_init');opts = rmfield(opts,'lambda_init');end
 
 V_ama = cell(maxrank,1);
 Lambda_ama = V_ama;
@@ -156,8 +156,8 @@ opts.tol = 1e-8;
 opts.fminuncopt = optimset('GradObj','on','LargeScale','off',...
             'MaxIter',200,'TolFun',100*eps,'TolX',100*eps);
 opts.PC = PC;
-if isfield(opts,'v_init');opts = rmfield(opts,'v_init');end;
-if isfield(opts,'lambda_init');opts = rmfield(opts,'lambda_init');end;
+if isfield(opts,'v_init');opts = rmfield(opts,'v_init');end
+if isfield(opts,'lambda_init');opts = rmfield(opts,'lambda_init');end
 
 opts.maxcorrec = 20;
 [V_greedy,Lambda_greedy,result_greedy] = nilr_greedy_approx(Jpen_param,pw_residual,sz_v,opts);

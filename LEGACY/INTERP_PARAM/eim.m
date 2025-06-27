@@ -94,9 +94,9 @@ end
 end
 
 function opts = default_opts(opts)
-    if ~isfield(opts,'max_basis'); opts.max_basis = 20; end;
-    if ~isfield(opts,'tol'); opts.tol = 1e-12; end;
-    if ~isfield(opts,'orth'); opts.orth = true; end;
-    if ~isfield(opts,'metric'); opts.metric = @(x) norm(x,Inf); end;
-    if ~isfield(opts,'dot'); opts.dot = []; end;
+    if ~isfield(opts,'max_basis'); opts.max_basis = 20; end
+    if ~isfield(opts,'tol'); opts.tol = 1e-12; end
+    if ~isfield(opts,'orth'); opts.orth = true; end
+    if ~isfield(opts,'metric'); opts.metric = @(x) norm(x,Inf); end
+    if ~isfield(opts,'dot'); opts.dot = []; end
 end

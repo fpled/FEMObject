@@ -403,18 +403,18 @@ figure(10)
 clf
 fich=['diff_ref2_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
 load(fich)
-rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end;
+rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end
 semilogy(resultref.time(rep),resultref.error(rep),['ks-'])
 leg = [leg , {['ref.']}];
 hold on
 fich=['diff_PGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
 load(fich)
-rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end;
+rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end
 semilogy(resultPGSD.time(rep),resultPGSD.errres(rep),['b*-'])
 leg = [leg , {['algo 1']}];
 fich=['diff_PUGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
 load(fich)
-rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end;
+rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end
 semilogy(resultPUGSD.time(rep),resultPUGSD.errres(rep),['rv-'])
 leg = [leg , {['algo 2']}];
 set(gca,'fontsize',fsize)
@@ -435,7 +435,7 @@ for pp=scanpp
     try
         fich=['diff_ref2_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end;
+        rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end
         semilogy(resultref.time(rep),resultref.error(rep),['ks' ppline{pp==scanpp}])
         leg = [leg , {['ref., N_0=' num2str(pp)]}];
         hold on
@@ -446,7 +446,7 @@ for pp=scanpp
     try
         fich=['diff_PGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end;
+        rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end
         semilogy(resultPGSD.time(rep),resultPGSD.errres(rep),['b*' ppline{pp==scanpp} ])
         leg = [leg , {['algo 1, N_0=' num2str(pp)]}];
         hold on
@@ -456,7 +456,7 @@ for pp=scanpp
     try
         fich=['diff_PUGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end;
+        rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end
         semilogy(resultPUGSD.time(rep),resultPUGSD.errres(rep),['rv' ppline{pp==scanpp} ])
         leg = [leg , {['algo 2, N_0=' num2str(pp)]}];
         hold on
@@ -486,7 +486,7 @@ for kk=1:length(scantypemesh)
     try
         fich=['diff_ref2_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end;
+        rep=find(resultref.error>=tolaff);if length(rep)<length(resultref.error);rep=[rep,rep(end)+1];end
         semilogy(resultref.time(rep),resultref.error(rep),['ks' ppline{kk}])
         leg = [leg , {['ref., N_x=' num2str(scann(kk))]}];
         hold on
@@ -497,7 +497,7 @@ for kk=1:length(scantypemesh)
     try
         fich=['diff_PGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end;
+        rep=find(resultPGSD.errres>=tolaff);if length(rep)<length(resultPGSD.errres);rep=[rep,rep(end)+1];end
         semilogy(resultPGSD.time(rep),resultPGSD.errres(rep),['b*' ppline{kk} ])
         leg = [leg , {['algo 1, N_x=' num2str(scann(kk))]}];
         hold on
@@ -508,7 +508,7 @@ for kk=1:length(scantypemesh)
     try
         fich=['diff_PUGSD_typemesh_' typemesh '_stdk_' num2str(stdk) '_stdsec_' num2str(stdsec) '_mk0_' num2str(mk0) '_mk1_' num2str(mk1) '_mf_' num2str(mf) '_mg_' num2str(mg) '_p' num2str(pp) '.mat'];
         load(fich)
-        rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end;
+        rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end
         semilogy(resultPUGSD.time(rep),resultPUGSD.errres(rep),['rv' ppline{kk} ])
         leg = [leg , {['algo 2, N_x=' num2str(scann(kk))]}];
         hold on
