@@ -402,8 +402,8 @@ plotparamelem(Sq,'group')
 a = 250e-3; % half-length
 b = 30e-3; % distance of applied load from the right edge
 e = 100e-3; % thickness
-St = gmshLshapedpanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tri');
-Sq = gmshLshapedpanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_quad',2,'recombine');
+St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tri');
+Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_quad',2,'recombine');
 
 figure('Name','L-shaped panel')
 clf
@@ -627,8 +627,8 @@ plotparamelem(Strefcrack,'group')
 a = 250e-3; % half-length
 b = 30e-3; % distance of applied load from the right edge
 e = 100e-3; % thickness
-St = gmshLshapedpanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tet',3);
-% Sq = gmshLshapedpanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_cub',3,'recombine');
+St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tet',3);
+% Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_cub',3,'recombine');
 
 figure('Name','L-shaped panel')
 clf
