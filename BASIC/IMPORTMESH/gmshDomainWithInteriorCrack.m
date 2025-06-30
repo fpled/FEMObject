@@ -4,7 +4,7 @@ function varargout = gmshDomainWithInteriorCrack(D,C,clD,clC,filename,indim,vara
 % C : LIGNE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths
 % filename : file name (optional)
-% indim : space dimension (optional, getindim(D) by default)
+% indim : space dimension (optiownal, getindim(D) by default)
 
 noduplicate = ischarin('noduplicate',varargin);
 varargin = delonlycharin('noduplicate',varargin);
