@@ -1,5 +1,5 @@
-function varargout = gmshcirclewithinclusion(C,I,clC,clI,filename,indim,varargin)
-% function varargout = gmshcirclewithinclusion(C,I,clC,clI,filename,indim)
+function varargout = gmshCircleWithInclusion(C,I,clC,clI,filename,indim,varargin)
+% function varargout = gmshCircleWithInclusion(C,I,clC,clI,filename,indim)
 % C : CIRCLE
 % I : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE or LIGNE or POINT
 % clD, clI : characteristic lengths

@@ -1,5 +1,5 @@
-function varargout = gmshdomainwithedgenotch(D,C,c,clD,clC,filename,indim,varargin)
-% function varargout = gmshdomainwithedgenotch(D,C,c,clD,clC,filename,indim,notchtype)
+function varargout = gmshDomainWithSingleEdgeNotch(D,C,c,clD,clC,filename,indim,varargin)
+% function varargout = gmshDomainWithSingleEdgeNotch(D,C,c,clD,clC,filename,indim,notchtype)
 % D : DOMAIN
 % C : LIGNE in dim 2, QUADRANGLE in dim 3
 % c : width of the edge notch

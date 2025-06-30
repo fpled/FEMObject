@@ -1,5 +1,5 @@
-function varargout = gmshLshapedpanel(a,b,t,clD,clC,filename,indim,varargin)
-% function varargout = gmshLshapedpanel(a,b,t,clD,clC,filename,indim)
+function varargout = gmshLshapedPanel(a,b,t,clD,clC,filename,indim,varargin)
+% function varargout = gmshLshapedPanel(a,b,t,clD,clC,filename,indim)
 % a : half-length
 % b : distance of applied load from the right edge
 % t : thickness

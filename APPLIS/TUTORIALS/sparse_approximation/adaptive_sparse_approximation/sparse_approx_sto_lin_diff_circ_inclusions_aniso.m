@@ -27,7 +27,7 @@ B{8} = CIRCLE(0.5,0.2,r);
 B{9} = DOMAIN(2,[0.4,0.4],[0.6,0.6]);
 
 cl = 0.02;
-system.S = gmshdomainwithinclusion(D,B,cl,cl,'gmsh_circular_inclusions');
+system.S = gmshDomainWithInclusion(D,B,cl,cl,'gmsh_circular_inclusions');
 
 %% Random variables
 

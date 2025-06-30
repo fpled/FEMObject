@@ -1,5 +1,5 @@
-function varargout = gmshcanistermulti(I,cl1,cl2,cl0,cltip,clI,filename,indim,varargin)
-% function varargout = gmshcanistermulti(I,cl1,cl2,cl0,cltip,clI,filename,indim)
+function varargout = gmshCanisterMulti(I,cl1,cl2,cl0,cltip,clI,filename,indim,varargin)
+% function varargout = gmshCanisterMulti(I,cl1,cl2,cl0,cltip,clI,filename,indim)
 % I : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE
 % cl1, cl2, cl0, cltip, clI : characteristic lengths
 % filename : file name (optional)

@@ -1,5 +1,5 @@
-function varargout = gmshcanister(cl1,cl2,cl0,cltip,filename,indim,varargin)
-% function varargout = gmshcanister(cl1,cl2,cl0,cltip,filename,indim)
+function varargout = gmshCanister(cl1,cl2,cl0,cltip,filename,indim,varargin)
+% function varargout = gmshCanister(cl1,cl2,cl0,cltip,filename,indim)
 % cl1, cl2, cl0, cltip : characteristic lengths
 % filename : file name (optional)
 % indim : space dimension (optional, 2 by default)

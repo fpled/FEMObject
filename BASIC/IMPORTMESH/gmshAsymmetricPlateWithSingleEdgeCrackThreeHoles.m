@@ -1,5 +1,5 @@
-function varargout = gmshasymmetricnotchedplatewithedgecrack(a,b,clD,clC,clH,unit,filename,indim,varargin)
-% function varargout = gmshasymmetricnotchedplatewithedgecrack(a,b,clD,clC,clH,unit,filename,indim)
+function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,filename,indim,varargin)
+% function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,filename,indim)
 % a : length of the edge crack (or notch)
 % b : location of the edge crack (or notch) from the centerline
 % clD, clC, clH : characteristic lengths

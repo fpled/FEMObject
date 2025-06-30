@@ -1,5 +1,5 @@
-function varargout = gmshmulti(I,cl,filename,indim,varargin)
-% function varargout = gmshmulti(I,cl,filename,indim)
+function varargout = gmshMulti(I,cl,filename,indim,varargin)
+% function varargout = gmshMulti(I,cl,filename,indim)
 % I : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE
 % cl : characteristic length
 % filename : file name (optional)

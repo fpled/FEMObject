@@ -60,7 +60,7 @@ if setProblem
     cl_patch_D = 0.25;
     cl_patch_B = 0.05;
     for k=1:n
-        patches.patches{k}.S = gmshdomainwithedgecrack(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_edge_crack']));
+        patches.patches{k}.S = gmshDomainWithSingleEdgeCrack(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_single_edge_crack']));
         patches.patches{k}.S = setoption(patches.patches{k}.S,option);
     end
     

@@ -48,7 +48,7 @@ if setProblem
     B{9} = DOMAIN(2,[0.4,0.4],[0.6,0.6]);
     
     cl = 0.02;
-    glob.S = gmshdomainwithinclusion(D,B,cl,cl,fullfile(pathname,['gmsh_circular_' num2str(n) '_inclusions']));
+    glob.S = gmshDomainWithInclusion(D,B,cl,cl,fullfile(pathname,['gmsh_circular_' num2str(n) '_inclusions']));
     
     % Patches
     patches = Patches(n);

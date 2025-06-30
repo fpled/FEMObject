@@ -1,5 +1,5 @@
-function varargout = gmshdomainwithhole(D,H,clD,clH,filename,indim,varargin)
-% function varargout = gmshdomainwithhole(D,H,clD,clH,filename,indim)
+function varargout = gmshDomainWithHole(D,H,clD,clH,filename,indim,varargin)
+% function varargout = gmshDomainWithHole(D,H,clD,clH,filename,indim)
 % D : DOMAIN or QUADRANGLE
 % H : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE or LIGNE or POINT
 % clD, clH : characteristic lengths

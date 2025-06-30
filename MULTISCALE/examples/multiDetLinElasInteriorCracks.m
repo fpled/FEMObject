@@ -69,7 +69,7 @@ if setProblem
     cl_patch_D = 0.02;
     cl_patch_B = 0.002;
     for k=1:n
-        patches.patches{k}.S = gmshdomainwithinteriorcrack(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_interior_crack']));
+        patches.patches{k}.S = gmshDomainWithInteriorCrack(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_interior_crack']));
         patches.patches{k}.S = setoption(patches.patches{k}.S,option);
     end
     

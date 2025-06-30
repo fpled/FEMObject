@@ -4,7 +4,7 @@ cl1 = 0.02;
 cl2 = 0.04;
 cl3 = 0.02;
 cltip = 0.01;
-S = gmshcanister(cl1,cl2,cl3,cltip,'gmsh_canister');
+S = gmshCanister(cl1,cl2,cl3,cltip,'gmsh_canister');
 
 figure(1)
 clf

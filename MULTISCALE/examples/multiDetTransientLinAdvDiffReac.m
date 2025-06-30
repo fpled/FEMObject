@@ -57,7 +57,7 @@ if setProblem
     cl0 = 0.02;
     cltip = 0.01;
     clI = 0.02;
-    glob.S = gmshcanistermulti(D_patch,cl1,cl2,cl0,cltip,clI,fullfile(pathname,'gmsh_canister_multi'));
+    glob.S = gmshCanisterMulti(D_patch,cl1,cl2,cl0,cltip,clI,fullfile(pathname,'gmsh_canister_multi'));
     
     % nbelem_patch = [20,20];
     % for k=1:n

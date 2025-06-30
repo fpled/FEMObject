@@ -1,5 +1,5 @@
-function varargout = gmshdomainwithinclusion(D,I,clD,clI,filename,indim,varargin)
-% function varargout = gmshdomainwithinclusion(D,I,clD,clI,filename,indim)
+function varargout = gmshDomainWithInclusion(D,I,clD,clI,filename,indim,varargin)
+% function varargout = gmshDomainWithInclusion(D,I,clD,clI,filename,indim)
 % D : DOMAIN or QUADRANGLE
 % I : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE or LIGNE or POINT
 % clD, clI : characteristic lengths

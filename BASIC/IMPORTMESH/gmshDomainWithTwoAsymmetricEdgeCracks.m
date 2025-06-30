@@ -1,7 +1,7 @@
-function varargout = gmshdomainwithedgecrack(D,C,clD,clC,filename,indim,varargin)
-% function varargout = gmshdomainwithedgecrack(D,C,clD,clC,filename,indim)
+function varargout = gmshDomainWithTwoAsymmetricEdgeCracks(D,Ca,Cb,clD,clC,filename,indim,varargin)
+% function varargout = gmshDomainWithTwoAsymmetricEdgeCracks(D,Ca,Cb,clD,clC,filename,indim)
 % D : DOMAIN
-% C : LIGNE in dim 2, QUADRANGLE in dim 3
+% Ca, Cb : LIGNE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(D) by default)
@@ -9,67 +9,76 @@ function varargout = gmshdomainwithedgecrack(D,C,clD,clC,filename,indim,varargin
 noduplicate = ischarin('noduplicate',varargin);
 varargin = delonlycharin('noduplicate',varargin);
 
-if nargin<6 || isempty(indim)
+if nargin<7 || isempty(indim)
     indim = getindim(D);
 end
-if nargin<4 || isempty(clC)
+if nargin<5 || isempty(clC)
     clC = clD;
 end
 
 PD = getvertices(D);
 
 if indim==2
-    PC = getvertices(C);
-    C = LIGNE(min(PC{:}),max(PC{:}));
+    PCa = getvertices(Ca);
+    PCb = getvertices(Cb);
+    Ca = LIGNE(min(PCa{:}),max(PCa{:}));
+    Cb = LIGNE(min(PCb{:}),max(PCb{:}));
     if ischarin('refinecrack',varargin)
-        G = gmshfile(C,clC,[2 1],1);
+        Ga = gmshfile(Ca,clC,[2 1],1);
+        Gb = gmshfile(Cb,clC,[8 5],8);
     else
-        G = gmshfile(C,[clD clC],[2 1],1);
+        Ga = gmshfile(Ca,[clD clC],[2 1],1);
+        Gb = gmshfile(Cb,[clD clC],[8 5],8);
     end
-    G = createpoints(G,PD,clD,3:6);
-    G = createcontour(G,2:6,2:6,1);
+    G = Ga+Gb;
+    G = createpoints(G,PD,clD,[3:4,6:7]);
+    G = createcontour(G,2:7,2:7,1);
     G = createplanesurface(G,1,1);
     if ischarin('recombine',varargin)
         G = recombinesurface(G,1);
     end
-    G = embedcurveinsurface(G,1,1);
+    G = embedcurvesinsurface(G,[1,8],1);
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
-        G = createphysicalpoint(G,2,openboundaryphysicalgroup);
-        G = createphysicalcurve(G,1,physicalgroup);
+        G = createphysicalpoint(G,[2,5],openboundaryphysicalgroup);
+        G = createphysicalcurve(G,[1,8],physicalgroup);
     end
     G = createphysicalsurface(G,1,1);
     
 elseif indim==3
     if ischarin('refinecrack',varargin)
-        G = gmshfile(C,clC,1:4,1:4,1,1);
+        Ga = gmshfile(Ca,clC,1:4,1:4,1,1);
+        Gb = gmshfile(Cb,clC,5:8,5:8,2,2);
     else
-        G = gmshfile(C,[clD clC clC clD],1:4,1:4,1,1);
+        Ga = gmshfile(Ca,[clD clC clC clD],1:4,1:4,1,1);
+        Gb = gmshfile(Cb,[clD clC clC clD],5:8,5:8,2,2);
     end
-    G = createpoints(G,PD,clD,5:12);
-    G = createcontour(G,[1 8 7 6 5],5:9,2);
-    G = createplanesurface(G,2,2);
-    G = embedcurveinsurface(G,1,2);
-    
-    G = createcontour(G,[4 9 10 11 12],10:14,3);
+    G = Ga+Gb;
+    G = createpoints(G,PD,clD,9:16);
+    G = createcontour(G,[1 12 11 5 10 9],9:14,3);
     G = createplanesurface(G,3,3);
-    G = embedcurveinsurface(G,3,3);
+    G = embedcurvesinsurface(G,[1 5],3);
     
-    G = createlines(G,[[7 11];[12 8]],15:16);
-    G = createcurveloop(G,-[6 16 13 15],4);
+    G = createcontour(G,[4 13 14 8 15 16],15:20,4);
     G = createplanesurface(G,4,4);
+    G = embedcurvesinsurface(G,[3 7],4);
     
-    G = createlines(G,[[6 10];[9 5]],17:18);
-    G = createcurveloop(G,[-8 17 -11 18],5);
+    G = createlines(G,[[11 15];[16 12]],21:22);
+    G = createcurveloop(G,-[10 22 19 21],5);
     G = createplanesurface(G,5,5);
     
-    G = createcurveloop(G,[-9 -18 -10 -14 16 -5],6);
+    G = createlines(G,[[10 14];[13 9]],23:24);
+    G = createcurveloop(G,[-13 23 -16 24],6);
     G = createplanesurface(G,6,6);
-    G = embedcurveinsurface(G,4,6);
     
-    G = createcurveloop(G,[15 -12 -17 -7],7);
+    G = createcurveloop(G,[-14 -24 -15 -20 22 -9],7);
     G = createplanesurface(G,7,7);
+    G = embedcurveinsurface(G,4,7);
+    
+    G = createcurveloop(G,[-11 21 -18 -17 -23 -12],8);
+    G = createplanesurface(G,8,8);
+    G = embedcurveinsurface(G,8,8);
     
     if ischarin('recombine',varargin)
         G = recombinesurface(G,1);
@@ -80,14 +89,14 @@ elseif indim==3
         G = recombinesurface(G,6);
         G = recombinesurface(G,7);
     end
-    G = createsurfaceloop(G,2:7,1);
+    G = createsurfaceloop(G,3:8,1);
     G = createvolume(G,1,1);
-    G = embedsurfaceinvolume(G,1,1);
+    G = embedsurfacesinvolume(G,[1 2],1);
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
-        G = createphysicalpoint(G,[1 4],openboundaryphysicalgroup);
-        G = createphysicalcurve(G,[1 3 4],openboundaryphysicalgroup);
+        G = createphysicalpoint(G,[1 4 5 8],openboundaryphysicalgroup);
+        G = createphysicalcurve(G,[1 3 4 5 6 7],openboundaryphysicalgroup);
         G = createphysicalsurface(G,1,physicalgroup);
     end
     G = createphysicalvolume(G,1,1);
@@ -131,7 +140,7 @@ if ~isempty(B) && isstruct(B)
     G = setbgfield(G);
 end
 
-if nargin>=5 && ischar(filename)
+if nargin>=6 && ischar(filename)
     G = setfile(G,filename);
 end
 

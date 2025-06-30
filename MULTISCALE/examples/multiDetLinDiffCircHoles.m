@@ -66,7 +66,7 @@ if setProblem
     cl_patch_D = 0.02;
     cl_patch_B = 0.002;
     for k=1:n
-        patches.patches{k}.S = gmshdomainwithhole(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_circular_hole']),getindim(D_patch{k}),'duplicate');
+        patches.patches{k}.S = gmshDomainWithHole(D_patch{k},B_patch{k},cl_patch_D,cl_patch_B,fullfile(pathname,['gmsh_patch_' num2str(k) '_circular_hole']),getindim(D_patch{k}),'duplicate');
     end
     
     % Partition of global mesh

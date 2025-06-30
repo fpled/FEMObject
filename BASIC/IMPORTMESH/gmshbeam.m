@@ -1,5 +1,5 @@
-function G = gmshbeam(P,cl,filename,indim,varargin)
-% function G = gmshbeam(P,cl,filename,indim,varargin)
+function G = gmshBeam(P,cl,filename,indim,varargin)
+% function G = gmshBeam(P,cl,filename,indim,varargin)
 % P : cell array
 % cl : characteristic length
 % filename : file name (optional)

@@ -1,5 +1,5 @@
-function varargout = gmshdomainwithinteriorcrack(D,C,clD,clC,filename,indim,varargin)
-% function varargout = gmshdomainwithinteriorcrack(D,C,clD,clC,filename,indim)
+function varargout = gmshDomainWithInteriorCrack(D,C,clD,clC,filename,indim,varargin)
+% function varargout = gmshDomainWithInteriorCrack(D,C,clD,clC,filename,indim)
 % D : DOMAIN
 % C : LIGNE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths

@@ -1,5 +1,5 @@
-function varargout = gmshcirclewithhole(C,H,clC,clH,filename,indim,varargin)
-% function varargout = gmshcirclewithhole(C,H,clC,clH,filename,indim)
+function varargout = gmshCircleWithHole(C,H,clC,clH,filename,indim,varargin)
+% function varargout = gmshCircleWithHole(C,H,clC,clH,filename,indim)
 % C : CIRCLE
 % H : DOMAIN or CIRCLE or ELLIPSE or QUADRANGLE or LIGNE or POINT
 % clC, clH : characteristic lengths
