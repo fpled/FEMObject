@@ -6,7 +6,9 @@ function varargout = gmshDomainWithSingleEdgeNotch(D,C,c,clD,clC,filename,indim,
 % clD, clC : characteristic lengths
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(D) by default)
-% notchtype : 'c', 'r' or 'v' for circular, rectangular or V notch (optional, 'c' by default)
+% notchtype : 'c', 'circ' or 'circular' for circular notch (by default)
+%             'r', 'rect' or 'rectangular' for rectangular notch
+%             'v', 'V' or 'triangular' for V notch
 
 if nargin<7 || isempty(indim)
     indim = getindim(D);
@@ -31,20 +33,20 @@ if indim==2
     G = createpoints(G,PB,clB,[7,2]);
     G = createpoints(G,PD,clD,3:6);
     PC2 = max(PC{:});
-    if ischarin('r',varargin)
+    if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
         % rectangular notch
         P{1} = PC2 + [0,c/2];
         P{2} = PC2 - [0,c/2];
         G = createpoints(G,P,clC,[8,1]);
         G = createcontour(G,1:8,1:8,1);
         % G = createphysicalcurve(G,[1 7 8],1);
-    elseif ischarin('v',varargin)
+    elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
         % V (triangular) notch
         P = PC2;
         G = createpoints(G,P,clC,1);
         G = createcontour(G,1:7,1:7,1);
         % G = createphysicalcurve(G,[1 7],1);
-    else%if ischarin('c',varargin)
+    else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
         % circular (rounded) notch
         P{1} = PC2 + [-c/2,c/2];
         P{2} = PC2;
@@ -75,7 +77,7 @@ elseif indim==3
         clB = clD;
     end
     G = createpoints(G,PB,clB,[6 4 5 3]);
-    if ischarin('r',varargin)
+    if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
         % rectangular cuboid notch
         P{1} = PC{2} + [0,c/2,0];
         P{2} = PC{2} - [0,c/2,0];
@@ -134,7 +136,7 @@ elseif indim==3
         G = createsurfaceloop(G,1:10,1);
         % G = createphysicalsurface(G,[1 2 3],1);
 
-    elseif ischarin('v',varargin)
+    elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
         % V (triangular) notch
         G = createpoints(G,PD,clD,7:14);
         G = createpoints(G,PC(2:3),clC,1:2);
@@ -185,7 +187,7 @@ elseif indim==3
         % G = createphysicalcurve(G,1,1);
         % G = createphysicalsurface(G,[1 2],1);
 
-    else%if ischarin('c',varargin)
+    else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
         % circular (rounded) cuboid notch
         P{1} = PC{2} + [-c/2,c/2,0];
         P{2} = PC{2};
