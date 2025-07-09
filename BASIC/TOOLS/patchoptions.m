@@ -17,7 +17,8 @@ edgecolor = getcharin('edgecolor',varargin,'k');
 optionsout = {'facecolor',facecolor,'edgecolor',edgecolor};
 facevertexcdata = getcharin('facevertexcdata',varargin);
 if indim==3 && ~ischarin('solid',varargin)
-    facealpha = getcharin('facealpha',varargin,.3);
+    % facealpha = getcharin('facealpha',varargin,0.3);
+    facealpha = getcharin('facealpha',varargin,1);
     facelighting = getcharin('facelighting',varargin,'gouraud');
 else
     facealpha = getcharin('facealpha',varargin);

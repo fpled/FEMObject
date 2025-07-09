@@ -10,6 +10,7 @@ ampl = getcharin('ampl',varargin,0);
 varargin = delcharin('ampl',varargin);
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
+camera_position = getcharin('campos',varargin);
 
 if ~isenrich(elem)
     u = reshape(double(qe),[getnbnode(elem),getnbelem(elem)]);
@@ -98,6 +99,9 @@ end
 
 if ~isempty(up_vector)
     camup(up_vector)
+end
+if ~isempty(camera_position)
+    campos(camera_position);
 end
 
 if nargout>=1

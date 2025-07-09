@@ -26,6 +26,7 @@ end
 
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
+camera_position = getcharin('campos',varargin);
 listegroup = getcharin('selgroup',varargin,1:M.nbgroupelem);
 Helem = zeros(1,length(listegroup));
 for p=listegroup
@@ -71,6 +72,9 @@ elseif dim==3
 end
 if ~isempty(up_vector)
     camup(up_vector)
+end
+if ~isempty(camera_position)
+    campos(camera_position);
 end
 
 if ~(dim==1 && ischarin('courbe',varargin))

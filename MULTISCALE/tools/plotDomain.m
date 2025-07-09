@@ -10,6 +10,7 @@ addParameter(p,'solid',false,@islogical);
 addParameter(p,'surface',false,@islogical);
 addParameter(p,'view',[],@isnumeric);
 addParameter(p,'camup','auto',@(x) isnumeric(x) || ischar(x));
+addParameter(p,'campos','auto',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'FontSize',16,@isscalar);
 addParameter(p,'Interpreter','latex',@ischar);
 if nargin==1 || isempty(varargin) || ischar(varargin{1})
@@ -18,7 +19,7 @@ else
     parse(p,varargin{2:end})
 end
 
-varargin = delcharin({'legend','solid','surface','view','camup','FontSize','Interpreter'},varargin);
+varargin = delcharin({'legend','solid','surface','view','camup','campos','FontSize','Interpreter'},varargin);
 
 if ~iscell(D)
     D = {D};
@@ -145,6 +146,9 @@ elseif getindim(D{1})==3 || p.Results.surface
 end
 if ~isempty(p.Results.camup)
     camup(p.Results.camup)
+end
+if ~isempty(p.Results.campos)
+    campos(p.Results.campos)
 end
     
 end

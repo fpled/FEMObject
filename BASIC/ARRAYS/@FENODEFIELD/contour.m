@@ -29,6 +29,8 @@ end
 
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
+camera_position = getcharin('campos',varargin);
+
 for p=1:M.nbgroupelem
     if (ischarin('surface',varargin) || ischarin('surfacemesh',varargin)) && M.dim==2
         surface(M.groupelem{p},M.node,'facecolor',facecolor,'edgecolor',edgecolor,'facevertexcdata',u.value);
@@ -56,5 +58,8 @@ elseif M.indim==3
 end
 if ~isempty(up_vector)
     camup(up_vector)
+end
+if ~isempty(camera_position)
+    campos(camera_position);
 end
 

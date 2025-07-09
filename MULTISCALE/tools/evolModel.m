@@ -21,6 +21,7 @@ addParameter(p,'legend',true,@islogical);
 addParameter(p,'node',false,@(x) islogical(x) || ischar(x));
 addParameter(p,'view',[],@isnumeric);
 addParameter(p,'camup','auto',@(x) isnumeric(x) || ischar(x));
+addParameter(p,'campos','auto',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'FontSize',16,@isscalar);
 addParameter(p,'LineWidth',0.5,@isscalar);
 addParameter(p,'Interpreter','latex',@ischar);
@@ -40,7 +41,7 @@ addParameter(p,'FrameRate',30,@isnumeric);
 addParameter(p,'Quality',100,@isnumeric);
 parse(p,varargin{:})
 
-varargin = delcharin({'view','camup','FontSize','LineWidth','Interpreter','FaceColor',...
+varargin = delcharin({'view','camup','campos','FontSize','LineWidth','Interpreter','FaceColor',...
     'axison','boxon','boxstylefull','noxtick','noytick','noztick',...
     'plotiter''plottime','filename','pathname','formats','FrameRate','Quality'},varargin);
 if isa(p.Results.formats,'char')
@@ -52,7 +53,7 @@ figure('Name','Mesh')
 clf
 set(gcf,'color','w')
 
-T = setevolparam(T,'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize,...
+T = setevolparam(T,'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize,...
     'axison',p.Results.axison,'boxon',p.Results.boxon,'boxstylefull',p.Results.boxstylefull,...
     'noxtick',p.Results.noxtick,'noytick',p.Results.noytick,'noztick',p.Results.noztick,'plotiter',p.Results.plotiter,'plottime',p.Results.plottime);
 frame = evol_model(T,St,varargin{:}); % save the frames

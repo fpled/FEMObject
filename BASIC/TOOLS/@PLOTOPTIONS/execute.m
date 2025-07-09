@@ -29,6 +29,7 @@ if ischarin('after',varargin)
     axisimage = getparam(P.PARAMETERS,'axisimage');
     numview = getparam(P.PARAMETERS,'view');
     up_vector = getparam(P.PARAMETERS,'camup');
+    camera_position = getparam(P.PARAMETERS,'campos');
     fontsize = getparam(P.PARAMETERS,'fontsize');
     
     if ~isempty(ax)
@@ -92,6 +93,9 @@ if ischarin('after',varargin)
     end
     if ~isempty(up_vector)
         camup(up_vector)
+    end
+    if ~isempty(camera_position)
+        campos(camera_position);
     end
     if colmap
         colormap(colorma)

@@ -38,5 +38,5 @@ ampl = L/max(abs(q));
 
 figure(1)
 clf
-plot(S,'facecolor','w','edgecolor','w')
+plot(S,'facecolor','b','edgecolor','b','facealpha',0.3)
 plot(S+ampl*q,'facecolor','r','edgecolor','r','facealpha',0.3)

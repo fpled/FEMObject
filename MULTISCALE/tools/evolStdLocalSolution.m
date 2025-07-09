@@ -12,6 +12,7 @@ addParameter(p,'colorbar',true,@(x) islogical(x) || ischar(x));
 addParameter(p,'colormap','default',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'view',[],@isnumeric);
 addParameter(p,'camup','auto',@(x) isnumeric(x) || ischar(x));
+addParameter(p,'campos','auto',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'FontSize',16,@isscalar);
 addParameter(p,'filename','solution',@ischar);
 addParameter(p,'pathname','./',@ischar);
@@ -20,7 +21,7 @@ addParameter(p,'FrameRate',30,@isnumeric);
 addParameter(p,'Quality',100,@isnumeric);
 parse(p,varargin{:})
 
-varargin = delcharin({'rescale','colorbar','colormap','view','camup','FontSize',...
+varargin = delcharin({'rescale','colorbar','colormap','view','camup','campos','FontSize',...
     'filename','pathname','formats','FrameRate','Quality'},varargin);
 if isa(p.Results.formats,'char')
     p.Results.formats = {p.Results.formats};
@@ -43,7 +44,7 @@ if isa(patches,'Patches')
     S = cellfun(@(patch) patch.S,patch,'UniformOutput',false);
     swt = cellfun(@(patch) TIMEMATRIX(reshape(variance(wt{patch.number}),wt{patch.number}.sz),T),patch,'UniformOutput',false);
     T = setevolparam(T,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
-        'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize);
+        'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);
     frame = evol_sol(T,swt,S,'rescale',p.Results.rescale,varargin{:}); % save the frames
 elseif isa(patches,'Patch')
     patch = patches;
@@ -64,7 +65,7 @@ elseif isa(patches,'Patch')
     swt = TIMEMATRIX(swt,T);
     
     swt = setevolparam(swt,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
-        'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize);
+        'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);
     frame = evol_sol(swt,patch.S,'rescale',p.Results.rescale,varargin{:}); % save the frames
 end
 

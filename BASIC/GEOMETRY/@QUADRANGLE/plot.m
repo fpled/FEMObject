@@ -12,6 +12,7 @@ axis image
 
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
+camera_position = getcharin('campos',varargin);
 if ~isempty(numview)
     view(numview)
 elseif D.indim==3
@@ -19,6 +20,9 @@ elseif D.indim==3
 end
 if ~isempty(up_vector)
     camup(up_vector)
+end
+if ~isempty(camera_position)
+    campos(camera_position);
 end
 
 if nargout>=1

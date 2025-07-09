@@ -11,6 +11,7 @@ addParameter(p,'colorbar',true,@(x) islogical(x) || ischar(x));
 addParameter(p,'colormap','default',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'view',[],@isnumeric);
 addParameter(p,'camup','auto',@(x) isnumeric(x) || ischar(x));
+addParameter(p,'campos','auto',@(x) isnumeric(x) || ischar(x));
 addParameter(p,'FontSize',16,@isscalar);
 addParameter(p,'filename','solution',@ischar);
 addParameter(p,'pathname','./',@ischar);
@@ -19,7 +20,7 @@ addParameter(p,'FrameRate',30,@isnumeric);
 addParameter(p,'Quality',100,@isnumeric);
 parse(p,varargin{:})
 
-varargin = delcharin({'rescale','colorbar','colormap','view','camup','FontSize',...
+varargin = delcharin({'rescale','colorbar','colormap','view','camup','campos','FontSize',...
     'filename','pathname','formats','FrameRate','Quality'},varargin);
 if isa(p.Results.formats,'char')
     p.Results.formats = {p.Results.formats};
@@ -58,7 +59,7 @@ if isa(patches,'Patches')
     for k=1:n
         patch = patches.patches{k};
         wt_ref{patch.number} = setevolparam(wt_ref{patch.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
-            'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize);
+            'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);
     end
     T = gettimemodel(wt_ref{1});
     frame = evol_sol(T,wt_ref,S,'rescale',p.Results.rescale,varargin{:}); % save the frames
@@ -91,7 +92,7 @@ elseif isa(patches,'Patch')
     set(gcf,'color','w')
     
     wt_ref{patch.number} = setevolparam(wt_ref{patch.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
-        'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize);
+        'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);
     frame = evol_sol(wt_ref{patch.number},patch.S,'rescale',p.Results.rescale,varargin{:}); % save the frames
 end
 

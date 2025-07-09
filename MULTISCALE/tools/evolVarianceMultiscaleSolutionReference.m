@@ -61,7 +61,7 @@ vwt_ref = cellfun(@(patch) TIMEMATRIX(reshape(variance(wt_ref{patch.number}),wt_
 vlambdat_ref = cellfun(@(patch,interface) interface.P_patch*vwt_ref{patch.number},patch,interface,'UniformOutput',false);
 
 T = setevolparam(T,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
-    'view',p.Results.view,'camup',p.Results.camup,'FontSize',p.Results.FontSize);
+    'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);
 frame = evol_sol(T,[{vUt_ref},vwt_ref,vlambdat_ref],[{S_out},S_patch,S_interface],'rescale',p.Results.rescale,'interfaces',2+n:1+2*n,varargin{:}); % save the frames
 
 % Create movie file
