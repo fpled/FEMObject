@@ -347,7 +347,7 @@ clH = c; % characteristic length for circular holes
 St = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_tri');
 Sq = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_quad',2,'recombine');
 
-figure('Name','Asymmetric plate with single edge crack')
+figure('Name','Asymmetric plate with single edge crack and three holes')
 clf
 subplot(1,2,1)
 plotparamelem(St,'group')
