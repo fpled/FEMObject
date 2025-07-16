@@ -30,7 +30,7 @@ if ischarin('after',varargin)
     numview = getparam(P.PARAMETERS,'view');
     up_vector = getparam(P.PARAMETERS,'camup');
     camera_position = getparam(P.PARAMETERS,'campos');
-    fontsize = getparam(P.PARAMETERS,'fontsize');
+    fontsize = getparam(P.PARAMETERS,'FontSize');
     
     if ~isempty(ax)
         axis(ax);

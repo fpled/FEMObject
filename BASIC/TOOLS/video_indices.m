@@ -22,7 +22,7 @@ end
 % Create a new figure and save position
 h = figure('Name','Multi-index set');
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 winsize = get(h,'Position');
 winsize(1:2) = [0 0]; % set borders of the movie
 % Create movie file

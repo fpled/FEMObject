@@ -74,8 +74,8 @@ m = 1:10;
 
 figure(length(m)+1)
 clf
-plot(S,'color','k','facecolor','k','facealpha',0.1)
-plot(S+ampl*q,'color',color,'facecolor',color,'facealpha',0.3)
+plot(S,'Color','k','FaceColor','k','FaceAlpha',0.1)
+plot(S+ampl*q,'Color',color,'FaceColor',color,'FaceAlpha',0.3)
 if strcmp(ddlforce,'FZ')
     view(3)
 else
@@ -102,8 +102,8 @@ for i=m
         Vi = vi(findddl(S,DDL(DDLVECT('U',S.syscoord,'TRANS'))),:);
         ampl = L/max(abs(Vi))/10;
     end
-    plot(S,'color','k','facecolor','k','facealpha',0.1)
-    plot(S+ampl*V(:,i),'color',color,'facecolor',color,'facealpha',0.3)
+    plot(S,'Color','k','FaceColor','k','FaceAlpha',0.1)
+    plot(S+ampl*V(:,i),'Color',color,'FaceColor',color,'FaceAlpha',0.3)
     camlight left
     lighting gouraud
 end

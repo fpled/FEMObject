@@ -194,8 +194,8 @@ xnodeout=[xnodeout , {xnodetri3(:,:,reptriout)}];
 
 end
 
-%plot(ssqua,nodeplus,'facecolor','y')
-%plot(sstri,nodeplus,'facecolor','g')
+%plot(ssqua,nodeplus,'FaceColor','y')
+%plot(sstri,nodeplus,'FaceColor','g')
 
 
 %elemin  = SEG2(nodeplus,getnumber(elem),connecin);

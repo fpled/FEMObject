@@ -56,27 +56,27 @@ end
 
 
 if display_(1)
-    varargin = setcharin('facecolor',varargin,'y');
+    varargin = setcharin('FaceColor',varargin,'y');
     plot(Sin,varargin{:})
 end
 if display_(2)
-    varargin = setcharin('facecolor',varargin,'g');
+    varargin = setcharin('FaceColor',varargin,'g');
     plot(Sout,'out',varargin{:})
 end
 if display_(3)
-    varargin = setcharin('facecolor',varargin,'m');
+    varargin = setcharin('FaceColor',varargin,'m');
     plot(Scut,varargin{:})
 end
 if display_(4) | display_(5)
-    varargin = setcharin('facecolor',varargin,'y');
+    varargin = setcharin('FaceColor',varargin,'y');
     plot(Scutin,varargin{:})
 end
 if display_(4) | display_(6)
-    varargin = setcharin('facecolor',varargin,'g');
+    varargin = setcharin('FaceColor',varargin,'g');
     plot(Scutout,'out',varargin{:})
 end
 if display_(7)
-    varargin = setcharin('facecolor',varargin,'g');
+    varargin = setcharin('FaceColor',varargin,'g');
     plot(Sindomain,varargin{:})
 end
 
@@ -85,10 +85,10 @@ if ischarin('enrich',varargin)
     for p=1:M.nbgroupelem
         nodep = getnode(node,unique(getconnec(M.groupelem{p})));
         if getlsenrich(M.groupelem{p})>0
-            plot(nodep,'marker','rs')       ;
+            plot(nodep,'Marker','rs')       ;
         else
             if getdim(M.groupelem{p})==1
-                plot(nodep,'marker','k.')       ;
+                plot(nodep,'Marker','k.')       ;
             end
         end
     end

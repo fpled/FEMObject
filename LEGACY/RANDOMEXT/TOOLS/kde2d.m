@@ -52,7 +52,7 @@ function [bandwidth,density,X,Y]=kde2d(data,n,MIN_XY,MAX_XY)
 %  % plot the data and the density estimate
 %  surf(X,Y,density,'LineStyle','none'), view([0,60])
 %  colormap hot, hold on, alpha(.8)
-%  set(gca, 'color', 'blue');
+%  set(gca, 'Color', 'blue');
 %  plot(data(:,1),data(:,2),'w.','MarkerSize',5)
 %
 % Example (Sinusoidal density):
@@ -64,7 +64,7 @@ function [bandwidth,density,X,Y]=kde2d(data,n,MIN_XY,MAX_XY)
 %  % plot the data and the density estimate
 %  surf(X,Y,density,'LineStyle','none'), view([0,70])
 %  colormap hot, hold on, alpha(.8)
-%  set(gca, 'color', 'blue');
+%  set(gca, 'Color', 'blue');
 %  plot(data(:,1),data(:,2),'w.','MarkerSize',5)
 %
 % Notes: If you have a more accurate density estimator

@@ -54,7 +54,7 @@ for i=1:m
         plot(V,varargin{:});
     end
     if ~isempty(modename) && plottitle
-        title([ modename '_{' num2str(scanm(i)) '}'],'fontsize',16)
+        title([ modename '_{' num2str(scanm(i)) '}'],'FontSize',16)
     elseif ~isempty(manutext)
         modename=manutext{2};
         pos = manutext{1};

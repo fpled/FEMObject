@@ -37,7 +37,7 @@ else
     % set(gcf,'Name','Standard deviation of u')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = ut.sz;
 sut = std(ut);

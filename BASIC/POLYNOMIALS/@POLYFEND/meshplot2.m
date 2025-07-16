@@ -53,13 +53,13 @@ for i =1:nbelem
                     case 0
                     col = [1 0 1];
                 end
-                options = {'facecolor' 'flat' 'facevertexcdata' col};
+                options = {'FaceColor' 'flat' 'FaceVertexCData' col};
                 %options = [options , varargin];
             else
-                options = {'facecolor'  'none'};
+                options = {'FaceColor'  'none'};
                 %options = [options , varargin];
        end
-            patch('vertices',vertex,'faces',faces,options{:})
+            patch('Faces',faces,'Vertices',vertex,options{:})
             keyboard
    end
 

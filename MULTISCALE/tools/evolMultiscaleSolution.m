@@ -54,7 +54,7 @@ else
     % set(gcf,'Name','Multiscale solution u=(U,w) over domain')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 if size(Ut,1)==glob.S.nbddl
     P_out = calcProjection(glob,'free',false);

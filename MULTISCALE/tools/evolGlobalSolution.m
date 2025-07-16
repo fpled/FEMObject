@@ -50,7 +50,7 @@ else
     % set(gcf,'Name','Global solution U over fictitious domain')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 Ut = setevolparam(Ut,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
     'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);

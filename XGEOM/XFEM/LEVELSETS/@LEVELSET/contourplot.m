@@ -39,12 +39,12 @@ for i=1:length(contourval)
             Dadd=node;
         end
         if dimelem>0
-            if length(contourval)==1 || ischarin('color',varargin)
-                col = getcharin('color',varargin,getcharin('edgecolor',varargin,'r'));
-                varargin = setcharin('color',varargin,col);
+            if length(contourval)==1 || ischarin('Color',varargin)
+                col = getcharin('Color',varargin,getcharin('EdgeColor',varargin,'r'));
+                varargin = setcharin('Color',varargin,col);
             else
                 col = contourval(i);
-                varargin = setcharin('color',varargin,col);
+                varargin = setcharin('Color',varargin,col);
             end
             plot(Dadd,varargin{:});
         else

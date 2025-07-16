@@ -10,7 +10,7 @@ leg = getcharin('legend',varargin,false);
 
 [t,rep]=gettevol(T);
 
-fontsize = getevolparam(T,'fontsize');
+fontsize = getevolparam(T,'FontSize');
 plotiter = getevolparam(T,'plotiter');
 plottime = getevolparam(T,'plottime');
 plotstep = getevolparam(T,'plotstep');

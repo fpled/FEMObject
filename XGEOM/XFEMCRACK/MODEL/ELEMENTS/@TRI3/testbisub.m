@@ -7,23 +7,23 @@ t = TRI3(NODE(nodelocalcoord(t)));
 figure(1)
 clf
 subplot(3,2,1)
-patch('faces',cinin,'vertices',nodecoord,'facecolor','r','edgecolor','k');
+patch('Faces',cinin,'Vertices',nodecoord,'FaceColor','r','EdgeColor','k');
 plot(t,NODE(nodelocalcoord(t)))
 axis square
 title('inin')
 subplot(3,2,2)
-patch('faces',cinout,'vertices',nodecoord,'facecolor','y','edgecolor','k');
+patch('Faces',cinout,'Vertices',nodecoord,'FaceColor','y','EdgeColor','k');
 plot(t,NODE(nodelocalcoord(t)))
 axis square
 title('inout')
 subplot(3,2,3)
-patch('faces',coutin,'vertices',nodecoord,'facecolor','g','edgecolor','k');
+patch('Faces',coutin,'Vertices',nodecoord,'FaceColor','g','EdgeColor','k');
 plot(t,NODE(nodelocalcoord(t)))
 axis square
 title('outin')
 
 subplot(3,2,4)
-patch('faces',coutout,'vertices',nodecoord,'facecolor','m','edgecolor','k');
+patch('Faces',coutout,'Vertices',nodecoord,'FaceColor','m','EdgeColor','k');
 plot(t,NODE(nodelocalcoord(t)))
 axis square
 title('outout')
@@ -31,13 +31,13 @@ title('outout')
 [ginin,ginout,goutin,goutout]=calc_bilssubgauss(t,ls1,ls2,1);
 
 subplot(3,2,5:6)
-patch('faces',cinin,'vertices',nodecoord,'facecolor','r','edgecolor','k');
+patch('Faces',cinin,'Vertices',nodecoord,'FaceColor','r','EdgeColor','k');
 plot(POINT(ginin.coord),'yo');
-patch('faces',cinout,'vertices',nodecoord,'facecolor','y','edgecolor','k');
+patch('Faces',cinout,'Vertices',nodecoord,'FaceColor','y','EdgeColor','k');
 plot(POINT(ginout.coord),'ro');
-patch('faces',coutin,'vertices',nodecoord,'facecolor','g','edgecolor','k');
+patch('Faces',coutin,'Vertices',nodecoord,'FaceColor','g','EdgeColor','k');
 plot(POINT(goutin.coord),'bo');
-patch('faces',coutout,'vertices',nodecoord,'facecolor','m','edgecolor','k');
+patch('Faces',coutout,'Vertices',nodecoord,'FaceColor','m','EdgeColor','k');
 plot(POINT(goutout.coord),'ko');
 
 axis square

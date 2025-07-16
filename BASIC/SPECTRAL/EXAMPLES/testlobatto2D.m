@@ -103,7 +103,7 @@ ut = setevolparam(ut,'view',3);
 
 figure(1)
 
-evol(ut,S,'edgecolor','none')
+evol(ut,S,'EdgeColor','none')
 
 
 %%

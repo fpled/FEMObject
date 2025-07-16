@@ -60,7 +60,7 @@ opts.pivot_search = 'random_row';
 figure(1)
 clf
 [Xplot, Yplot] = meshgrid(xplot,yplot);
-surface(Xplot,Yplot,Fplot,'edgecolor','none')
+surface(Xplot,Yplot,Fplot,'EdgeColor','none')
 colorbar
 
 %%

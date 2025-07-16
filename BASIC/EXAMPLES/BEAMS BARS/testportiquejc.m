@@ -53,7 +53,7 @@ else
     
     figure(2)
     clf
-    plot(S,'edgecolor','b','node')
+    plot(S,'EdgeColor','b','node')
     plot(S+ampl*q,'node');
 
     s = calc_sigma(S,q,'node');

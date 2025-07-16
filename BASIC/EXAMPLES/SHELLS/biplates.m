@@ -75,8 +75,8 @@ clf
 for i=1:size(V,2)
     ampl = 1/max(abs(V(:,i)));
     subplot(2,2,i)
-    plot(S,'color','none','facecolor','k','facealpha',0.5)
-    plot(S+ampl*V(:,i),'color','none','facecolor','r','facealpha',0.5)
+    plot(S,'Color','none','FaceColor','k','FaceAlpha',0.5)
+    plot(S+ampl*V(:,i),'Color','none','FaceColor','r','FaceAlpha',0.5)
     lighting gouraud
 end
 
@@ -91,16 +91,16 @@ for i=1:3
     
     figure(13)
     hold on
-    plot(scanw,log(umod),'color',getfacecolor(i+1));
+    plot(scanw,log(umod),'Color',getfacecolor(i+1));
 
     w = 1.7;
     u = (K-w^2*M+j*C*w)\f;
     
     figure(14)
     hold on
-    plot(S+.001*real(u),'facecolor',getfacecolor(i+1),'facealpha',0.5)
+    plot(S+.001*real(u),'FaceColor',getfacecolor(i+1),'FaceAlpha',0.5)
     
     figure(15)
     hold on
-    plot(S+.001*imag(u),'facecolor',getfacecolor(i+1),'facealpha',0.5)
+    plot(S+.001*imag(u),'FaceColor',getfacecolor(i+1),'FaceAlpha',0.5)
 end

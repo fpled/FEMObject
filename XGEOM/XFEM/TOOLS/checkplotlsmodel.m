@@ -17,7 +17,7 @@ title('groupelem')
 
 i=i+1;subplot(nl,nc,i)
 lstypeplot(S);
-contourplot(getlevelsets(S),S,'linewidth',2,'color','m');
+contourplot(getlevelsets(S),S,'LineWidth',2,'Color','m');
 title('lstype')
 
 i=i+1;subplot(nl,nc,i)
@@ -35,11 +35,11 @@ if isenrich(S)
     
     i=i+1;subplot(nl,nc,i)
     lsenrichplot(S)
-    contourplot(getlevelsets(S),S,'linewidth',2,'color','m');
+    contourplot(getlevelsets(S),S,'LineWidth',2,'Color','m');
     title('enrichment')
     
     i=i+1;subplot(nl,nc,i)
-    plotparamnode(S,'nbddl','markersize',8)
+    plotparamnode(S,'nbddl','MarkerSize',8)
     title('nbddlpernode')
     
     if islscrackin(getlevelsets(S))

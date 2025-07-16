@@ -11,9 +11,9 @@ end
 
 options = varargin;
 
-colelem = getcharin('facevertexcdata',options);
-facecolor = getcharin('facecolor',options,'none');
-edgecolor = getcharin('edgecolor',options,'k');
+colelem = getcharin('FaceVertexCData',options);
+facecolor = getcharin('FaceColor',options,'none');
+edgecolor = getcharin('EdgeColor',options,'k');
 if ~strcmpi(facecolor,'none')
     edgecolor = facecolor;
 end
@@ -32,13 +32,13 @@ elseif strcmpi(facecolor,'flat')
     end
 end
 
-options = setcharin('edgecolor',options,edgecolor);
+options = setcharin('EdgeColor',options,edgecolor);
 if ~isempty(colelem)
-    options = setcharin('facevertexcdata',options,colelem);
+    options = setcharin('FaceVertexCData',options,colelem);
 end
 
-H(1) = patch('faces',connec(:,1:2),'vertices',nodecoord,options{:});
-H(2) = patch('faces',connec(:,2:3),'vertices',nodecoord,options{:});
+H(1) = patch('Faces',connec(:,1:2),'Vertices',nodecoord,options{:});
+H(2) = patch('Faces',connec(:,2:3),'Vertices',nodecoord,options{:});
 
 if nargout>=1
     varargout{1} = H;

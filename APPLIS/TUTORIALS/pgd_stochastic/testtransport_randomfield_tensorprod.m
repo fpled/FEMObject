@@ -57,8 +57,8 @@ multiplot(mat2cell(V,size(V,1),ones(1,mkl+1)),1:30,S)
 
 figure(45)
 clf
-semilogy((Dkl(2:end)),'*','markersize',8)
-set(gca,'fontsize',16)
+semilogy((Dkl(2:end)),'*','MarkerSize',8)
+set(gca,'FontSize',16)
 ylabel('(\sigma_i)^{1/2}')
 xlabel('i')
 fich = './illustreseparation/testtransport_randomfield_m40_diffusion_randfield_spectrum';
@@ -213,7 +213,7 @@ save('test_transport_randfield_omc_statio','omc')
 %%
 figure(2)
 hold on
-pdfsampleplot(omc,'k','linewidth',2,'npts',20)
+pdfsampleplot(omc,'k','LineWidth',2,'npts',20)
 
 
 %%
@@ -262,7 +262,7 @@ useptest = useppc;
 %%
 figure(2)
 hold on
-pdfplot(osep,col,'nbs',5e4,'linewidth',2)
+pdfplot(osep,col,'nbs',5e4,'LineWidth',2)
 
 
 %%
@@ -392,7 +392,7 @@ end
 %%
 figure(2)
 hold on
-pdfplot(ogsd,'b-','nbs',5e4,'linewidth',2,'ksdensity')
+pdfplot(ogsd,'b-','nbs',5e4,'LineWidth',2,'ksdensity')
 
 %%
 

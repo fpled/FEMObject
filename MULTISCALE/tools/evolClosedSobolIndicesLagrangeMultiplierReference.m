@@ -44,13 +44,13 @@ if isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Sobol index of lambda_ref over interfaces #' num2str([numbers{:}]) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     interface = interfaces.interfaces;
     S = cellfun(@(interface) interface.S,interface,'UniformOutput',false);
     slambdat_ref = cellfun(@(interface) TIMEMATRIX(reshape(SensitivityAnalysis.closedSobolIndices(lambdat_ref{interface.number},alpha,ndims(lambdat_ref{interface.number})),lambdat_ref{interface.number}.sz),T),interface,'UniformOutput',false);
     frame = evol_sol(T,slambdat_ref,S,'rescale',p.Results.rescale,varargin{:}); % save the frames
-elseif isa(interfaces,'Interfaces')
+elseif isa(interfaces,'Interface')
     interface = interfaces;
     if ischarin('displ',varargin)
         i = getcharin('displ',varargin);
@@ -61,7 +61,7 @@ elseif isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Closed Sobol index of Lagrange multiplier lambda_ref over interface #' num2str(interface.number) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     sz = lambdat_ref{interface.number}.sz;
     slambdat_ref = SensitivityAnalysis.closedSobolIndices(lambdat_ref{interface.number},alpha);

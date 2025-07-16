@@ -3,10 +3,10 @@ function varargout = plotenveloppe(Y,face,varargin)
 % Y : TIMEMATRIX
 % facecolor : couleur de remplissage
 % 
-% function plotenveloppe(Y,facecolor,'edgecolor',edgecolor)
+% function plotenveloppe(Y,facecolor,'EdgeColor',edgecolor)
 % edgecolor : couleurs des contrours ('k' par defaut)
 %
-% function plotenveloppe(Y,facecolor,'facealpha',alpha,'edgealpha','alphaedge')
+% function plotenveloppe(Y,facecolor,'FaceAlpha',alpha,'EdgeAlpha',edgealpha)
 % alpha et edgealpha : coefficients de transparence (0.5 par defaut)
 
 if nargin<=1
@@ -27,9 +27,9 @@ Ymin = min(Y,[],1);
 Ymax = max(Y,[],1);
 end
 
-edge = getcharin('edgecolor',varargin,'k');
-transp = getcharin('facealpha',varargin,0.5);
-transpedge = getcharin('edgealpha',varargin,transp);
+edge = getcharin('EdgeColor',varargin,'k');
+transp = getcharin('FaceAlpha',varargin,0.5);
+transpedge = getcharin('EdgeAlpha',varargin,transp);
 
 t=[t,fliplr(t)];
 Y = [Ymin.value(:,rep),fliplr(Ymax.value(:,rep))];

@@ -40,7 +40,7 @@ else
     % set(gcf,'Name','Standard deviation of u=(U,w) over domain')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = Ut.sz;
 sUt = std(Ut);

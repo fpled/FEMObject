@@ -54,7 +54,7 @@ else
     % set(gcf,'Name','Reference global solution U_ref and local solution w_ref over complementary subdomain and patches')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 if isa(glob,'Global')
     S_out = glob.S_out;

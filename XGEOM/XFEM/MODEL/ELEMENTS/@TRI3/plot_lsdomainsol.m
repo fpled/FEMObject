@@ -33,7 +33,7 @@ switch getlstype(elem)
         if issigma
             ksigma = getcharin('sigma',varargin);
             varargin = delcharin('sigma',varargin);
-            varargin = setcharin('facecolor',varargin,'flat');
+            varargin = setcharin('FaceColor',varargin,'flat');
         end
         
         qelem=localize(elem,q);
@@ -63,10 +63,10 @@ switch getlstype(elem)
                     se = D*(Be*qe);
                     se = double(sigmacompo(se,ksigma,elem));
                     se = se(:);
-                    varargin = setcharin('facevertexcdata',varargin,se);
+                    varargin = setcharin('FaceVertexCData',varargin,se);
                 end
                 
-                patch('faces',1:3,'vertices',nodecoorde+ampl*ae',varargin{:});
+                patch('Faces',1:3,'Vertices',nodecoorde+ampl*ae',varargin{:});
                 
             elseif all(lse>=0)
                 
@@ -85,11 +85,11 @@ switch getlstype(elem)
                     se1 = D*(Be*qe);
                     se1 = double(sigmacompo(se1,ksigma,elem));
                     se1 = repmat(se1(:),size(connecin,1),1);
-                    varargin = setcharin('facevertexcdata',varargin,se1);
+                    varargin = setcharin('FaceVertexCData',varargin,se1);
                 end
                 
                 if size(connecin,1)>0
-                    patch('faces',connecin,'vertices',nodecoordeplus+ampl*ue1,varargin{:});
+                    patch('Faces',connecin,'Vertices',nodecoordeplus+ampl*ue1,varargin{:});
                 end
             end
             

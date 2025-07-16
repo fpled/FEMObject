@@ -88,7 +88,7 @@ for k=1:nbfonc
 
     plot(FENODEFIELD(unfreevector(S,qradref{k})),S)
     axis off
-    text(1.5,0.3,['U_{' num2str(k) '}'],'fontsize',fsize)
+    text(1.5,0.3,['U_{' num2str(k) '}'],'FontSize',fsize)
 end
 
 %%

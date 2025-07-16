@@ -49,7 +49,7 @@ end
 nl=ceil(sqrt(m));nc=ceil(m/nl);
 for i=1:m
     fullsubplot(nl,nc,i)
-    text(1.5,0.3,['U_{' num2str(i) '}'],'fontsize',fsize)
+    text(1.5,0.3,['U_{' num2str(i) '}'],'FontSize',fsize)
     plot(FENODEFIELD(qradref{i}),S,optionsplot{:})
     axis off
 end
@@ -70,7 +70,7 @@ end
 nl=ceil(sqrt(m));nc=ceil(m/nl);
 for i=1:m
     fullsubplot(nl,nc,i)
-    text(1.5,0.3,['U_{' num2str(i) '}'],'fontsize',fsize)
+    text(1.5,0.3,['U_{' num2str(i) '}'],'FontSize',fsize)
     plot(FENODEFIELD(qrad{i}),S,optionsplot{:})
     axis off
 end
@@ -90,7 +90,7 @@ end
 nl=ceil(sqrt(m));nc=ceil(m/nl);
 for i=1:m
     fullsubplot(nl,nc,i)
-    text(1.5,0.3,['U_{' num2str(i) '}'],'fontsize',fsize)
+    text(1.5,0.3,['U_{' num2str(i) '}'],'FontSize',fsize)
     plot(FENODEFIELD(qrad{i}),S,optionsplot{:})
     axis off
 end
@@ -109,7 +109,7 @@ end
 nl=ceil(sqrt(m));nc=ceil(m/nl);
 for i=1:m
     fullsubplot(nl,nc,i)
-    text(1.5,0.3,['U_{' num2str(i) '}'],'fontsize',fsize)
+    text(1.5,0.3,['U_{' num2str(i) '}'],'FontSize',fsize)
     plot(FENODEFIELD(qrada{i}),S,optionsplot{:})
     axis off
 end

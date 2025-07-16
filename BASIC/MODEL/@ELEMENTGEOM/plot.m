@@ -13,15 +13,15 @@ nodecoord = double(getcoord(node));
 connec = calc_conneclocal(elem,node);
 
 faces = patchfaces(elem,connec);
-facevertexcdata = getcharin('facevertexcdata',options);
+facevertexcdata = getcharin('FaceVertexCData',options);
 
 if ~isempty(facevertexcdata) && size(facevertexcdata,1)==getnbelem(elem)
     facevertexcdata = repmat(facevertexcdata',size(faces,1)/getnbelem(elem),1);
     facevertexcdata = facevertexcdata(:);
-    options = setcharin('facevertexcdata',options,facevertexcdata);
+    options = setcharin('FaceVertexCData',options,facevertexcdata);
 end
 
-H = patch('faces',faces,'vertices',nodecoord,options{:});
+H = patch('Faces',faces,'Vertices',nodecoord,options{:});
 
 if nargout>=1
     varargout{1} = H;

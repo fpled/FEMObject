@@ -1,11 +1,11 @@
-function P = getcenter(C)
-% function P = getcenter(C)
+function P = getcenter(E)
+% function P = getcenter(E)
 
-switch C.indim
+switch E.indim
     case 2
-        P = [C.cx,C.cy];
+        P = [E.cx, E.cy];
     case 3
-        P = [C.cx,C.cy,C.cz];
+        P = [E.cx, E.cy, E.cz];
     otherwise
         error('Wrong space dimension')
 end

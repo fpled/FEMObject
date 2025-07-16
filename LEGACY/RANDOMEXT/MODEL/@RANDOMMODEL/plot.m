@@ -9,7 +9,7 @@ function varargout = plot(M,varargin)
 % 'numelem'          ---                  affichage des numeros des elements
 % 'mat'              ---                  affichage des materiaux
 % 'group'            ---                  affichage des groupes d'elements
-% 'color'            ---                  definit la couleur du maillage
+% 'Color'            ---                  definit la couleur du maillage
 % -> voir patchoptions pour la suite des parametres associes a la commande patch
 
 if ~isa(M,'MODEL')
@@ -37,12 +37,12 @@ else
     dim = getindim(M);
     options = patchoptions(dim,varargin{:});
     
-    color = getcharin('color',varargin);
+    color = getcharin('Color',varargin);
     if ~isempty(color) && isa(color,'char')
-        options = setcharin('edgecolor',options,color);
+        options = setcharin('EdgeColor',options,color);
     elseif ~isempty(color) && isa(color,'double')
-        options = setcharin('facecolor',options,'flat');
-        options = setcharin('facevertexcdata',options,color);
+        options = setcharin('FaceColor',options,'flat');
+        options = setcharin('FaceVertexCData',options,color);
     end
     node = M.node;
     
@@ -60,8 +60,8 @@ else
         end
         optionselem = options;
         if getdim(elem)==1
-            optionselem=delcharin('facelighting',optionselem);
-            optionselem=delcharin('edgelighting',optionselem);
+            optionselem=delcharin('FaceLighting',optionselem);
+            optionselem=delcharin('EdgeLighting',optionselem);
         end
         if getnbelem(elem)>0 && (~strcmp(getlstype(elem),'out') || ischarin('out',varargin))
             
@@ -73,15 +73,15 @@ else
                 elseif lsenrichplot
                     colelem = getlsenrich(elem);
                 end
-                optionselem = setcharin('facecolor',optionselem,'flat');
-                optionselem = setcharin('facevertexcdata',optionselem,colelem);
+                optionselem = setcharin('FaceColor',optionselem,'flat');
+                optionselem = setcharin('FaceVertexCData',optionselem,colelem);
             end
             
             Helemtemp = plot(elem,node,optionselem{:});
             Helem = [Helem,Helemtemp];
             
             if elemtext==1
-                plotnumber(elem,node,'color','r',varargin{:});
+                plotnumber(elem,node,'Color','r',varargin{:});
             end
             
             if  matplot || groupplot || lsenrichplot

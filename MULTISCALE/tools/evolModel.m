@@ -51,7 +51,7 @@ end
 figure('Name','Mesh')
 % set(gcf,'Name','Mesh')
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 T = setevolparam(T,'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize,...
     'axison',p.Results.axison,'boxon',p.Results.boxon,'boxstylefull',p.Results.boxstylefull,...

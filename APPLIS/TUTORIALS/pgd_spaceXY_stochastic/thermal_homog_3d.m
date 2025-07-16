@@ -34,7 +34,7 @@ b=-calc_nonhomogeneous_vector(S1e,A);
 u1ef=Af\b;
 u1e=unfreevector(S1e,u1ef);
 figure('Name','EBC - Mode 1')
-plot_sol(S1e,u1ef,'edgecolor','none')
+plot_sol(S1e,u1ef,'EdgeColor','none')
 
 S2e=S;
 S2e = addcl(S2e,getface(D,1),'T',@(x) x(:,2));
@@ -48,7 +48,7 @@ b=-calc_nonhomogeneous_vector(S2e,A);
 u2ef=Af\b;
 u2e=unfreevector(S2e,u2ef);
 figure('Name','EBC - Mode 2')
-plot_sol(S2e,u2ef,'edgecolor','none')
+plot_sol(S2e,u2ef,'EdgeColor','none')
 
 S3e=S;
 S3e = addcl(S3e,getface(D,1),'T',@(x) x(:,3));
@@ -62,7 +62,7 @@ b=-calc_nonhomogeneous_vector(S3e,A);
 u3ef=Af\b;
 u3e=unfreevector(S3e,u3ef);
 figure('Name','EBC - Mode 3')
-plot_sol(S3e,u3ef,'edgecolor','none')
+plot_sol(S3e,u3ef,'EdgeColor','none')
 
 
 % Determination du tenseur de conductivite homogeneise
@@ -106,7 +106,7 @@ u1pf=Af\b;
 u1p=unfreevector(S1p,u1pf);
 u1pt=x+u1p;
 figure('Name','PBC - Mode 1')
-plot_sol(S,u1pt,'edgecolor','none');
+plot_sol(S,u1pt,'EdgeColor','none');
 
 b=-A*y;
 b=freevector(S1p,b);
@@ -114,7 +114,7 @@ u2pf=Af\b;
 u2p=unfreevector(S1p,u2pf);
 u2pt=y+u2p;
 figure('Name','PBC - Mode 2')
-plot_sol(S,u2pt,'edgecolor','none');
+plot_sol(S,u2pt,'EdgeColor','none');
 
 b=-A*z;
 b=freevector(S1p,b);
@@ -122,7 +122,7 @@ u3pf=Af\b;
 u3p=unfreevector(S1p,u3pf);
 u3pt=z+u3p;
 figure('Name','PBC - Mode 3')
-plot_sol(S,u3pt,'edgecolor','none');
+plot_sol(S,u3pt,'EdgeColor','none');
 
 % Determination du tenseur de conductivite homogeneise
 Kp=zeros(3);
@@ -182,19 +182,19 @@ b=f{1}-f0;
 u1nf=solvesingular(Af,b);
 u1n=unfreevector(S1n,u1nf);
 figure('Name','NBC - Mode 1')
-plot_sol(S1n,u1nf,'edgecolor','none');
+plot_sol(S1n,u1nf,'EdgeColor','none');
 
 b=f{2}-f0;
 u2nf=solvesingular(Af,b);
 u2n=unfreevector(S1n,u2nf);
 figure('Name','NBC - Mode 2')
-plot_sol(S1n,u2nf,'edgecolor','none');
+plot_sol(S1n,u2nf,'EdgeColor','none');
 
 b=f{3}-f0;
 u3nf=solvesingular(Af,b);
 u3n=unfreevector(S1n,u3nf);
 figure('Name','NBC - Mode 3')
-plot_sol(S1n,u3nf,'edgecolor','none');
+plot_sol(S1n,u3nf,'EdgeColor','none');
 
 % Determination du tenseur de conductivite homogeneise
 Kn=zeros(3);

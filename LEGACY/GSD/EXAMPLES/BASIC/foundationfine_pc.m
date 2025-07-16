@@ -54,13 +54,13 @@ ampl = 20 ;
 Kmean = mean(Ksto) ;
 fmean = mean(fsto) ;
 u0=Kmean\fmean;
-plot(M+u0*ampl,'edgecolor','r');
+plot(M+u0*ampl,'EdgeColor','r');
 
 RVsample = random(RV);
 Ksample = randomeval(Ksto,[RVsample{:}],RV);
 fsample = f{1}*RVsample{4}+f{2}*RVsample{5};
 usample=Ksample\fsample;
-plot(M+usample*ampl,'edgecolor','b');
+plot(M+usample*ampl,'EdgeColor','b');
 
 tic
 fprintf('Resolution pcg')
@@ -69,7 +69,7 @@ upc = pcg(Ksto,fsto,1e-7);
 fprintf('Temps pcg  ')
 toc
 figure
-plot(M+mean(upc)*ampl,'edgecolor','g')
+plot(M+mean(upc)*ampl,'EdgeColor','g')
 
 %[urad,radU,radl,radalpha,result]=solve_radial_simple_gc(Ksto,fsto,paramresol.radial,double(upc));
 
@@ -85,5 +85,5 @@ for i=1:length(urad)
 end
 
 
-plot(M+mean(urad)*ampl,'edgecolor','m')
+plot(M+mean(urad)*ampl,'EdgeColor','m')
 

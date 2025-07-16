@@ -9,15 +9,15 @@ facesdirichlet = [5];
 
 figure(1);
 clf;
-plotfacets(S,'edgecolor','w','facecolor','b','facealpha',1,'legend',false)
+plotfacets(S,'EdgeColor','w','FaceColor','b','FaceAlpha',1,'legend',false)
 light('Position',[3 0 3])
 myprint(savepath,['trapeze3D'],'epsc2')
 myprint(savepath,['trapeze3D'],'jpeg','300')
 
 figure(2);clf;
-plotridges(S,'edgecolor','k','facecolor','k','edgealpha',1,'facealpha',1,'legend',false)
-h1=plotfacets(S,facesdirichlet,'edgecolor','none','facecolor','r','facealpha',1)
-h2=plotfacets(S,facesefforts,'edgecolor','none','facecolor','y','facealpha',1)
+plotridges(S,'EdgeColor','k','FaceColor','k','EdgeAlpha',1,'FaceAlpha',1,'legend',false)
+h1=plotfacets(S,facesdirichlet,'EdgeColor','none','FaceColor','r','FaceAlpha',1)
+h2=plotfacets(S,facesefforts,'EdgeColor','none','FaceColor','y','FaceAlpha',1)
 legend([h1(1),h2(1)],'Dirichlet','Neumann')
 
 %%

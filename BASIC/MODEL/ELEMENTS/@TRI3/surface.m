@@ -6,7 +6,7 @@ colnode = getcharin('FaceVertexCData',varargin);
 nodecoord = [nodecoord,colnode];
 [a,connec] = ismember(getconnec(elem),getnumber(node)) ;
 
-H = patch('faces',connec,'vertices',nodecoord,'Facelighting','phong',varargin{:});
+H = patch('Faces',connec,'Vertices',nodecoord,'FaceLighting','phong',varargin{:});
 
 if nargout>=1
     varargout{1} = H;

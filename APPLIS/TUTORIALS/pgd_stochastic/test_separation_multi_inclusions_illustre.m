@@ -6,27 +6,27 @@ mypath = './';
 
 figure(4)
 clf
-pdfplot(RV{1},'b','linewidth',2)
+pdfplot(RV{1},'b','LineWidth',2)
 hold on
-pdfplot(RV{2},'g','linewidth',2)
-set(gca,'xscale','log')
-set(gca,'yscale','log')
-set(gca,'fontsize',14)
+pdfplot(RV{2},'g','LineWidth',2)
+set(gca,'XScale','log')
+set(gca,'YScale','log')
+set(gca,'FontSize',14)
 legend('\alpha_1','\alpha_i, i= 2...8')
 myprint(mypath,'ex_inclusions_rvs',{'epsc2'})
 %%
 figure(1)
 clf
 
-h1=plot(S,'edgecolor','none','selgroup',[1,10],'facecolor','r');
-h2=plot(S,'edgecolor','none','selgroup',2,'facecolor','b');
-h3=plot(S,'edgecolor','none','selgroup',3:9,'facecolor','g');
-%h3=plot(S,'edgecolor','none','selgroup',10,'facecolor','r','');
-plot(create_boundary( keepgroupelem(S,10)),'edgecolor','w');
+h1=plot(S,'EdgeColor','none','selgroup',[1,10],'FaceColor','r');
+h2=plot(S,'EdgeColor','none','selgroup',2,'FaceColor','b');
+h3=plot(S,'EdgeColor','none','selgroup',3:9,'FaceColor','g');
+%h3=plot(S,'EdgeColor','none','selgroup',10,'FaceColor','r','');
+plot(create_boundary( keepgroupelem(S,10)),'EdgeColor','w');
 myprint(mypath,'ex_inclusions_geometry',{'jpeg'})
 plot(S)
 myprint(mypath,'ex_inclusions_mesh',{'jpeg'})
-plot(create_boundary( keepgroupelem(S,10)),'edgecolor','w');
+plot(create_boundary( keepgroupelem(S,10)),'EdgeColor','w');
 
 %%
 
@@ -67,14 +67,14 @@ for kk=1:length(result.u)
     rrr = [rrr;sobol_indices(output)];
 end
 figure(45)
-plot(rrr,'linewidth',2)
-set(gca,'fontsize',14)
+plot(rrr,'LineWidth',2)
+set(gca,'FontSize',14)
 leg = {};
 for k=1:8
     leg{k} = ['S_' num2str(k)];
 end
 ylim([0,0.4])
-legend(leg{:},'location','northeastoutside')
+legend(leg{:},'Location','northeastoutside')
 xlabel('rank')
 %myprint(mypath,['ex_inclusions_progressive_galerkin_noupdate_pgd_sobconv'],{'epsc2'})
 myprint(mypath,['ex_inclusions_progressive_galerkin_10update_pgd_sobconv'],{'epsc2'})
@@ -84,20 +84,20 @@ myprint(mypath,['ex_inclusions_progressive_galerkin_10update_pgd_sobconv'],{'eps
 i=15;
 figure(12)
 clf
-pdfplot(truncate(oseppc,1:i),'nbs',1e5,'b','linewidth',2,'ksdensity')
+pdfplot(truncate(oseppc,1:i),'nbs',1e5,'b','LineWidth',2,'ksdensity')
 hold on
-pdfplot(orefpc,'nbs',1e5,'k','linewidth',2,'ksdensity')
+pdfplot(orefpc,'nbs',1e5,'k','LineWidth',2,'ksdensity')
 legend(['Rank ' num2str(i)],'Reference')
 myprint(mypath,['ex_inclusions_progressive_galerkin_3update_pgd_pdfconv_rank' num2str(i)],{'epsc2'})
 %%
 i=40;
 figure(12)
 clf
-pdfplot(truncate(oseppc,1:i),'nbs',1e5,'b','linewidth',2,'ksdensity')
+pdfplot(truncate(oseppc,1:i),'nbs',1e5,'b','LineWidth',2,'ksdensity')
 hold on
-pdfplot(truncate(osepgoalpc,1:i),'nbs',1e5,'r','linewidth',2,'ksdensity')
+pdfplot(truncate(osepgoalpc,1:i),'nbs',1e5,'r','LineWidth',2,'ksdensity')
 hold on
-pdfplot(orefpc,'nbs',1e5,'k','linewidth',2,'ksdensity')
+pdfplot(orefpc,'nbs',1e5,'k','LineWidth',2,'ksdensity')
 legend(['Rank ' num2str(i)],['Goal - Rank ' num2str(i)],'Reference')
 
 %%
@@ -131,9 +131,9 @@ figure(12)
 clf
 leg = {};
 for k=0:length(resup)-1
-    semilogy(resup{k+1}.error,getcourbestyles(k+1),'linewidth',2)
+    semilogy(resup{k+1}.error,getcourbestyles(k+1),'LineWidth',2)
     hold on
-    set(gca,'fontsize',14)
+    set(gca,'FontSize',14)
     xlabel('rank')
     ylabel('error')
     leg{end+1} = [num2str(k) ' updates'];

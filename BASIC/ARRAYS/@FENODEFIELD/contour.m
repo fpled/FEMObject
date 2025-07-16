@@ -9,7 +9,7 @@ function contour(u,M,varargin)
 % du maillage dans le plan z=0
 % argi = 'nofaces' affichage des bords des elements en 2D
 
-facecolor = getcharin('facecolor',varargin);
+facecolor = getcharin('FaceColor',varargin);
 if isempty(facecolor)
     if ischarin('nofaces',varargin)
         facecolor = 'none';
@@ -18,7 +18,7 @@ if isempty(facecolor)
     end
 end
 
-edgecolor = getcharin('edgecolor',varargin);
+edgecolor = getcharin('EdgeColor',varargin);
 if isempty(edgecolor)
     if ischarin('edges',varargin)
         edgecolor = 'k';
@@ -33,10 +33,10 @@ camera_position = getcharin('campos',varargin);
 
 for p=1:M.nbgroupelem
     if (ischarin('surface',varargin) || ischarin('surfacemesh',varargin)) && M.dim==2
-        surface(M.groupelem{p},M.node,'facecolor',facecolor,'edgecolor',edgecolor,'facevertexcdata',u.value);
+        surface(M.groupelem{p},M.node,'FaceColor',facecolor,'EdgeColor',edgecolor,'FaceVertexCData',u.value);
         
         if ischarin('surfacemesh',varargin)
-            plot(M.groupelem{p},M.node,'facecolor','none','edgecolor','k','facevertexcdata',u.value);
+            plot(M.groupelem{p},M.node,'FaceColor','none','EdgeColor','k','FaceVertexCData',u.value);
         end
         axis image
         axis square
@@ -44,7 +44,7 @@ for p=1:M.nbgroupelem
             view(3)
         end
     else
-        plot(M.groupelem{p},M.node,'facecolor',facecolor,'edgecolor',edgecolor,'facevertexcdata',u.value);
+        plot(M.groupelem{p},M.node,'FaceColor',facecolor,'EdgeColor',edgecolor,'FaceVertexCData',u.value);
         axis image
     end
 end

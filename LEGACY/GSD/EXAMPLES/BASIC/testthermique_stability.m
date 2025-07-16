@@ -99,8 +99,8 @@ figure(10)
 clf
 plot(x,urefx(x),'k')
 hold on
-plot(ur,S,'courbe','color','r')
-plot(upcr,S,'courbe','color','b')
+plot(ur,S,'courbe','Color','r')
+plot(upcr,S,'courbe','Color','b')
 
 legend('Reference','Petrov-Galerkin deterministe','Galerkin PC')
 

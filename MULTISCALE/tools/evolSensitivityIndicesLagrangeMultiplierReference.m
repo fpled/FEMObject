@@ -44,14 +44,14 @@ if isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Sensitivity index of lambda_ref over interfaces #' num2str([numbers{:}]) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     interface = interfaces.interfaces;
     S = cellfun(@(interface) interface.S,interface,'UniformOutput',false);
     slambdat_ref = cellfun(@(interface) reshape(varianceConditionalExpectation(lambdat_ref{interface.number},alpha)./max(variance(lambdat_ref{interface.number})),lambdat_ref{interface.number}.sz),interface,'UniformOutput',false);
     slambdat_ref = cellfun(@(s) TIMEMATRIX(s,T),slambdat_ref,'UniformOutput',false);
     frame = evol_sol(T,slambdat_ref,S,'rescale',p.Results.rescale,varargin{:}); % save the frames
-elseif isa(interfaces,'Interfaces')
+elseif isa(interfaces,'Interface')
     interface = interfaces;
     if ischarin('displ',varargin)
         i = getcharin('displ',varargin);
@@ -62,7 +62,7 @@ elseif isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Sensitivity index of Lagrange multiplier lambda_ref over interface #' num2str(interface.number) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     sz = lambdat_ref{interface.number}.sz;
     vlambdat_ref = variance(lambdat_ref{interface.number});

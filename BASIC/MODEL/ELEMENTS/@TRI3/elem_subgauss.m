@@ -40,7 +40,7 @@ else
         c = Ntri3(tri3gauss.coord)*xnode;
         subgauss.coord = [subgauss.coord;c] ;
     end
-    % plot(TRI3(NODE(xnode),1,1:3),NODE(xnode),'facecolor','none');
+    % plot(TRI3(NODE(xnode),1,1:3),NODE(xnode),'FaceColor','none');
 end
 
 

@@ -45,12 +45,12 @@ dq = double(dq);
 % solex = x;
 figure(1)
 hold off
-plot(x,solex,'r-','linewidth',2)
+plot(x,solex,'r-','LineWidth',2)
 hold on
 plot(x,double(q),'b-')
 figure(2)
 hold off
-plot(x,dsolex,'r-','linewidth',2)
+plot(x,dsolex,'r-','LineWidth',2)
 hold on
 plot(x,dq(:),'b-')
 

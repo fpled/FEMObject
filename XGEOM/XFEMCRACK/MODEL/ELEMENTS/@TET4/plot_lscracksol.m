@@ -57,11 +57,11 @@ else
             if issigma
                 se = D*(Be*ue(:));% sigma(mat,eleme,xnodee,[1/3,1/3],uet(:));
                 se= double(se(ksigma));se = se(:);
-                varargin = setcharin('facecolor',varargin,'flat');
-                varargin = setcharin('facevertexcdata',varargin,se);
+                varargin = setcharin('FaceColor',varargin,'flat');
+                varargin = setcharin('FaceVertexCData',varargin,se);
             end
             
-            patch('faces',1:3,'vertices',nodecoorde+ampl*ue',varargin{:});
+            patch('Faces',1:3,'Vertices',nodecoorde+ampl*ue',varargin{:});
         else
             % division en sous-elements
             [connecin,connecout,xlnodeplus]=lsdivide_oneelem(ls1e);
@@ -85,15 +85,15 @@ else
                 se1=double(se1(ksigma));se1 = repmat(se1(:),size(connecout,1),1);
                 se2=double(se2(ksigma));se2 = repmat(se2(:),size(connecin,1),1);
                 
-                varargin = setcharin('facecolor',varargin,'flat');
-                varargin = setcharin('facevertexcdata',varargin,se1);
-                patch('faces',connecout,'vertices',nodecoordeplus+ampl*ue1',varargin{:});
-                varargin = setcharin('facevertexcdata',varargin,se2);
-                patch('faces',connecin,'vertices',nodecoordeplus+ampl*ue2',varargin{:});
+                varargin = setcharin('FaceColor',varargin,'flat');
+                varargin = setcharin('FaceVertexCData',varargin,se1);
+                patch('Faces',connecout,'Vertices',nodecoordeplus+ampl*ue1',varargin{:});
+                varargin = setcharin('FaceVertexCData',varargin,se2);
+                patch('Faces',connecin,'Vertices',nodecoordeplus+ampl*ue2',varargin{:});
                 
             else
-                patch('faces',connecout,'vertices',nodecoordeplus+ampl*ue1',varargin{:});
-                patch('faces',connecin,'vertices',nodecoordeplus+ampl*ue2',varargin{:});
+                patch('Faces',connecout,'Vertices',nodecoordeplus+ampl*ue1',varargin{:});
+                patch('Faces',connecin,'Vertices',nodecoordeplus+ampl*ue2',varargin{:});
                 
             end
             

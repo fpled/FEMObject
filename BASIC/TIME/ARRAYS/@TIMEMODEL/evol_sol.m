@@ -90,7 +90,7 @@ if rescale
     
 end
 
-fontsize = getevolparam(T,'fontsize');
+fontsize = getevolparam(T,'FontSize');
 plotiter = getevolparam(T,'plotiter');
 plottime = getevolparam(T,'plottime');
 plotstep = getevolparam(T,'plotstep');

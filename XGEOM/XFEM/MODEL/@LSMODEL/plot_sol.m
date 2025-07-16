@@ -6,12 +6,12 @@ options = patchoptions(getindim(M),varargin{:});
 options = setcharin('ampl',options,getcharin('ampl',varargin,1));
 if ischarin('sigma',varargin)
     options = [{'sigma' , getcharin('sigma',varargin)},options];
-    options = setcharin('edgecolor',options,getcharin('edgecolor',varargin,'none'));
+    options = setcharin('EdgeColor',options,getcharin('EdgeColor',varargin,'none'));
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if ischarin('epsilon',varargin)
     options = [{'epsilon' , getcharin('epsilon',varargin)},options];
-    options = setcharin('edgecolor',options,getcharin('edgecolor',varargin,'none'));
+    options = setcharin('EdgeColor',options,getcharin('EdgeColor',varargin,'none'));
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 listegroup = getcharin('selgroup',varargin,1:getnbgroupelem(M));

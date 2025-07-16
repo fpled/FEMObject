@@ -9,7 +9,7 @@ S=addcl(S,D2,'U',0);
 K=calc_rigi(S);
 f=surfload(S,D1,'FY',1);
 q=K\f;
-clf;plot(S+0.1*q,'edgecolor','r')
+clf;plot(S+0.1*q,'EdgeColor','r')
 eval_sol(S,q,P(3),{'UX','UY'})
 s=calc_sigma(S,q,'smooth');
 plot(s,S,'compo','SMXX')
@@ -63,4 +63,4 @@ rep{5} = setdiff(1:n^2,repbord);
 % A=sparse(size(K,1),size(K,2));
 % A(rep)=double(K(rep)*eps);
 % q(S.ddlfree)=((1+eps)*K(S.ddlfree,S.ddlfree))\f(S.ddlfree);
-% figure(1);clf;plot(S+SPACEFUN(0.1*q),'edgecolor','m')
+% figure(1);clf;plot(S+SPACEFUN(0.1*q),'EdgeColor','m')

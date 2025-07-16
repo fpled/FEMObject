@@ -7,8 +7,8 @@ iscourbe = ischarin('courbe',varargin);
 varargin = delonlycharin('surface',varargin);
 dim = getindim(M);
 options = patchoptions(dim,varargin{:});
-options = setcharin('facecolor',options,'interp');
-options = setcharin('edgecolor',options,'none');
+options = setcharin('FaceColor',options,'interp');
+options = setcharin('EdgeColor',options,'none');
 
 if issurf
     options = [options , {'surface'}];

@@ -10,7 +10,7 @@ end
 if nargin<=3
     clP = clD;
 end
-if length(clP)==1
+if isscalar(clP)
     clP = repmat(clP,1,length(P));
 end
 if nargin<=4

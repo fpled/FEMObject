@@ -5,7 +5,7 @@ leg = {};
 
 plot(M)
 num = getnumgroupelemwithfield(M,'lsenrich',1);
-Htemp = plot(M,'selgroup',num,'facecolor','y');
+Htemp = plot(M,'selgroup',num,'FaceColor','y');
 if length(Htemp)>0
 legtemp = cell(1,length(Htemp(1)));
 legtemp(:)={'enriched'};

@@ -56,7 +56,7 @@ else
     figure(2)
     clf
     varargout{1}=q;
-    plot(S,'edgecolor','b')
+    plot(S,'EdgeColor','b')
     plot(S+ampl*q)
 
     a=F*L^3/3/getparam(mat,'E')/getparam(mat,'IZ');

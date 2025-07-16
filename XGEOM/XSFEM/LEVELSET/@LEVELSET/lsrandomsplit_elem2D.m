@@ -46,7 +46,7 @@ for i=1:length(I_elemtot)
        case 'cut'
        col='m';    
    end
-   %patch('vertices',xi,'faces',[1,2,3,4],'facecolor',col) 
+   %patch('Faces',[1,2,3,4],'Vertices',xi,'FaceColor',col) 
 
 end
 %keyboard

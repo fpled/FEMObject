@@ -151,7 +151,7 @@ else
 end
 
 figure(3)
-plot(u,S,'courbe','color','r')
+plot(u,S,'courbe','Color','r')
 hold on
 
 %% solution, de reference
@@ -417,7 +417,7 @@ load(fich)
 rep=find(resultPUGSD.errres>=tolaff);if length(rep)<length(resultPUGSD.errres);rep=[rep,rep(end)+1];end
 semilogy(resultPUGSD.time(rep),resultPUGSD.errres(rep),['rv-'])
 leg = [leg , {['algo 2']}];
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Residual Error')
 xlabel('Time (s)')
@@ -464,7 +464,7 @@ for pp=scanpp
         warning(fich)
     end
 end
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Residual Error')
 xlabel('Time (s)')
@@ -516,7 +516,7 @@ for kk=1:length(scantypemesh)
         warning(fich)
     end
 end
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Residual Error')
 xlabel('Time (s)')
@@ -604,21 +604,21 @@ clf
 leg={};leg2={};
 for kk=1:length(scanp)
     figure(16)
-    loglog(scannP(:,kk),timeref(:,kk)./timepgsd(:,kk),getcourbestyles(kk,'marker'))
+    loglog(scannP(:,kk),timeref(:,kk)./timepgsd(:,kk),getcourbestyles(kk,'Marker'))
     leg = [leg , {['N_0=' num2str(scanp(kk))]}];
     hold on
     figure(160)
-    loglog(scannP(:,kk),timeref(:,kk)./timepugsd(:,kk),getcourbestyles(kk,'marker'))
+    loglog(scannP(:,kk),timeref(:,kk)./timepugsd(:,kk),getcourbestyles(kk,'Marker'))
     hold on
     leg2 = [leg2 , {['N_0=' num2str(scanp(kk))]}];
 end
 figure(16)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Time Gain')
 xlabel('N_x\times P')
 figure(160)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg2{:})
 ylabel('Time Gain')
 xlabel('N_x\times P')
@@ -637,46 +637,46 @@ clf
 leg={};
 for kk=1:length(scann)
     figure(17)
-    loglog(scannP(kk,:),timeref(kk,:)./timepgsd(kk,:),getcourbestyles(kk,'marker'))
+    loglog(scannP(kk,:),timeref(kk,:)./timepgsd(kk,:),getcourbestyles(kk,'Marker'))
     hold on
     figure(170)
-    loglog(scannP(kk,:),timeref(kk,:)./timepugsd(kk,:),getcourbestyles(kk,'marker'))
+    loglog(scannP(kk,:),timeref(kk,:)./timepugsd(kk,:),getcourbestyles(kk,'Marker'))
     hold on
     figure(19)
-    loglog(scannP(kk,:),timepgsd(kk,:),getcourbestyles(kk,'marker'))
+    loglog(scannP(kk,:),timepgsd(kk,:),getcourbestyles(kk,'Marker'))
     hold on
     figure(190)
-    loglog(scannP(kk,:),timepugsd(kk,:),getcourbestyles(kk,'marker'))
+    loglog(scannP(kk,:),timepugsd(kk,:),getcourbestyles(kk,'Marker'))
     hold on
     figure(18)
-    loglog(scannP(kk,:),timeref(kk,:),getcourbestyles(kk,'marker'))
+    loglog(scannP(kk,:),timeref(kk,:),getcourbestyles(kk,'Marker'))
     hold on
     leg = [leg , {['N_x=' num2str(scann(kk))]}];
     %leg = [leg , {['N_x=' num2str(scann(kk))]}];
     legref = [legref , {['N_x=' num2str(scann(kk))]}];
 end
 figure(17)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Time Gain')
 xlabel('N_x\times P')
 figure(170)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Time Gain')
 xlabel('N_x\times P')
 figure(18)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(legref{:})
 ylabel('Time (s)')
 xlabel('N_x\times P')
 figure(19)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Time (s)')
 xlabel('N_x\times P')
 figure(190)
-set(gca,'fontsize',fsize)
+set(gca,'FontSize',fsize)
 legend(leg{:})
 ylabel('Time (s)')
 xlabel('N_x\times P')
@@ -731,10 +731,10 @@ end
 nbmodes=nbfun;
 figure(44)
 clf
-semilogy(1:nbmodes,resultPGSD.errL2uM(1:nbmodes),'b--s','linewidth',2)
+semilogy(1:nbmodes,resultPGSD.errL2uM(1:nbmodes),'b--s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -744,10 +744,10 @@ legend('algorithm 1, ||\lambda_MU_M||/||u_M||','algorithm 1, ||R_M||')
 nbmodes=nbfun;
 figure(44)
 clf
-semilogy(1:nbmodes,resultPUGSD.errL2uM(1:nbmodes),'b--s','linewidth',2)
+semilogy(1:nbmodes,resultPUGSD.errL2uM(1:nbmodes),'b--s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-o','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-o','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -757,12 +757,12 @@ legend('algorithm 1, ||\lambda_MU_M||/||u_M||','algorithm 1, ||R_M||')
 nbmodes=nbfun;
 figure(44)
 clf
-semilogy(1:nbmodes,resultPGSD.errL2uM(1:nbmodes),'b-s','linewidth',2)
+semilogy(1:nbmodes,resultPGSD.errL2uM(1:nbmodes),'b-s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,resultPUGSD.errL2uM(1:nbmodes),'b-->','linewidth',2)
-semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','linewidth',2)
-semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r--*','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,resultPUGSD.errL2uM(1:nbmodes),'b-->','LineWidth',2)
+semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','LineWidth',2)
+semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r--*','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -774,11 +774,11 @@ nbmodes=nbfun;
 nbmodes=nbfun;
 figure(44)
 clf
-semilogy(1:nbmodes,errresPGSD(1:nbmodes),'b-o','linewidth',2)
+semilogy(1:nbmodes,errresPGSD(1:nbmodes),'b-o','LineWidth',2)
 hold on
-semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-.*','linewidth',2)
-semilogy(1:nbmodes,errresAGSD(1:nbmodes),'k-->','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-.*','LineWidth',2)
+semilogy(1:nbmodes,errresAGSD(1:nbmodes),'k-->','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -789,11 +789,11 @@ legend('P-GSD','PU-GSD','A-GSD')
 nbmodes=nbfun;
 figure(45)
 clf
-semilogy(resultPGSD.nbitercumul,errresPGSD(1:nbmodes),'b-o','linewidth',2)
+semilogy(resultPGSD.nbitercumul,errresPGSD(1:nbmodes),'b-o','LineWidth',2)
 hold on
-semilogy(resultPUGSD.nbitercumul,errresPUGSD(1:nbmodes),'r-.*','linewidth',2)
-semilogy(1:nbmodes,errresAGSD(1:nbmodes),'k-->','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD(1:nbmodes),'r-.*','LineWidth',2)
+semilogy(1:nbmodes,errresAGSD(1:nbmodes),'k-->','LineWidth',2)
+set(gca,'FontSize',fsize)
 % set(gca,'Xtick',[1:nbmodes])
 % xlim([.8,nbmodes])
 xlabel('Number of Nonlinear Deterministic Problems')
@@ -814,12 +814,12 @@ end
 
 figure(44)
 clf
-semilogy(1:nbmodes,resultPGSD.errL2(1:nbmodes),'b-s','linewidth',2)
+semilogy(1:nbmodes,resultPGSD.errL2(1:nbmodes),'b-s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,resultPUGSD.errL2(1:nbmodes),'b-->','linewidth',2)
-semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','linewidth',2)
-semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r--*','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,resultPUGSD.errL2(1:nbmodes),'b-->','LineWidth',2)
+semilogy(1:nbmodes,errresPGSD(1:nbmodes),'r-o','LineWidth',2)
+semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r--*','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 set(gca,'Ytick',10.^[-5:1])
 xlim([.8,nbmodes])
@@ -833,10 +833,10 @@ legend('algorithm 1, ||u_M -u_{ref}||/||u_{ref}||','algorithm 2, ||u_M -u_{ref}|
 nbmodes=nbfun;
 figure(44)
 clf
-semilogy(1:nbmodes,errresPGSD(1:nbmodes),'b--s','linewidth',2)
+semilogy(1:nbmodes,errresPGSD(1:nbmodes),'b--s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-o','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,errresPUGSD(1:nbmodes),'r-o','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -848,14 +848,14 @@ nbmodes = length(errresPGSD);
 figure(1000)
 clf
 load('diff_PGSD_stdk_0.1_stdsec_0.1_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.3_stdsec_0.3_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 legend('cov = 10%','cov = 20%','cov = 30%')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -869,14 +869,14 @@ nbmodes = length(errresPUGSD);
 figure(1000)
 clf
 load('diff_PUGSD_stdk_0.1_stdsec_0.1_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.3_stdsec_0.3_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 legend('cov = 10%','cov = 20%','cov = 30%')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -888,14 +888,14 @@ nbmodes = length(errresPGSD);
 figure(1000)
 clf
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p5.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p6.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 legend('N_o=4','N_o=5','N_o=6')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -907,14 +907,14 @@ nbmodes = length(errresPUGSD);
 figure(1000)
 clf
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p5.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p6.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 legend('N_o=4','N_o=5','N_o=6')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -927,21 +927,21 @@ nbmodes = length(errresPUGSD);
 figure(1000)
 clf
 load('diff_PGSD_stdk_0.1_stdsec_0.1_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_stdk_0.1_stdsec_0.1_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'ks--','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'ks--','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'bo--','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'bo--','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.3_stdsec_0.3_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.3_stdsec_0.3_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'r^--','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'r^--','LineWidth',2,'MarkerSize',msize)
 legend('algo 1 , cov = 10%','algo 2 , cov = 10%','algo 1 , cov = 20%','algo 2 , cov = 20%','algo 1 , cov = 30%','algo 2 , cov = 30%')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -953,18 +953,18 @@ nbmodes = length(errresPUGSD);
 figure(1000)
 clf
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'r>-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'r>-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.1_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.01_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'m^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'m^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_2.2204e-016_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'k*-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'k*-','LineWidth',2,'MarkerSize',msize)
 legend('E(\kappa_1) = 1.5','E(\kappa_1) = 0.5','E(\kappa_1) = 0.1','E(\kappa_1) = 0.01','\kappa_1 = 0')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -976,18 +976,18 @@ nbmodes = length(errresPGSD);
 figure(1000)
 clf
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_1.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.5_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'r>-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'r>-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.1_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_0.01_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'m^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'m^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_stdk_0.1925_stdsec_0.1925_mk0_3_mk1_2.2204e-016_mf_6_mg_2.25_p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'k*-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'k*-','LineWidth',2,'MarkerSize',msize)
 legend('E(\kappa_1) = 1.5','E(\kappa_1) = 0.5','E(\kappa_1) = 0.1','E(\kappa_1) = 0.01','\kappa_1 = 0')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -999,11 +999,11 @@ msize=8;
 figure(1000)
 clf
 load('diffusion_nonlin_PGSD_p4_M16.mat')
-semilogy(resultPGSD.nbitercumul,errresPGSD,'b--s','linewidth',2,'markersize',msize)
+semilogy(resultPGSD.nbitercumul,errresPGSD,'b--s','LineWidth',2,'MarkerSize',msize)
 load('diffusion_nonlin_PUGSD_p4_M16.mat')
 hold on
-semilogy(resultPUGSD.nbitercumul,errresPUGSD,'r-o','linewidth',2,'markersize',msize)
-set(gca,'fontsize',fsize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD,'r-o','LineWidth',2,'MarkerSize',msize)
+set(gca,'FontSize',fsize)
 % set(gca,'Xtick',max(max()))
 xlim([-3,max(max(resultPGSD.nbitercumul),max(resultPUGSD.nbitercumul))]+3)
 xlabel('iterations')
@@ -1016,31 +1016,31 @@ msize=8;
 figure(1000)
 clf
 load('diff_PGSD_eps_0.5p4.mat')
-semilogy(resultPGSD.nbitercumul,errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(resultPGSD.nbitercumul,errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_eps_0.1p4.mat')
-semilogy(resultPGSD.nbitercumul,errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(resultPGSD.nbitercumul,errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_eps_0.01p4.mat')
-semilogy(resultPGSD.nbitercumul,errresPGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(resultPGSD.nbitercumul,errresPGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_eps_0.001p4.mat')
-semilogy(resultPGSD.nbitercumul,errresPGSD,'k>-','linewidth',2,'markersize',msize)
+semilogy(resultPGSD.nbitercumul,errresPGSD,'k>-','LineWidth',2,'MarkerSize',msize)
 legend('\epsilon_s = 5.10^{-1}','\epsilon_s = 10^{-1}','\epsilon_s = 10^{-2}','\epsilon_s = 10^{-3}')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 xlabel('iterations')
 ylabel('|| R_M ||')
 figure(1001)
 clf
 load('diff_PGSD_eps_0.5p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PGSD_eps_0.1p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_eps_0.01p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PGSD_eps_0.001p4.mat')
-semilogy(1:length(errresPGSD),errresPGSD,'k>-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPGSD),errresPGSD,'k>-','LineWidth',2,'MarkerSize',msize)
 legend('\epsilon_s = 5.10^{-1}','\epsilon_s = 10^{-1}','\epsilon_s = 10^{-2}','\epsilon_s = 10^{-3}')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 xlabel('M')
 ylabel('|| R_M ||')
 
@@ -1052,31 +1052,31 @@ msize=8;
 figure(1000)
 clf
 load('diff_PUGSD_eps_0.5p4.mat')
-semilogy(resultPUGSD.nbitercumul,errresPUGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_eps_0.1p4.mat')
-semilogy(resultPUGSD.nbitercumul,errresPUGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_eps_0.01p4.mat')
-semilogy(resultPUGSD.nbitercumul,errresPUGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_eps_0.001p4.mat')
-semilogy(resultPUGSD.nbitercumul,errresPUGSD,'k>-','linewidth',2,'markersize',msize)
+semilogy(resultPUGSD.nbitercumul,errresPUGSD,'k>-','LineWidth',2,'MarkerSize',msize)
 legend('\epsilon_s = 5.10^{-1}','\epsilon_s = 10^{-1}','\epsilon_s = 10^{-2}','\epsilon_s = 10^{-3}')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 xlabel('iterations')
 ylabel('|| R_M ||')
 figure(1001)
 clf
 load('diff_PUGSD_eps_0.5p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'ks-','LineWidth',2,'MarkerSize',msize)
 hold on
 load('diff_PUGSD_eps_0.1p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'bo-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_eps_0.01p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'r^-','LineWidth',2,'MarkerSize',msize)
 load('diff_PUGSD_eps_0.001p4.mat')
-semilogy(1:length(errresPUGSD),errresPUGSD,'k>-','linewidth',2,'markersize',msize)
+semilogy(1:length(errresPUGSD),errresPUGSD,'k>-','LineWidth',2,'MarkerSize',msize)
 legend('\epsilon_s = 5.10^{-1}','\epsilon_s = 10^{-1}','\epsilon_s = 10^{-2}','\epsilon_s = 10^{-3}')
-set(gca,'fontsize',12)
+set(gca,'FontSize',12)
 xlabel('M')
 ylabel('|| R_M ||')
 
@@ -1100,10 +1100,10 @@ end
 nbmodes=nbfun-2;
 figure(44)
 clf
-semilogy(1:nbmodes,errL2PGSD(1:nbmodes),'b--s','linewidth',2)
+semilogy(1:nbmodes,errL2PGSD(1:nbmodes),'b--s','LineWidth',2)
 hold on
-semilogy(1:nbmodes,errL2PUGSD(1:nbmodes),'r-o','linewidth',2)
-set(gca,'fontsize',fsize)
+semilogy(1:nbmodes,errL2PUGSD(1:nbmodes),'r-o','LineWidth',2)
+set(gca,'FontSize',fsize)
 set(gca,'Xtick',[1:nbmodes])
 xlim([.8,nbmodes])
 xlabel('M')
@@ -1171,9 +1171,9 @@ for up=[0,1]
             clf
             
             if vi==2
-                plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'fact',.8,'manutext',{{0.6,-1},'U','fontsize',16},'edgecolor','none','linewidth',0)
+                plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'fact',.8,'manutext',{{0.6,-1},'U','FontSize',16},'EdgeColor','none','LineWidth',0)
             else
-                plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'surface','fact',1,'manutext',{{0.6,-1},'U','fontsize',16},'edgecolor','none','linewidth',0)
+                plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'surface','fact',1,'manutext',{{0.6,-1},'U','FontSize',16},'EdgeColor','none','LineWidth',0)
             end
             
             mysaveas('E:\REDACTION\matlab_results\Lshape_nonlin\', fich ,{'epsc2','jpeg'});
@@ -1196,9 +1196,9 @@ figure(16)
 clf
 
 if vi==2
-    plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'fact',.8,'manutext',{{0.6,-1},'U','fontsize',16},'edgecolor','none','linewidth',0)
+    plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'fact',.8,'manutext',{{0.6,-1},'U','FontSize',16},'EdgeColor','none','LineWidth',0)
 else
-    plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'surface','fact',1,'manutext',{{0.6,-1},'U','fontsize',16},'edgecolor','none','linewidth',0)
+    plotV(uM,1:nbmodes,S,'nl',nl,'nc',nc,'surface','fact',1,'manutext',{{0.6,-1},'U','FontSize',16},'EdgeColor','none','LineWidth',0)
 end
 mysaveas('C:\REDACTION\matlab_results\Lshape_nonlin\', fich ,{'epsc2','jpeg'});
 
@@ -1221,9 +1221,9 @@ for j=scanj
         plot(myfunplot(((mean(uM)-mean(truncate(uM,1:j)))./max(abs(mean(uM))))),S);
         % axis on
         % if j==1;ax0=axis;cax0=caxis();else;axis(ax0);caxis(cax0);end
-        % set(gca,'fontsize',12)
+        % set(gca,'FontSize',12)
         
-        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'fontsize',14);
+        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'FontSize',14);
         if k==1
             cax0=caxis;
             ax0=axis;
@@ -1245,10 +1245,10 @@ for j=scanj
         fullsubplot(length(scanj),2,2*(find(j==scanj)-1)+k)
         uM = uMtest{k};
         plot(myfunplot((std(uM)-std(truncate(uM,1:j)))./max(abs(std(uM)))),S);
-        % set(gca,'fontsize',12)
+        % set(gca,'FontSize',12)
         % if j==1;ax0=axis;cax0=caxis();else;axis(ax0);caxis(cax0);end
         
-        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'fontsize',14);
+        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'FontSize',14);
         if k==1
             cax0=caxis;
             ax0=axis;
@@ -1291,10 +1291,10 @@ for j=scanj
         norm(RM)
         RMmom2 = (std(RM).^2+mean(RM).^2);
         plot(RMmom2,S,'surface');
-        % set(gca,'fontsize',12)
+        % set(gca,'FontSize',12)
         % if j==1;ax0=axis;cax0=caxis();else;axis(ax0);caxis(cax0);end
         
-        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'fontsize',14);
+        text(1.4,.1,[ 'u' '_{' num2str(j) '}'],'FontSize',14);
         if k==1
             cax0=caxis;
             ax0=axis;
@@ -1447,7 +1447,7 @@ for k=1:length(scanmode)
     leg = [leg , {['mode ' num2str(i)]}];
 end
 leg = [leg,'mean solution'];
-plot(t,Ymean,'k-','linewidth',2);
+plot(t,Ymean,'k-','LineWidth',2);
 legend(leg{:})
 title('envelep of modes')
 
@@ -1464,7 +1464,7 @@ for k=1:length(scanmode)
     plotenveloppe(t,Y,fillcolor{kc});
     leg = [leg , {['mode 1 to ' num2str(i)]}];
 end
-plot(t,Ymean,'k-','linewidth',2)
+plot(t,Ymean,'k-','LineWidth',2)
 leg = [leg,'mean solution'];
 legend(leg{:})
 
@@ -1498,7 +1498,7 @@ rep1=getnodenextto(getnode(S),POINT([1.5,1.5]));
 rep1 = findddl(S,'u',rep1) ;
 rep2=getnodenextto(getnode(S),POINT([.5,0.1]));
 rep2 = findddl(S,'u',rep2) ;
-options={'nbs',2e5,'npts',30,'ksdensity','linewidth',2}
+options={'nbs',2e5,'npts',30,'ksdensity','LineWidth',2}
 rep=rep1
 figure(102)
 clf
@@ -1517,7 +1517,7 @@ axis(ax);
 pause(.1)
 pdfplot(expand(getmode(uM(rep),1:5)),'m--',options{:})
 axis(ax);
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 legend('reference','M = 1','M = 2','M = 3','M = 5')
 rep=rep2
 
@@ -1538,7 +1538,7 @@ axis(ax);
 pause(.1)
 pdfplot(expand(getmode(uM(rep),1:5)),'m--',options{:})
 axis(ax);
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 legend('reference','M = 1','M = 2','M = 3','M = 5')
 
 

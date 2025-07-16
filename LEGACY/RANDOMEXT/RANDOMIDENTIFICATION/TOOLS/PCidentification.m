@@ -544,9 +544,9 @@ if strcmp(state,'iter')
             L = fun(x);
         end
 
-        plot(x,L,marker,'markersize',10)    
+        plot(x,L,marker,'MarkerSize',10)    
     elseif length(x)==2
-        plot(x(1),x(2),marker,'markersize',10)        
+        plot(x(1),x(2),marker,'MarkerSize',10)        
     else
 %error('pas d''affichage possible')
     end

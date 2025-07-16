@@ -86,5 +86,5 @@ end
 figure
 clf
 ampl=getsize(S)/max(abs(mean(q)));
-plot(S,'color','b')
-plot(S+mean(q)*ampl,'color','r')
+plot(S,'Color','b')
+plot(S+mean(q)*ampl,'Color','r')

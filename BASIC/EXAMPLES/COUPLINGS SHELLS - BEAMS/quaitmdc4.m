@@ -55,7 +55,7 @@ M = union(M,Mtirant);
 
 figure(1)
 clf
-plot(M,'facecolor','w','node')
+plot(M,'FaceColor','w','node')
 
 if nbblocelem>1
     V = VECTEUR([0;2*pasL;0]);
@@ -96,7 +96,7 @@ end
 
 figure(2)
 clf
-plot(Mquai,'facecolor','w')
+plot(Mquai,'FaceColor','w')
 Mquai = concatgroupelem(Mquai);
 Mquai = final(Mquai);
 
@@ -121,8 +121,8 @@ q = mean(qpc);
 figure(3)
 clf
 ampl = 1000;
-plot(Mquai,'color','w');
-plot(Mquai+ampl*q,'color','r','facecolor','r','facealpha',0.5);
+plot(Mquai,'Color','w');
+plot(Mquai+ampl*q,'Color','r','FaceColor','r','FaceAlpha',0.5);
 
 qbout = eval_sol(Mquai,qpc,POINT([0,0,0]),'UX')
 
@@ -133,13 +133,13 @@ ploteausol = 1;
 
 if ploteausol==1
     eau = QUADRANGLE(POINT([-l/5,-L/10,deltaeau]),POINT([l,-L/10,deltaeau]),POINT([l,L+L/10,deltaeau]),POINT([-l/5,L+L/10,deltaeau]));
-    plot(eau,'facecolor','b','edgecolor','none','facealpha',0.3)
+    plot(eau,'FaceColor','b','EdgeColor','none','FaceAlpha',0.3)
     sol = QUADRANGLE(POINT([0,-L/10,-21]),POINT([l,-L/10,-7]),POINT([l,L+L/10,-7]),POINT([0,L+L/10,-21]));
-    plot(sol,'facecolor','r','edgecolor','none','facealpha',0.3)
+    plot(sol,'FaceColor','r','EdgeColor','none','FaceAlpha',0.3)
     camlight headlight;
     lighting gouraud
 end
 
-plot(Mquai,'facecolor','m','edgecolor','m','facealpha',0.3)
+plot(Mquai,'FaceColor','m','EdgeColor','m','FaceAlpha',0.3)
 camlight headlight;
 lighting gouraud

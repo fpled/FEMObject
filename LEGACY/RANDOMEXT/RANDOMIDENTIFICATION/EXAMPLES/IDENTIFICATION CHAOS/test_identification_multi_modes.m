@@ -98,7 +98,7 @@ end
 %%
 figure(50)
 hold on 
-pdfplot(Xpc,'npts',100,'nbs',1e5,'r','linewidth',3)
+pdfplot(Xpc,'npts',100,'nbs',1e5,'r','LineWidth',3)
 
 
 %%
@@ -107,13 +107,13 @@ figure(50)
 clf
 pdfsampleplot(Xs,'b','npts',110,'bar')
 hold on
-pdfplot(Xpcm,'r','npts',100,'nbs',1e5,'linewidth',3)
+pdfplot(Xpcm,'r','npts',100,'nbs',1e5,'LineWidth',3)
 
 -likelihood(Xpcm,Xs,1e5)
 
 [Xpcmupdate,L0] = PCidentification(getPC(Xpcm),Xs,...
     'nbsestim',1e5,'fmin',20,'nocenter','initialguess',Xpcm,'parametrized');
-pdfplot(Xpcmupdate,'g','npts',100,'nbs',1e5,'linewidth',3)
+pdfplot(Xpcmupdate,'g','npts',100,'nbs',1e5,'LineWidth',3)
 
 
 %%
@@ -129,7 +129,7 @@ hold on
 Xs = random(x2,1000,1)';
 figure(50)
 clf
-pdfsampleplot(Xs,'w','npts',100,'ksdensity','bar','facecolor','w')
+pdfsampleplot(Xs,'w','npts',100,'ksdensity','bar','FaceColor','w')
 hold on
 %pdfsampleplot(Xs,'b','npts',120)
 %hold on

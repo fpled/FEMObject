@@ -38,13 +38,13 @@ if isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Variance of lambda over interfaces #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     interface = interfaces.interfaces;
     S = cellfun(@(interface) interface.S,interface,'UniformOutput',false);
     vlambdat = cellfun(@(interface) TIMEMATRIX(reshape(mean(lambdat{interface.number}),lambdat{interface.number}.sz),T),interface,'UniformOutput',false);
     frame = evol_sol(T,vlambdat,S,'rescale',p.Results.rescale,varargin{:}); % save the frames
-elseif isa(interfaces,'Interfaces')
+elseif isa(interfaces,'Interface')
     interface = interfaces;
     if ischarin('displ',varargin)
         i = getcharin('displ',varargin);
@@ -55,7 +55,7 @@ elseif isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Variance of lambda over interface #' num2str(interface.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     sz = lambdat{interface.number}.sz;
     vlambdat = mean(lambdat{interface.number});

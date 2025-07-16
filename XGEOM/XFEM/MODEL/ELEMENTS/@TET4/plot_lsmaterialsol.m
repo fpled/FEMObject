@@ -34,7 +34,7 @@ switch getlstype(elem)
         if issigma
             ksigma = getcharin('sigma',varargin);
             varargin = delcharin('sigma',varargin);
-            varargin = setcharin('facecolor',varargin,'flat');
+            varargin = setcharin('FaceColor',varargin,'flat');
         end
         vararginin=varargin;
         vararginout=varargin;
@@ -101,7 +101,7 @@ switch getlstype(elem)
                     end
                     
                     se= double(se(ksigma));se = se(:);
-                    varargin = setcharin('facevertexcdata',varargin,se);
+                    varargin = setcharin('FaceVertexCData',varargin,se);
                 end
                 
                 if ~isenrich(elem)
@@ -112,7 +112,7 @@ switch getlstype(elem)
                     ue = reshape(ue,3,4);
                 end
                 
-                patch('faces',1:4,'vertices',nodecoorde+ampl*ue',varargin{:});
+                patch('Faces',1:4,'Vertices',nodecoorde+ampl*ue',varargin{:});
             else
                 % division en sous-elements
                 [connecin,connecout,xlnodeplus]=lsdivide_oneelem(lse);
@@ -135,12 +135,12 @@ switch getlstype(elem)
                         se2=double(se2(ksigma));
                         se2 = repmat(se2(:),size(connecout,1),1);
                         
-                        vararginin = setcharin('facevertexcdata',varargin,se1);
-                        vararginout = setcharin('facevertexcdata',varargin,se2);
+                        vararginin = setcharin('FaceVertexCData',varargin,se1);
+                        vararginout = setcharin('FaceVertexCData',varargin,se2);
                     end
                     
-                    patch('faces',connecin,'vertices',nodecoordeplus+ampl*ue1,vararginin{:});
-                    patch('faces',connecout,'vertices',nodecoordeplus+ampl*ue2,vararginout{:});
+                    patch('Faces',connecin,'Vertices',nodecoordeplus+ampl*ue1,vararginin{:});
+                    patch('Faces',connecout,'Vertices',nodecoordeplus+ampl*ue2,vararginout{:});
                     
                     
                 else %%% enrichi
@@ -156,10 +156,10 @@ switch getlstype(elem)
                             Belsk = calc_Bls(Be,DNe,xik,lse,'in',getenrichtype(ls),factnodee);
                             se1 = Din*(Belsk*[ae(:);be(:)]);
                             se1=double(se1(ksigma));
-                            varargin = setcharin('facevertexcdata',varargin,se1);
+                            varargin = setcharin('FaceVertexCData',varargin,se1);
                         end
                         
-                        patch('faces',1:4,'vertices',nodecoordk+ampl*uek',varargin{:});
+                        patch('Faces',1:4,'Vertices',nodecoordk+ampl*uek',varargin{:});
                     end
                     
                     for kk=1:size(connecout,1)
@@ -173,9 +173,9 @@ switch getlstype(elem)
                             Belsk = calc_Bls(Be,DNe,xik,lse,'out',getenrichtype(ls),factnodee);
                             se1 = Dout*(Belsk*[ae(:);be(:)]);
                             se1=double(se1(ksigma));
-                            varargin = setcharin('facevertexcdata',varargin,se1);
+                            varargin = setcharin('FaceVertexCData',varargin,se1);
                         end
-                        patch('faces',1:4,'vertices',nodecoordk+ampl*uek',varargin{:});
+                        patch('Faces',1:4,'Vertices',nodecoordk+ampl*uek',varargin{:});
                     end
                     
                     

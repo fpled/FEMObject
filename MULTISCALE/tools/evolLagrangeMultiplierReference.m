@@ -37,7 +37,7 @@ if isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Reference Lagrange mulitplier lambda_ref over interfaces #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     n = numel(interfaces);
     S = cellfun(@(interface) interface.S,interfaces.interfaces,'UniformOutput',false);
@@ -59,7 +59,7 @@ elseif isa(interfaces,'Interface')
         % set(gcf,'Name',['Reference Lagrange mulitplier lambda_ref over interface #' num2str(interface.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     lambdat_ref{interface.number} = setevolparam(lambdat_ref{interface.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
         'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);

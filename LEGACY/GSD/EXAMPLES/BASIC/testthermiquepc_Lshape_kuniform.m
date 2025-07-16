@@ -64,20 +64,20 @@ time_pcg=toc;
 
 figure(200)
 clf
-plot(S,'facecolor',[0.6,0.9,0.9])
+plot(S,'FaceColor',[0.6,0.9,0.9])
 %plot(S)
 colu = 'b' ;
 colg = 'r' ;
 linwid = 3;
-plot(L1,'linewidth',linwid,'edgecolor',colu)
-plot(L2,'linewidth',linwid,'edgecolor',colu)
-plot(L3,'linewidth',linwid,'edgecolor',colu)
-plot(L4,'linewidth',linwid,'edgecolor',colu)
-plot(L5,'linewidth',linwid,'edgecolor',colu)
-plot(L6,'linewidth',linwid,'edgecolor',colg)
+plot(L1,'LineWidth',linwid,'EdgeColor',colu)
+plot(L2,'LineWidth',linwid,'EdgeColor',colu)
+plot(L3,'LineWidth',linwid,'EdgeColor',colu)
+plot(L4,'LineWidth',linwid,'EdgeColor',colu)
+plot(L5,'LineWidth',linwid,'EdgeColor',colu)
+plot(L6,'LineWidth',linwid,'EdgeColor',colg)
 
-annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','fontsize',18)
-annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','fontsize',18)
+annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','FontSize',18)
+annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','FontSize',18)
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions.eps','epsc2')
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_sanscol.eps','epsc2')
@@ -85,17 +85,17 @@ annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','fonts
 
 figure(201)
 clf
-%plot(S,'facecolor',[0.6,0.9,0.9])
+%plot(S,'FaceColor',[0.6,0.9,0.9])
 plot(S)
 repnode=330;
-plot(S.node(repnode),'bx','markersize',12)
-plottext(S.node(repnode),'P_1','color','b','fontsize',18)
+plot(S.node(repnode),'bx','MarkerSize',12)
+plottext(S.node(repnode),'P_1','Color','b','FontSize',18)
 repnode=640;
-plot(S.node(repnode),'bx','markersize',12)
-plottext(S.node(repnode),'P_2','fontsize',18,'color','b')
+plot(S.node(repnode),'bx','MarkerSize',12)
+plottext(S.node(repnode),'P_2','FontSize',18,'Color','b')
 repnode=1097;
-plot(S.node(repnode),'bx','markersize',12)
-plottext(S.node(repnode),'P_3','fontsize',18,'color','b')
+plot(S.node(repnode),'bx','MarkerSize',12)
+plottext(S.node(repnode),'P_3','FontSize',18,'Color','b')
 
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions.eps','epsc2')
@@ -103,30 +103,30 @@ plottext(S.node(repnode),'P_3','fontsize',18,'color','b')
 
 figure(202)
 clf
-plot(S,'facecolor',[0.6,0.9,0.9])
+plot(S,'FaceColor',[0.6,0.9,0.9])
 %plot(S)
 colu = 'b' ;
 colg = 'r' ;
 linwid = 3;
-plot(L1,'linewidth',linwid,'edgecolor',colu)
-plot(L2,'linewidth',linwid,'edgecolor',colu)
-plot(L3,'linewidth',linwid,'edgecolor',colu)
-plot(L4,'linewidth',linwid,'edgecolor',colu)
-plot(L5,'linewidth',linwid,'edgecolor',colu)
-plot(L6,'linewidth',linwid,'edgecolor',colg)
+plot(L1,'LineWidth',linwid,'EdgeColor',colu)
+plot(L2,'LineWidth',linwid,'EdgeColor',colu)
+plot(L3,'LineWidth',linwid,'EdgeColor',colu)
+plot(L4,'LineWidth',linwid,'EdgeColor',colu)
+plot(L5,'LineWidth',linwid,'EdgeColor',colu)
+plot(L6,'LineWidth',linwid,'EdgeColor',colg)
 
-annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','fontsize',18)
-annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','fontsize',18)
+annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','FontSize',18)
+annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','FontSize',18)
 
 repnode=330;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_1','color','k','fontsize',18)
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_1','Color','k','FontSize',18)
 repnode=640;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_2','fontsize',18,'color','k')
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_2','FontSize',18,'Color','k')
 repnode=1097;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_3','fontsize',18,'color','k')
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_3','FontSize',18,'Color','k')
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_withpoints.eps','epsc2')
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_sanscol.eps','epsc2')

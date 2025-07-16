@@ -37,7 +37,7 @@ else
     % set(gcf,'Name','Variance of u')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = ut.sz;
 vut = variance(ut);

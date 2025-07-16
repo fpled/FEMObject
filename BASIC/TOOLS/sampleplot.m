@@ -65,7 +65,7 @@ otherwise
 end
 
 if strcmp(courbe,'multipdf')
-    surf(x,y,P+max(max(P))*1.1e-3,varargin{:},'edgecolor','none','facecolor','interp')    
+    surf(x,y,P+max(max(P))*1.1e-3,varargin{:},'EdgeColor','none','FaceColor','interp')    
     xlim([min(min(x)),max(max(x))]);
     ylim([min(min(y)),max(max(y))]);
 %view(-10,87)

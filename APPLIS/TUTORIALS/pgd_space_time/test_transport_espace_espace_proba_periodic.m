@@ -167,7 +167,7 @@ usepr = unfreevector(Sy,unfreevector(Sx,usepr,2),1)';
 cax=caxis;
 figure(3)
 clf
-%surf(X,Y,bb','edgecolor','none')
+%surf(X,Y,bb','EdgeColor','none')
 plot(usepr(:),S)
 axis off
 axis square
@@ -186,7 +186,7 @@ ur(getnumber(nn1))=ur(getnumber(nn2));
 figure(4)
 clf
 %bb=reshape(ur,size(X,1),size(X,2));
-%surf(X,Y,bb','edgecolor','none')
+%surf(X,Y,bb','EdgeColor','none')
 plot(ur,S);
 %caxis(cax);
 axis off
@@ -259,11 +259,11 @@ for numsample = 6
     clf;
     cax = [min(ur(:)),max(ur(:))];
     cval = linspace(cax(1)+(cax(2)-cax(1))*0.01,cax(2)-(cax(2)-cax(1))*0.01,20);
-%surf(X,Y,ur,'edgecolor','none');
+%surf(X,Y,ur,'EdgeColor','none');
 %colormap('default')%colormap(flipud(bone))
-    plot(DOMAIN(2),'linewidth',2,'edgecolor','k');
+    plot(DOMAIN(2),'LineWidth',2,'EdgeColor','k');
 %plot(create_boundary(S))
-%plot(DOMAIN(2),'facecolor','w')
+%plot(DOMAIN(2),'FaceColor','w')
     hold on
     [Cref,Href]=contour(X,Y,ur,cval);
     view(2);axis image;axis off
@@ -304,10 +304,10 @@ for numsample = 6
                 temp = unfreevector(Sy,unfreevector(Sx,temp,2),1)';
 
                 figure(34);clf;
-%surf(X(2:end-1,2:end-1),Y(2:end-1,2:end-1),ee,'edgecolor','none');
+%surf(X(2:end-1,2:end-1),Y(2:end-1,2:end-1),ee,'EdgeColor','none');
                 contour(X,Y,temp,cval);
                 view(2);axis image;axis off
-                plot(DOMAIN(2),'linewidth',2);
+                plot(DOMAIN(2),'LineWidth',2);
                 caxis(cax)
                 view(2);axis image;axis off
 
@@ -319,7 +319,7 @@ for numsample = 6
 end
 
 %% CONVERGENCE PGD progressive
-%optionsplot = {'linewidth',2,'markersize',8};
+%optionsplot = {'LineWidth',2,'MarkerSize',8};
 optionsplot={};
 imax = min(80,length(resgal.error));
 errmin = 1e-6;
@@ -340,12 +340,12 @@ semilogy(I,resref.error(I),'k-*',optionsplot{:})
 %I = find(resrefuu.error(1:min(imax,end))>errmin);
 %semilogy(I,resrefuu.error(I),'k--v',optionsplot{:})
 ylim([1e-3,1])
-set(gca,'fontsize',14)
-legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','SVD','location','northeast')
+set(gca,'FontSize',14)
+legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','SVD','Location','northeast')
 
 myprint('C:/REDACTION/figs/ect2010_ex2/','ex2_conv_progressive_PGD','epsc2')
 %% CONVERGENCE PGD update
-%optionsplot = {'linewidth',2,'markersize',8};
+%optionsplot = {'LineWidth',2,'MarkerSize',8};
 optionsplot={};
 imax = min(40,length(resgal.error));
 errmin = 1e-6;
@@ -363,8 +363,8 @@ I = find(resadu.error(1:imax)>errmin);
 semilogy(I,resadu.error(I),'m-s',optionsplot{:})
 I = find(resrefu.error(1:imax)>errmin);
 semilogy(I,resrefu.error(I),'k-*',optionsplot{:})
-set(gca,'fontsize',14)
-legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','SVD','location','Northeast')
+set(gca,'FontSize',14)
+legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','SVD','Location','northeast')
 
 myprint('C:/REDACTION/figs/ect2010_ex2/','ex2_conv_update_PGD','epsc2')
 
@@ -377,8 +377,8 @@ myprint('C:/REDACTION/figs/ect2010_ex2/','ex2_conv_update_PGD','epsc2')
 figure(443)
 semilogy(resref.error,'m-s',optionsplot{:})
 hold on
-semilogy(resrefu.error,'b-s',optionsplot{:},'markerfacecolor','b')
-semilogy(resrefuu.error,'r-s',optionsplot{:},'markerfacecolor','r')
+semilogy(resrefu.error,'b-s',optionsplot{:},'MarkerFaceColor','b')
+semilogy(resrefuu.error,'r-s',optionsplot{:},'MarkerFaceColor','r')
 
 
 %% TEMPS DE CALCUL PROGRESSIVE
@@ -393,9 +393,9 @@ semilogy(resresi.time(rep),resresi.error(rep),'r-^')
 rep = find(resad.error(1:min(end,imax)));
 semilogy(resad.time(rep),resad.error(rep),'m-s')
 xlim([0,200])
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 xlabel('(s)')
-legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','location','best')
+legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','Location','best')
 
 myprint('C:/REDACTION/figs/ect2010_ex2/',['ex2_conv_time_progressive'],'epsc2')
 
@@ -411,9 +411,9 @@ semilogy(resresiu.time(rep),resresiu.error(rep),'r-^')
 rep = find(resadu.error(1:min(end,imax)));
 semilogy(resadu.time(rep),resadu.error(rep),'m-s')
 xlim([0,300])
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 xlabel('(s)')
-legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','location','northeast')
+legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD','Location','northeast')
 
 myprint('C:/REDACTION/figs/ect2010_ex2/',['ex2_conv_time_update'],'epsc2')
 
@@ -431,19 +431,19 @@ semilogy(resad.time(rep),resad.error(rep),'m-s')
 %ylim([1e-10,1])
 imax = 40;
 rep = find(resgalu.error(1:min(end,imax)));
-semilogy(resgalu.time(rep),resgalu.error(rep),'b-o','markerfacecolor','b')
+semilogy(resgalu.time(rep),resgalu.error(rep),'b-o','MarkerFaceColor','b')
 hold on
 rep = find(resresiu.error(1:min(end,imax)));
-semilogy(resresiu.time(rep),resresiu.error(rep),'r-^','markerfacecolor','r')
+semilogy(resresiu.time(rep),resresiu.error(rep),'r-^','MarkerFaceColor','r')
 rep = find(resadu.error(1:min(end,imax)));
-semilogy(resadu.time(rep),resadu.error(rep),'m-s','markerfacecolor','m')
+semilogy(resadu.time(rep),resadu.error(rep),'m-s','MarkerFaceColor','m')
 ylim([3e-3,1])
 xlim([0,200])
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 xlabel('(s)')
 legend('Galerkin-PGD','MinRes-PGD','Minimax-PGD',...
     'Galerkin-PGD-Updated','MinRes-PGD-Updated',...
-    'Minimax-PGD-Updated','location','southeast')
+    'Minimax-PGD-Updated','Location','southeast')
 
 myprint('C:/REDACTION/figs/ect2010_ex2/',['ex2_conv_time_progressive_updated'],'epsc2')
 

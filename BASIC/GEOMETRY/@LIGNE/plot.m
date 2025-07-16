@@ -9,7 +9,7 @@ nodecoord = [nodecoord,zeros(n(1),n(2)==1)];
 connec = 1:2;
 options = patchoptions(getdim(L),varargin{:});
 
-H = patch('faces',connec,'vertices',nodecoord,options{:});
+H = patch('Faces',connec,'Vertices',nodecoord,options{:});
 
 if nargout>=1
     varargout{1} = H;

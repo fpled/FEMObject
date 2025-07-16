@@ -71,7 +71,7 @@ semilogy(r1.error,'r')
 semilogy(r2.error,'g')
 
 legend('PGD','HPGD','HPGD with leaves update',...
-    'location','southwest');
+    'Location','southwest');
 xlabel('Rank of the approximation')
 ylabel('Relative Residual')
 
@@ -108,7 +108,7 @@ semilogy(r3.error,'r')
 semilogy(r4.error,'g')
 
 legend('Balanced tree','First dim separated','TT',...
-    'location','southwest');
+    'Location','southwest');
 xlabel('Rank of the approximation')
 ylabel('Relative Residual')
 

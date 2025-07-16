@@ -13,11 +13,11 @@ Handles=[];
 leg = cell(1,0);
 for i=1:length(scanfaces)
     if getgroupelemdim(faces{scanfaces(i)})==0
-        options = setcharin('markeredgecolor',options,getfacecolor(scanfaces(i)));
+        options = setcharin('MarkerEdgeColor',options,getfacecolor(scanfaces(i)));
         options = addcharin('numelem',options);
     else
-        if ~ischarin('facecolor',varargin)
-            options = setcharin('facecolor',options,getfacecolor(scanfaces(i)));
+        if ~ischarin('FaceColor',varargin)
+            options = setcharin('FaceColor',options,getfacecolor(scanfaces(i)));
         end
     end
     

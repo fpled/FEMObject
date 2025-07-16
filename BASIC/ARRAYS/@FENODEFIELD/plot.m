@@ -19,9 +19,9 @@ end
 
 dim = getindim(M);
 options = patchoptions(dim,'noedges',varargin{:});
-% options = setcharin('edgecolor',options,'none');
-if strcmp(getcharin('facecolor',options),'none')
-    options = setcharin('facecolor',options,'interp');
+% options = setcharin('EdgeColor',options,'none');
+if strcmp(getcharin('FaceColor',options),'none')
+    options = setcharin('FaceColor',options,'interp');
 end
 
 numview = getcharin('view',varargin);
@@ -47,20 +47,20 @@ for p=listegroup
         
     elseif (ischarin('surface',varargin) || ischarin('surfacemesh',varargin)) && dim==2
         options = delonlycharin('surface',options);
-        Helem(p) = surface(elem,M.node,'facevertexcdata',u,options{:});
+        Helem(p) = surface(elem,M.node,'FaceVertexCData',u,options{:});
         
         if ischarin('surfacemesh',varargin)
-            options = setcharin('edgecolor',options,'k');
-            options = setcharin('facecolor',options,'none');
+            options = setcharin('EdgeColor',options,'k');
+            options = setcharin('FaceColor',options,'none');
             options = delonlycharin('surfacemesh',options);
-            plot(elem,M.node,'facevertexcdata',u,options{:});
+            plot(elem,M.node,'FaceVertexCData',u,options{:});
         end
         axis image
         if isempty(numview)
             view(3)
         end
     else
-        Helem(p) = plot(elem,M.node,'facevertexcdata',full(u),options{:});
+        Helem(p) = plot(elem,M.node,'FaceVertexCData',full(u),options{:});
         axis image
     end
 end

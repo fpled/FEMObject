@@ -59,7 +59,7 @@ for p=[1,3,5,10]
     fprintf('log likelihood pc order %d = %.1f \n',p,mylike(Xpcm,Xs))
     figure(10)
     clf
-    pdfsampleplot(Xs,'npts',20,'bar','w','edgecolor','c')
+    pdfsampleplot(Xs,'npts',20,'bar','w','EdgeColor','c')
 %
     xlim([-2.5,2.5])
     hold on
@@ -74,7 +74,7 @@ for p=[1,3,5,10]
     fprintf('log likelihood pc fe order %d = %.1f \n',p,mylike(Xpcfe,Xs))
     figure(10)
     clf
-    pdfsampleplot(Xs,'npts',20,'bar','w','edgecolor','c')
+    pdfsampleplot(Xs,'npts',20,'bar','w','EdgeColor','c')
 %
     xlim([-2.5,2.5])
     hold on

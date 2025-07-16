@@ -80,19 +80,19 @@ else
                 xy = transfer(RV,RVplot,[x(:),y(:)]);
                 x=reshape(xy(:,1),size(x));
                 y=reshape(xy(:,2),size(y));
-                if ~ischarin('facecolor',varargin)
-                    varargin = setcharin('facecolor',varargin,'interp');
+                if ~ischarin('FaceColor',varargin)
+                    varargin = setcharin('FaceColor',varargin,'interp');
                 end
-                if ~ischarin('edgecolor',varargin)
-                    varargin = setcharin('edgecolor',varargin,'none');
+                if ~ischarin('EdgeColor',varargin)
+                    varargin = setcharin('EdgeColor',varargin,'none');
                 end
                 surf(x,y,P,varargin{:})
             else
-                if ~ischarin('facecolor',varargin)
-                    varargin = setcharin('facecolor',varargin,'interp');
+                if ~ischarin('FaceColor',varargin)
+                    varargin = setcharin('FaceColor',varargin,'interp');
                 end
-                if ~ischarin('edgecolor',varargin)
-                    varargin = setcharin('edgecolor',varargin,'none');
+                if ~ischarin('EdgeColor',varargin)
+                    varargin = setcharin('EdgeColor',varargin,'none');
                 end
                 varargin = delonlycharin('surface',varargin);
                 surf(x,y,P,varargin{:})

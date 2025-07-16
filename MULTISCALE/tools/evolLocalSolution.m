@@ -52,7 +52,7 @@ if isa(patches,'Patches')
         % set(gcf,'Name',['Local solution w over patches #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     n = numel(patches);
     S = cellfun(@(patch) patch.S,patches.patches,'UniformOutput',false);
@@ -89,7 +89,7 @@ elseif isa(patches,'Patch')
         % set(gcf,'Name',['Local solution w over patch #' num2str(patch.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     wt{patch.number} = setevolparam(wt{patch.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,'FontSize',p.Results.FontSize);
     frame = evol_sol(wt{patch.number},patch.S,'rescale',p.Results.rescale,varargin{:}); % save the frames

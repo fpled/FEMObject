@@ -1,16 +1,16 @@
-function varargout = gmshfilewithpoints(C,P,clC,clP,numbercenter,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface,varargin)
-% function G = gmshfilewithpoints(C,P,clC,clP,numbercenter,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface)
-% C : ELLIPSE
+function varargout = gmshfilewithpoints(E,P,clE,clP,numbercenter,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface,varargin)
+% function G = gmshfilewithpoints(E,P,clE,clP,numbercenter,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface)
+% E : ELLIPSE
 % P : POINT
-% clC, clP : characteristic length
+% clE, clP : characteristic length
 
 if ~iscell(P)
     P = {P};
 end
 if nargin<=3
-    clP = clC;
+    clP = clE;
 end
-if length(clP)==1
+if isscalar(clP)
     clP = repmat(clP,1,length(P));
 end
 if nargin<=4
@@ -25,9 +25,9 @@ elseif nargin==9
 end
 
 G = GMSHFILE();
-P = getvertices(C);
-G = createpoint(G,[C.cx,C.cy],clC,numbercenter);
-G = createpoints(G,PC,clC,numberpoints);
+P = getvertices(E);
+G = createpoint(G,[E.cx,E.cy,E.cz],clE,numbercenter);
+G = createpoints(G,PC,clE,numberpoints);
 G = createellipsecontour(G,numbercenter,numberpoints,numberlines,numberlineloop);
 if ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);

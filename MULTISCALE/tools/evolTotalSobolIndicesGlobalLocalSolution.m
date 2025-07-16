@@ -46,7 +46,7 @@ else
     % set(gcf,'Name',['Total Sobol index of U and w over domain and patches for random variables #' num2str(alpha)])
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = Ut.sz;
 dUt = ndims(Ut);

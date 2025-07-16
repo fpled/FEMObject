@@ -16,5 +16,5 @@ V = u.V{scanm(i)};
 
 plot(V,varargin{:});
 axis off
-title([ name '_{' num2str(scanm(i)) '}'],'fontsize',16)
+title([ name '_{' num2str(scanm(i)) '}'],'FontSize',16)
 end

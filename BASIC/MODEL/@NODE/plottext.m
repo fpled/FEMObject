@@ -3,9 +3,9 @@ function plottext(u,text,varargin)
 % text : vecteur de caracteres ou de double
 %    contenant une info a afficher pour chaque noeud
 %
-% function plottext(u,text,'color',color,'fontsize',fontsize)
+% function plottext(u,text,'Color',color,'FontSize',fontsize)
 
-color = getcharin('color',varargin,'b');
-fontsize = getcharin('fontsize',varargin,14); 
-plottext(u.POINT,text,'fontsize',fontsize,'color',color);
+color = getcharin('Color',varargin,'b');
+fontsize = getcharin('FontSize',varargin,14); 
+plottext(u.POINT,text,'FontSize',fontsize,'Color',color);
 

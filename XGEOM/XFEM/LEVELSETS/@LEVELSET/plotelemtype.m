@@ -16,10 +16,10 @@ for p=1:ls.D.nbgroupelem
     end
 end
 
-plot(ls.D,'selgroup',groupout,'facecolor','r');
-plot(ls.D,'group','selgroup',groupout,'facecolor','g');
-plot(ls.D,'group','selgroup',groupin,'facecolor','y');
-plot(ls.D,'group','selgroup',groupcut,'facecolor','r');
+plot(ls.D,'selgroup',groupout,'FaceColor','r');
+plot(ls.D,'group','selgroup',groupout,'FaceColor','g');
+plot(ls.D,'group','selgroup',groupin,'FaceColor','y');
+plot(ls.D,'group','selgroup',groupcut,'FaceColor','r');
 
 
 

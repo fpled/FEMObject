@@ -51,8 +51,8 @@ if ischarin('sigma',varargin) || ischarin('epsilon',varargin) || ischarin('energ
     varargin = delcharin('sigma',varargin);
     varargin = delcharin('epsilon',varargin);
     varargin = delcharin('energyint',varargin);
-    varargin = setcharin('facecolor',varargin,'flat');
-    varargin = setcharin('facevertexcdata',varargin,se(:));
+    varargin = setcharin('FaceColor',varargin,'flat');
+    varargin = setcharin('FaceVertexCData',varargin,se(:));
     
     if ischarin('surface',varargin)
         zpos = repmat(se(:)',getnbnode(elem),1);
@@ -60,28 +60,28 @@ if ischarin('sigma',varargin) || ischarin('epsilon',varargin) || ischarin('energ
         varargin = delonlycharin('surface',varargin);
     end
     
-    H = patch('faces',faces,'vertices',vertpos,varargin{:});
+    H = patch('Faces',faces,'Vertices',vertpos,varargin{:});
     axis image
 else
-    if strcmp(getcharin('facecolor',varargin),'none')
-        varargin = setcharin('facecolor',varargin,'interp');
+    if strcmp(getcharin('FaceColor',varargin),'none')
+        varargin = setcharin('FaceColor',varargin,'interp');
     end
-    if strcmp(getcharin('edgecolor',varargin),'none')
-        varargin = setcharin('edgecolor',varargin,'interp');
+    if strcmp(getcharin('EdgeColor',varargin),'none')
+        varargin = setcharin('EdgeColor',varargin,'interp');
     end
     varargin = delcharin('displ',varargin);
     varargin = delcharin('rotation',varargin);
     
     if (ischarin('surface',varargin) || ischarin('surfacemesh',varargin))% && getdim(elem)==2
         varargin = delonlycharin('surface',varargin);
-        varargin = setcharin('facevertexcdata',varargin,q(:));
-        H = surface(elem,node,'facevertexcdata',q,varargin{:});
+        varargin = setcharin('FaceVertexCData',varargin,q(:));
+        H = surface(elem,node,'FaceVertexCData',q,varargin{:});
         
         if ischarin('surfacemesh',varargin)
-            varargin = setcharin('edgecolor',varargin,'k');
-            varargin = setcharin('facecolor',varargin,'none');
+            varargin = setcharin('EdgeColor',varargin,'k');
+            varargin = setcharin('FaceColor',varargin,'none');
             varargin = delonlycharin('surfacemesh',varargin);
-            plot(elem,node,'facevertexcdata',q,varargin{:});
+            plot(elem,node,'FaceVertexCData',q,varargin{:});
         end
         axis image
         axis square
@@ -91,8 +91,8 @@ else
             view(3)
         end
     else
-        varargin = setcharin('facevertexcdata',varargin,u(:));
-        H = patch('faces',faces,'vertices',vertpos,varargin{:});
+        varargin = setcharin('FaceVertexCData',varargin,u(:));
+        H = patch('Faces',faces,'Vertices',vertpos,varargin{:});
         axis image
     end
 end

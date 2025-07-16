@@ -36,7 +36,7 @@ if i<m
     
     %col = {'y','m','g','r','b','k','g','c'};
     %for k=1:size(subconnec,1)
-    %    plot(TET4(NODE(xnodeplus),1,subconnec(k,:)),NODE(xnodeplus),'facecolor',col{k},'facelighting','gouraud','facealpha',.5);
+    %    plot(TET4(NODE(xnodeplus),1,subconnec(k,:)),NODE(xnodeplus),'FaceColor',col{k},'FaceLighting','gouraud','FaceAlpha',.5);
     %end
     
 else

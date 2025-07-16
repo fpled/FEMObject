@@ -31,13 +31,13 @@ q = unfreevector(S,q)+u0;
 
 figure(1)
 clf
-plot(S,'color','k')
-plot(S+q,'color','r')
+plot(S,'Color','k')
+plot(S+q,'Color','r')
 s=calc_sigma(S,q);
 figure(2)
 clf
 plot(s,S+q,'compo','SMXX')
 colorbar
-%plot(S,'facecolor','w','edgecolor','k')
-%plot(S+q,'facealpha',0.3,'facecolor','r','edgecolor','r')
+%plot(S,'FaceColor','w','EdgeColor','k')
+%plot(S+q,'FaceAlpha',0.3,'FaceColor','r','EdgeColor','r')
 

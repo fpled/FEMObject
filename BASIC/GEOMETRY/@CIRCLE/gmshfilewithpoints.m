@@ -10,7 +10,7 @@ end
 if nargin<=3
     clP = clC;
 end
-if length(clP)==1
+if isscalar(clP)
     clP = repmat(clP,1,length(P));
 end
 if nargin<=4
@@ -26,7 +26,7 @@ end
 
 G = GMSHFILE();
 PC = getvertices(C);
-G = createpoint(G,[C.cx,C.cy],clC,numbercenter);
+G = createpoint(G,[C.cx,C.cy,C.cz],clC,numbercenter);
 G = createpoints(G,PC,clC,numberpoints);
 G = createcirclecontour(G,numbercenter,numberpoints,numberlines,numberlineloop,varargin{:});
 if ~isempty(numbersurface)

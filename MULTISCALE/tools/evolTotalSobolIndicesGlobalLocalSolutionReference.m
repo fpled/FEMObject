@@ -46,7 +46,7 @@ else
     % set(gcf,'Name',['Total Sobol index of U_ref and w_ref over complementary subdomain and patches for random variables #' num2str(alpha)])
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 if isa(glob,'Global')
     S_out = glob.S_out;

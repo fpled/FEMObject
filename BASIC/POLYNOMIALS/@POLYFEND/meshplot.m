@@ -33,13 +33,13 @@ if ~ischarin('matdecoup',varargin)
             if state
                 col = getstate(H);
                 col = col(:);
-                options = {'facecolor','flat','facevertexcdata',col};
+                options = {'FaceColor','flat','FaceVertexCData',col};
                 options = [options , varargin];
             else
-                options = {'facecolor','none'};
+                options = {'FaceColor','none'};
                 options = [options , varargin];
             end
-            patch('vertices',node,'faces',connec,options{:})
+            patch('Faces',connec,'Vertices',node,options{:})
             if plotpoint==1
                 hold on
                 Pcut2 = [];
@@ -65,19 +65,19 @@ if ~ischarin('matdecoup',varargin)
                     end
                 end
                 if ~isempty(Pcut2)
-                    plot(POINT(Pcut2),'d','markersize',10,'color','b','linewidth',2)
+                    plot(POINT(Pcut2),'d','MarkerSize',10,'Color','b','LineWidth',2)
                 end
                 if ~isempty(Pcut3)
-                    plot(POINT(Pcut3),'x','markersize',10,'color','r','linewidth',2)
+                    plot(POINT(Pcut3),'x','MarkerSize',10,'Color','r','LineWidth',2)
                 end
                 if ~isempty(Pcut4)
-                    plot(POINT(Pcut4),'h','markersize',10,'color','c','linewidth',2)
+                    plot(POINT(Pcut4),'h','MarkerSize',10,'Color','c','LineWidth',2)
                 end
                 if ~isempty(Pin)
-                    plot(POINT(Pin),'square','markersize',10,'color','y','linewidth',2)
+                    plot(POINT(Pin),'square','MarkerSize',10,'Color','y','LineWidth',2)
                 end
                 if ~isempty(Pout)
-                    plot(POINT(Pout),'o','markersize',10,'color','g','linewidth',2);
+                    plot(POINT(Pout),'o','MarkerSize',10,'Color','g','LineWidth',2);
                 end
                 hold off
             end
@@ -95,14 +95,14 @@ if ~ischarin('matdecoup',varargin)
                 
                 if state==1
                     col = stateH(i);
-                    options = {'facecolor' 'flat' 'facevertexcdata' col};
+                    options = {'FaceColor' 'flat' 'FaceVertexCData' col};
                     options = [options , varargin];
                 else
-                    options = {'facecolor'  'none'};
+                    options = {'FaceColor'  'none'};
                     options = [options , varargin];
                 end
                 
-                patch('vertices',xi,'faces',faces,options{:})
+                patch('Faces',faces,'Vertices',xi,options{:})
                 
             end
             view(3); axis square
@@ -152,13 +152,13 @@ else
             faces = [ 1 2 6 5;2 3 7 6; 3 4 8 7;4 1 5 8;1 2 3 4;5 6 7 8];
             if state==1
                 col = stateH(i);
-                options = {'facecolor' 'flat' 'facevertexcdata' col};
+                options = {'FaceColor' 'flat' 'FaceVertexCData' col};
                 
             else
-                options = {'facecolor'  'none'};
+                options = {'FaceColor'  'none'};
                 
             end
-            patch('vertices',vertex,'faces',faces,options{:})
+            patch('Faces',faces,'Vertices',vertex,options{:})
         end
     end
     view(3); axis square

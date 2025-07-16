@@ -1,34 +1,53 @@
 function P = getvertices(C)
 % function P = getvertices(C)
 
+% Radius
+r = C.r;
+
 P = cell(1,4);
 switch C.indim
     case 2
-        P{1} = [C.cx-C.r,C.cy];
-        P{2} = [C.cx,C.cy-C.r];
-        P{3} = [C.cx+C.r,C.cy];
-        P{4} = [C.cx,C.cy+C.r];
+        % Vertices
+        P{1} = [-r,  0];
+        P{2} = [ 0, -r];
+        P{3} = [ r,  0];
+        P{4} = [ 0,  r];
         
-        v = [C.vx,C.vy];
-        v = v/norm(v);
-        R = [v(1) v(2);
-            -v(2) v(1)];
+        % Rotate in-plane around z = [0, 0, 1] by angle of rotation theta =
+        % atan2(vy, vx) using tangent vector v = [vx, vy]
+        v = [C.vx, C.vy];
+        R = calcrotation(C,v);
+        
+        % Translate to center c = [cx, cy]
+        c = [C.cx, C.cy];
+        
     case 3
-        P{1} = [C.cx-C.r,C.cy,C.cz];
-        P{2} = [C.cx,C.cy-C.r,C.cz];
-        P{3} = [C.cx+C.r,C.cy,C.cz];
-        P{4} = [C.cx,C.cy+C.r,C.cz];
+        % Vertices
+        P{1} = [-r,  0, 0];
+        P{2} = [ 0, -r, 0];
+        P{3} = [ r,  0, 0];
+        P{4} = [ 0,  r, 0];
         
-        n = [C.nx,C.ny,C.nz];
-        n = n/norm(n);
-        Q = [0 -n(3) n(2);
-            n(3) 0 -n(1);
-            -n(2) n(1) 0];
-        v = [C.vx,C.vy];
-        v = v/norm(v);
-        R = eye(3)-v(2)*Q+(1-v(1))*Q^2;
+        %% Old version
+        % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
+        % atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
+        % rotation formula
+        %% New version
+        % Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
+        % using tangent vector v = [vx, vy], then tilt from z axis to normal
+        % vector n = [nx, ny, nz] so that the circle's normal is n regardless
+        % of v = [vx, vy]
+        v = [C.vx, C.vy];
+        n = [C.nx, C.ny, C.nz];
+        R = calcrotation(C,v,n);
+        
+        % Translate to center c = [cx, cy, cz]
+        c = [C.cx, C.cy, C.cz];
+        
+    otherwise
+        error('Wrong space dimension');
 end
 
 for i=1:4
-    P{i} = P{i}*R;
+    P{i} = P{i}*R + c;
 end

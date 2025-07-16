@@ -38,7 +38,7 @@ if isa(patches,'Patches')
         % set(gcf,'Name',['Mean of w over patches #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     patch = patches.patches;
     S = cellfun(@(patch) patch.S,patch,'UniformOutput',false);
@@ -57,7 +57,7 @@ elseif isa(patches,'Patch')
         % set(gcf,'Name',['Mean of w over patch #' num2str(patch.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     sz = wt{patch.number}.sz;
     wt{patch.number} = mean(wt{patch.number});

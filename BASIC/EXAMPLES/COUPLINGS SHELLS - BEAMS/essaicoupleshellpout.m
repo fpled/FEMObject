@@ -42,7 +42,7 @@ Mdalle = convertelem(Mdalle,'DKQ'); %% on peut aussi utiliser COQ4
 M = union(Mpieu,Mdalle);
 figure(1)
 clf
-plot(M,'facecolor','w','node')
+plot(M,'FaceColor','w','node')
 
 V = VECTEUR([pasL;0;0]);
 Mquai = M;
@@ -56,7 +56,7 @@ end
 
 figure(2)
 clf
-plot(Mquai,'facecolor','w')
+plot(Mquai,'FaceColor','w')
 
 Mquai = final(Mquai);
 Mquai = addcl(Mquai,Pbaspieu,{'U','R'});
@@ -72,5 +72,5 @@ q = K\F;
 figure(3)
 clf
 ampl = 10;
-plot(Mquai,'color','w','facecolor','w','facealpha',0.3);
-plot(Mquai+ampl*q,'color','b','facecolor','b','facealpha',0.3);
+plot(Mquai,'Color','w','FaceColor','w','FaceAlpha',0.3);
+plot(Mquai+ampl*q,'Color','b','FaceColor','b','FaceAlpha',0.3);

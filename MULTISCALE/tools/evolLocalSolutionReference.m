@@ -52,7 +52,7 @@ if isa(patches,'Patches')
         % set(gcf,'Name',['Reference local solution w_ref over patches #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     n = numel(patches);
     S = cellfun(@(patch) patch.S,patches.patches,'UniformOutput',false);
@@ -89,7 +89,7 @@ elseif isa(patches,'Patch')
         % set(gcf,'Name',['Reference local solution w_ref over patch #' num2str(patch.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     wt_ref{patch.number} = setevolparam(wt_ref{patch.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
         'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);

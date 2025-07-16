@@ -44,7 +44,7 @@ if isa(patches,'Patches')
         % set(gcf,'Name',['Total Sobol index of w over patches #' num2str([numbers{:}]) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     patch = patches.patches;
     S = cellfun(@(patch) patch.S,patch,'UniformOutput',false);
@@ -63,7 +63,7 @@ elseif isa(patches,'Patch')
         % set(gcf,'Name',['Total Sobol index of w over patch #' num2str(patch.number) ' for random variables #' num2str(alpha)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     sz = wt{patch.number}.sz;
     swt = SensitivityAnalysis.totalSobolIndices(wt{patch.number},alpha);

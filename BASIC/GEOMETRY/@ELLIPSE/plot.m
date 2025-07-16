@@ -1,54 +1,75 @@
-function varargout = plot(C,varargin)
-% function varargout = plot(C,varargin)
+function varargout = plot(E,varargin)
+% function varargout = plot(E,varargin)
 
-npts = getcharin('npts',varargin,200);
-t = linspace(0,2*pi,npts);
-t = t(1:end);
+npts = getcharin('npts',varargin,200); % angular resolution
+t = linspace(0,2*pi,npts+1)';          % angle
+t(end) = [];                           % avoid duplicate point
 
-x = C.a*cos(t');
-y = C.b*sin(t');
+% Semi-axes
+a = E.a;
+b = E.b;
 
-switch C.indim
+% Build parametric ellipse
+x = a * cos(t);
+y = b * sin(t);
+
+switch E.indim
     case 2
-        nodecoord = [x,y];
+        nodecoord = [x, y];
         
-        v = [C.vx,C.vy];
-        v = v/norm(v);
-        R = [v(1) v(2);
-            -v(2) v(1)];
+        % Rotate in-plane around z = [0, 0, 1] by angle of rotation theta =
+        % atan2(vy, vx) using tangent vector v = [vx, vy]
+        v = [E.vx, E.vy];
+        R = calcrotation(E,v);
         
-        c = [C.cx,C.cy];
+        % Translate to center c = [cx, cy]
+        c = [E.cx, E.cy];
+        
     case 3
-        nodecoord = [x,y,zeros(length(t),1)];
+        nodecoord = [x, y, zeros(npts,1)];
         
-        n = [C.nx,C.ny,C.nz];
-        n = n/norm(n);
-        Q = [0 -n(3) n(2);
-            n(3) 0 -n(1);
-            -n(2) n(1) 0];
-        v = [C.vx,C.vy];
-        v = v/norm(v);
-        R = eye(3)-v(2)*Q+(1-v(1))*Q^2;
+        %% Old version
+        % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
+        % atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
+        % rotation formula
+        %% New version
+        % Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
+        % using tangent vector v = [vx, vy], then tilt from z axis to normal
+        % vector n = [nx, ny, nz] so that the circle's normal is n regardless
+        % of v = [vx, vy]
+        v = [E.vx, E.vy];
+        n = [E.nx, E.ny, E.nz];
+        R = calcrotation(E,v,n);
         
-        c = [C.cx,C.cy,C.cz];
+        % Translate to center c = [cx, cy, cz]
+        c = [E.cx, E.cy, E.cz];
+        
+    otherwise
+        error('Wrong space dimension');
 end
 
-nodecoord = nodecoord*R + repmat(c,length(t),1);
-connec = [1:length(t),1];
-options = patchoptions(C.indim,varargin{:});
+% Rotate and translate
+nodecoord = nodecoord * R + c;
 
-H = patch('faces',connec,'vertices',nodecoord,options{:});
+% Connectivity for a closed loop
+connec = [1:npts,1];
 
-if ~(C.indim==3 && all(nodecoord(:,3)==C.cz))
+% Plot using patch
+options = patchoptions(E.indim,varargin{:});
+H = patch('Faces',connec,'Vertices',nodecoord,options{:});
+
+tol = getfemobjectoptions('tolerancepoint');
+if ~(E.indim==3 && all(abs(nodecoord(:,3) - E.cz) < tol))
     axis image
 end
 
+% Optional view or camera controls
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
 camera_position = getcharin('campos',varargin);
 if ~isempty(numview)
     view(numview)
-elseif C.indim==3
+elseif E.indim==3
     view(3)
 end
 if ~isempty(up_vector)

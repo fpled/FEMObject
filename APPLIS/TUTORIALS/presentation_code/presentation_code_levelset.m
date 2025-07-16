@@ -48,7 +48,7 @@ toc
 %S = convertelem(S,'TRI3');
 tic
 figure(1);clf;plot(getlevelset(S,1),S);
-contourplot(getlevelset(S,1),S,'color','k');plot(S)
+contourplot(getlevelset(S,1),S,'Color','k');plot(S)
 figure(2)
 clf
 toc
@@ -91,7 +91,7 @@ Sf = lsdivideelem(S)
 Sf = final(Sf);
 figure(1003)
 clf
-plot(Sf,'color','r')
+plot(Sf,'Color','r')
 plot(S)
 %uf = transfer(S,Sf,unfreevector(S,u))
 

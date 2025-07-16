@@ -53,7 +53,7 @@ B = create_boundary(S);
 figure(6)
 clf
 plot(S)
-plot(B,'node','color','r')
+plot(B,'node','Color','r')
 title('boundary of a mesh (MODEL)')
 
 L1 = LIGNE(P(4),POINT([2,1]));
@@ -61,8 +61,8 @@ L2 = DROITE(P(1),POINT([1,0]));
 figure(7)
 clf
 plot(S)
-plot(intersect(B,L1),'node','color','g')
-plot(intersect(B,L2),'node','color','r')
+plot(intersect(B,L1),'node','Color','g')
+plot(intersect(B,L2),'node','Color','r')
 
 title('Intersection of boundary and geometrical object')
 
@@ -104,7 +104,7 @@ clf
 subplot(1,2,1)
 plot(S)
 subplot(1,2,2)
-plot(S+0.03*u,'color','r')
+plot(S+0.03*u,'Color','r')
 
 s = calc_sigma(S,u);
 figure(102)

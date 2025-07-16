@@ -2,7 +2,7 @@ function u = createcirclecontour(u,numbercenter,numberpoints,numberlines,numberl
 % function u = createcirclecontour(u,numcenter,numberpoints,numberlines,numberlineloop,reverse)
 
 if nargin<6
-    reverse=1;
+    reverse = 1;
 else
     reverse = getcharin('reverse',varargin,1);
 end

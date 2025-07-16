@@ -6,7 +6,7 @@ nodecoord = permute(double(getcoord(P)),[3,2,1]);
 connec = 1:4;
 options = patchoptions(3,varargin{:});
 
-H = patch('faces',connec,'vertices',nodecoord,options{:});
+H = patch('Faces',connec,'Vertices',nodecoord,options{:});
 
 axis image
 

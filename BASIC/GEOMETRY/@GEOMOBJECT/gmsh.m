@@ -23,7 +23,11 @@ else
         [G,numbersurface] = gmshfilewithpoints(D,varargin{:});
     end
     if recombine
-        G = recombinesurface(G,numbersurface);
+        if D.dim==2
+            G = recombinesurface(G,numbersurface);
+        elseif D.dim==3
+            G = recombinesurface(G);
+        end
     end
     G = createphysicalsurface(G,numbersurface,1);
     if D.dim==3

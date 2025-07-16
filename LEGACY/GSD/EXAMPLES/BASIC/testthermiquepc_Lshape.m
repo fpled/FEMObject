@@ -127,7 +127,7 @@ for k=1:length(scansub)
         [qrad,result_ps{k}{i}]=solve(GSD,Ksto,fsto,[],'reference',qpc);
         error_ps{k}(i) = result_ps{k}{i}.error(end);
     end
-    semilogy(error_ps{k},courbestyle{length(leg)+1},'linewidth',2,'markersize',10)
+    semilogy(error_ps{k},courbestyle{length(leg)+1},'LineWidth',2,'MarkerSize',10)
     hold on
     leg = [leg , {['PS(power)-GSD, iter='  num2str(scansub(k)) ]}];
     pause(0.01)
@@ -145,7 +145,7 @@ for k=1:length(scansub)
         [qrad,result_psu{k}{i}]=solve(GSD,Ksto,fsto,[],'reference',qpc);
         error_psu{k}(i) = result_psu{k}{i}.error(end);
     end
-    semilogy(error_psu{k},courbestyle{length(leg)+1},'linewidth',2,'markersize',10)
+    semilogy(error_psu{k},courbestyle{length(leg)+1},'LineWidth',2,'MarkerSize',10)
     hold on
     leg = [leg , {['PS(power-update)-GSD, iter='  num2str(scansub(k)) ]}];
     pause(0.01)
@@ -154,8 +154,8 @@ end
 
 h=gca;
 set(gca,'Fontsize',fsize)
-xlabel('order M','fontsize',fsize)
-ylabel('error','fontsize',fsize)
+xlabel('order M','FontSize',fsize)
+ylabel('error','FontSize',fsize)
 legend(leg{:})
 
 %%
@@ -175,7 +175,7 @@ for k=1:length(scansub)
         [qrad,result_a{k}{i}]=solve(GSD,Ksto,fsto,[],'reference',qpc);
         error_a{k}(i)=result_a{k}{i}.error(end);
     end
-    semilogy(error_a{k},courbestyle{length(leg)+1},'linewidth',2,'markersize',10)
+    semilogy(error_a{k},courbestyle{length(leg)+1},'LineWidth',2,'MarkerSize',10)
     leg = [leg , {['PS(arnoldi)-GSD, iter=' num2str(scansub(k))]}];
 end
 legend(leg{:})
@@ -200,7 +200,7 @@ for k=1:length(scansub)
         [qrad,result_pss{k}{i}]=solve(GSD,Ksto,fsto,[],'reference',qpc);
         error_pss{k}(i)=result_pss{k}{i}.error(end);
     end
-    semilogy(error_pss{k},courbestyle{length(leg)+1},'linewidth',2,'markersize',10)
+    semilogy(error_pss{k},courbestyle{length(leg)+1},'LineWidth',2,'MarkerSize',10)
     hold on
     leg = [leg , {['PS-GSD, iter=' num2str(scansub(k))]}];
 end
@@ -277,37 +277,37 @@ title('error on error estimate')
 %% Description du probleme : figures
 figure(200)
 clf
-plot(S,'facecolor',[0.6,0.9,0.9])
+plot(S,'FaceColor',[0.6,0.9,0.9])
 %plot(S)
 colu = 'b' ;
 colg = 'r' ;
 linwid = 3;
-plot(L1,'linewidth',linwid,'edgecolor',colu)
-plot(L2,'linewidth',linwid,'edgecolor',colu)
-plot(L3,'linewidth',linwid,'edgecolor',colu)
-plot(L4,'linewidth',linwid,'edgecolor',colu)
-plot(L5,'linewidth',linwid,'edgecolor',colu)
-plot(L6,'linewidth',linwid,'edgecolor',colg)
+plot(L1,'LineWidth',linwid,'EdgeColor',colu)
+plot(L2,'LineWidth',linwid,'EdgeColor',colu)
+plot(L3,'LineWidth',linwid,'EdgeColor',colu)
+plot(L4,'LineWidth',linwid,'EdgeColor',colu)
+plot(L5,'LineWidth',linwid,'EdgeColor',colu)
+plot(L6,'LineWidth',linwid,'EdgeColor',colg)
 
-annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','fontsize',18)
-annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','fontsize',18)
+annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','FontSize',18)
+annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','FontSize',18)
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions.eps','epsc2')
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_sanscol.eps','epsc2')
 
 figure(201)
 clf
-%plot(S,'facecolor',[0.6,0.9,0.9])
+%plot(S,'FaceColor',[0.6,0.9,0.9])
 plot(S)
 repnode=330;
-plot(S.node(repnode),'marker','bx','markersize',12)
-plottext(S.node(repnode),'P_1','color','b','fontsize',18)
+plot(S.node(repnode),'Marker','bx','MarkerSize',12)
+plottext(S.node(repnode),'P_1','Color','b','FontSize',18)
 repnode=640;
-plot(S.node(repnode),'marker','bx','markersize',12)
-plottext(S.node(repnode),'P_2','fontsize',18,'color','b')
+plot(S.node(repnode),'Marker','bx','MarkerSize',12)
+plottext(S.node(repnode),'P_2','FontSize',18,'Color','b')
 repnode=1097;
-plot(S.node(repnode),'marker','bx','markersize',12)
-plottext(S.node(repnode),'P_3','fontsize',18,'color','b')
+plot(S.node(repnode),'Marker','bx','MarkerSize',12)
+plottext(S.node(repnode),'P_3','FontSize',18,'Color','b')
 
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions.eps','epsc2')
@@ -315,30 +315,30 @@ plottext(S.node(repnode),'P_3','fontsize',18,'color','b')
 
 figure(202)
 clf
-plot(S,'facecolor',[0.6,0.9,0.9])
+plot(S,'FaceColor',[0.6,0.9,0.9])
 %plot(S)
 colu = 'b' ;
 colg = 'r' ;
 linwid = 3;
-plot(L1,'linewidth',linwid,'edgecolor',colu)
-plot(L2,'linewidth',linwid,'edgecolor',colu)
-plot(L3,'linewidth',linwid,'edgecolor',colu)
-plot(L4,'linewidth',linwid,'edgecolor',colu)
-plot(L5,'linewidth',linwid,'edgecolor',colu)
-plot(L6,'linewidth',linwid,'edgecolor',colg)
+plot(L1,'LineWidth',linwid,'EdgeColor',colu)
+plot(L2,'LineWidth',linwid,'EdgeColor',colu)
+plot(L3,'LineWidth',linwid,'EdgeColor',colu)
+plot(L4,'LineWidth',linwid,'EdgeColor',colu)
+plot(L5,'LineWidth',linwid,'EdgeColor',colu)
+plot(L6,'LineWidth',linwid,'EdgeColor',colg)
 
-annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','fontsize',18)
-annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','fontsize',18)
+annotation('textarrow',[0.7 0.65],[0.35 0.5],'String','\partial_1\Omega','FontSize',18)
+annotation('textarrow',[0.55 0.45],[0.2 0.12],'String','\partial_2\Omega','FontSize',18)
 
 repnode=330;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_1','color','k','fontsize',18)
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_1','Color','k','FontSize',18)
 repnode=640;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_2','fontsize',18,'color','k')
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_2','FontSize',18,'Color','k')
 repnode=1097;
-plot(S.node(repnode),'marker','kx','markersize',12)
-plottext(S.node(repnode),'P_3','fontsize',18,'color','k')
+plot(S.node(repnode),'Marker','kx','MarkerSize',12)
+plottext(S.node(repnode),'P_3','FontSize',18,'Color','k')
 
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_withpoints.eps','epsc2')
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshape_mesh_boundaryconditions_sanscol.eps','epsc2')
@@ -379,7 +379,7 @@ timepower=result_powertime.time;
 [qrad,result_power]=solve(GSD,Ksto,fsto,[],'reference',qpc);
 errorpower = result_power.error ;
 
-semilogy(timepower,errorpower,'b*-','linewidth',2)
+semilogy(timepower,errorpower,'b*-','LineWidth',2)
 
 timepowerp{p}=timepower;
 errorpowerp{p}=errorpower;
@@ -400,7 +400,7 @@ for i=1:8
     
 end
 
-semilogy(timea,errora,'b*-','linewidth',2)
+semilogy(timea,errora,'b*-','LineWidth',2)
 
 timeap{p}=timea;
 errorap{p}=errora;
@@ -417,23 +417,23 @@ fsize=16;
 rr=3;
 figure(10)
 clf
-semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','linewidth',3,'markersize',10)
+semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','LineWidth',3,'MarkerSize',10)
 hold on
-semilogy(timepowerp{3},errorpowerp{3},'rs--','linewidth',3,'markersize',10)
-semilogy(timeap{3},errorap{3},'b>--','linewidth',3,'markersize',10)
-semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','linewidth',3,'markersize',10)
-semilogy(timepowerp{5},errorpowerp{5},'rs-','linewidth',3,'markersize',10)
-semilogy(timeap{5},errorap{5},'b>-','linewidth',3,'markersize',10)
-semilogy(timepcgp{}(1:rr),errorpcgp{7}(1:rr),'k*:','linewidth',3,'markersize',10)
-semilogy(timepowerp{7},errorpowerp{7},'rs:','linewidth',3,'markersize',10)
-semilogy(timeap{7},errorap{7},'b>:','linewidth',3,'markersize',10)
+semilogy(timepowerp{3},errorpowerp{3},'rs--','LineWidth',3,'MarkerSize',10)
+semilogy(timeap{3},errorap{3},'b>--','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','LineWidth',3,'MarkerSize',10)
+semilogy(timepowerp{5},errorpowerp{5},'rs-','LineWidth',3,'MarkerSize',10)
+semilogy(timeap{5},errorap{5},'b>-','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{}(1:rr),errorpcgp{7}(1:rr),'k*:','LineWidth',3,'MarkerSize',10)
+semilogy(timepowerp{7},errorpowerp{7},'rs:','LineWidth',3,'MarkerSize',10)
+semilogy(timeap{7},errorap{7},'b>:','LineWidth',3,'MarkerSize',10)
 ylim([10^-4,1])
 
 
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('time (s)','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('time (s)','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('PCG , p=3','P-GSD , p=3','A-GSD , p=3','PCG , p=5','P-GSD , p=5','A-GSD , p=5','PCG , p=7','P-GSD , p=7','A-GSD , p=7')
 
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arnoldi_power_pcg_orderp.eps','epsc2')
@@ -442,18 +442,18 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arn
 rr=3;
 figure(11)
 clf
-semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','linewidth',3,'markersize',10)
+semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','LineWidth',3,'MarkerSize',10)
 hold on
-semilogy(timeap{3},errorap{3},'b>--','linewidth',3,'markersize',10)
-semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','linewidth',3,'markersize',10)
-semilogy(timeap{5},errorap{5},'b>-','linewidth',3,'markersize',10)
-semilogy(timepcgp{7}(1:rr),errorpcgp{7}(1:rr),'k*:','linewidth',3,'markersize',10)
-semilogy(timeap{7},errorap{7},'b>:','linewidth',3,'markersize',10)
+semilogy(timeap{3},errorap{3},'b>--','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','LineWidth',3,'MarkerSize',10)
+semilogy(timeap{5},errorap{5},'b>-','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{7}(1:rr),errorpcgp{7}(1:rr),'k*:','LineWidth',3,'MarkerSize',10)
+semilogy(timeap{7},errorap{7},'b>:','LineWidth',3,'MarkerSize',10)
 ylim([10^-4,1])
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('time (s)','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('time (s)','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('PCG , p=3','A-GSD , p=3','PCG , p=5','A-GSD , p=5','PCG , p=7','A-GSD , p=7')
 
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arnoldi_pcg_orderp.eps','epsc2')
@@ -471,17 +471,17 @@ courbestyle2={'b>--','b>-','b>:'};
 
 leg={};
 for kkk=1:length(scanr)
-    semilogy(timepcgr{scanr(kkk)}(1:rr),errorpcgr{scanr(kkk)}(1:rr),courbestyle1{kkk},'linewidth',3,'markersize',10)
+    semilogy(timepcgr{scanr(kkk)}(1:rr),errorpcgr{scanr(kkk)}(1:rr),courbestyle1{kkk},'LineWidth',3,'MarkerSize',10)
     leg=[leg ,{['PCG n=' num2str(scann(kkk))]}];
     hold on
-    semilogy(timear{scanr(kkk)},errorar{scanr(kkk)},courbestyle2{kkk},'linewidth',3,'markersize',10)
+    semilogy(timear{scanr(kkk)},errorar{scanr(kkk)},courbestyle2{kkk},'LineWidth',3,'MarkerSize',10)
     leg=[leg ,{['A-GSD n=' num2str(scann(kkk))]}];
 end
 ylim([10^-4,1])
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('time (s)','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('time (s)','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend(leg{:})
 
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arnoldi_pcg_sizen.eps','epsc2')
@@ -491,15 +491,15 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arn
 rr=3;
 figure(101)
 clf
-semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','linewidth',3,'markersize',10)
+semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','LineWidth',3,'MarkerSize',10)
 hold on
-semilogy(timeap{5},errorap{5},'b>-','linewidth',3,'markersize',10)
+semilogy(timeap{5},errorap{5},'b>-','LineWidth',3,'MarkerSize',10)
 ylim([10^-4,1])
 xlim([0,50])
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('time (s)','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('time (s)','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('PCG','A-GSD')
 
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arnoldi_pcg_orderp.eps','epsc2')
@@ -508,20 +508,20 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_arn
 rr=3;
 figure(12)
 clf
-semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','linewidth',3,'markersize',10)
+semilogy(timepcgp{3}(1:rr),errorpcgp{3}(1:rr),'k*--','LineWidth',3,'MarkerSize',10)
 hold on
-semilogy(timepowerp{3},errorpowerp{3},'rs--','linewidth',3,'markersize',10)
-semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','linewidth',3,'markersize',10)
-semilogy(timepowerp{5},errorpowerp{5},'rs-','linewidth',3,'markersize',10)
-semilogy(timepcgp{7}(1:rr),errorpcgp{7}(1:rr),'k*:','linewidth',3,'markersize',10)
-semilogy(timepowerp{7},errorpowerp{7},'rs:','linewidth',3,'markersize',10)
+semilogy(timepowerp{3},errorpowerp{3},'rs--','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{5}(1:rr),errorpcgp{5}(1:rr),'k*-','LineWidth',3,'MarkerSize',10)
+semilogy(timepowerp{5},errorpowerp{5},'rs-','LineWidth',3,'MarkerSize',10)
+semilogy(timepcgp{7}(1:rr),errorpcgp{7}(1:rr),'k*:','LineWidth',3,'MarkerSize',10)
+semilogy(timepowerp{7},errorpowerp{7},'rs:','LineWidth',3,'MarkerSize',10)
 ylim([10^-4,1])
 
 
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('time (s)','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('time (s)','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('PCG , p=3','P-GSD , p=3','PCG , p=5','P-GSD , p=5','PCG , p=7','P-GSD , p=7')
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorvstime_power_pcg._orderp.eps','epsc2')
 
@@ -554,12 +554,12 @@ end
 %%
 figure(140)
 clf
-semilogy(0:length(result.erroriter)-1,result.erroriter,courbestyle{1},'linewidth',2,'markersize',10)
+semilogy(0:length(result.erroriter)-1,result.erroriter,courbestyle{1},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
 xlim([0,length(result.erroriter)])
-xlabel('iteration','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('iteration','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_conv_pssub_dim8.eps','epsc2')
 
 
@@ -596,13 +596,13 @@ end
 figure(1444)
 clf
 nbfonc=8;
-semilogy(errorpsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy(errorpsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( erroragsdtri,courbestyle{3},'linewidth',2,'markersize',10)
+semilogy( erroragsdtri,courbestyle{3},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('SI-GSD',['A^{M+' num2str(nbplus) '}-GSD'])
 xlim([1,nbfonc])
 saveas(gcf,['E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_agsdMplus' num2str(nbplus) '_psgsd.eps'],'epsc2')
@@ -610,13 +610,13 @@ saveas(gcf,['E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_agsdMplu
 figure(1445)
 clf
 nbfonc=8;
-semilogy(errorApsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy(errorApsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( errorAagsdtri,courbestyle{3},'linewidth',2,'markersize',10)
+semilogy( errorAagsdtri,courbestyle{3},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error A ','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error A ','FontSize',fsizetransp)
 legend('SI-GSD',['A^{M+' num2str(nbplus) '}-GSD'])
 xlim([1,nbfonc])
 saveas(gcf,['E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_agsdMplus' num2str(nbplus) '_psgsd.eps'],'epsc2')
@@ -627,13 +627,13 @@ saveas(gcf,['E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_agsdMpl
 figure(14)
 clf
 nbfonc=8;
-semilogy(errorqpcsd,courbestyle{1},'linewidth',2,'markersize',10)
+semilogy(errorqpcsd,courbestyle{1},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( errorpsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy( errorpsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('SD','SI-GSD')
 xlim([1,nbfonc])
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_sd_psgsd.eps','epsc2')
@@ -641,13 +641,13 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_sd_psgsd.
 figure(144)
 clf
 nbfonc=8;
-semilogy(errorpsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy(errorpsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( erroragsd,courbestyle{3},'linewidth',2,'markersize',10)
+semilogy( erroragsd,courbestyle{3},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error','FontSize',fsizetransp)
 legend('SI-GSD','A-GSD')
 xlim([1,nbfonc])
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_agsd_psgsd.eps','epsc2')
@@ -656,13 +656,13 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_error_agsd_psgs
 figure(155)
 clf
 nbfonc=8;
-semilogy(errorApsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy(errorApsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( errorAagsd,courbestyle{3},'linewidth',2,'markersize',10)
+semilogy( errorAagsd,courbestyle{3},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error A','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error A','FontSize',fsizetransp)
 legend('SI-GSD','A-GSD')
 xlim([1,nbfonc])
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_agsd_psgsd.eps','epsc2')
@@ -672,13 +672,13 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_agsd_psg
 figure(15)
 clf
 nbfonc=8;
-semilogy(errorAqpcsd,courbestyle{1},'linewidth',2,'markersize',10)
+semilogy(errorAqpcsd,courbestyle{1},'LineWidth',2,'MarkerSize',10)
 hold on
-semilogy( errorApsgsd,courbestyle{2},'linewidth',2,'markersize',10)
+semilogy( errorApsgsd,courbestyle{2},'LineWidth',2,'MarkerSize',10)
 h=gca;
 set(gca,'Fontsize',fsizetransp)
-xlabel('order M','fontsize',fsizetransp)
-ylabel('error A','fontsize',fsizetransp)
+xlabel('order M','FontSize',fsizetransp)
+ylabel('error A','FontSize',fsizetransp)
 legend('SD','SI-GSD')
 xlim([1,nbfonc])
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_sd_psgsd.eps','epsc2')
@@ -688,26 +688,26 @@ saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_errorA_sd_psgsd
 
 figure(49)
 clf
-plotV(qpcsd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','fontsize',18},'fact',.95)
+plotV(qpcsd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','FontSize',18},'fact',.95)
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_sd_spacefun_sorted.jpg','jpeg')
 figure(50)
 clf
-plotV(qradps,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','fontsize',18},'fact',.95)
+plotV(qradps,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','FontSize',18},'fact',.95)
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_psgsd_spacefun_sorted.jpg','jpeg')
 figure(51)
 clf
 qradsd = spectral_decomposition(qrad,'nbfoncmax',10,'pfixmax',7,'pfixtol',1e-10,'display');
-plotV(qradpssd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','fontsize',18},'fact',.95)
+plotV(qradpssd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','FontSize',18},'fact',.95)
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_psgsd_spacefun.jpg','jpeg')
 
 figure(52)
 clf
-plotV(qrada,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','fontsize',18},'fact',.95)
+plotV(qrada,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','FontSize',18},'fact',.95)
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_agsd_spacefun.jpg','jpeg')
 figure(53)
 clf
 qradasd = spectral_decomposition(qrada,'nbfoncmax',10,'pfixmax',7,'pfixtol',1e-10,'display');
-plotV(qradasd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','fontsize',18},'fact',.95)
+plotV(qradasd,1:8,S,'nl',3,'manutext',{{1.2,0.3},'U','FontSize',18},'fact',.95)
 %saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_agsd_spacefun_sorted.jpg','jpeg')
 
 
@@ -742,7 +742,7 @@ figure(30)
 clf
 plot(getV(qpcsd,1),S)
 axis off
-title('U_1','fontsize',24)
+title('U_1','FontSize',24)
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_mode1_reference.jpg','jpeg')
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_mode1_reference.eps','epsc2')
 
@@ -751,7 +751,7 @@ clf
 multipdfplot(getL(qpcsd),'nbs',1e5)
 axis off
 view(2)
-%title('PDF (\lambda_1,\lambda_2)','fontsize',24)
+%title('PDF (\lambda_1,\lambda_2)','FontSize',24)
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_pdflambda12_reference.jpg','jpeg')
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_pdflambda12_reference.eps','epsc2')
 
@@ -760,7 +760,7 @@ figure(32)
 clf
 plot(getV(qpcsd,2),S)
 axis off
-title('U_2','fontsize',24)
+title('U_2','FontSize',24)
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_mode2_reference.jpg','jpeg')
 saveas(gcf,'E:\REDACTION\matlab_results\Lshaperandomfield\Lshape_manufacture_mode2_reference.eps','epsc2')
 

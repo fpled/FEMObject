@@ -36,7 +36,7 @@ b=-calc_nonhomogeneous_vector(S1e,A);
 u1ef=Af\b;
 u1e=unfreevector(S1e,u1ef);
 figure('Name','EBC - Mode 1')
-plot_sol(S1e,u1ef,'edgecolor','none')
+plot_sol(S1e,u1ef,'EdgeColor','none')
 
 % Mode 2
 S2e=S;
@@ -49,7 +49,7 @@ b=-calc_nonhomogeneous_vector(S2e,A);
 u2ef=Af\b;
 u2e=unfreevector(S2e,u2ef);
 figure('Name','EBC - Mode 2')
-plot_sol(S2e,u2ef,'edgecolor','none')
+plot_sol(S2e,u2ef,'EdgeColor','none')
 
 %% Conditions aux limites periodiques
 S1p=S;
@@ -69,7 +69,7 @@ u1pf=Af\b;
 u1p=unfreevector(S1p,u1pf);
 u1pt=x+u1p;
 figure('Name','PBC - Mode 1')
-plot_sol(S,u1pt,'edgecolor','none');
+plot_sol(S,u1pt,'EdgeColor','none');
 
 % Mode 2
 b=-A*y;
@@ -78,7 +78,7 @@ u2pf=Af\b;
 u2p=unfreevector(S1p,u2pf);
 u2pt=y+u2p;
 figure('Name','PBC - Mode 2')
-plot_sol(S,u2pt,'edgecolor','none');
+plot_sol(S,u2pt,'EdgeColor','none');
 
 %% Conditions aux limites de Neumann
 S1n=mesh(D,nelem(1),nelem(2));
@@ -110,7 +110,7 @@ b=f1-f;
 u1nf=solvesingular(Af,b);
 u1n=unfreevector(S1n,u1nf);
 figure('Name','NBC - Mode 1')
-plot_sol(S1n,u1nf,'edgecolor','none');
+plot_sol(S1n,u1nf,'EdgeColor','none');
 
 % Mode 2
 f2=surfload(S1n,L{1},'QN',-1);
@@ -119,7 +119,7 @@ b=f2-f;
 u2nf=solvesingular(Af,b);
 u2n=unfreevector(S1n,u2nf);
 figure('Name','NBC - Mode 2')
-plot_sol(S1n,u2nf,'edgecolor','none');
+plot_sol(S1n,u2nf,'EdgeColor','none');
 
 %% Determination des conductivites homogeneisees
 % Utilisation du taux d'entropie

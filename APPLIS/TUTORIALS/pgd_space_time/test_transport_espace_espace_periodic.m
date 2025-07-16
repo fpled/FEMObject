@@ -49,7 +49,7 @@ bb = expand(bsep);
 bb = unfreevector(Sy,unfreevector(Sx,bb,2),1)
 figure(3)
 clf
-surf(X,Y,bb'+1e-5,'edgecolor','none')
+surf(X,Y,bb'+1e-5,'EdgeColor','none')
 axis off
 axis square
 view(2)
@@ -118,7 +118,7 @@ bb = unfreevector(Sy,unfreevector(Sx,bb,2),1);
 
 figure(3)
 clf
-surf(X,Y,bb'+1e-5,'edgecolor','none')
+surf(X,Y,bb'+1e-5,'EdgeColor','none')
 axis off
 axis square
 view(2)

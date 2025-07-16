@@ -10,7 +10,11 @@ varargin = delonlycharin('recombine',varargin);
 
 [G,numbersurface] = gmshfile(D,varargin{:});
 if recombine
-    G = recombinesurface(G,numbersurface);
+    if D.dim==2
+        G = recombinesurface(G,numbersurface);
+    elseif D.dim==3
+        G = recombinesurface(G);
+    end
 end
 G = setfile(G,filename);
 n=max(nargout,1);

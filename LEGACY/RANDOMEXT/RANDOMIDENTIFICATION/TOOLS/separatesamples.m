@@ -47,11 +47,11 @@ if ischarin('display',varargin)
     pdfsampleplot(Xs,'b','npts',50,'bar')
     hold on
     for i=1:length(sep)
-        plot([sep(i),sep(i)],ylim,'r','linewidth',3)
+        plot([sep(i),sep(i)],ylim,'r','LineWidth',3)
     end
     if nargout==4
         for i=1:length(mublock)
-            plot([mublock(i),mublock(i)],ylim,'g--','linewidth',3)
+            plot([mublock(i),mublock(i)],ylim,'g--','LineWidth',3)
         end
     end
 end

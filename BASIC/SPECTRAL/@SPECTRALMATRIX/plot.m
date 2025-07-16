@@ -58,7 +58,7 @@ else
             [x,y] = meshgrid(x,y);
             P = randomeval(u,[x(:),y(:)]);
             P = reshape(P,n,n);
-            surf(x,y,P,'edgecolor','none','facecolor','interp',varargin{:})
+            surf(x,y,P,'EdgeColor','none','FaceColor','interp',varargin{:})
             axz = [min(min(P)),max(max(P))];
             axis([ax,axz])
     end

@@ -5,7 +5,7 @@ if isa(P,'double')
     P = mat2cell(P,ones(1,size(P,1)),size(P,2));
 end
 
-if length(cl)==1
+if isscalar(cl)
     cl = repmat(cl,1,length(P));
 end
 

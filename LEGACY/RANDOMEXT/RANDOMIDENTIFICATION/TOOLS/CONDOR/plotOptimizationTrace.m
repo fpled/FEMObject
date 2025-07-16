@@ -17,7 +17,7 @@ l=plot3(mytrace(:,1),mytrace(:,2),zeros(1,nEvaluations)+fumin);
 set(l,'Color','k');
 set(l,'LineStyle',':');
 l=plot3(mytrace(:,1),mytrace(:,2),mytrace(:,3));
-set(l,'linewidth',2);
+set(l,'LineWidth',2);
 [xs,ys,zs]=sphere(10);
 r=(max(mytrace(:,1))-min(mytrace(:,1)))*.02;
 xs=xs*r;
@@ -31,9 +31,9 @@ set(l,'EdgeColor','none');
 l=surf(xs+mytrace(iopt,1),ys+mytrace(iopt,2),zs+fumin);
 set(l,'FaceColor','g');
 set(l,'EdgeColor','none');
-for i=1:nEvaluations,
+for i=1:nEvaluations
     l=line([mytrace(i,1) mytrace(i,1)],[mytrace(i,2) mytrace(i,2)],[mytrace(i,3) fumin]);
-    set(l,'color','k');
+    set(l,'Color','k');
 end
 view(-60,70);
 l=title(sprintf('View of the optimization path followed by the Condor Optimizer\n(red dot=starting point; green dot=optimal point)'));

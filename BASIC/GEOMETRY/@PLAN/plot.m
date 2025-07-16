@@ -6,9 +6,9 @@ P2 = double(getcoord(D.P{2}));
 P3 = double(getcoord(D.P{3}));
 nodecoord = [P1;P2;P3] ;
 connec = [1,2,3];
-edgecolor = getcharin('color',varargin,'k') ;
+edgecolor = getcharin('Color',varargin,'k') ;
 
-H = patch('faces',connec,'vertices',nodecoord,'edgecolor',edgecolor);
+H = patch('Faces',connec,'Vertices',nodecoord,'EdgeColor',edgecolor);
   
 if nargout>=1
     varargout{1} = H;

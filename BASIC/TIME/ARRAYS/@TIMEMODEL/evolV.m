@@ -82,11 +82,11 @@ for i=1:plotstep:length(t)
     
     if plotiter
         fullsubplot(nl,nc,1);
-        text(0.1,0.5,['iter ' num2str(i,'%d')],'fontsize',12)
+        text(0.1,0.5,['iter ' num2str(i,'%d')],'FontSize',12)
         axis off
     elseif plottime
         fullsubplot(nl,nc,1);
-        text(0.1,0.5,['time ' num2str(t(i),'%.2f') ' s'],'fontsize',12)
+        text(0.1,0.5,['time ' num2str(t(i),'%.2f') ' s'],'FontSize',12)
         axis off
     end
     

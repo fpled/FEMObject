@@ -54,7 +54,7 @@ else
     % set(gcf,'Name','Global solution U and local solution w over domain and patches')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 T = gettimemodel(Ut);
 T = setevolparam(T,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...

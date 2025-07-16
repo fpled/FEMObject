@@ -4,10 +4,10 @@ function fillhandle = plotenveloppe(t,Y,face,varargin)
 % t : abscisse
 % facecolor : couleur de remplissage
 % 
-% function plotenveloppe(Y,facecolor,'edgecolor',edgecolor)
+% function plotenveloppe(Y,facecolor,'EdgeColor',edgecolor)
 % edgecolor : couleurs des contrours ('k' par defaut)
 %
-% function plotenveloppe(Y,facecolor,'facealpha',alpha,'edgealpha','alphaedge')
+% function plotenveloppe(Y,facecolor,'FaceAlpha',alpha,'EdgeAlpha','alphaedge')
 % alpha et edgealpha : coefficients de transparence (0.5 par defaut)
 
 if nargin<=2
@@ -30,13 +30,13 @@ else
 end
 
 
-edge = getcharin('edgecolor',varargin,'k');
-transp = getcharin('facealpha',varargin,0.5);
-transpedge = getcharin('edgealpha',varargin,transp);
+edge = getcharin('EdgeColor',varargin,'k');
+transp = getcharin('FaceAlpha',varargin,0.5);
+transpedge = getcharin('EdgeAlpha',varargin,transp);
 
 options={};
-if ischarin('linewidth',varargin)
-    options=[options , {'linewidth',getcharin('linewidth',varargin)}];
+if ischarin('LineWidth',varargin)
+    options=[options , {'Linewidth',getcharin('Linewidth',varargin)}];
 end
 
 t=t(:)';

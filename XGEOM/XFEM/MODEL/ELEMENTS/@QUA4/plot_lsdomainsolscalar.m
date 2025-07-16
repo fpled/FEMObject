@@ -27,9 +27,9 @@ switch getlstype(elem)
         if issigma
             ksigma = getcharin('sigma',varargin);
             varargin = delcharin('sigma',varargin);
-            varargin = setcharin('facecolor',varargin,'flat');
+            varargin = setcharin('FaceColor',varargin,'flat');
         else
-            varargin = setcharin('facecolor',varargin,'interp');
+            varargin = setcharin('FaceColor',varargin,'interp');
         end
         
         qelem=localize(elem,q);
@@ -59,12 +59,12 @@ switch getlstype(elem)
                     se = D*(Be*qe);
                     se = double(sigmacompo(se,ksigma,elem));
                     se = se(:);
-                    varargin = setcharin('facevertexcdata',varargin,se);
+                    varargin = setcharin('FaceVertexCData',varargin,se);
                 else
-                    varargin = setcharin('facevertexcdata',varargin,ae(:));
+                    varargin = setcharin('FaceVertexCData',varargin,ae(:));
                 end
                 
-                patch('faces',1:4,'vertices',nodecoorde,varargin{:});
+                patch('Faces',1:4,'Vertices',nodecoorde,varargin{:});
                 
             elseif all(lse>=0)
                 
@@ -83,13 +83,13 @@ switch getlstype(elem)
                     se1 = D*(Be*qe);
                     se1 = double(sigmacompo(se1,ksigma,elem));
                     se1 = repmat(se1(:),size(connecin,1),1);
-                    varargin = setcharin('facevertexcdata',varargin,se1);
+                    varargin = setcharin('FaceVertexCData',varargin,se1);
                 else
-                    varargin = setcharin('facevertexcdata',varargin,ue1(:));
+                    varargin = setcharin('FaceVertexCData',varargin,ue1(:));
                 end
                 
                 if size(connecin,1)>0
-                    patch('faces',connecin,'vertices',nodecoordeplus,varargin{:});
+                    patch('Faces',connecin,'Vertices',nodecoordeplus,varargin{:});
                 end
             end
             

@@ -39,7 +39,7 @@ q=K\F;
 figure(2)
 clf
 ampl=1;
-plot(S,'color','b')
+plot(S,'Color','b')
 plot(S+ampl*q)
 
 

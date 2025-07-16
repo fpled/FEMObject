@@ -48,10 +48,10 @@ if ischarin('display',varargin)
     multipdfsampleplot(Xs,'npts',50)
     hold on
     for i=2:length(sepx)-1
-        plot([sepx(i),sepx(i)],ylim,'r','linewidth',3)
+        plot([sepx(i),sepx(i)],ylim,'r','LineWidth',3)
     end
     for i=2:length(sepy)-1
-        plot(xlim,[sepy(i),sepy(i)],'r','linewidth',3)
+        plot(xlim,[sepy(i),sepy(i)],'r','LineWidth',3)
     end
 
 end

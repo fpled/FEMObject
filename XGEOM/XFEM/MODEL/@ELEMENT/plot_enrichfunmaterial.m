@@ -16,7 +16,7 @@ if ~isenrich(elem)
     hold on
     end
     else
-    patch('faces',connec,'vertices',nodecoord,'facevertexcdata',zeros(size(nodecoord,1),1),options{:});             
+    patch('Faces',connec,'Vertices',nodecoord,'FaceVertexCData',zeros(size(nodecoord,1),1),options{:});             
     end    
 else
 
@@ -108,11 +108,11 @@ end
     hold on
     end
     else
-    patch('faces',1:size(subconnecin,2),'vertices',nodein(subconnecin(k,:),:),'facevertexcdata',psiin(subconnecin(k,:),:),options{:});             
+    patch('Faces',1:size(subconnecin,2),'Vertices',nodein(subconnecin(k,:),:),'FaceVertexCData',psiin(subconnecin(k,:),:),options{:});             
     end
     end
     
-    %patch('faces',subconnecin,'vertices',nodein(subconnecin,:),'facevertexcdata',psiin,options{:});         
+    %patch('Faces',subconnecin,'Vertices',nodein(subconnecin,:),'FaceVertexCData',psiin,options{:});         
     end
     
     if size(subconnecout,1)>0  
@@ -123,11 +123,11 @@ end
     hold on
     end
         else
-    patch('faces',1:size(subconnecout,2),'vertices',nodeout(subconnecout(k,:),:),'facevertexcdata',psiout(subconnecout(k,:),:),options{:});         
+    patch('Faces',1:size(subconnecout,2),'Vertices',nodeout(subconnecout(k,:),:),'FaceVertexCData',psiout(subconnecout(k,:),:),options{:});         
         end
         end
 
-        %patch('faces',subconnecout,'vertices',nodeout,'facevertexcdata',psiout,options{:});
+        %patch('Faces',subconnecout,'Vertices',nodeout,'FaceVertexCData',psiout,options{:});
     
     
     end

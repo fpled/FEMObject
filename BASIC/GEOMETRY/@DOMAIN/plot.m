@@ -27,9 +27,9 @@ switch D.indim
         
 end
 
-options = patchoptions(D.indim,'facevertexcdata',1,varargin{:});
+options = patchoptions(D.indim,'FaceVertexCData',1,varargin{:});
 
-H = patch('faces',connec,'vertices',nodecoord,options{:});
+H = patch('Faces',connec,'Vertices',nodecoord,options{:});
 
 axis image
 

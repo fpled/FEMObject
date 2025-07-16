@@ -46,7 +46,7 @@ else
     % set(gcf,'Name',['Total Sobol index of u_ref=(U_ref,w_ref) over domain for random variables #' num2str(alpha)])
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 if isa(glob,'Global')
     S_out = glob.S_out;

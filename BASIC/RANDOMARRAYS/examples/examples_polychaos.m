@@ -141,10 +141,10 @@ plot(X{2},'pdf','r','nbs',1e4)
 
 figure(3)
 subplot(1,2,1)
-plot(T,'multipdf','npts',20,'edgecolor','none')
+plot(T,'multipdf','npts',20,'EdgeColor','none')
 view(2)
 ax = axis;
 subplot(1,2,2)
-plot(X(:),'multipdf','npts',20,'edgecolor','none')
+plot(X(:),'multipdf','npts',20,'EdgeColor','none')
 view(2)
 axis(ax)

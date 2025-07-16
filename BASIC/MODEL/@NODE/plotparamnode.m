@@ -29,7 +29,7 @@ end
 for p=1:nbgroup
     nodep = getnode(node,groupnode{p},'local');
     marker = getpointstyles(p);
-    markersize=getcharin('markersize',varargin,8);
+    markersize=getcharin('MarkerSize',varargin,8);
     Htemp = plot(nodep,marker,varargin{:});
     Handles = [Handles,Htemp];
     leg = [leg,paramplot{p}];

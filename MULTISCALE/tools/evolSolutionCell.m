@@ -61,7 +61,7 @@ else
     % set(gcf,'Name','Solution u')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 T = setevolparam(T,'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
     'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize,...

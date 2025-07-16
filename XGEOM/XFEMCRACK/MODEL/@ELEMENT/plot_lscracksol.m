@@ -20,8 +20,8 @@ else
     varargin=delcharin('ampl',varargin);
     
     
-    H = patch('faces',globconnec,...
-        'vertices',nodecoord(connec(:),:)+ampl*u,varargin{:});
+    H = patch('Faces',globconnec,...
+        'Vertices',nodecoord(connec(:),:)+ampl*u,varargin{:});
     
     if nargout ==1
         varargout{1}=H;

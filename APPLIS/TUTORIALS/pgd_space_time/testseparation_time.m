@@ -243,7 +243,7 @@ ugsd2 = Vxyz*diag(alpha)*Vt';
 ugsd2 = TIMEMATRIX(ugsd2,N,[size(ugsd2,1),1]);
 
 figure(5)
-evol(ugsd2,S2)%,'rescale','z','color')
+evol(ugsd2,S2)%,'rescale','z','Color')
 
 
 
@@ -262,5 +262,5 @@ ugsd = Vxyz*diag(alpha)*Vt';
 ugsd = TIMEMATRIX(ugsd,N,[size(ugsd,1),1]);
 
 figure(5)
-evol(ugsd,keepelem(S,300:400),'colorbar','rescale','color')    
+evol(ugsd,keepelem(S,300:400),'colorbar','rescale','Color')    
 

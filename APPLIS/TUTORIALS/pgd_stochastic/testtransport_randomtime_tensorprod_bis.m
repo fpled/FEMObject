@@ -155,7 +155,7 @@ save(fich,'omc','omctime')
 %%
 figure(2)
 hold on
-pdfsampleplot(omc,'k','linewidth',2)%,'npts',20)
+pdfsampleplot(omc,'k','LineWidth',2)%,'npts',20)
 
 %%
 scanpfval = [4:.2:5.5]*10^-4;
@@ -191,10 +191,10 @@ solver = SEPSOLVER(getdim(Asep),'tol',tol,'alphaupdate',alphaupdate,...
 tic
 [usep,resultsep] = dsolve(Msep,Asep,bsep,N,solver);
 toc
-figure(17);semilogy(resultsep.error,col,'linewidth',2);
+figure(17);semilogy(resultsep.error,col,'LineWidth',2);
 hold on
 x0 = xlim;
-set(gca,'fontsize',14)
+set(gca,'FontSize',14)
 xlim([1,max(x0(2),length(resultsep.error))]);
 useppc = PCTPMATRIX(usep,PC);
 oseptime = foutput'*useppc;
@@ -205,8 +205,8 @@ eval(['useppc' num2str(maxorder) '=useppc;']);
 
 figure(2)
 hold on
-pdfplot(osep,col,'nbs',1e5,'linewidth',2,'npts',20)
-set(gca,'fontsize',14)
+pdfplot(osep,col,'nbs',1e5,'LineWidth',2,'npts',20)
+set(gca,'FontSize',14)
 
 %%
 figure(4)
@@ -287,7 +287,7 @@ end
 
 figure(2)
 clf
-pdfsampleplot(omc,'k','linewidth',2)%,'npts',20)
+pdfsampleplot(omc,'k','LineWidth',2)%,'npts',20)
 hold on
 oseptest = {useppc1,useppc2,useppc4,useppc8,useppc12};
 for j=1:length(oseptest)
@@ -296,9 +296,9 @@ end
 scancol = {'m-^','b-d','r-o','c-v'};
 
 for j=1:length(scancol)
-    pdfplot(oseptest{j},scancol{j},'nbs',1e5,'linewidth',2,'npts',20)
+    pdfplot(oseptest{j},scancol{j},'nbs',1e5,'LineWidth',2,'npts',20)
     hold on
-    set(gca,'fontsize',14)
+    set(gca,'FontSize',14)
     pause(.01)
 end
 

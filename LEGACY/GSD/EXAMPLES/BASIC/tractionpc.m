@@ -32,14 +32,14 @@ ampl = 1 ;
 Kmean = mean(Ksto) ;
 fmean = mean(fsto) ;
 u0=Kmean\fmean;
-plot(M+u0*ampl,'edgecolor','r');
+plot(M+u0*ampl,'EdgeColor','r');
 
 
 RVsample = random(RV);
 Ksample = randomeval(Ksto,RVsample);
 fsample = randomeval(fsto,RVsample);
 usample=Ksample\fsample;
-plot(M+usample*ampl,'edgecolor','b');
+plot(M+usample*ampl,'EdgeColor','b');
 
 
 upc = pcg(Ksto,fsto,1e-10);

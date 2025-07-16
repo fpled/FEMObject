@@ -55,7 +55,7 @@ ampl=1e6;
 figure(1)
 q=K\f;
 q=unfreevector(S,q);
-plot(S+ampl*q,'color','r');
+plot(S+ampl*q,'Color','r');
 
 % fun = inline('x(:,1)','x');
 fun = @(x) x(:,1);
@@ -64,7 +64,7 @@ ampl=1e6;
 figure(1)
 q=K\f;
 q=unfreevector(S,q);
-plot(S+ampl*q,'color','b')
+plot(S+ampl*q,'Color','b')
 a=(L*x.^2/2-x.^3/6)/E/I;
 b=q(2:3:end,1);
 fprintf('effort vertical affine affine\n')

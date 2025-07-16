@@ -6,7 +6,7 @@ else
     xplot = calc_midpointelem(elem,node);
 end
 
-color = getcharin('color',varargin,'b');
-fontsize = getcharin('fontsize',varargin,14); 
+color = getcharin('Color',varargin,'b');
+fontsize = getcharin('FontSize',varargin,14); 
 
-plottext(xplot,text,'Color',color,'fontsize',fontsize); 
+plottext(xplot,text,'Color',color,'FontSize',fontsize); 

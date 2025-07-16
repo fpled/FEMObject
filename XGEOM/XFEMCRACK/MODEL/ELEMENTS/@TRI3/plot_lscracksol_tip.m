@@ -20,7 +20,7 @@ varargin=delcharin('ampl',varargin);
 if issigma
     ksigma = getcharin('sigma',varargin);
     varargin = delcharin('sigma',varargin);
-    varargin = setcharin('facecolor',varargin,'flat');
+    varargin = setcharin('FaceColor',varargin,'flat');
 end
 
 qelem=localize(elem,q);
@@ -31,7 +31,7 @@ if issigma
     [B,detJ,DN] = calc_B(elem,xnode,[]);
 end
 
-% plot(elem,node,'facecolor','w')
+% plot(elem,node,'FaceColor','w')
 % checke = 12;
 % keyboard
 
@@ -86,11 +86,11 @@ for e=1:getnbelem(elem)
         if issigma
             se = D*(Be*ue(:));% sigma(mat,eleme,xnodee,[1/3,1/3],uet(:));
             se= double(se(ksigma));se = se(:);
-            varargin = setcharin('facecolor',varargin,'flat');
-            varargin = setcharin('facevertexcdata',varargin,se);
+            varargin = setcharin('FaceColor',varargin,'flat');
+            varargin = setcharin('FaceVertexCData',varargin,se);
         end
         
-        patch('faces',1:3,'vertices',nodecoorde+ampl*ue',varargin{:});
+        patch('Faces',1:3,'Vertices',nodecoorde+ampl*ue',varargin{:});
         
         
         
@@ -180,10 +180,10 @@ for e=1:getnbelem(elem)
                         setemp = D*(Be*ae(:)+Bels*be(:));
                         se(k)=double(setemp(ksigma));
                     end
-                    varargin = setcharin('facevertexcdata',varargin,se);
+                    varargin = setcharin('FaceVertexCData',varargin,se);
                 end
                 
-                patch('faces',subconnec{i},'vertices',nodecoordeplus+ampl*ue{i},varargin{:});
+                patch('Faces',subconnec{i},'Vertices',nodecoordeplus+ampl*ue{i},varargin{:});
                 
             end
             

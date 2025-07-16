@@ -38,7 +38,7 @@ urbox = [cxbox+l/2,cybox+l/2];
 
 figure(1)
 for i=1:nbox
-    plot(DOMAIN(2,dlbox(i,:),urbox(i,:)),'edgecolor','r')
+    plot(DOMAIN(2,dlbox(i,:),urbox(i,:)),'EdgeColor','r')
 end
 %%
 
@@ -76,7 +76,7 @@ end
 
 figure(44)
 clf
-surf(X,Y,double(lss<0),'edgecolor','none')
+surf(X,Y,double(lss<0),'EdgeColor','none')
 clear lst
 
 %%
@@ -85,7 +85,7 @@ A = double(lss<0);
 figure(5)
 clf
 subplot(1,2,1)
-surf(X,Y,A,'edgecolor','none')
+surf(X,Y,A,'EdgeColor','none')
 view(3)
 
 
@@ -106,7 +106,7 @@ fun = @(x) (x>0).*(1-1/2*exp(-coeff*abs(x)))+(x<=0).*(1/2*exp(-coeff*abs(x)));
 Af=fun(lss);
 figure(5)
 subplot(1,2,2)
-surf(X,Y,Af,'edgecolor','none')
+surf(X,Y,Af,'EdgeColor','none')
 view(3)
 
 s=svd(Af);
@@ -126,7 +126,7 @@ figure(5)
 for i=1:nbox
     clf
     plot(S)
-    contourplot(LEVELSET(lss(:,i)),S,'color','r')
+    contourplot(LEVELSET(lss(:,i)),S,'Color','r')
     pause(.5)
 end    
 
@@ -142,7 +142,7 @@ for m=1:10:size(D,1)
     clf
     lssapprox = U(:,1:m)*D(1:m,1:m)*V(:,1:m)'; 
     plot(S)
-    contourplot(LEVELSET(lssapprox(:)),S,'color','r')
+    contourplot(LEVELSET(lssapprox(:)),S,'Color','r')
     title(['m = ' num2str(m) ' , error = ' num2str(err(m))])
     pause
 end
@@ -151,13 +151,13 @@ end
 A = reshape(double(lss(:,1)),size(X));
 figure(5)
 clf
-surf(X,Y,A,'edgecolor','none')
+surf(X,Y,A,'EdgeColor','none')
 coeff = 10;
 fun = @(x) (x>0).*(1-1/2*exp(-coeff*abs(x)))+(x<=0).*(1/2*exp(-coeff*abs(x)));
 %fun = @(x) x;
 figure(5)
 clf
-surf(X,Y,fun(A),'edgecolor','none')
+surf(X,Y,fun(A),'EdgeColor','none')
 
 A=fun(A);
 
@@ -178,8 +178,8 @@ for m=10:30:size(D,1)
     clf
     lssapprox = U(:,1:m)*D(1:m,1:m)*V(:,1:m)'; 
     plot(S)
-%contourplot(LEVELSET(lssapprox(:)),S,'color','r')
-    surf(X,Y,lssapprox,'edgecolor','none')
+%contourplot(LEVELSET(lssapprox(:)),S,'Color','r')
+    surf(X,Y,lssapprox,'EdgeColor','none')
     view(3)
     title(['m = ' num2str(m) ' , error = ' num2str(err(m))])
     pause(0.8)
@@ -206,8 +206,8 @@ for m=1:30:size(D,1)
     clf
     lssapprox = U(:,1:m)*D(1:m,1:m)*V(:,1:m)'; 
     plot(S)
-%contourplot(LEVELSET(lssapprox(:)),S,'color','r')
-    surf(X,Y,lssapprox,'edgecolor','none')
+%contourplot(LEVELSET(lssapprox(:)),S,'Color','r')
+    surf(X,Y,lssapprox,'EdgeColor','none')
     view(2)
     title(['m = ' num2str(m) ' , error = ' num2str(err(m))])
     pause(.5)

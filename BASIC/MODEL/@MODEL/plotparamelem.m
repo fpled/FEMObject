@@ -22,14 +22,14 @@ for p=1:M.nbgroupelem
     end
     
     if isempty(paramelem)
-        optionsplot = setcharin('facecolor',optionsplot,'none');
+        optionsplot = setcharin('FaceColor',optionsplot,'none');
         plot(elem,node,optionsplot{:});
         isalreadyplot = 1;
     else
         isalreadyplot = 0;
         for i=1:length(paramplot)
             if paramcmp(paramelem,paramplot{i})
-                optionsplot = setcharin('facecolor',optionsplot,getfacecolor(i));
+                optionsplot = setcharin('FaceColor',optionsplot,getfacecolor(i));
                 plot(elem,node,optionsplot{:});
                 isalreadyplot = 1;
                 break
@@ -48,7 +48,7 @@ for p=1:M.nbgroupelem
         else
             error('on ne peut pas afficher')
         end
-        optionsplot = setcharin('facecolor',optionsplot,getfacecolor(i));
+        optionsplot = setcharin('FaceColor',optionsplot,getfacecolor(i));
         Htemp = plot(elem,node,optionsplot{:});
         Handles = [Handles,Htemp];
     end

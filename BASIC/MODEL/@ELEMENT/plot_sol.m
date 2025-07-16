@@ -60,8 +60,8 @@ if ischarin('sigma',varargin) || ischarin('epsilon',varargin) || ischarin('energ
     varargin = delcharin('sigma',varargin);
     varargin = delcharin('epsilon',varargin);
     varargin = delcharin('energyint',varargin);
-    varargin = setcharin('facecolor',varargin,'flat');
-    varargin = setcharin('facevertexcdata',varargin,se(:));
+    varargin = setcharin('FaceColor',varargin,'flat');
+    varargin = setcharin('FaceVertexCData',varargin,se(:));
     
     if ischarin('surface',varargin)
         zpos = repmat(se(:)',getnbnode(elem),1);
@@ -69,11 +69,11 @@ if ischarin('sigma',varargin) || ischarin('epsilon',varargin) || ischarin('energ
         varargin = delonlycharin('surface',varargin);
     end
 else
-    if strcmp(getcharin('facecolor',varargin),'none')
-        varargin = setcharin('facecolor',varargin,'interp');
+    if strcmp(getcharin('FaceColor',varargin),'none')
+        varargin = setcharin('FaceColor',varargin,'interp');
     end
-    if (isa(mat,'ELAS_BEAM') || isa(mat,'ELAS_BEAM_ISOT_TRANS')) && strcmp(getcharin('edgecolor',varargin),'none')
-        varargin = setcharin('edgecolor',varargin,'interp');
+    if (isa(mat,'ELAS_BEAM') || isa(mat,'ELAS_BEAM_ISOT_TRANS')) && strcmp(getcharin('EdgeColor',varargin),'none')
+        varargin = setcharin('EdgeColor',varargin,'interp');
     end
     if ischarin('displ',varargin)
         k = getcharin('displ',varargin,1);
@@ -84,10 +84,10 @@ else
     end
     varargin = delcharin('displ',varargin);
     varargin = delcharin('rotation',varargin);
-    varargin = setcharin('facevertexcdata',varargin,u(:,k));
+    varargin = setcharin('FaceVertexCData',varargin,u(:,k));
 end
 
-H = patch('faces',faces,'vertices',vertpos,varargin{:});
+H = patch('Faces',faces,'Vertices',vertpos,varargin{:});
 
 axis image
 

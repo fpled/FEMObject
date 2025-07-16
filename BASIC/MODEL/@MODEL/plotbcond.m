@@ -36,7 +36,7 @@ Handles = [];
 for i=1:length(groupnodeplot)
     nodep = getnode(M.node,groupnodeplot{i});
     marker = getpointstyles(i);
-    markersize = getcharin('markersize',varargin,8);
+    markersize = getcharin('MarkerSize',varargin,8);
     Htemp = plot(nodep,marker,varargin{:});
     Handles = [Handles,Htemp];
 end

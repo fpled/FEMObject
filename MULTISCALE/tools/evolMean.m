@@ -37,7 +37,7 @@ else
     % set(gcf,'Name','Mean of u')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = ut.sz;
 ut = mean(ut);

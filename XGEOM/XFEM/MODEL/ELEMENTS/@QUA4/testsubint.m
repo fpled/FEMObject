@@ -16,11 +16,11 @@ end
 
 
 for k=1:length(elemin)
-    plot(elemin{k},nodeplus,'facecolor','y')
+    plot(elemin{k},nodeplus,'FaceColor','y')
 end
 
 for k=1:length(elemout)
-    plot(elemout{k},nodeplus,'facecolor','g')
+    plot(elemout{k},nodeplus,'FaceColor','g')
     
 end
 

@@ -64,8 +64,8 @@ if nargin<4 || isempty(ampl)
 end
 
 figure(2)
-plot(S,'color','k','facecolor','k','facealpha',0.1)
-plot(S+ampl*q,'color',color,'facecolor',color,'facealpha',0.3)
+plot(S,'Color','k','FaceColor','k','FaceAlpha',0.1)
+plot(S+ampl*q,'Color',color,'FaceColor',color,'FaceAlpha',0.3)
 lighting gouraud
 axis on
 xlabel('x')

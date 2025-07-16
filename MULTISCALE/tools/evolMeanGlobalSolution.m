@@ -37,7 +37,7 @@ else
     % set(gcf,'Name','Mean of U over fictitious domain')
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = Ut.sz;
 Ut = mean(Ut);

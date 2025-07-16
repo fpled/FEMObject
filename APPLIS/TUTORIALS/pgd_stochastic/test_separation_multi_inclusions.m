@@ -218,7 +218,7 @@ figure(3)
 clf
 plot(S)
 for i=1:length(sobref)
-    plot(S,'selgroup',i+1,'color',sobref(i))
+    plot(S,'selgroup',i+1,'Color',sobref(i))
 end
 colormap(cool)
 colorbar

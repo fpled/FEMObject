@@ -85,7 +85,7 @@ parse(p,varargin{:})
 
 figure('Name','Evolution of relative SVD truncation error indicator w.r.t SVD rank')
 % set(gcf,'Name','Evolution of relative SVD truncation error indicator w.r.t SVD rank')
-semilogy(1:numel(err),err,'-+k','linewidth',p.Results.LineWidth);
+semilogy(1:numel(err),err,'-+k','LineWidth',p.Results.LineWidth);
 if p.Results.grid
     grid on
 end

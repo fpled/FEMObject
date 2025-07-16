@@ -80,10 +80,10 @@ color='b';
 Ip = Isorted(1:p,dim);
 figure(1)
 clf
-plot(Ip(:,1),Ip(:,2),'linestyle','none',...
-    'marker','s','markerFaceColor',color,...
-    'markeredgecolor',color,'markersize',16)
-set(gca,'fontsize',14)
+plot(Ip(:,1),Ip(:,2),'LineStyle','none',...
+    'Marker','s','MarkerFaceColor',color,...
+    'MarkerEdgeColor',color,'MarkerSize',16)
+set(gca,'FontSize',14)
 xlim([-0.9,7])
 ylim([-0.9,7])
 grid on

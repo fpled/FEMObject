@@ -43,7 +43,7 @@ else
     % set(gcf,'Name',['Sensitivity index of u for random variables #' num2str(alpha)])
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = ut.sz;
 vut = variance(ut);           

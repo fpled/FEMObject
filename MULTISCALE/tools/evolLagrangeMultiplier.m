@@ -37,7 +37,7 @@ if isa(interfaces,'Interfaces')
         % set(gcf,'Name',['Lagrange mulitplier lambda over interfaces #' num2str([numbers{:}])])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     n = numel(interfaces);
     S = cellfun(@(interface) interface.S,interfaces.interfaces,'UniformOutput',false);
@@ -59,7 +59,7 @@ elseif isa(interfaces,'Interface')
         % set(gcf,'Name',['Lagrange mulitplier lambda over interface #' num2str(interface.number)])
     end
     clf
-    set(gcf,'color','w')
+    set(gcf,'Color','w')
     
     lambdat{interface.number} = setevolparam(lambdat{interface.number},'colormap',p.Results.colormap,'colorbar',p.Results.colorbar,...
         'view',p.Results.view,'camup',p.Results.camup,'campos',p.Results.campos,'FontSize',p.Results.FontSize);

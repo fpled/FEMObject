@@ -20,18 +20,18 @@ Sc = S;
 %% probleme et maillage
 figure(44)
 clf;plot(create_boundary(S));
-h1=plot(S,'selgroup',1,'facecolor','c','edgecolor','none');
-h2=plot(S,'selgroup',2:3,'facecolor','y','edgecolor','none');
-set(gca,'fontsize',16)
+h1=plot(S,'selgroup',1,'FaceColor','c','EdgeColor','none');
+h2=plot(S,'selgroup',2:3,'FaceColor','y','EdgeColor','none');
+set(gca,'FontSize',16)
 legend([h1(1),h2(2)],'\Omega_1','\Omega_2')
 % myprint('canister','domain','jpeg');
 
 
 figure(45)
 clf;plot(S);
-h1=plot(S,'selgroup',1,'facecolor','c','edgecolor','none');
-h2=plot(S,'selgroup',2:3,'facecolor','y','edgecolor','none');
-set(gca,'fontsize',12)
+h1=plot(S,'selgroup',1,'FaceColor','c','EdgeColor','none');
+h2=plot(S,'selgroup',2:3,'FaceColor','y','EdgeColor','none');
+set(gca,'FontSize',12)
 legend([h1(1),h2(1)],'\Omega_1','\Omega_2')
 % myprint('canister','mesh','jpeg');
 
@@ -40,10 +40,10 @@ figure(46)
 clf;plot(create_boundary(keepgroupelem(S,1)));
 plot(create_boundary(keepgroupelem(S,2:3)));
 YY=18;
-text(0,0,'\Gamma_1','fontsize',YY)
-text(0,0,'\Gamma_2','fontsize',YY)
-text(0,0,'\Omega_1','fontsize',YY)
-text(0,0,'\Omega_2','fontsize',YY)
+text(0,0,'\Gamma_1','FontSize',YY)
+text(0,0,'\Gamma_2','FontSize',YY)
+text(0,0,'\Omega_1','FontSize',YY)
+text(0,0,'\Omega_2','FontSize',YY)
 
 % myprint('canister','problem','jpeg');
 ylim([0,1.8])

@@ -270,7 +270,7 @@ xlim([-ddw,max(scanw)+ddw])
 %%
 figure(1);
 clf
-%plot(Sb,'edgealpha',1,'edgecolor','none','facecolor','b','facealpha',1)
+%plot(Sb,'EdgeAlpha',1,'EdgeColor','none','FaceColor','b','FaceAlpha',1)
 scanmode = [1,3:3:24];
 Vr = unfreevector(S,W(1:size(K,1),:));
 Vi = unfreevector(S,W(size(K,1)+1:end,:));
@@ -279,7 +279,7 @@ Vy = Vr(findddl(S,'UY'),:);
 nbm = length(scanmode);
 for k=scanmode
     fullsubplot(ceil(sqrt(nbm)),ceil(nbm/ceil(sqrt(nbm))),find(k==scanmode))
-    text(1,-0.2,['| U_{' num2str(k) '}|' ],'fontsize',14)
+    text(1,-0.2,['| U_{' num2str(k) '}|' ],'FontSize',14)
     scal = 1/max(max(abs(V(:,k))))*max(max(abs(getcoord(getnode(S)))))*0.05;
     plot(FENODEFIELD(sqrt(Vy(:,k).^2+Vx(:,k).^2)),S+scal*V(:,k));
     cx=caxis();
@@ -328,7 +328,7 @@ for kk=1:4
     hold on
 end
 plotenveloppe(scanw,(Y),col,...
-    'linewidth',1,'facealpha',0.5,'edgealpha',1,'edgecolor','k')
+    'LineWidth',1,'FaceAlpha',0.5,'EdgeAlpha',1,'EdgeColor','k')
 
 %%
 figure(50)
@@ -342,7 +342,7 @@ ax2 = axes('Position',get(ax1,'Position'),...
     'Color','none',...
     'XColor','k','YColor','k')
 hold on
-bar(scanw,ajoutfun,'stacked','facecolor','k')
+bar(scanw,ajoutfun,'stacked','FaceColor','k')
 ylim([0,6])
 set(gca,'Ytick',[0:6])
 xlim([-ddw,max(scanw)+ddw])

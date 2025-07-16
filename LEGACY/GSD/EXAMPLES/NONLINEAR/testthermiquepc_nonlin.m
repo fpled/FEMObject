@@ -153,8 +153,8 @@ plotaddedfunctions(resultareuse)
 figure(18)
 clf
 [addedfun,hh]= plotaddedfunctions({resultnoreuse,resultreuse},1.5);
-set(hh(1),'facecolor','b')
-set(hh(2),'facecolor','y')
+set(hh(1),'FaceColor','b')
+set(hh(2),'FaceColor','y')
 legend('No Reuse','Reuse')
 xlabel('Newton iteration')
 saveas(gcf,'E:\REDACTION\matlab_results\thermique_nonlin_addedfun_reuse_noreuse.eps','epsc2')
@@ -184,10 +184,10 @@ G = setparam(G,'type','power');
 
 %%
 figure(10021)
-semilogy(resultng.error,'k^-','linewidth',2,'markersize',10)
+semilogy(resultng.error,'k^-','LineWidth',2,'MarkerSize',10)
 fsize=18;
 xlim([0.5,length(resultng.error)+0.5])
-set(gca,'fontsize',18)
+set(gca,'FontSize',18)
 xlabel('order M')
 ylabel('error')
 saveas(gcf,'E:\REDACTION\matlab_results\thermique_nonlin_PU-GSD_newtonglobal_error.eps','epsc2')
@@ -201,7 +201,7 @@ G = setparam(G,'nbfoncmax',4);
 
 figure(10021)
 hold on
-semilogy(resultng_a.error,'rs-','linewidth',2,'markersize',10)
+semilogy(resultng_a.error,'rs-','LineWidth',2,'MarkerSize',10)
 legend('PU-GSD','AGSD')
 %% Affichage des modes de la solution non-lineaire par GSD : Newton global
 figure(16)
@@ -278,7 +278,7 @@ for k=1:length(scanmode)
     leg = [leg , {['mode ' num2str(i)]}];
 end
 leg = [leg,'mean solution'];
-plot(t,Ymean,'k-','linewidth',2);
+plot(t,Ymean,'k-','LineWidth',2);
 legend(leg{:})
 title('envelep of modes')
 
@@ -295,7 +295,7 @@ for k=1:length(scanmode)
     plotenveloppe(t,Y,fillcolor{kc});
     leg = [leg , {['mode 1 to ' num2str(i)]}];
 end
-plot(t,Ymean,'k-','linewidth',2)
+plot(t,Ymean,'k-','LineWidth',2)
 leg = [leg,'mean solution'];
 legend(leg{:})
 

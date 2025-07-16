@@ -46,7 +46,7 @@ colormap(viridis);
 %% Plot
 
 for ii=1:0.3:20
-    surf(cos(2*pi*ii/20)*X,'linestyle','none');
+    surf(cos(2*pi*ii/20)*X,'LineStyle','none');
     axis off
     axis([0 200 0 200 -10 10])
     set(gca, 'CLim', [-8, 8]);

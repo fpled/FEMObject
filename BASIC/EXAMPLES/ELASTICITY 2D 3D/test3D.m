@@ -55,7 +55,7 @@ for i=1:length(ampl) ;
         else
             clf
         end
-        plot(S+ampl(i)*V(:,m),'facecolor','w')
+        plot(S+ampl(i)*V(:,m),'FaceColor','w')
         camlight left
         lighting gouraud
         axis(axis0)
@@ -77,7 +77,7 @@ q = K\f;
 figure(2)
 clf
 ampl=0.03; 
-plot(S+ampl*q,'facecolor','w')
+plot(S+ampl*q,'FaceColor','w')
 
 s = calc_sigma(S,q,'node');
 
@@ -87,7 +87,7 @@ colorbar
 
 figure(4)
 clf
-plot(S,'facecolor','w')
+plot(S,'FaceColor','w')
 camlight left
 lighting gouraud
 hold on

@@ -43,7 +43,7 @@ else
     % set(gcf,'Name',['Sobol index of U over fictitious domain for random variables #' num2str(alpha)])
 end
 clf
-set(gcf,'color','w')
+set(gcf,'Color','w')
 
 sz = Ut.sz;
 d = ndims(Ut);

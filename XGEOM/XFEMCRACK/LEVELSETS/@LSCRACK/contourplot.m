@@ -24,8 +24,8 @@ for i=1:length(contourval)
                     [elem,node]=contour(elem,D.node,getvalue(getlssupport(c)),contourval(i));
                     Dadd = addelem(Dadd,elem);
                     Dadd = addnode(Dadd,node);
-                    %plot(Dadd,'facecolor','g','facelighting','gouraud','facealpha',.1,'color','k')
-                    %plot(Dadd,'facecolor','none','facelighting','gouraud','facealpha',.1,'color','k')
+                    %plot(Dadd,'FaceColor','g','FaceLighting','gouraud','FaceAlpha',.1,'Color','k')
+                    %plot(Dadd,'FaceColor','none','FaceLighting','gouraud','FaceAlpha',.1,'Color','k')
                     
                     % keyboard
                 case 'bicut'
@@ -37,9 +37,9 @@ for i=1:length(contourval)
                     
                     %figure
                     %clf
-                    %plot(D,'selgroup',3,'facecolor','none','facelighting','gouraud','facealpha',.5,'color','k')
-                    %plot(D,'selgroup',1,'facecolor','r','facelighting','gouraud','facealpha',.5,'color','k')
-                    %plot(D,'selgroup',2,'facecolor','g','facelighting','gouraud','facealpha',.5,'color','k')
+                    %plot(D,'selgroup',3,'FaceColor','none','FaceLighting','gouraud','FaceAlpha',.5,'Color','k')
+                    %plot(D,'selgroup',1,'FaceColor','r','FaceLighting','gouraud','FaceAlpha',.5,'Color','k')
+                    %plot(D,'selgroup',2,'FaceColor','g','FaceLighting','gouraud','FaceAlpha',.5,'Color','k')
                     %keyboard
                     
                     for k=1:length(elemcutin)
@@ -48,14 +48,14 @@ for i=1:length(contourval)
                         Dadd = addnode(Dadd,node);
                     end
                     
-                    %plot(Dadd,'facecolor','none','facelighting','gouraud','facealpha',.5,'color','b')
+                    %plot(Dadd,'FaceColor','none','FaceLighting','gouraud','FaceAlpha',.5,'Color','b')
                     % Dadd = MODEL(getmode(D));
                     %  for k=1:length(elemcutout)
                     % [elem,node]=contour(elemcutout{k},nodeplus,ls1value,contourval(i));
                     % Dadd = addelem(Dadd,elem);
                     % Dadd = addnode(Dadd,node);
                     % end
-                    % plot(Dadd,'facecolor','w','facelighting','gouraud','facealpha',.5,'color','m')
+                    % plot(Dadd,'FaceColor','w','FaceLighting','gouraud','FaceAlpha',.5,'Color','m')
                     
                     %keyboard
                     
@@ -69,13 +69,13 @@ for i=1:length(contourval)
                     
             end
             
-            if length(contourval)==1 | ischarin('color',varargin)
-                col = getcharin('color',varargin,'r');
-                varargin = setcharin('color',varargin,col);
+            if length(contourval)==1 | ischarin('Color',varargin)
+                col = getcharin('Color',varargin,'r');
+                varargin = setcharin('Color',varargin,col);
             else
                 col = contourval(i);
             end
-            plot(Dadd,'color',col,varargin{:});
+            plot(Dadd,'Color',col,varargin{:});
             
         end
     end

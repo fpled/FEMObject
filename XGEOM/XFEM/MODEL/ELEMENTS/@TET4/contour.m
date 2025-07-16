@@ -105,9 +105,9 @@ for i=1:length(repelemcut)
 %ntemp = NODE(nodecontour(end-size(p,1)+1:end,:),nbnodes-size(p,1)+1:nbnodes);
 %elemtemp = TRI3(ntemp,1:size(c,1),elemcontour(end-size(c,1)+1:end,:));
 
-%plot(elemtemp,ntemp,'facecolor','y','facelighting','gouraud','facealpha',.5,'edgecolor','y')
+%plot(elemtemp,ntemp,'FaceColor','y','FaceLighting','gouraud','FaceAlpha',.5,'EdgeColor','y')
 %keyboard
-%plot(elemtemp,ntemp,'facecolor','none','facelighting','gouraud','facealpha',.5,'edgecolor','k')
+%plot(elemtemp,ntemp,'FaceColor','none','FaceLighting','gouraud','FaceAlpha',.5,'EdgeColor','k')
 
 end
 

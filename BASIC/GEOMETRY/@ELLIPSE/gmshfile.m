@@ -1,6 +1,6 @@
-function varargout = gmshfile(C,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface,varargin)
-% function G = gmshfile(C,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface)
-% C : ELLIPSE
+function varargout = gmshfile(E,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface,varargin)
+% function G = gmshfile(E,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface)
+% E : ELLIPSE
 % cl : characteristic length
 
 if nargin<=2
@@ -14,8 +14,8 @@ elseif nargin==6
 end
 
 G = GMSHFILE();
-P = getvertices(C);
-G = createpoint(G,[C.cx,C.cy],cl,numbercenter);
+P = getvertices(E);
+G = createpoint(G,[E.cx,E.cy,E.cz],cl,numbercenter);
 G = createpoints(G,P,cl,numberpoints);
 G = createellipsecontour(G,numbercenter,numberpoints,numberlines,numberlineloop);
 if ~isempty(numbersurface)

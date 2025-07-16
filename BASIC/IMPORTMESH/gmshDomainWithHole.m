@@ -56,14 +56,31 @@ for j=1:length(H)
 end
 G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
+if getdim(D)==3
+    P = getvertices(D);
+    vect = P{5}-P{1};
+    G = extrude(G,vect,'Surface',1,varargin{:});
+end
 if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
+    if getdim(D)==2
+        G = recombinesurface(G,1);
+    elseif getdim(D)==3
+        G = recombinesurface(G);
+    end
 end
 if ~isempty(numberembeddedpoints)
-    G = embedpointsinsurface(G,numberembeddedpoints,1);
+    if getdim(D)==2
+        G = embedpointsinsurface(G,numberembeddedpoints,1);
+    elseif getdim(D)==3
+        G = embedpointsinvolume(G,numberembeddedpoints,1);
+    end
 end
 if ~isempty(numberembeddedlines)
-    G = embedcurvesinsurface(G,numberembeddedlines,1);
+    if getdim(D)==2
+        G = embedcurvesinsurface(G,numberembeddedlines,1);
+    elseif getdim(D)==3
+        G = embedcurvesinvolume(G,numberembeddedlines,1);
+    end
     if ~noduplicate
         physicalgroup = 1;
         G = createphysicalpoint(G,numberpointsinembeddedlines,1);
@@ -71,6 +88,9 @@ if ~isempty(numberembeddedlines)
     end
 end
 G = createphysicalsurface(G,1,1);
+if getdim(D)==3
+    G = createphysicalvolume(G,1,1);
+end
 varargin = delonlycharin('recombine',varargin);
 
 % Box field

@@ -1,5 +1,5 @@
-function varargout = gmshDomainWithTwoAsymmetricEdgeCracks(D,Ca,Cb,clD,clC,filename,indim,varargin)
-% function varargout = gmshDomainWithTwoAsymmetricEdgeCracks(D,Ca,Cb,clD,clC,filename,indim)
+function varargout = gmshDomainWithDoubleEdgeCrack(D,Ca,Cb,clD,clC,filename,indim,varargin)
+% function varargout = gmshDomainWithDoubleEdgeCrack(D,Ca,Cb,clD,clC,filename,indim)
 % D : DOMAIN
 % Ca, Cb : LIGNE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths

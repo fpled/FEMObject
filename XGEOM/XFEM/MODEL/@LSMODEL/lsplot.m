@@ -76,7 +76,7 @@ leglstypes={};
 Handles = [];
 for i=1:length(Splot)
     if getnbelem(Splot{i})>0
-        varargin = setcharin('facecolor',varargin,lstypescolor{i});
+        varargin = setcharin('FaceColor',varargin,lstypescolor{i});
         Htemp = plot(Splot{i},varargin{:});
         if length(Htemp)>0
             leglstypes = [leglstypes,{lstypes{i}}];

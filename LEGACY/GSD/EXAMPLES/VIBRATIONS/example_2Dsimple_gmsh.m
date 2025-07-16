@@ -33,9 +33,9 @@ figure(1)
 clf
 plot(S);
 
-h1 = plotfacets(S,facesdirichlet,'facecolor','r','edgecolor','none','facealpha',1);
-h2 = plotfacets(S,facesefforts,'facecolor','y','edgecolor','none','facealpha',1);
-h3 = plotridges(S,numridges,'markersize',20);
+h1 = plotfacets(S,facesdirichlet,'FaceColor','r','EdgeColor','none','FaceAlpha',1);
+h2 = plotfacets(S,facesefforts,'FaceColor','y','EdgeColor','none','FaceAlpha',1);
+h3 = plotridges(S,numridges,'MarkerSize',20);
 legend([h1,h2,h3],'Dirichlet','Neumann','Output')
 
 %% calcul vibrations

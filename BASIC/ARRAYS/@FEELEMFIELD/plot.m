@@ -62,24 +62,24 @@ for p=listegroup
                 else
                     value = reshape(mean(u.value{p}(rep,:,numlocal,:),4),[getnbelem(elem),1]);
                 end
-                options = setcharin('facecolor',options,'flat');
+                options = setcharin('FaceColor',options,'flat');
                 
                 if issurf && M.dim==2
-                    Helem(p) = surface(elem,M.node,'facevertexcdata',double(value),options{:});
+                    Helem(p) = surface(elem,M.node,'FaceVertexCData',double(value),options{:});
                 else
-                    Helem(p) = plot(elem,M.node,'facevertexcdata',double(value),options{:});
+                    Helem(p) = plot(elem,M.node,'FaceVertexCData',double(value),options{:});
                 end
             case {'node'}
                 value = reshape(u.value{p}(rep,:,:),[M.nbnode,1]);
-                options = setcharin('facecolor',options,'interp');
+                options = setcharin('FaceColor',options,'interp');
                 
                 if issurf && M.dim==2
-                    Helem(p) = surface(elem,M.node,'facevertexcdata',double(value),options{:});
+                    Helem(p) = surface(elem,M.node,'FaceVertexCData',double(value),options{:});
                     if isempty(numview)
                         view(3)
                     end
                 else
-                    Helem(p) = plot(elem,M.node,'facevertexcdata',double(value),options{:});
+                    Helem(p) = plot(elem,M.node,'FaceVertexCData',double(value),options{:});
                 end
         end
     end

@@ -31,7 +31,7 @@ concut = sign(con(rep,:));
 elemin = find(sum(sign(con)==-1 | sign(con)==0,2)==4);
 
 if any(elemin) & displayelemtype
-patch('Vertices',xnode,'Faces',connec(elemin,:),'Facecolor','w')
+patch('Faces',connec(elemin,:),'Vertices',xnode,'FaceColor','w')
 end
 
 % GESTION DES ELEMENTS DE TYPE I
@@ -60,7 +60,7 @@ coseg1 = [[1:length(elem1)]',[length(elem1)+1:2*length(elem1)]'];
 nbnode=size(node1,1);
 
 if any(elem1) & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','b')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','b')
 
 end
 % GESTION DES ELEMENTS DE TYPE II
@@ -83,7 +83,7 @@ xi1 = con(repseg11)./(con(repseg11)-con(repseg12));
 xi1=repmat(xi1,1,dim);
 P2 = (1-xi1).*xnode(connec(repseg11),:)+xi1.*xnode(connec(repseg12),:);
 if any(elem1)  & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','g')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','g')
 
 
 end
@@ -110,7 +110,7 @@ coseg1 = [coseg1;...
 nbnode=size(node1,1);
 
 if any(elem1)  & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','y')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','y')
 
 
 end
@@ -133,7 +133,7 @@ nbnode=size(node1,1);
 
 
 if any(elem1)  & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','m')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','m')
 
 end
 % GESTION DES ELEMENTS DE TYPE V
@@ -165,7 +165,7 @@ nbnode=size(node1,1);
 
 
 if any(elem1)  & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','r')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','r')
 
 
 end
@@ -183,7 +183,7 @@ nbnode=size(node1,1);
 end    
 
 if any(elem1)  & displayelemtype
-patch('Vertices',xnode,'Faces',connec(rep(elem1),:),'Facecolor','w')
+patch('Faces',connec(rep(elem1),:),'Vertices',xnode,'FaceColor','w')
 end
 
 node1=NODE(node1,1:size(node1,1));

@@ -60,15 +60,15 @@ beta = @(w) 0.001;
 %% affichage modele
 figure(1)
 clf
-plotfacets(S,'edgecolor','none','facecolor','b','facealpha',1,'legend',false)
+plotfacets(S,'EdgeColor','none','FaceColor','b','FaceAlpha',1,'legend',false)
 light('Position',[3 0 3])
 
 figure(2)
 clf
-plotridges(S,'edgecolor','k','facecolor','k','edgealpha',1,'facealpha',1,'legend',false)
-h1 = plotfacets(S,facesdirichlet,'edgecolor','none','facecolor','r','facealpha',1);
-h2 = plotfacets(S,facesefforts,'edgecolor','none','facecolor','y','facealpha',1);
-h3 = plotpeaks(S,numpeaks,'markersize',20);
+plotridges(S,'EdgeColor','k','FaceColor','k','EdgeAlpha',1,'FaceAlpha',1,'legend',false)
+h1 = plotfacets(S,facesdirichlet,'EdgeColor','none','FaceColor','r','FaceAlpha',1);
+h2 = plotfacets(S,facesefforts,'EdgeColor','none','FaceColor','y','FaceAlpha',1);
+h3 = plotpeaks(S,numpeaks,'MarkerSize',20);
 legend([h1(1),h2(2),h3(1)],'Dirichlet','Neumann','Output')
 
 %% calcul vibrations sans amort
