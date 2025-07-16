@@ -41,18 +41,20 @@ if ~isempty(numbersurface)
         vect = PD{5}-PD{1};
         G = extrude(G,vect,'Surface',numbersurface,varargin{:});
     end
+end
+G = createpoints(G,P,clP,numberembeddedpoints);
+if ~isempty(numbersurface)
+    if getdim(D)==2
+        G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
+    elseif getdim(D)==3
+        G = embedpointsinvolume(G,numberembeddedpoints,numbersurface);
+    end
     if ischarin('recombine',varargin)
         if getdim(D)==2
             G = recombinesurface(G,numbersurface);
         elseif getdim(D)==3
             G = recombinesurface(G);
         end
-    end
-    G = createpoints(G,P,clP,numberembeddedpoints);
-    if getdim(D)==2
-        G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
-    elseif getdim(D)==3
-        G = embedpointsinvolume(G,numberembeddedpoints,numbersurface);
     end
 end
 

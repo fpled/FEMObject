@@ -25,9 +25,9 @@ elseif nargin==9
 end
 
 G = GMSHFILE();
-P = getvertices(E);
+PE = getvertices(E);
 G = createpoint(G,[E.cx,E.cy,E.cz],clE,numbercenter);
-G = createpoints(G,PC,clE,numberpoints);
+G = createpoints(G,PE,clE,numberpoints);
 G = createellipsecontour(G,numbercenter,numberpoints,numberlines,numberlineloop);
 if ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);

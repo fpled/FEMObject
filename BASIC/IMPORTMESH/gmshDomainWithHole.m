@@ -61,13 +61,6 @@ if getdim(D)==3
     vect = P{5}-P{1};
     G = extrude(G,vect,'Surface',1,varargin{:});
 end
-if ischarin('recombine',varargin)
-    if getdim(D)==2
-        G = recombinesurface(G,1);
-    elseif getdim(D)==3
-        G = recombinesurface(G);
-    end
-end
 if ~isempty(numberembeddedpoints)
     if getdim(D)==2
         G = embedpointsinsurface(G,numberembeddedpoints,1);
@@ -85,6 +78,13 @@ if ~isempty(numberembeddedlines)
         physicalgroup = 1;
         G = createphysicalpoint(G,numberpointsinembeddedlines,1);
         G = createphysicalcurve(G,numberembeddedlines,physicalgroup);
+    end
+end
+if ischarin('recombine',varargin)
+    if getdim(D)==2
+        G = recombinesurface(G,1);
+    elseif getdim(D)==3
+        G = recombinesurface(G);
     end
 end
 G = createphysicalsurface(G,1,1);

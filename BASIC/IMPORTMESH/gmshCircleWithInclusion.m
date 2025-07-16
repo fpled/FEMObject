@@ -52,14 +52,14 @@ for j=1:length(I)
 end
 G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
-if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
-end
 if ~isempty(numberembeddedpoints)
     G = embedpointsinsurface(G,numberembeddedpoints,1);
 end
 if ~isempty(numberembeddedlines)
     G = embedcurvesinsurface(G,numberembeddedlines,1);
+end
+if ischarin('recombine',varargin)
+    G = recombinesurface(G,1);
 end
 G = createphysicalsurface(G,1,1);
 varargin = delonlycharin('recombine',varargin);

@@ -25,7 +25,7 @@ numpoints = 1:5;
 numlines = 1:5;
 % numlineloop = 1:4;
 for j=1:length(I)
-%     numlineloop = [numlineloop,-numlines(1:end-1)];
+    % numlineloop = [numlineloop,-numlines(1:end-1)];
     if isa(I{j},'DOMAIN') || isa(I{j},'QUADRANGLE')
         GI = gmshfile(I{j},cl(j),numpoints(1:end-1),numlines(1:end-1),numlines(end),j+1,varargin{:});
     elseif isa(I{j},'CIRCLE') || isa(I{j},'ELLIPSE')

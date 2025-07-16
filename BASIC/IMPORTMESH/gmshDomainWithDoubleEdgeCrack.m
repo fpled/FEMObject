@@ -34,15 +34,15 @@ if indim==2
     G = createpoints(G,PD,clD,[3:4,6:7]);
     G = createcontour(G,2:7,2:7,1);
     G = createplanesurface(G,1,1);
-    if ischarin('recombine',varargin)
-        G = recombinesurface(G,1);
-    end
     G = embedcurvesinsurface(G,[1,8],1);
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
         G = createphysicalpoint(G,[2,5],openboundaryphysicalgroup);
         G = createphysicalcurve(G,[1,8],physicalgroup);
+    end
+    if ischarin('recombine',varargin)
+        G = recombinesurface(G,1);
     end
     G = createphysicalsurface(G,1,1);
     

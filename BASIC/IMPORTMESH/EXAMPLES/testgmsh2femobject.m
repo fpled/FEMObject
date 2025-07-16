@@ -2,13 +2,16 @@
 D = DOMAIN(2);
 P1 = POINT([0.3,0.5]);
 P2 = POINT([0.1,0.5]);
+
 r1 = 0.3;
 r2 = 0.5;
 C1 = CIRCLE(0.5,0.5,r1);
 C2 = CIRCLE(0.5,0.5,r2);
+
 L1 = LIGNE([0.0,0.5],P1);
 L2 = LIGNE([0.2,0.3],[0.6,0.7]);
 L3 = LIGNE([0.7,0.2],[0.9,0.1]);
+
 a = 0.5;
 b = 0.2;
 E = ELLIPSE(0.5,0.5,a,b);
@@ -544,20 +547,25 @@ plotparamelem(Sq,'group')
 
 %% Dimension 3
 D = DOMAIN(3);
+P1 = POINT([0.3,0.5,0.75]);
+P2 = POINT([0.3,0.5,0.05]);
+
 r = 0.3;
 C = CIRCLE(0.5,0.5,0.0,r);
 S = SPHERE(C);
 % S = SPHERE(0.5,0.5,0.0,r);
-h = 0.5;
+
+h = 1.0;
 CY = CYLINDER(C,h);
 % CY = CYLINDER(0.5,0.5,0.0,r,h);
+
 a = 0.5;
 b = 0.2;
 c = 0.1;
 E = ELLIPSE(0.5,0.5,0.0,a,b);
 EL = ELLIPSOID(E,c);
-EL1 = ELLIPSOID(E,c);
-P = POINT([0.3,0.5,0.75]);
+% EL = ELLIPSOID(0.5,0.5,0.0,a,b,c);
+
 a = 0.3; % crack length
 b = 0.5; % height of crack surface
 e = 1; % thickness
@@ -584,8 +592,8 @@ plotparamelem(St,'group')
 
 %% Domain with point
 fprintf('\n3D Domain with point\n');
-St = gmsh(D,P,0.1,0.02,'filename','gmsh_domain_with_point_tet');
-% Sq = gmsh(D,P,0.1,0.02,'filename','gmsh_domain_with_point_cub','recombine');
+St = gmsh(D,P1,0.1,0.02,'filename','gmsh_domain_with_point_tet');
+% Sq = gmsh(D,P1,0.1,0.02,'filename','gmsh_domain_with_point_cub','recombine');
 
 figure('Name','Domain with point')
 clf
@@ -607,13 +615,65 @@ plotparamelem(St,'group')
 % subplot(1,2,2)
 % plotparamelem(Sq,'group')
 
-%% Domain
+%% Sphere with point
+fprintf('\n3D Sphere with point\n');
+fprintf('\n');
+St = gmsh(S,P2,0.1,0.02,'filename','gmsh_sphere_with_point_tet');
+% Sq = gmsh(S,P2,0.1,0.02,'filename','gmsh_sphere_with_point_cub','recombine');
+
+figure('Name','Sphere with point')
+clf
+% subplot(1,2,1)
+plotparamelem(St,'group')
+% subplot(1,2,2)
+% plotparamelem(Sq,'group')
+
+%% Cylinder
 fprintf('\n3D Cylinder\n');
 fprintf('\n');
 St = gmsh(CY,0.1,'filename','gmsh_cylinder_tet');
 % Sq = gmsh(CY,0.1,'filename','gmsh_cylinder_cub','recombine');
 
 figure('Name','Cylinder')
+clf
+% subplot(1,2,1)
+plotparamelem(St,'group')
+% subplot(1,2,2)
+% plotparamelem(Sq,'group')
+
+%% Cylinder with point
+fprintf('\n3D Cylinder with point\n');
+fprintf('\n');
+St = gmsh(CY,P1,0.1,0.02,'filename','gmsh_cylinder_with_point_tet');
+% Sq = gmsh(CY,P1,0.1,0.02,'filename','gmsh_cylinder_with_point_cub','recombine');
+
+figure('Name','Cylinder with point')
+clf
+% subplot(1,2,1)
+plotparamelem(St,'group')
+% subplot(1,2,2)
+% plotparamelem(Sq,'group')
+
+%% Ellipsoid
+fprintf('\n3D Ellipsoid\n');
+fprintf('\n');
+St = gmsh(EL,0.1,'filename','gmsh_ellipsoid_tet');
+% Sq = gmsh(EL,0.1,'filename','gmsh_ellipsoid_cub','recombine');
+
+figure('Name','Ellipsoid')
+clf
+% subplot(1,2,1)
+plotparamelem(St,'group')
+% subplot(1,2,2)
+% plotparamelem(Sq,'group')
+
+%% Ellipsoid with point
+fprintf('\n3D Ellipsoid with point\n');
+fprintf('\n');
+St = gmsh(EL,P2,0.1,0.02,'filename','gmsh_ellipsoid_with_point_tet');
+% Sq = gmsh(EL,P2,0.1,0.02,'filename','gmsh_ellipsoid_with_point_cub','recombine');
+
+figure('Name','Ellipsoid with point')
 clf
 % subplot(1,2,1)
 plotparamelem(St,'group')

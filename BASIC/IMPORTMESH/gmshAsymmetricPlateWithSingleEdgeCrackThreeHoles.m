@@ -66,10 +66,10 @@ for j=1:length(H)
 end
 G = createcurveloop(G,numlineloop,numlines(end));
 G = createplanesurface(G,numlines(end),1);
+G = embedcurveinsurface(G,1,1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);
 end
-G = embedcurveinsurface(G,1,1);
 if ~noduplicate
     openboundaryphysicalgroup = 1;
     physicalgroup = 1;

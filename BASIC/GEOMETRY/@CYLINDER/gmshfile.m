@@ -16,12 +16,15 @@ end
 G = GMSHFILE();
 P = getvertices(C);
 G = createpoint(G,[C.cx,C.cy,C.cz],cl,numbercenter);
-G = createpoints(G,P,cl,numberpoints);
+G = createpoints(G,P(1:4),cl,numberpoints);
 G = createcirclecontour(G,numbercenter,numberpoints,numberlines,numberlineloop,varargin{:});
 if ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);
+    n = [C.nx,C.ny,C.nz];
+    vect = C.h*n;
+    G = extrude(G,vect,'Surface',numbersurface,varargin{:});
     if ischarin('recombine',varargin)
-        G = recombinesurface(G,numbersurface);
+        G = recombinesurface(G);
     end
 end
 

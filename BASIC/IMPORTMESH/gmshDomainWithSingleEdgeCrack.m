@@ -29,10 +29,10 @@ if indim==2
     G = createpoints(G,PD,clD,3:6);
     G = createcontour(G,2:6,2:6,1);
     G = createplanesurface(G,1,1);
+    G = embedcurveinsurface(G,1,1);
     if ischarin('recombine',varargin)
         G = recombinesurface(G,1);
     end
-    G = embedcurveinsurface(G,1,1);
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;

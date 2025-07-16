@@ -48,7 +48,11 @@ if indim==3
     G = extrude(G,vect,'Surface',1,varargin{:});
 end
 if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
+    if indim==2
+        G = recombinesurface(G,1);
+    elseif indim==3
+        G = recombinesurface(G);
+    end
 end
 
 varargin = delonlycharin('recombine',varargin);
