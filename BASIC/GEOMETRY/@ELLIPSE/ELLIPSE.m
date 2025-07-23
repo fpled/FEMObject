@@ -1,5 +1,7 @@
 function u = ELLIPSE(varargin)
-% function E = ELLIPSE(C,a,b)
+% function E = ELLIPSE(C)
+% function E = ELLIPSE(E)
+% function E = ELLIPSE(E,a,b)
 % function E = ELLIPSE(cx,cy,a,b)
 % function E = ELLIPSE(cx,cy,a,b,vx,vy)
 % function E = ELLIPSE(cx,cy,cz,a,b)
@@ -12,20 +14,18 @@ if nargin==0
 elseif nargin==1
     if isa(varargin{1},'ELLIPSE')
         u = varargin{1};
-    end
-elseif nargin==2
-    if isa(varargin{1},'CIRCLE')
+    elseif isa(varargin{1},'CIRCLE')
         C = varargin{1};
         c = getc(C);
         n = getn(C);
         v = getv(C);
-        % r = getr(C);
+        r = getr(C);
         u.dim = getdim(C);
         u.cx = c(1);
         u.cy = c(2);
         u.cz = c(3);
-        u.a  = varargin{2};
-        u.b  = varargin{3};
+        u.a  = r;
+        u.b  = r;
         u.nx = n(1);
         u.ny = n(2);
         u.nz = n(3);
@@ -33,7 +33,13 @@ elseif nargin==2
         u.vy = v(2);
         u.indim = getindim(C);
         
-        u = class(u,'CYLINDER',GEOMOBJECT(u.dim,u.indim));
+        u = class(u,'ELLIPSE',GEOMOBJECT(u.dim,u.indim));
+    end
+elseif nargin==3
+    if isa(varargin{1},'ELLIPSE')
+        u = varargin{1};
+        u.a = varargin{2};
+        u.b = varargin{3};
     end
 elseif nargin==4
     u.dim = 2;

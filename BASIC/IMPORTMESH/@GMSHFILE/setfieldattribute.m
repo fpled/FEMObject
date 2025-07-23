@@ -6,5 +6,16 @@ if nargin<4 || isempty(number)
 end
 
 u = stepcounter(u);
-s = ['Field[' num2str(number) '].' name ' = ' num2str(value) ' ;\n'];
+
+if ischar(value) || (isstring(value) && isscalar(value))
+    valstr = ['"' char(value) '"'];
+elseif isnumeric(value) && numel(value)>1
+    valstr = valuesintobraces(value);
+elseif isnumeric(value) && isscalar(value)
+    valstr = num2str(value);
+else
+    error('Unsupported value type for setfieldattribute.');
+end
+
+s = ['Field[' num2str(number) '].' name ' = ' valstr ' ;\n'];
 u = addstring(u,s);

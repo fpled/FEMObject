@@ -7,7 +7,7 @@ switch getdim(D)
         seg = [1,2;2,3;3,4;4,1];
         L = cell(1,4);
         for i=1:4
-            L{i} = LIGNE(P{seg(i,1)},P{seg(i,2)});
+            L{i} = LINE(P{seg(i,1)},P{seg(i,2)});
         end
         if nargout==2
             N{1} = [0;-1];
@@ -21,7 +21,7 @@ switch getdim(D)
         seg = [seg;[1,5;2,6;3,7;4,8]];
         L = cell(1,12);
         for i=1:12
-            L{i} = LIGNE(P{seg(i,1)},P{seg(i,2)});
+            L{i} = LINE(P{seg(i,1)},P{seg(i,2)});
         end
         if nargout==2
             error('normale pas definie sur les edges')

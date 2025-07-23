@@ -2,8 +2,8 @@ function varargout = plot(E,varargin)
 % function varargout = plot(E,varargin)
 
 npts = getcharin('npts',varargin,200); % angular resolution
-t = linspace(0,2*pi,npts+1)';          % angle
-t(end) = [];                           % avoid duplicate point
+t = linspace(0,2*pi,npts+1)'; % parametric angle
+t(end) = []; % remove duplicate
 
 % Semi-axes
 a = E.a;
@@ -36,7 +36,7 @@ N = [1 0 0;
 %      1  1  0;
 %      0  1  1;
 %      1  0  1 ];
-N = N ./ vecnorm(N,2,2);  % normalize each plane normal
+N = N ./ vecnorm(N,2,2); % normalize each plane normal
 
 % Connectivity for a closed loop
 connec = [1:npts,1];
@@ -46,18 +46,19 @@ options = patchoptions(E.indim, varargin{:});
 holdState = ishold;
 hold on
 
-H = gobjects(size(N,1),1);
+% Rings
+H.rings = gobjects(size(N,1),1);
 for i = 1:size(N,1)
     ni = N(i,:);
 
-    % Pick arbitrary vector not parallel to ni
+    % Arbitrary vector not parallel to ni
     if abs(ni(1))<0.9
         vec = [1 0 0];
     else
         vec = [0 1 0];
     end
     
-    % Build local orthonormal basis (ui, wi) in plane orthogonal to ni
+    % Local orthonormal basis (ui, wi) in plane orthogonal to ni
     ui = cross(vec, ni);
     ui = ui / norm(ui);
     wi = cross(ni, ui);
@@ -65,7 +66,7 @@ for i = 1:size(N,1)
     % Parametric directions in local plane
     D = cos(t)*ui + sin(t)*wi;
     
-    % Scale each D(k,:) so (x/a)^2+(y/b)^2+(z/c)^2 == 1
+    % Project onto the ellipsoid surface
     S = 1./sqrt( (D(:,1)/a).^2 + (D(:,2)/b).^2 + (D(:,3)/c).^2 );
     nodecoord = D .* S;
 
@@ -73,7 +74,23 @@ for i = 1:size(N,1)
     nodecoord = nodecoord * R + ct;
     
     % draw closed ring
-    H(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
+    H.rings(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
+end
+
+% Main diameters (radial lines)
+diam_pts = [ a  0  0;
+            -a  0  0;
+             0  b  0;
+             0 -b  0;
+             0  0  c;
+             0  0 -c];
+
+% Rotate and translate endpoints
+H.diameters = gobjects(3,1);
+for i = 1:3
+    p1 = diam_pts(2*i-1,:) * R + ct; % +axis
+    p2 = diam_pts(2*i,:)   * R + ct; % -axis
+    H.diameters(i) = patch('Faces',[1 2],'Vertices',[p1; p2],options{:},'LineStyle',':');
 end
 
 if ~holdState

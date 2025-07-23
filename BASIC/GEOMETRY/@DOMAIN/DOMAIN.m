@@ -21,9 +21,9 @@ elseif nargin==3
     u.diameter = distance(u.P1,u.P2);
     if ~(u.indim==u.dim)
         if u.dim==1
-            error('utiliser LIGNE')
+            error('Use LINE')
         elseif u.dim==2
-            error('utiliser QUADRANGLE')
+            error('Use QUADRANGLE')
         end
     end
     u = class(u,'DOMAIN',GEOMOBJECT(u.dim,u.indim));

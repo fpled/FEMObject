@@ -1,7 +1,6 @@
 function u = ELLIPSOID(varargin)
 % function E = ELLIPSOID(E)
 % function E = ELLIPSOID(E,c)
-% function E = ELLIPSOID(E,a,b,c)
 % function E = ELLIPSOID(cx,cy,cz,a,b,c)
 % function E = ELLIPSOID(cx,cy,cz,a,b,c,vx,vy)
 % function E = ELLIPSOID(cx,cy,cz,a,b,c,nx,ny,nz)
@@ -28,30 +27,6 @@ elseif nargin==2
         u.a  = a;
         u.b  = b;
         u.c  = varargin{2};
-        u.nx = n(1);
-        u.ny = n(2);
-        u.nz = n(3);
-        u.vx = v(1);
-        u.vy = v(2);
-        u.indim = 3;
-        
-        u = class(u,'ELLIPSOID',GEOMOBJECT(u.dim,u.indim));
-    end
-elseif nargin==4
-    if isa(varargin{1},'ELLIPSE')
-        E = varargin{1};
-        c = getc(E);
-        n = getn(E);
-        v = getv(E);
-        % a = geta(E);
-        % b = getb(E);
-        u.dim = 3;
-        u.cx = c(1);
-        u.cy = c(2);
-        u.cz = c(3);
-        u.a  = varargin{2};
-        u.b  = varargin{3};
-        u.c  = varargin{4};
         u.nx = n(1);
         u.ny = n(2);
         u.nz = n(3);

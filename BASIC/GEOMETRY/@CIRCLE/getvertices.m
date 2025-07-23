@@ -8,10 +8,10 @@ P = cell(1,4);
 switch C.indim
     case 2
         % Vertices
-        P{1} = [-r,  0];
-        P{2} = [ 0, -r];
-        P{3} = [ r,  0];
-        P{4} = [ 0,  r];
+        P{1} = [ r,  0]; % +x
+        P{2} = [ 0,  r]; % +y
+        P{3} = [-r,  0]; % -x
+        P{4} = [ 0, -r]; % -y
         
         % Rotate in-plane around z = [0, 0, 1] by angle of rotation theta =
         % atan2(vy, vx) using tangent vector v = [vx, vy]
@@ -23,10 +23,10 @@ switch C.indim
         
     case 3
         % Vertices
-        P{1} = [-r,  0, 0];
-        P{2} = [ 0, -r, 0];
-        P{3} = [ r,  0, 0];
-        P{4} = [ 0,  r, 0];
+        P{1} = [ r,  0, 0]; % +x
+        P{2} = [ 0,  r, 0]; % +y
+        P{3} = [-r,  0, 0]; % -x
+        P{4} = [ 0, -r, 0]; % -y
         
         %% Old version
         % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =

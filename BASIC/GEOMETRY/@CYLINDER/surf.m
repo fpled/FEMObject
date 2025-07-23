@@ -1,14 +1,25 @@
 function varargout = surf(C,varargin)
 % function varargout = surf(C,varargin)
 
-npts = getcharin('npts',varargin,200); % angular resolution
-
+% Radius, height and opening angle
 r = C.r;
 h = C.h;
+angle = C.angle;
+
+% Angular resolution: 200 points for full circle (angle = 2*pi), scale for partial arc
+npts = getcharin('npts',varargin,max(2,round(200*angle/(2*pi))));
 
 % Build parametric cylinder
-[X,Y,Z] = cylinder(r,npts);
-Z = Z * h;
+if angle==2*pi
+    [X,Y,Z] = cylinder(r,npts);
+    Z = Z * h;
+else
+    t = linspace(0,angle,npts+1)';  % parametric angle
+    z = [0, h];
+    [T,Z] = meshgrid(t,z);
+    X = r * cos(T);
+    Y = r * sin(T);
+end
 
 % Flatten into vertex list
 nodecoord = [X(:), Y(:), Z(:)];

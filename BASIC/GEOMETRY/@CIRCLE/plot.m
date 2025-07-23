@@ -2,8 +2,8 @@ function varargout = plot(C,varargin)
 % function varargout = plot(C,varargin)
 
 npts = getcharin('npts',varargin,200); % angular resolution
-t = linspace(0,2*pi,npts+1)';          % angle
-t(end) = [];                           % avoid duplicate point
+t = linspace(0,2*pi,npts+1)'; % parametric angle
+t(end) = []; % remove duplicate
 
 % Radius
 r = C.r;

@@ -1,6 +1,6 @@
 function [M,nb]=cast2matlab_model(mode,file,mat)
 % function [M,nb]=cast2matlab_model(mode,file,mat)
-% MODE : 'UNID', 'PLAN' , 'TRID'
+% MODE : 'UNID', 'PLANE', 'TRID'
 
 fid = fopen(file);
 if fid==-1

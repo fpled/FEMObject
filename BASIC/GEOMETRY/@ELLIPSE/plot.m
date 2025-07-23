@@ -2,8 +2,8 @@ function varargout = plot(E,varargin)
 % function varargout = plot(E,varargin)
 
 npts = getcharin('npts',varargin,200); % angular resolution
-t = linspace(0,2*pi,npts+1)';          % angle
-t(end) = [];                           % avoid duplicate point
+t = linspace(0,2*pi,npts+1)'; % parametric angle
+t(end) = []; % remove duplicate
 
 % Semi-axes
 a = E.a;

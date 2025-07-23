@@ -57,7 +57,7 @@ nb.repelemingroup=repelemingroup;
 switch mode
 case 'UNID'
     node = NODE(node(:,2),node(:,1));
-case 'PLAN'
+case 'PLANE'
     node = NODE(node(:,2:3),node(:,1));        
 case 'TRID'
     node = NODE(node(:,2:4),node(:,1));

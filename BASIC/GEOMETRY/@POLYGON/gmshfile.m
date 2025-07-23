@@ -3,20 +3,16 @@ function varargout = gmshfile(D,cl,numberpoints,numberlines,numberlineloop,numbe
 % D : POLYGON
 % cl : characteristic length
 
-if nargin<=2
-    n = numel(D.P);
-    numberpoints = 1:n;
-    numberlines = 1:n;
-    numberlineloop = n+1;
-    numbersurface = 1;
-elseif nargin==5
-    numbersurface = [];
-end
+n = numel(D.P);
+if nargin<=2 || isempty(numberpoints), numberpoints = 1:n; end
+if nargin<=3 || isempty(numberlines), numberlines = 1:n; end
+if nargin<=4 || isempty(numberlineloop), numberlineloop = 1; numbersurface = 1; end
+if nargin==5, numbersurface = []; end
 
 G = GMSHFILE();
 P = getvertices(D);
-G = createpoints(G,P(1:n),cl,numberpoints);
-G = createcontour(G,numberpoints(1:n),numberlines,numberlineloop);
+G = createpoints(G,P,cl,numberpoints);
+G = createcontour(G,numberpoints,numberlines,numberlineloop);
 if ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);
     if ischarin('recombine',varargin)

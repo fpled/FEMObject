@@ -31,15 +31,15 @@ dh = 2*unit; % distance between the holes
 ph = 1.25*unit; % location of the top hole from the top
 r = 0.25*unit; % radius of the holes
 
-P{1} = [-L,-h];
-P{2} = [-ls,-h];
-P{3} = [ls,-h];
-P{4} = [L,-h];
-P{5} = [L,h];
-P{6} = [0,h];
-P{7} = [-L,h];
+P{1} = [-L,  -h];
+P{2} = [-ls, -h];
+P{3} = [ ls, -h];
+P{4} = [ L , -h];
+P{5} = [ L ,  h];
+P{6} = [ 0 ,  h];
+P{7} = [-L ,  h];
 
-C = LIGNE([-b,-h],[-b,-h+a]);
+C = LINE([-b,-h],[-b,-h+a]);
 
 H{1} = CIRCLE(-lh,h-ph-2*dh,r);
 H{2} = CIRCLE(-lh,h-ph-dh,r);
@@ -120,7 +120,7 @@ if nargin>=7 && ischar(filename)
     G = setfile(G,filename);
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,2:-1:2-n+1,varargin{:});
 

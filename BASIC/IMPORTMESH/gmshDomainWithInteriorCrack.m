@@ -1,7 +1,7 @@
 function varargout = gmshDomainWithInteriorCrack(D,C,clD,clC,filename,indim,varargin)
 % function varargout = gmshDomainWithInteriorCrack(D,C,clD,clC,filename,indim)
 % D : DOMAIN
-% C : LIGNE in dim 2, QUADRANGLE in dim 3
+% C : LINE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths
 % filename : file name (optional)
 % indim : space dimension (optiownal, getindim(D) by default)
@@ -24,34 +24,45 @@ if isscalar(clC)
 end
 
 if indim==2
-    G = gmshfile(D,clD,1:4,1:4,1,1,varargin{:});
-    numpoints = 4+(1:2*length(C));
-    numlines = 4+(1:length(C));
+    numpoints = 1:4;
+    numlines = 1:4;
+    numlineloop = 1;
+    numsurface = 1;
+    G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,varargin{:});
+    numpoints = numpoints(end)+(1:2*length(C));
+    numlines = numlines(end)+(1:length(C));
     for j=1:length(C)
         GC = gmshfile(C{j},clC(j),numpoints([2*j-1,2*j]),numlines(j));
         G = G+GC;
-        G = embedcurveinsurface(G,numlines(j),1);
+        G = embedcurveinsurface(G,numlines(j),numsurface);
     end
     if ~noduplicate
         physicalgroup = 1;
-        G = createphysicalpoint(G,numpoints,1);
+        % G = createphysicalpoint(G,numpoints,1);
         G = createphysicalcurve(G,numlines,physicalgroup);
     end
     G = createphysicalsurface(G,1,1);
 elseif indim==3
-    G = gmshfile(D,clD,1:8,1:4,1,1,varargin{:});
-    numpoints = 8+(1:4*length(C));
-    numlines = 4+(1:4*length(C));
-    numbersurface = 1+(1:length(C));
+    numpoints = 1:8;
+    numlines = 1:12;
+    numlineloop = 1:6;
+    numsurface = 1:6;
+    numsurfaceloop = 1;
+    numvolume = 1;
+    G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,numsurfaceloop,numvolume,varargin{:});
+    numpoints = numpoints(end)+(1:4*length(C));
+    numlines = numlines(end)+(1:4*length(C));
+    numlineloop = numsurfaceloop(end)+(1:length(C));
+    numsurface = numsurface(end)+(1:length(C));
     for j=1:length(C)    
-        GC = gmshfile(C{j},clC(j),numpoints(4*j-3:4*j),numlines(4*j-3:4*j),j+1,numbersurface(j),varargin{:});
+        GC = gmshfile(C{j},clC(j),numpoints(4*j-3:4*j),numlines(4*j-3:4*j),numlineloop(j),numsurface(j),varargin{:});
         G = G+GC;
-        G = embedsurfaceinvolume(G,numbersurface(j),1);
+        G = embedsurfaceinvolume(G,numsurface(j),numvolume);
     end
     if ~noduplicate
         physicalgroup = 1;
-        G = createphysicalcurve(G,numlines,1);
-        G = createphysicalsurface(G,numbersurface,physicalgroup);
+        % G = createphysicalcurve(G,numlines,1);
+        G = createphysicalsurface(G,numsurface,physicalgroup);
     end
     G = createphysicalvolume(G,1,1);
 end
@@ -61,7 +72,7 @@ if nargin>=5 && ischar(filename)
     G = setfile(G,filename);
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});
 

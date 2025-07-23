@@ -1,5 +1,5 @@
-function u = createcirclecontour(u,numbercenter,numberpoints,numberlines,numberlineloop,varargin)
-% function u = createcirclecontour(u,numcenter,numberpoints,numberlines,numberlineloop,reverse)
+function u = createcirclecontour(u,numbercenter,numberpoints,numbercurves,numbercurveloop,varargin)
+% function u = createcirclecontour(u,numcenter,numberpoints,numbercurves,numbercurveloop,reverse)
 
 if nargin<6
     reverse = 1;
@@ -7,8 +7,10 @@ else
     reverse = getcharin('reverse',varargin,1);
 end
 
-seg = [1:length(numberpoints);2:length(numberpoints),1];
-seg = numberpoints(seg)';
+% Closed loop
+n = length(numberpoints);
+seg = [1:n; 2:n,1]';
+seg = numberpoints(seg);
 
-u = createcircles(u,numbercenter,seg,numberlines);
-u = createcurveloop(u,reverse*numberlines,numberlineloop);
+u = createcirclearcs(u,numbercenter,seg,numbercurves);
+u = createcurveloop(u,reverse*numbercurves,numbercurveloop);

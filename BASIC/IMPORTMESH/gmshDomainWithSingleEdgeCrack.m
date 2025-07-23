@@ -1,7 +1,7 @@
 function varargout = gmshDomainWithSingleEdgeCrack(D,C,clD,clC,filename,indim,varargin)
 % function varargout = gmshDomainWithSingleEdgeCrack(D,C,clD,clC,filename,indim)
 % D : DOMAIN
-% C : LIGNE in dim 2, QUADRANGLE in dim 3
+% C : LINE in dim 2, QUADRANGLE in dim 3
 % clD, clC : characteristic lengths
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(D) by default)
@@ -20,7 +20,7 @@ PD = getvertices(D);
 
 if indim==2
     PC = getvertices(C);
-    C = LIGNE(min(PC{:}),max(PC{:}));
+    C = LINE(min(PC{:}),max(PC{:}));
     if ischarin('refinecrack',varargin)
         G = gmshfile(C,clC,[2 1],1);
     else
@@ -135,7 +135,7 @@ if nargin>=5 && ischar(filename)
     G = setfile(G,filename);
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});
 

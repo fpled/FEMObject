@@ -8,12 +8,12 @@ c = E.c;
 
 P = cell(1,6);
 % Vertices
-P{1} = [-a,  0,  0];
-P{2} = [ 0, -b,  0];
-P{3} = [ 0,  0, -c];
-P{4} = [ a,  0,  0];
-P{5} = [ 0,  b,  0];
-P{6} = [ 0,  b,  c];
+P{1} = [ a,  0,  0]; % +x
+P{2} = [ 0,  b,  0]; % +y
+P{3} = [ 0,  0,  c]; % +z
+P{4} = [-a,  0,  0]; % -x
+P{5} = [ 0, -b,  0]; % -y
+P{6} = [ 0,  0, -c]; % -z
 
 %% Old version
 % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =

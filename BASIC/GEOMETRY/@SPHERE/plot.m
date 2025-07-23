@@ -2,8 +2,8 @@ function varargout = plot(S,varargin)
 % function varargout = plot(S,varargin)
 
 npts = getcharin('npts',varargin,100); % angular resolution
-t = linspace(0,2*pi,npts+1)';          % angle
-t(end) = [];                           % avoid duplicate point
+t = linspace(0,2*pi,npts+1)'; % parametric angle
+t(end) = []; % remove duplicate
 
 % Radius
 r = S.r;
@@ -44,7 +44,8 @@ options = patchoptions(S.indim, varargin{:});
 holdState = ishold;
 hold on
 
-H = gobjects(size(N,1),1);
+% Rings
+H.rings = gobjects(size(N,1),1);
 for i = 1:size(N,1)
     ni = N(i,:);
 
@@ -67,7 +68,23 @@ for i = 1:size(N,1)
     nodecoord = nodecoord * R + c;
     
     % draw closed ring
-    H(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
+    H.rings(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
+end
+
+% Main diameters (radial lines)
+diam_pts = [ r  0  0;
+            -r  0  0;
+             0  r  0;
+             0 -r  0;
+             0  0  r;
+             0  0 -r];
+
+% Rotate and translate endpoints
+H.diameters = gobjects(3,1);
+for i = 1:3
+    p1 = diam_pts(2*i-1,:) * R + c; % +axis
+    p2 = diam_pts(2*i,:)   * R + c; % -axis
+    H.diameters(i) = patch('Faces',[1 2],'Vertices',[p1; p2],options{:},'LineStyle',':');
 end
 
 if ~holdState

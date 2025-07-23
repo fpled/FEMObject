@@ -10,7 +10,7 @@ varargin = delcharin('indim',varargin);
 
 switch indim
     case 2
-        S = MODEL('PLAN');
+        S = MODEL('PLANE');
     case 3
         S = MODEL('TRID');
     otherwise

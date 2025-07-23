@@ -1,15 +1,20 @@
-function u = createellipsecontour(u,numbercenter,numberpoints,numberlines,numberlineloop,varargin)
-% function u = createellipsecontour(u,numcenter,numberpoints,numberlines,numberlineloop,reverse)
+function u = createellipsecontour(u,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,varargin)
+% function u = createellipsecontour(u,numcenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,reverse)
 
-if nargin<6
+if nargin<7
     reverse = 1;
 else
     reverse = getcharin('reverse',varargin,1);
 end
 
-seg = [1:length(numberpoints);2:length(numberpoints),1];
-maj = numberpoints;
-seg = numberpoints(seg)';
+if length(numbermajorpoints)~=length(numbercurves)
+    error('numbermajorpoints must be the same length as numbercurves.');
+end
 
-u = createellipses(u,numbercenter,seg,maj,numberlines);
-u = createcurveloop(u,reverse*numberlines,numberlineloop);
+% Closed loop
+n = length(numberpoints);
+seg = [1:n; 2:n,1]';
+seg = numberpoints(seg);
+
+u = createellipsearcs(u,numbercenter,seg,numbermajorpoints,numbercurves);
+u = createcurveloop(u,reverse*numbercurves,numbercurveloop);

@@ -1,6 +1,6 @@
-function u = createellipses(u,numbercenter,seg,maj,numberlines)
-% function u = createellipses(u,numbercenter,seg,maj,numberlines)
+function u = createellipses(u,center,radii,angles,numbercurves)
+% function u = createellipses(u,center,radii,angles,numbercurves)
 
-for k=1:size(seg,1)
-    u = createellipse(u,numbercenter,seg(k,:),maj(k),numberlines(k));
+for k=1:size(angles,1)
+    u = createellipse(u,center,radii,numbercurves(k),angles(k,:));
 end

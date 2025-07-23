@@ -1,7 +1,7 @@
 function varargout = gmshDomainWithSingleEdgeNotch(D,C,c,clD,clC,filename,indim,varargin)
 % function varargout = gmshDomainWithSingleEdgeNotch(D,C,c,clD,clC,filename,indim,notchtype)
 % D : DOMAIN
-% C : LIGNE in dim 2, QUADRANGLE in dim 3
+% C : LINE in dim 2, QUADRANGLE in dim 3
 % c : width of the edge notch
 % clD, clC : characteristic lengths
 % filename : file name (optional)
@@ -22,8 +22,8 @@ PC = getvertices(C);
 
 if indim==2
     PC1 = min(PC{:});
-    PB{1} = PC1 + [0,c/2];
-    PB{2} = PC1 - [0,c/2];
+    PB{1} = PC1 + [0, c/2];
+    PB{2} = PC1 - [0, c/2];
     G = GMSHFILE();
     if ischarin('refinecrack',varargin)
         clB = clC;
@@ -35,8 +35,8 @@ if indim==2
     PC2 = max(PC{:});
     if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
         % rectangular notch
-        P{1} = PC2 + [0,c/2];
-        P{2} = PC2 - [0,c/2];
+        P{1} = PC2 + [0, c/2];
+        P{2} = PC2 - [0, c/2];
         G = createpoints(G,P,clC,[8,1]);
         G = createcontour(G,1:8,1:8,1);
         % G = createphysicalcurve(G,[1 7 8],1);
@@ -48,13 +48,13 @@ if indim==2
         % G = createphysicalcurve(G,[1 7],1);
     else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
         % circular (rounded) notch
-        P{1} = PC2 + [-c/2,c/2];
+        P{1} = PC2 + [-c/2, c/2];
         P{2} = PC2;
-        P{3} = PC2 - [c/2,c/2];
-        P{4} = PC2 - [c/2,0];
+        P{3} = PC2 - [ c/2, c/2];
+        P{4} = PC2 - [ c/2,   0];
         G = createpoints(G,P,clC,[8,9,1,10]);
-        G = createcircle(G,10,8:9,1);
-        G = createcircle(G,10,[9,1],2);
+        G = createcirclearc(G,10,8:9,1);
+        G = createcirclearc(G,10,[9,1],2);
         G = createlines(G,[1:7;2:8]',3:9);
         G = createcurveloop(G,1:9,1);
         % G = createphysicalcurve(G,[1 2 3 9],1);
@@ -66,10 +66,10 @@ if indim==2
     G = createphysicalsurface(G,1,1);
     
 elseif indim==3
-    PB{1} = PC{1} + [0,c/2,0];
-    PB{2} = PC{1} - [0,c/2,0];
-    PB{3} = PC{4} + [0,c/2,0];
-    PB{4} = PC{4} - [0,c/2,0];
+    PB{1} = PC{1} + [0, c/2, 0];
+    PB{2} = PC{1} - [0, c/2, 0];
+    PB{3} = PC{4} + [0, c/2, 0];
+    PB{4} = PC{4} - [0, c/2, 0];
     G = GMSHFILE();
     if ischarin('refinecrack',varargin)
         clB = clC;
@@ -79,10 +79,10 @@ elseif indim==3
     G = createpoints(G,PB,clB,[6 4 5 3]);
     if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
         % rectangular cuboid notch
-        P{1} = PC{2} + [0,c/2,0];
-        P{2} = PC{2} - [0,c/2,0];
-        P{3} = PC{3} + [0,c/2,0];
-        P{4} = PC{3} - [0,c/2,0];
+        P{1} = PC{2} + [0, c/2, 0];
+        P{2} = PC{2} - [0, c/2, 0];
+        P{3} = PC{3} + [0, c/2, 0];
+        P{4} = PC{3} - [0, c/2, 0];
         
         G = createpoints(G,PD,clD,9:16);
         G = createpoints(G,P,clC,[7 1 8 2]);
@@ -189,14 +189,14 @@ elseif indim==3
 
     else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
         % circular (rounded) cuboid notch
-        P{1} = PC{2} + [-c/2,c/2,0];
+        P{1} = PC{2} + [-c/2, c/2, 0];
         P{2} = PC{2};
-        P{3} = PC{2} - [c/2,c/2,0];
-        P{4} = PC{2} - [c/2,0,0];
-        P{5} = PC{3} + [-c/2,c/2,0];
+        P{3} = PC{2} - [ c/2, c/2, 0];
+        P{4} = PC{2} - [ c/2,   0, 0];
+        P{5} = PC{3} + [-c/2, c/2, 0];
         P{6} = PC{3};
-        P{7} = PC{3} - [c/2,c/2,0];
-        P{8} = PC{3} - [c/2,0,0];
+        P{7} = PC{3} - [ c/2, c/2, 0];
+        P{8} = PC{3} - [ c/2,   0, 0];
         
         G = createpoints(G,PD,clD,9:16);
         G = createpoints(G,P,clC,[7 17 1 18 8 19 2 20]);
@@ -207,13 +207,13 @@ elseif indim==3
         G = createplanesurface(G,2,2);
         
         G = createline(G,[17 19],10);
-        G = createcircle(G,18,[7 17],9);
-        G = createcircle(G,20,[8 19],25);
+        G = createcirclearc(G,18,[7 17],9);
+        G = createcirclearc(G,20,[8 19],25);
         G = createcurveloop(G,[9 10 -25 -7],3);
         G = createsurface(G,3,3);
         
-        G = createcircle(G,18,[17 1],26);
-        G = createcircle(G,20,[19 2],27);
+        G = createcirclearc(G,18,[17 1],26);
+        G = createcirclearc(G,20,[19 2],27);
         G = createcurveloop(G,[26 -1 -27 -10],4);
         G = createsurface(G,4,4);
         
@@ -305,6 +305,6 @@ if nargin>=6 && ischar(filename)
     G = setfile(G,filename);
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});

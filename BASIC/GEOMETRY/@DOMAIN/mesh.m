@@ -14,7 +14,7 @@ switch indim
     case 1
         S = MODEL('UNID');
     case 2
-        S = MODEL('PLAN');
+        S = MODEL('PLANE');
     case 3
         S = MODEL('TRID');
     otherwise

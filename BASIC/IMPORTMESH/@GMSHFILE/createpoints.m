@@ -5,14 +5,31 @@ if isa(P,'double')
     P = mat2cell(P,ones(1,size(P,1)),size(P,2));
 end
 
-if isscalar(cl)
-    cl = repmat(cl,1,length(P));
+npts = length(P);
+
+if nargin < 3 || isempty(cl)
+    cl = [];
+elseif isscalar(cl)
+    cl = repmat(cl,1,npts);
 end
 
-for k=1:length(P)
+if nargin < 4 || isempty(numberpoints)
+    numberpoints = [];
+end
+
+for k=1:npts
+    Pk = P{k};
     if isempty(cl)
-        u = createpoint(u,P{k},[],numberpoints(k));
+        if isempty(numberpoints)
+            u = createpoint(u,Pk);
+        else
+            u = createpoint(u,Pk,[],numberpoints(k));
+        end
     else
-        u = createpoint(u,P{k},cl(k),numberpoints(k));
+        if isempty(numberpoints)
+            u = createpoint(u,Pk,cl(k));
+        else
+            u = createpoint(u,Pk,cl(k),numberpoints(k));
+        end
     end
 end

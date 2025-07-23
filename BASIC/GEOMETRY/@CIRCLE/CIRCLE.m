@@ -1,4 +1,6 @@
 function u = CIRCLE(varargin)
+% function C = CIRCLE(C)
+% function C = CIRCLE(C,r)
 % function C = CIRCLE(cx,cy,r)
 % function C = CIRCLE(cx,cy,r,vx,vy)
 % function C = CIRCLE(cx,cy,cz,r)
@@ -11,6 +13,11 @@ if nargin==0
 elseif nargin==1
     if isa(varargin{1},'CIRCLE')
         u = varargin{1};
+    end
+elseif nargin==2
+    if isa(varargin{1},'CIRCLE')
+        u = varargin{1};
+        u.r = varargin{2};
     end
 elseif nargin==3
     u.dim = 2;

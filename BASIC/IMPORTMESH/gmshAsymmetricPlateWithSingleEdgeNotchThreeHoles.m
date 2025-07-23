@@ -32,13 +32,13 @@ dh = 2*unit; % distance between the holes
 ph = 1.25*unit; % location of the top hole from the top
 r = 0.25*unit; % radius of the holes
 
-P{1} = [-L,-h];
-P{2} = [-ls,-h];
-P{3} = [ls,-h];
-P{4} = [L,-h];
-P{5} = [L,h];
-P{6} = [0,h];
-P{7} = [-L,h];
+P{1} = [-L , -h];
+P{2} = [-ls, -h];
+P{3} = [ ls, -h];
+P{4} = [ L , -h];
+P{5} = [ L ,  h];
+P{6} = [ 0 ,  h];
+P{7} = [-L ,  h];
 
 H{1} = CIRCLE(-lh,h-ph-2*dh,r);
 H{2} = CIRCLE(-lh,h-ph-dh,r);
@@ -51,10 +51,10 @@ end
 
 if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
     % rectangular notch
-    PC{1} = [-b-c/2,-h];
-    PC{2} = [-b-c/2,-h+a];
-    PC{3} = [-b+c/2,-h+a];
-    PC{4} = [-b+c/2,-h];
+    PC{1} = [-b-c/2, -h  ];
+    PC{2} = [-b-c/2, -h+a];
+    PC{3} = [-b+c/2, -h+a];
+    PC{4} = [-b+c/2, -h  ];
     G = createpoints(G,P,clD,[1:2,7:11]);
     if ischarin('refinecrack',varargin)
         clcrack = clC;
@@ -66,9 +66,9 @@ if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular'
         [6 7];[7 8];[8 9];[9 10];[10 11];[11 1]],1:11);
 elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
     % V (triangular) notch
-    PC{1} = [-b-c/2,-h];
-    PC{2} = [-b,-h+a];
-    PC{3} = [-b+c/2,-h];
+    PC{1} = [-b-c/2, -h  ];
+    PC{2} = [-b    , -h+a];
+    PC{3} = [-b+c/2, -h  ];
     G = createpoints(G,P,clD,[1:2,6:10]);
     if ischarin('refinecrack',varargin)
         clcrack = clC;
@@ -80,12 +80,12 @@ elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',
         [6 7];[7 8];[8 9];[9 10];[10 1]],1:10);
 else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
     % circular notch
-    PC{1} = [-b-c/2,-h];
-    PC{2} = [-b-c/2,-h+a-c/2];
-    PC{3} = [-b,-h+a];
-    PC{4} = [-b+c/2,-h+a-c/2];
-    PC{5} = [-b,-h+a-c/2];
-    PC{6} = [-b+c/2,-h];
+    PC{1} = [-b-c/2, -h      ];
+    PC{2} = [-b-c/2, -h+a-c/2];
+    PC{3} = [-b    , -h+a    ];
+    PC{4} = [-b+c/2, -h+a-c/2];
+    PC{5} = [-b    , -h+a-c/2];
+    PC{6} = [-b+c/2, -h      ];
     G = createpoints(G,P,clD,[1:2,9:13]);
     if ischarin('refinecrack',varargin)
         clcrack = clC;
@@ -93,8 +93,8 @@ else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circula
         clcrack = [clD clC clC clC clC clD];
     end
     G = createpoints(G,PC,clcrack,3:8);
-    G = createcircle(G,7,4:5,4);
-    G = createcircle(G,7,5:6,5);
+    G = createcirclearc(G,7,4:5,4);
+    G = createcirclearc(G,7,5:6,5);
     G = createlines(G,[[1 2];[2 3];[3 4];...
         [6 8];[8 9];[9 10];[10 11];[11 12];[12 13];[13 1]],[1:3,6:12]);
 end
@@ -177,6 +177,6 @@ if ~isempty(B) && isstruct(B)
     G = setbgfield(G);
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,2:-1:2-n+1,varargin{:});

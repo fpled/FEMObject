@@ -7,7 +7,7 @@ vxy = [1,1];
 nx = [1,0,0];
 ny = [0,1,0];
 nz = [0,0,1];
-nzm = [0,0,-1];
+nxy = [1,1,0];
 nxyz = [1,1,1];
 
 %% CIRCLE
@@ -27,13 +27,13 @@ Cny = CIRCLE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3));
 Cnyvy = CIRCLE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vy(1),vy(2));
 Cnyvxy = CIRCLE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vxy(1),vxy(2));
 
+Cnxy = CIRCLE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3));
+Cnxyvy = CIRCLE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3),vy(1),vy(2));
+Cnxyvxy = CIRCLE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3),vxy(1),vxy(2));
+
 Cnxyz = CIRCLE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3));
 Cnxyzvy = CIRCLE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
 Cnxyzvxy = CIRCLE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
-
-Cnzm = CIRCLE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3));
-Cnzmvy = CIRCLE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vy(1),vy(2));
-Cnzmvxy = CIRCLE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vxy(1),vxy(2));
 
 figure('Name','Circle')
 plot(C,'EdgeColor','k')
@@ -52,15 +52,15 @@ plot(getnormal(Cny),'r',ampl)
 % plot(Cnyvy,'EdgeColor','r')
 % plot(Cnyvxy,'EdgeColor','r')
 
-plot(Cnxyz,'EdgeColor','g')
-plot(getnormal(Cnxyz),'g',ampl)
-% plot(Cnxyzvy,'EdgeColor','g')
-% plot(Cnxyzvxy,'EdgeColor','g')
+plot(Cnxy,'EdgeColor','g')
+plot(getnormal(Cnxy),'g',ampl)
+% plot(Cnxyvy,'EdgeColor','g')
+% plot(Cnxyvxy,'EdgeColor','g')
 
-plot(Cnzm,'EdgeColor','c')
-plot(getnormal(Cnzm),'c',ampl)
-% plot(Cnzmvy,'EdgeColor','c')
-% plot(Cnzmvxy,'EdgeColor','c')
+plot(Cnxyz,'EdgeColor','m')
+plot(getnormal(Cnxyz),'m',ampl)
+% plot(Cnxyzvy,'EdgeColor','m')
+% plot(Cnxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -75,24 +75,24 @@ ampl = max(a,b);
 
 E = ELLIPSE(center(1),center(2),center(3),a,b);
 
-Evy = ELLIPSE(center(1),center(2),center(3),a,b,vy(1),vy(2));
+Evy  = ELLIPSE(center(1),center(2),center(3),a,b,vy(1),vy(2));
 Evxy = ELLIPSE(center(1),center(2),center(3),a,b,vxy(1),vxy(2));
 
-Enx = ELLIPSE(center(1),center(2),center(3),a,b,nx(1),nx(2),nx(3));
-Enxvy = ELLIPSE(center(1),center(2),center(3),a,b,nx(1),nx(2),nx(3),vy(1),vy(2));
+Enx    = ELLIPSE(center(1),center(2),center(3),a,b,nx(1),nx(2),nx(3));
+Enxvy  = ELLIPSE(center(1),center(2),center(3),a,b,nx(1),nx(2),nx(3),vy(1),vy(2));
 Enxvxy = ELLIPSE(center(1),center(2),center(3),a,b,nx(1),nx(2),nx(3),vxy(1),vxy(2));
 
-Eny = ELLIPSE(center(1),center(2),center(3),a,b,ny(1),ny(2),ny(3));
-Enyvy = ELLIPSE(center(1),center(2),center(3),a,b,ny(1),ny(2),ny(3),vy(1),vy(2));
+Eny    = ELLIPSE(center(1),center(2),center(3),a,b,ny(1),ny(2),ny(3));
+Enyvy  = ELLIPSE(center(1),center(2),center(3),a,b,ny(1),ny(2),ny(3),vy(1),vy(2));
 Enyvxy = ELLIPSE(center(1),center(2),center(3),a,b,ny(1),ny(2),ny(3),vxy(1),vxy(2));
 
-Enxyz = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3));
-Enxyzvy = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
-Enxyzvxy = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
+Enxy    = ELLIPSE(center(1),center(2),center(3),a,b,nxy(1),nxy(2),nxy(3));
+Enxyvy  = ELLIPSE(center(1),center(2),center(3),a,b,nxy(1),nxy(2),nxy(3),vy(1),vy(2));
+Enxyvxy = ELLIPSE(center(1),center(2),center(3),a,b,nxy(1),nxy(2),nxy(3),vxy(1),vxy(2));
 
-Enzm = ELLIPSE(center(1),center(2),center(3),a,b,nzm(1),nzm(2),nzm(3));
-Enzmvy = ELLIPSE(center(1),center(2),center(3),a,b,nzm(1),nzm(2),nzm(3),vy(1),vy(2));
-Enzmvxy = ELLIPSE(center(1),center(2),center(3),a,b,nzm(1),nzm(2),nzm(3),vxy(1),vxy(2));
+Enxyz    = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3));
+Enxyzvy  = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
+Enxyzvxy = ELLIPSE(center(1),center(2),center(3),a,b,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
 
 figure('Name','Ellipse')
 plot(E,'EdgeColor','k')
@@ -111,15 +111,15 @@ plot(getnormal(Eny),'r',ampl)
 % plot(Enyvy,'EdgeColor','r')
 % plot(Enyvxy,'EdgeColor','r')
 
-plot(Enxyz,'EdgeColor','g')
-plot(getnormal(Enxyz),'g',ampl)
-% plot(Enxyzvy,'EdgeColor','g')
-% plot(Enxyzvxy,'EdgeColor','g')
+plot(Enxy,'EdgeColor','g')
+plot(getnormal(Enxy),'g',ampl)
+% plot(Enxyvy,'EdgeColor','g')
+% plot(Enxyvxy,'EdgeColor','g')
 
-plot(Enzm,'EdgeColor','c')
-plot(getnormal(Enzm),'c',ampl)
-% plot(Enzmvy,'EdgeColor','c')
-% plot(Enzmvxy,'EdgeColor','c')
+plot(Enxyz,'EdgeColor','m')
+plot(getnormal(Enxyz),'m',ampl)
+% plot(Enxyzvy,'EdgeColor','m')
+% plot(Enxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -130,55 +130,58 @@ zlabel('$z$','Interpreter','latex')
 %% CYLINDER
 r = 0.3;
 h = 1;
-ampl = h;
+angle = 2*pi;
+% angle = 4*pi/3;
+ampl_plot = h/2;
+ampl_surf = h;
 
-CY = CYLINDER(center(1),center(2),center(3),r,h);
+CY = CYLINDER(center(1),center(2),center(3),r,h,angle);
 
-CYvy = CYLINDER(center(1),center(2),center(3),r,vy(1),vy(2),h);
-CYvxy = CYLINDER(center(1),center(2),center(3),r,vxy(1),vxy(2),h);
+CYvy  = CYLINDER(center(1),center(2),center(3),r,h,nz(1),nz(2),nz(3),vy(1),vy(2),angle);
+CYvxy = CYLINDER(center(1),center(2),center(3),r,h,nz(1),nz(2),nz(3),vxy(1),vxy(2),angle);
 
-CYnx = CYLINDER(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),h);
-CYnxvy = CYLINDER(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),vy(1),vy(2),h);
-CYnxvxy = CYLINDER(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),vxy(1),vxy(2),h);
+CYnx    = CYLINDER(center(1),center(2),center(3),r,h,nx(1),nx(2),nx(3),angle);
+CYnxvy  = CYLINDER(center(1),center(2),center(3),r,h,nx(1),nx(2),nx(3),vy(1),vy(2),angle);
+CYnxvxy = CYLINDER(center(1),center(2),center(3),r,h,nx(1),nx(2),nx(3),vxy(1),vxy(2),angle);
 
-CYny = CYLINDER(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),h);
-CYnyvy = CYLINDER(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vy(1),vy(2),h);
-CYnyvxy = CYLINDER(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vxy(1),vxy(2),h);
+CYny    = CYLINDER(center(1),center(2),center(3),r,h,ny(1),ny(2),ny(3),angle);
+CYnyvy  = CYLINDER(center(1),center(2),center(3),r,h,ny(1),ny(2),ny(3),vy(1),vy(2),angle);
+CYnyvxy = CYLINDER(center(1),center(2),center(3),r,h,ny(1),ny(2),ny(3),vxy(1),vxy(2),angle);
 
-CYnxyz = CYLINDER(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),h);
-CYnxyzvy = CYLINDER(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2),h);
-CYnxyzvxy = CYLINDER(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2),h);
+CYnxy    = CYLINDER(center(1),center(2),center(3),r,h,nxy(1),nxy(2),nxy(3),angle);
+CYnxyvy  = CYLINDER(center(1),center(2),center(3),r,h,nxy(1),nxy(2),nxy(3),vy(1),vy(2),angle);
+CYnxyvxy = CYLINDER(center(1),center(2),center(3),r,h,nxy(1),nxy(2),nxy(3),vxy(1),vxy(2),angle);
 
-CYnzm = CYLINDER(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),h);
-CYnzmvy = CYLINDER(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vy(1),vy(2),h);
-CYnzmvxy = CYLINDER(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vxy(1),vxy(2),h);
+CYnxyz    = CYLINDER(center(1),center(2),center(3),r,h,nxyz(1),nxyz(2),nxyz(3),angle);
+CYnxyzvy  = CYLINDER(center(1),center(2),center(3),r,h,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2),angle);
+CYnxyzvxy = CYLINDER(center(1),center(2),center(3),r,h,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2),angle);
 
 figure('Name','Cylinder')
 plot(CY,'EdgeColor','k')
 hold on
-plot(getnormal(CY),'k',ampl)
+plot(getnormal(CY),'k',ampl_plot)
 % plot(CYvy,'EdgeColor','k')
 % plot(CYvxy,'EdgeColor','k')
 
 plot(CYnx,'EdgeColor','b')
-plot(getnormal(CYnx),'b',ampl)
+plot(getnormal(CYnx),'b',ampl_plot)
 % plot(CYnxvy,'EdgeColor','b')
 % plot(CYnxvxy,'EdgeColor','b')
 
 plot(CYny,'EdgeColor','r')
-plot(getnormal(CYny),'r',ampl)
+plot(getnormal(CYny),'r',ampl_plot)
 % plot(CYnyvy,'EdgeColor','r')
 % plot(CYnyvxy,'EdgeColor','r')
 
-plot(CYnxyz,'EdgeColor','g')
-plot(getnormal(CYnxyz),'g',ampl)
-% plot(CYnxyzvy,'EdgeColor','g')
-% plot(CYnxyzvxy,'EdgeColor','g')
+plot(CYnxy,'EdgeColor','g')
+plot(getnormal(CYnxy),'g',ampl_plot)
+% plot(CYnxyvy,'EdgeColor','g')
+% plot(CYnxyvxy,'EdgeColor','g')
 
-plot(CYnzm,'EdgeColor','c')
-plot(getnormal(CYnzm),'c',ampl)
-% plot(CYnzmvy,'EdgeColor','c')
-% plot(CYnzmvxy,'EdgeColor','c')
+plot(CYnxyz,'EdgeColor','m')
+plot(getnormal(CYnxyz),'m',ampl_plot)
+% plot(CYnxyzvy,'EdgeColor','m')
+% plot(CYnxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -189,29 +192,29 @@ zlabel('$z$','Interpreter','latex')
 figure('Name','Cylinder')
 surf(CY,'EdgeColor','k')
 hold on
-plot(getnormal(CY),'k',ampl)
+plot(getnormal(CY),'k',ampl_surf)
 % surf(CYvy,'EdgeColor','k')
 % surf(CYvxy,'EdgeColor','k')
 
 surf(CYnx,'EdgeColor','b')
-plot(getnormal(CYnx),'b',ampl)
+plot(getnormal(CYnx),'b',ampl_surf)
 % surf(CYnxvy,'EdgeColor','b')
 % surf(CYnxvxy,'EdgeColor','b')
 
 surf(CYny,'EdgeColor','r')
-plot(getnormal(CYny),'r',ampl)
+plot(getnormal(CYny),'r',ampl_surf)
 % surf(CYnyvy,'EdgeColor','r')
 % surf(CYnyvxy,'EdgeColor','r')
 
-surf(CYnxyz,'EdgeColor','g')
-plot(getnormal(CYnxyz),'g',ampl)
-% surf(CYnxyzvy,'EdgeColor','g')
-% surf(CYnxyzvxy,'EdgeColor','g')
+surf(CYnxy,'EdgeColor','g')
+plot(getnormal(CYnxy),'g',ampl_surf)
+% surf(CYnxyvy,'EdgeColor','g')
+% surf(CYnxyvxy,'EdgeColor','g')
 
-surf(CYnzm,'EdgeColor','c')
-plot(getnormal(CYnzm),'c',ampl)
-% surf(CYnzmvy,'EdgeColor','c')
-% surf(CYnzmvxy,'EdgeColor','c')
+surf(CYnxyz,'EdgeColor','m')
+plot(getnormal(CYnxyz),'m',ampl)
+% surf(CYnxyzvy,'EdgeColor','m')
+% surf(CYnxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -221,28 +224,28 @@ zlabel('$z$','Interpreter','latex')
 
 %% SPHERE
 r = 0.3;
-ampl = r;
+ampl = r/2;
 
 S = SPHERE(center(1),center(2),center(3),r);
 
-Svy = SPHERE(center(1),center(2),center(3),r,vy(1),vy(2));
+Svy  = SPHERE(center(1),center(2),center(3),r,vy(1),vy(2));
 Svxy = SPHERE(center(1),center(2),center(3),r,vxy(1),vxy(2));
 
-Snx = SPHERE(center(1),center(2),center(3),r,nx(1),nx(2),nx(3));
-Snxvy = SPHERE(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),vy(1),vy(2));
+Snx    = SPHERE(center(1),center(2),center(3),r,nx(1),nx(2),nx(3));
+Snxvy  = SPHERE(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),vy(1),vy(2));
 Snxvxy = SPHERE(center(1),center(2),center(3),r,nx(1),nx(2),nx(3),vxy(1),vxy(2));
 
-Sny = SPHERE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3));
-Snyvy = SPHERE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vy(1),vy(2));
+Sny    = SPHERE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3));
+Snyvy  = SPHERE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vy(1),vy(2));
 Snyvxy = SPHERE(center(1),center(2),center(3),r,ny(1),ny(2),ny(3),vxy(1),vxy(2));
 
-Snxyz = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3));
-Snxyzvy = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
-Snxyzvxy = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
+Snxy    = SPHERE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3));
+Snxyvy  = SPHERE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3),vy(1),vy(2));
+Snxyvxy = SPHERE(center(1),center(2),center(3),r,nxy(1),nxy(2),nxy(3),vxy(1),vxy(2));
 
-Snzm = SPHERE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3));
-Snzmvy = SPHERE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vy(1),vy(2));
-Snzmvxy = SPHERE(center(1),center(2),center(3),r,nzm(1),nzm(2),nzm(3),vxy(1),vxy(2));
+Snxyz    = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3));
+Snxyzvy  = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
+Snxyzvxy = SPHERE(center(1),center(2),center(3),r,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
 
 figure('Name','Sphere')
 plot(S,'EdgeColor','k')
@@ -261,15 +264,15 @@ plot(getnormal(Sny),'r',ampl)
 % plot(Snyvy,'EdgeColor','r')
 % plot(Snyvxy,'EdgeColor','r')
 
-plot(Snxyz,'EdgeColor','g')
-plot(getnormal(Snxyz),'g',ampl)
-% plot(Snxyzvy,'EdgeColor','g')
-% plot(Snxyzvxy,'EdgeColor','g')
+plot(Snxy,'EdgeColor','g')
+plot(getnormal(Snxy),'g',ampl)
+% plot(Snxyvy,'EdgeColor','g')
+% plot(Snxyvxy,'EdgeColor','g')
 
-plot(Snzm,'EdgeColor','c')
-plot(getnormal(Snzm),'c',ampl)
-% plot(Snzmvy,'EdgeColor','c')
-% plot(Snzmvxy,'EdgeColor','c')
+plot(Snxyz,'EdgeColor','m')
+plot(getnormal(Snxyz),'m',ampl)
+% plot(Snxyzvy,'EdgeColor','m')
+% plot(Snxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -294,15 +297,15 @@ plot(getnormal(Sny),'r',ampl)
 % surf(Snyvy,'EdgeColor','r')
 % surf(Snyvxy,'EdgeColor','r')
 
-surf(Snxyz,'EdgeColor','g')
-plot(getnormal(Snxyz),'g',ampl)
-% surf(Snxyzvy,'EdgeColor','g')
-% surf(Snxyzvxy,'EdgeColor','g')
+surf(Snxy,'EdgeColor','g')
+plot(getnormal(Snxy),'g',ampl)
+% surf(Snxyvy,'EdgeColor','g')
+% surf(Snxyvxy,'EdgeColor','g')
 
-surf(Snzm,'EdgeColor','c')
-plot(getnormal(Snzm),'c',ampl)
-% surf(Snzmvy,'EdgeColor','c')
-% surf(Snzmvxy,'EdgeColor','c')
+surf(Snxyz,'EdgeColor','m')
+plot(getnormal(Snxyz),'m',ampl)
+% surf(Snxyzvy,'EdgeColor','m')
+% surf(Snxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -314,55 +317,55 @@ zlabel('$z$','Interpreter','latex')
 a = 0.5;
 b = 0.2;
 c = 0.1;
-ampl = c;
+ampl = a/2;
 
-E = ELLIPSOID(center(1),center(2),center(3),a,b,c);
+EL = ELLIPSOID(center(1),center(2),center(3),a,b,c);
 
-Evy = ELLIPSOID(center(1),center(2),center(3),a,b,c,vy(1),vy(2));
-Evxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,vxy(1),vxy(2));
+ELvy  = ELLIPSOID(center(1),center(2),center(3),a,b,c,vy(1),vy(2));
+ELvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,vxy(1),vxy(2));
 
-Enx = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3));
-Enxvy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3),vy(1),vy(2));
-Enxvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3),vxy(1),vxy(2));
+ELnx    = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3));
+ELnxvy  = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3),vy(1),vy(2));
+ELnxvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nx(1),nx(2),nx(3),vxy(1),vxy(2));
 
-Eny = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3));
-Enyvy = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3),vy(1),vy(2));
-Enyvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3),vxy(1),vxy(2));
+ELny    = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3));
+ELnyvy  = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3),vy(1),vy(2));
+ELnyvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,ny(1),ny(2),ny(3),vxy(1),vxy(2));
 
-Enxyz = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3));
-Enxyzvy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
-Enxyzvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
+ELnxy    = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxy(1),nxy(2),nxy(3));
+ELnxyvy  = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxy(1),nxy(2),nxy(3),vy(1),vy(2));
+ELnxyvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxy(1),nxy(2),nxy(3),vxy(1),vxy(2));
 
-Enzm = ELLIPSOID(center(1),center(2),center(3),a,b,c,nzm(1),nzm(2),nzm(3));
-Enzmvy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nzm(1),nzm(2),nzm(3),vy(1),vy(2));
-Enzmvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nzm(1),nzm(2),nzm(3),vxy(1),vxy(2));
+ELnxyz    = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3));
+ELnxyzvy  = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3),vy(1),vy(2));
+ELnxyzvxy = ELLIPSOID(center(1),center(2),center(3),a,b,c,nxyz(1),nxyz(2),nxyz(3),vxy(1),vxy(2));
 
 figure('Name','Ellipsoid')
-plot(E,'EdgeColor','k')
+plot(EL,'EdgeColor','k')
 hold on
-plot(getnormal(E),'k',ampl)
-% plot(Evy,'EdgeColor','k')
-% plot(Evxy,'EdgeColor','k')
+plot(getnormal(EL),'k',ampl)
+% plot(ELvy,'EdgeColor','k')
+% plot(ELvxy,'EdgeColor','k')
 
-plot(Enx,'EdgeColor','b')
-plot(getnormal(Enx),'b',ampl)
-% plot(Enxvy,'EdgeColor','b')
-% plot(Enxvxy,'EdgeColor','b')
+plot(ELnx,'EdgeColor','b')
+plot(getnormal(ELnx),'b',ampl)
+% plot(ELnxvy,'EdgeColor','b')
+% plot(ELnxvxy,'EdgeColor','b')
 
-plot(Eny,'EdgeColor','r')
-plot(getnormal(Eny),'r',ampl)
-% plot(Enyvy,'EdgeColor','r')
-% plot(Enyvxy,'EdgeColor','r')
+plot(ELny,'EdgeColor','r')
+plot(getnormal(ELny),'r',ampl)
+% plot(ELnyvy,'EdgeColor','r')
+% plot(ELnyvxy,'EdgeColor','r')
 
-plot(Enxyz,'EdgeColor','g')
-plot(getnormal(Enxyz),'g',ampl)
-% plot(Enxyzvy,'EdgeColor','g')
-% plot(Enxyzvxy,'EdgeColor','g')
+plot(ELnxy,'EdgeColor','g')
+plot(getnormal(ELnxy),'g',ampl)
+% plot(ELnxyvy,'EdgeColor','g')
+% plot(ELnxyvxy,'EdgeColor','g')
 
-plot(Enzm,'EdgeColor','c')
-plot(getnormal(Enzm),'c',ampl)
-% plot(Enzmvy,'EdgeColor','c')
-% plot(Enzmvxy,'EdgeColor','c')
+plot(ELnxyz,'EdgeColor','m')
+plot(getnormal(ELnxyz),'m',ampl)
+% plot(ELnxyzvy,'EdgeColor','m')
+% plot(ELnxyzvxy,'EdgeColor','m')
 
 hold off
 grid on
@@ -371,32 +374,68 @@ ylabel('$y$','Interpreter','latex')
 zlabel('$z$','Interpreter','latex')
 
 figure('Name','Ellipsoid')
-surf(E,'EdgeColor','k')
+surf(EL,'EdgeColor','k')
 hold on
-plot(getnormal(E),'k',ampl)
-% surf(Evy,'EdgeColor','k')
-% surf(Evxy,'EdgeColor','k')
+plot(getnormal(EL),'k',ampl)
+% surf(ELvy,'EdgeColor','k')
+% surf(ELvxy,'EdgeColor','k')
 
-surf(Enx,'EdgeColor','b')
-plot(getnormal(Enx),'b',ampl)
-% surf(Enxvy,'EdgeColor','b')
-% surf(Enxvxy,'EdgeColor','b')
+surf(ELnx,'EdgeColor','b')
+plot(getnormal(ELnx),'b',ampl)
+% surf(ELnxvy,'EdgeColor','b')
+% surf(ELnxvxy,'EdgeColor','b')
 
-surf(Eny,'EdgeColor','r')
-plot(getnormal(Eny),'r',ampl)
-% surf(Enyvy,'EdgeColor','r')
-% surf(Enyvxy,'EdgeColor','r')
+surf(ELny,'EdgeColor','r')
+plot(getnormal(ELny),'r',ampl)
+% surf(ELnyvy,'EdgeColor','r')
+% surf(ELnyvxy,'EdgeColor','r')
 
-surf(Enxyz,'EdgeColor','g')
-plot(getnormal(Enxyz),'g',ampl)
-% surf(Enxyzvy,'EdgeColor','g')
-% surf(Enxyzvxy,'EdgeColor','g')
+surf(ELnxy,'EdgeColor','g')
+plot(getnormal(ELnxy),'g',ampl)
+% surf(ELnxyvy,'EdgeColor','g')
+% surf(ELnxyvxy,'EdgeColor','g')
 
-surf(Enzm,'EdgeColor','c')
-plot(getnormal(Enzm),'c',ampl)
-% surf(Enzmvy,'EdgeColor','c')
-% surf(Enzmvxy,'EdgeColor','c')
+surf(ELnxyz,'EdgeColor','m')
+plot(getnormal(ELnxyz),'m',ampl)
+% surf(ELnxyzvy,'EdgeColor','m')
+% surf(ELnxyzvxy,'EdgeColor','m')
 
+hold off
+grid on
+xlabel('$x$','Interpreter','latex')
+ylabel('$y$','Interpreter','latex')
+zlabel('$z$','Interpreter','latex')
+
+%% TORUS
+r1 = 0.5;
+r2 = 0.1;
+angle1 = pi/4;
+angle2 = pi/2;
+angle3 = pi;
+
+T = TORUS(center(1),center(2),center(3),r1,r2);
+T1 = TORUS(center(1),center(2),center(3),r1,r2,angle1);
+T2 = TORUS(center(1),center(2),center(3),r1,r2,angle2);
+T3 = TORUS(center(1),center(2),center(3),r1,r2,angle3);
+
+figure('Name','Torus')
+plot(T,'EdgeColor','k')
+hold on
+plot(T1,'EdgeColor','b')
+plot(T2,'EdgeColor','r')
+plot(T3,'EdgeColor','g')
+hold off
+grid on
+xlabel('$x$','Interpreter','latex')
+ylabel('$y$','Interpreter','latex')
+zlabel('$z$','Interpreter','latex')
+
+figure('Name','Torus')
+surf(T,'EdgeColor','k')
+hold on
+surf(T1,'EdgeColor','b')
+surf(T2,'EdgeColor','r')
+surf(T3,'EdgeColor','g')
 hold off
 grid on
 xlabel('$x$','Interpreter','latex')

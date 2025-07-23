@@ -1,27 +1,32 @@
 function varargout = plot(C,varargin)
 % function varargout = plot(C,varargin)
 
-npts = getcharin('npts',varargin,200); % angular resolution
-% t = linspace(0,2*pi,npts+1)';          % angle
-% t(end) = [];                           % avoid duplicate point
-
-% Radius and height
+% Radius, height and opening angle
 r = C.r;
 h = C.h;
+angle = C.angle;
+
+% Angular resolution: 200 points for full circle (angle = 2*pi), scale for partial arc
+npts = getcharin('npts',varargin,max(2,round(200*angle/(2*pi))));
+t = linspace(0,angle,npts+1)'; % parametric angle
+t(end) = [];                   % remove duplicate
+
+tol = getfemobjectoptions('tolerancepoint');
 
 % Build parametric cylinder
-% x = r * cos(t);
-% y = r * sin(t);
-% z_bot = zeros(npts,1);
-% z_top = h * ones(npts,1);
-% nodecoord_bot = [x, y, z_bot];
-% nodecoord_top = [x, y, z_top];
-
-% Build parametric cylinder
-[X,Y,Z] = cylinder(r,npts);
-Z = Z * h;
-nodecoord_bot = [X(1,:)', Y(1,:)', Z(1,:)'];
-nodecoord_top = [X(2,:)', Y(2,:)', Z(2,:)'];
+if abs(angle - 2*pi) < tol
+    [X,Y,Z] = cylinder(r,npts);
+    Z = Z * h;
+    nodecoord_bot = [X(1,:)', Y(1,:)', Z(1,:)'];
+    nodecoord_top = [X(2,:)', Y(2,:)', Z(2,:)'];
+else
+    x = r * cos(t);
+    y = r * sin(t);
+    z_bot = zeros(size(t));
+    z_top = h * ones(size(t));
+    nodecoord_bot = [x, y, z_bot];
+    nodecoord_top = [x, y, z_top];
+end
 
 %% Old version
 % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
@@ -42,25 +47,55 @@ c = [C.cx, C.cy, C.cz];
 % Rotate and translate
 nodecoord_bot = nodecoord_bot * R + c;
 nodecoord_top = nodecoord_top * R + c;
-
-% Connectivity for a closed loop
-connec = [1:npts,1];
+center_base = [0, 0, 0] * R + c;
+center_top  = [0, 0, h] * R + c;
 
 % Plot using patch
 options = patchoptions(C.indim,varargin{:});
 holdState = ishold;
 hold on
-% bottom ring
-Hb = patch('Faces',connec,'Vertices',nodecoord_bot,options{:});
-% top ring
-Ht = patch('Faces',connec,'Vertices',nodecoord_top,options{:});
-% four vertical spokes at t = 0, pi/2, pi, 3*pi/2
-idx = round(linspace(1,npts,5));  idx(end)=[];  % [0, pi/2, pi, 3*pi/2]
-Hs = gobjects(4,1);
-for k=1:4
-    nodecoord = [nodecoord_bot(idx(k),:);
-                 nodecoord_top(idx(k),:)];
-    Hs(k) = patch('Faces',[1 2],'Vertices',nodecoord,options{:});
+H = struct();
+
+% Bottom and top rings
+H.rings = gobjects(2,1);
+if abs(angle - 2*pi) < tol
+    % Full circle: use patch for closed loop
+    connec = [1:npts,1]; % connectivity for a closed loop
+    H.rings(1) = patch('Faces',connec,'Vertices',nodecoord_bot,options{:}); % bottom circle
+    H.rings(2) = patch('Faces',connec,'Vertices',nodecoord_top,options{:}); % top circle
+else
+    % Partial cylinder: create a sector (fan) for open circle arc by including center point
+    nodecoord_bot_fan = [center_base; nodecoord_bot]; % add base center
+    nodecoord_top_fan = [center_top; nodecoord_top]; % add top center
+    connec_fan = 1:(npts+1);
+    H.rings(1) = patch('Faces',connec_fan,'Vertices',nodecoord_bot_fan,options{:});
+    H.rings(2) = patch('Faces',connec_fan,'Vertices',nodecoord_top_fan,options{:});
+end
+
+% Vertical spoke along the central axis (center base to center top)
+H.axis = patch('Faces',[1 2],'Vertices',[center_base; center_top],options{:},'LineStyle','-.');
+
+% Vertical spoke lines and radial lines
+spoke_angles = [0, pi/2, pi, 3*pi/2];
+spoke_idx = 1; % always include start
+for k=2:4
+    if angle >= spoke_angles(k)-tol
+        [~,idx] = min(abs(t - spoke_angles(k)));
+        spoke_idx = [spoke_idx, idx];
+    end
+end
+if abs(angle - 2*pi) > tol
+    spoke_idx = unique([spoke_idx, length(t)]); % also include end for open arc
+end
+spoke_idx = unique(spoke_idx);
+
+H.spokes  = gobjects(length(spoke_idx),1);
+H.radials = gobjects(length(spoke_idx),2);
+for k = 1:length(spoke_idx)
+    idx = spoke_idx(k);
+    H.spokes(k) = patch('Faces',[1 2],'Vertices',[nodecoord_bot(idx,:); nodecoord_top(idx,:)],options{:});
+    H.radials(k,1) = patch('Faces',[1 2],'Vertices',[center_base; nodecoord_bot(idx,:)],options{:},'LineStyle',':');
+    H.radials(k,2) = patch('Faces',[1 2],'Vertices',[center_top; nodecoord_top(idx,:)],options{:},'LineStyle',':');
 end
 if ~holdState
     hold off

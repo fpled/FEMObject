@@ -3,19 +3,15 @@ function varargout = gmshfile(D,cl,numberpoints,numberlines,numberlineloop,numbe
 % D : QUADRANGLE
 % cl : characteristic length
 
-if nargin<=2
-    numberpoints = 1:4;
-    numberlines = 1:4;
-    numberlineloop = 5;
-    numbersurface = 1;
-elseif nargin==5
-    numbersurface = [];
-end
+if nargin<=2 || isempty(numberpoints), numberpoints = 1:4; end
+if nargin<=3 || isempty(numberlines), numberlines = 1:4; end
+if nargin<=4 || isempty(numberlineloop), numberlineloop = 1; numbersurface = 1; end
+if nargin==5, numbersurface = []; end
 
 G = GMSHFILE();
 P = getvertices(D);
-G = createpoints(G,P(1:4),cl,numberpoints);
-G = createcontour(G,numberpoints(1:4),numberlines,numberlineloop);
+G = createpoints(G,P,cl,numberpoints);
+G = createcontour(G,numberpoints,numberlines,numberlineloop);
 if ~isempty(numbersurface)
     G = createplanesurface(G,numberlineloop,numbersurface);
     if ischarin('recombine',varargin)

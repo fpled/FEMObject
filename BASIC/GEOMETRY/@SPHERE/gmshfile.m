@@ -1,29 +1,28 @@
-function varargout = gmshfile(S,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface,varargin)
-% function G = gmshfile(S,cl,numbercenter,numberpoints,numberlines,numberlineloop,numbersurface)
+function varargout = gmshfile(S,cl,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop,numbervolume,varargin)
+% function G = gmshfile(S,cl,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop,numbervolume)
 % S : SPHERE
 % cl : characteristic length
 
-if nargin<=2
-    numbercenter = 5;
-    numberpoints = 1:4;
-    numberlines = 1:4;
-    numberlineloop = 5;
-    numbersurface = 1;
-elseif nargin==6
-    numbersurface = [];
-end
+if nargin<=2 || isempty(numbercenter), numbercenter = 1; end
+if nargin<=3 || isempty(numberpoints), numberpoints = 2:7; end
+if nargin<=4 || isempty(numbercurves), numbercurves = 1:12; end
+if nargin<=5 || isempty(numbercurveloops), numbercurveloops = 1:8; end
+if nargin<=6 || isempty(numbersurfaces), numbersurfaces = 1:8; end
+if nargin<=7 || isempty(numbersurfaceloop), numbersurfaceloop = 1; numbervolume = 1; end
+if nargin==8, numbervolume = []; end
 
 G = GMSHFILE();
 P = getvertices(S);
 G = createpoint(G,[S.cx,S.cy,S.cz],cl,numbercenter);
 G = createpoints(G,P,cl,numberpoints);
-G = createcirclecontour(G,numbercenter,numberpoints,numberlines,numberlineloop,varargin{:});
-if ~isempty(numbersurface)
-    G = createplanesurface(G,numberlineloop,numbersurface);
-    if ischarin('recombine',varargin)
-        G = recombinesurface(G,numbersurface);
-    end
+G = createspherecontour(G,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop);
+if ~isempty(numbervolume)
+    G = createvolume(G,numbersurfaceloop,numbervolume);
+end
+
+if ischarin('recombine',varargin)
+    G = recombinesurface(G);
 end
 
 varargout{1} = G;
-varargout{2} = numbersurface;
+varargout{2} = numbervolume;

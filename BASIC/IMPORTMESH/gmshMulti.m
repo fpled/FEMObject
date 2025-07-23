@@ -42,7 +42,7 @@ end
 % end
 varargin = delonlycharin('recombine',varargin);
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 dim = max(cellfun(@(x) getdim(x),I));
 [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});

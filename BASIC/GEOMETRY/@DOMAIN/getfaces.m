@@ -7,7 +7,7 @@ switch getdim(D)
         faces = [1 2 6 5 ; 2 3 7 6 ; 3 4 8 7 ; 4 1 5 8 ; 1 2 3 4 ; 5 6 7 8];
         F = cell(1,6);
         for i=1:6
-            F{i} = PLAN(POINT(P{faces(i,1)}),POINT(P{faces(i,2)}),POINT(P{faces(i,3)}));
+            F{i} = PLANE(POINT(P{faces(i,1)}),POINT(P{faces(i,2)}),POINT(P{faces(i,3)}));
         end
         if nargout==2
             N{1} = [0;-1;0];
@@ -21,7 +21,7 @@ switch getdim(D)
         faces = [1 2 ; 2 3 ; 3 4  ; 4 1 ];
         F = cell(1,4);
         for i=1:4
-            F{i} = LIGNE(POINT(P{faces(i,1)}),POINT(P{faces(i,2)}));
+            F{i} = LINE(POINT(P{faces(i,1)}),POINT(P{faces(i,2)}));
         end
         if nargout==2
             N{1} = [0;-1];

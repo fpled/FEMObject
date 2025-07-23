@@ -7,8 +7,9 @@ function varargout = gmsh(D,varargin)
 filename = getcharin('filename',varargin,'gmsh_file');
 indim = getcharin('indim',varargin,getindim(D));
 recombine = ischarin('recombine',varargin);
+opencascade = any(ischarin({'occ','OpenCASCADE'},varargin));
 varargin = delcharin({'filename','indim'},varargin);
-varargin = delonlycharin('recombine',varargin);
+varargin = delonlycharin({'recombine','occ','OpenCASCADE'},varargin);
 
 if D.dim<=1
     if isscalar(varargin{1}) && ~isa(varargin{1},'POINT')
@@ -18,25 +19,34 @@ if D.dim<=1
     end
 else
     if isscalar(varargin{1}) && ~isa(varargin{1},'POINT')
-        [G,numbersurface] = gmshfile(D,varargin{:});
+        if opencascade
+            [G,number] = gmshfile_occ(D,varargin{:});
+        else
+            [G,number] = gmshfile(D,varargin{:});
+        end
     else
-        [G,numbersurface] = gmshfilewithpoints(D,varargin{:});
+        if opencascade
+            [G,number] = gmshfilewithpoints_occ(D,varargin{:});
+        else
+            [G,number] = gmshfilewithpoints(D,varargin{:});
+        end
     end
     if recombine
         if D.dim==2
-            G = recombinesurface(G,numbersurface);
+            G = recombinesurface(G,number);
         elseif D.dim==3
             G = recombinesurface(G);
         end
     end
-    G = createphysicalsurface(G,numbersurface,1);
-    if D.dim==3
-        G = createphysicalvolume(G,1,1);
+    if D.dim==2
+        G = createphysicalsurface(G,number,1);
+    elseif D.dim==3
+        G = createphysicalvolume(G,number,1);
     end
 end
 
 G = setfile(G,filename);
-n=max(nargout,1);
-varargout=cell(1,n);
+n = max(nargout,1);
+varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1);    
  

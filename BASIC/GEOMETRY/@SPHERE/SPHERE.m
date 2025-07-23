@@ -1,5 +1,7 @@
 function u = SPHERE(varargin)
+% function S = SPHERE(S)
 % function S = SPHERE(C)
+% function S = SPHERE(S,r)
 % function S = SPHERE(C,r)
 % function S = SPHERE(cx,cy,cz,r)
 % function S = SPHERE(cx,cy,cz,r,vx,vy)
@@ -32,7 +34,10 @@ elseif nargin==1
         u = class(u,'SPHERE',GEOMOBJECT(u.dim,u.indim));
     end
 elseif nargin==2
-    if isa(varargin{1},'CIRCLE')
+    if isa(varargin{1},'SPHERE')
+        u = varargin{1};
+        u.r = varargin{2};
+    elseif isa(varargin{1},'CIRCLE')
         C = varargin{1};
         c = getc(C);
         n = getn(C);

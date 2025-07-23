@@ -1,41 +1,30 @@
-function varargout = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface,varargin)
-% function G = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberlines,numberlineloop,numberembeddedpoints,numbersurface)
+function varargout = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberembeddedpoints,numberlines,numberlineloop,numbersurface,varargin)
+% function G = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberembeddedpoints,numberlines,numberlineloop,numbersurface)
 % D : QUADRANGLE
 % P : POINT
 % clD, clP : characteristic length
 
-if ~iscell(P)
-    P = {P};
-end
-if nargin<=3
-    clP = clD;
-end
-if isscalar(clP)
-    clP = repmat(clP,1,length(P));
-end
-if nargin<=4
-    numberpoints = 1:4;
-    numberlines = 1:4;
-    numberlineloop = 5;
-    numberembeddedpoints = 4+(1:length(P));
-    numbersurface = 1;
-elseif nargin==8
-    numbersurface = [];
-end
+if ~iscell(P), P = {P}; end
+if nargin<=3 || isempty(clP), clP = clD; end
+if isscalar(clP), clP = repmat(clP,1,length(P)); end
+
+if nargin<=4 || isempty(numberpoints), numberpoints = 1:4; end
+if nargin<=5 || isempty(numberembeddedpoints), numberembeddedpoints = 4+(1:length(P)); end
+if nargin<=6 || isempty(numberlines), numberlines = 1:4; end
+if nargin<=7 || isempty(numberlineloop), numberlineloop = 1; end
+if nargin<=8 || isempty(numbersurface), numbersurface = 1; end
 
 G = GMSHFILE();
 PD = getvertices(D);
-G = createpoints(G,PD(1:4),clD,numberpoints);
-G = createcontour(G,numberpoints(1:4),numberlines,numberlineloop);
-if ~isempty(numbersurface)
-    G = createplanesurface(G,numberlineloop,numbersurface);
-end
+G = createpoints(G,PD,clD,numberpoints);
+G = createcontour(G,numberpoints,numberlines,numberlineloop);
+G = createplanesurface(G,numberlineloop,numbersurface);
+
 G = createpoints(G,P,clP,numberembeddedpoints);
-if ~isempty(numbersurface)
-    G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
-    if ischarin('recombine',varargin)
-        G = recombinesurface(G,numbersurface);
-    end
+G = embedpointsinsurface(G,numberembeddedpoints,numbersurface);
+
+if ischarin('recombine',varargin)
+    G = recombinesurface(G,numbersurface);
 end
 
 varargout{1} = G;
