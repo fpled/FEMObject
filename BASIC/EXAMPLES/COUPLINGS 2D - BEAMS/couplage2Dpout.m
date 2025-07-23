@@ -16,10 +16,10 @@ P3=POINT([L,H]);
 P4=POINT([L,2*H]);
 P5=POINT([0,2*H]);
 P6=POINT([2*L,H]);
-D1 = DROITE(P1,P5);
+D1 = STRAIGHTLINE(P1,P5);
 
 S1 = mesh(DOMAIN(2,P1,P4),r1,2*r2,mat{1});
-S2 = mesh(LIGNE(P3,P6),r1,mat{2});
+S2 = mesh(LINE(P3,P6),r1,mat{2});
 S2 = convertelem(S2,'BEAM');
 S = union(S1,S2);
 

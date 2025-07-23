@@ -228,12 +228,12 @@ qplotquan=normsort(qplotquan);
 choixdroite=1;
 switch choixdroite
 case 1
-    D10 = LIGNE(POINT([0.5,0]),POINT([0.5,2]));
+    D10 = LINE(POINT([0.5,0]),POINT([0.5,2]));
     [rep,P10]=ispointin(D10,POINT(S.node));
     t=double(getcoord(P10));t=t(1,2,:);t=t(:);
 case 2
-    L10 = LIGNE(POINT([0.5,0]),POINT([0.5,1.5]));
-    L11 = LIGNE(POINT([0.5+1/r,1.5]),POINT([2,1.5]));
+    L10 = LINE(POINT([0.5,0]),POINT([0.5,1.5]));
+    L11 = LINE(POINT([0.5+1/r,1.5]),POINT([2,1.5]));
     [rep,P10]=ispointin(L10,POINT(S.node));
     [rep,P11]=ispointin(L11,POINT(S.node));
     P10 = [P10;P11];

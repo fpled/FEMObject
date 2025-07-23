@@ -23,12 +23,12 @@ switch getdim(elem)
         nuL = evalparam(mat,'NUL',elem,xnode,xgauss); % longitudinal Poisson ratio
         GL = evalparam(mat,'GL',elem,xnode,xgauss); % longitudinal shear modulus
         n1 = evalparam(mat,'AXISL',elem,xnode,xgauss); % axis of rotational symmetry
-        n1 = normalize(VECTEUR(n1));
+        n1 = normalize(VECTOR(n1));
         switch getindim(n1)
             case 2
                 if isparam(mat,'AXIST')
                     n2 = evalparam(mat,'AXIST',elem,xnode,xgauss);
-                    n2 = normalize(VECTEUR(n2));
+                    n2 = normalize(VECTOR(n2));
                     if dot(n1,n2)~=0
                         lastwarn('Wrong axis : change axis T')
                         n2 = rot2D(n1,pi/2);
@@ -40,7 +40,7 @@ switch getdim(elem)
             case 3
                 if isparam(mat,'AXIST')
                     n2 = evalparam(mat,'AXIST',elem,xnode,xgauss);
-                    n2 = normalize(VECTEUR(n2));
+                    n2 = normalize(VECTOR(n2));
                     n3 = cross(n1,n2);
                     n3 = normalize(n3);
                     n2 = cross(n3,n1);
@@ -128,10 +128,10 @@ switch getdim(elem)
         kT = EL*ET/(2*(1-nuT)*EL-4*nuL^2*ET); % transverse bulk modulus
         
         n1 = evalparam(mat,'AXISL',elem,xnode,xgauss); % axis of rotational symmetry
-        n1 = normalize(VECTEUR(n1));
+        n1 = normalize(VECTOR(n1));
         if isparam(mat,'AXIST')
             n2 = evalparam(mat,'AXIST',elem,xnode,xgauss);
-            n2 = normalize(VECTEUR(n2));
+            n2 = normalize(VECTOR(n2));
             n3 = cross(n1,n2);
             n3 = normalize(n3);
             n2 = cross(n3,n1);

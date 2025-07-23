@@ -37,14 +37,14 @@ P4 = POINT([0,l,H]);
 P5 = POINT([0,l,0]);
 P6 = POINT([L,l,0]);
 
-D1 = DROITE(P1,P2);
-D2 = DROITE(P2,P3);
-D3 = DROITE(P3,P4);
-D4 = DROITE(P4,P1);
+D1 = STRAIGHTLINE(P1,P2);
+D2 = STRAIGHTLINE(P2,P3);
+D3 = STRAIGHTLINE(P3,P4);
+D4 = STRAIGHTLINE(P4,P1);
 
-S1 = mesh(LIGNE(P5,P4),rb,mat{1});
+S1 = mesh(LINE(P5,P4),rb,mat{1});
 S1 = convertelem(S1,'BEAM');
-S3 = mesh(LIGNE(P6,P3),rb,mat{1});
+S3 = mesh(LINE(P6,P3),rb,mat{1});
 S3 = convertelem(S3,'BEAM');
 S2 = mesh(QUADRANGLE(P1,P2,P3,P4),2*rs,2*rs,mat{2});
 S2 = convertelem(S2,elemtype,'fullintegration');

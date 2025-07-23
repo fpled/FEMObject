@@ -48,7 +48,7 @@ else
             eY = rot2D(eX,pi/2);
             syscoord = CARTESIAN2D(eX,eY); 
         case 3
-            if ischarin('param',varargin) && isa(getcharin('param',varargin),'VECTEUR')
+            if ischarin('param',varargin) && isa(getcharin('param',varargin),'VECTOR')
                 eY = getcharin('param',varargin);
                 eZ = cross(eX,eY);
                 eZ = normalize(eZ);

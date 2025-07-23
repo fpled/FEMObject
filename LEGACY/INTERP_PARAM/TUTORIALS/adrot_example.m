@@ -21,10 +21,10 @@ S=createddlnode(S,DDL('u'));
 S=final(S);
 
 % Cls PERIODIQUE
-S = addclperiodic(S,LIGNE(P1,P8),...
-                    LIGNE(P7,P2),'u');
-S = addclperiodic(S,LIGNE(POINT([h 0]),POINT([1-h 0])),...
-                    LIGNE(POINT([h 1]),POINT([1-h 1])),'u');
+S = addclperiodic(S,LINE(P1,P8),...
+                    LINE(P7,P2),'u');
+S = addclperiodic(S,LINE(POINT([h 0]),POINT([1-h 0])),...
+                    LINE(POINT([h 1]),POINT([1-h 1])),'u');
 
 plot(S)
 

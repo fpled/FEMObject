@@ -2,7 +2,7 @@ function f = nodalload(S,D,compo,v,varargin)
 % function f = nodalload(S,D,compo,v)
 % effort nodal
 % D zone d'application de l'effort :
-%      objet geometrique (POINT, LIGNE, PLAN, ...)
+%      objet geometrique (POINT, LINE, PLANE, ...)
 %      on applique l'effort sur les points de S contenu dans D
 %      si il y a plusieurs noeuds on divise la valeur de la force par le nombre
 %      de noeuds

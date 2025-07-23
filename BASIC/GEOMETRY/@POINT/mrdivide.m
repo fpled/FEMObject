@@ -5,7 +5,7 @@ function u = mrdivide(u,v)
 % v peut etre un MYDOUBLEND
 %
 % See also POINT/distance, POINT/minus, POINT/mtimes, POINT/mrdivide, POINT/ne, POINT/eq,
-% POINT/plus, POINT/uminus, POINT/norm, VECTEUR/mrdivide
+% POINT/plus, POINT/uminus, POINT/norm, VECTOR/mrdivide
 
 if isa(u,'POINT')
     u.MYDOUBLEND = u.MYDOUBLEND/v;

@@ -17,7 +17,7 @@ else
         nbsec =2;
         l = LINFORM(0,1,[],'selgroup',2);
         P = POINT([ 0,0 ; 1,0 ; 0,2 ; 1,2 ; 1,1 ; 2,1 ; 2,2 ; 0,1 ]);
-        l2 = LINFORM(0,-1,[],'boundary',LIGNE(P(1),P(2)));
+        l2 = LINFORM(0,-1,[],'boundary',LINE(P(1),P(2)));
     end
 end
 

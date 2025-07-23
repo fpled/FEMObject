@@ -1,7 +1,7 @@
 function M = RANDOMMODEL(model)
 %function M = RANDOMMODEL(model)
 % constructeur de la classe RANDOMMODEL
-% mode : UNID, PLAN, TRID
+% mode : UNID, PLANE, TRID
 if nargin==0 
     M=struct();
     M=class(M,'RANDOMMODEL',MODEL());

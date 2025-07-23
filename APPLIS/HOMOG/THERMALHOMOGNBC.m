@@ -111,10 +111,10 @@ classdef THERMALHOMOGNBC
                 P{3}=POINT([obj.size_domain(1) obj.size_domain(2)]);
                 P{4}=POINT([0 obj.size_domain(2)]);
                 
-                L{1}=LIGNE(P{1},P{2});
-                L{2}=LIGNE(P{2},P{3});
-                L{3}=LIGNE(P{3},P{4});
-                L{4}=LIGNE(P{4},P{1});
+                L{1}=LINE(P{1},P{2});
+                L{2}=LINE(P{2},P{3});
+                L{3}=LINE(P{3},P{4});
+                L{4}=LINE(P{4},P{1});
                 
                 obj.f{1}=surfload(obj.model{1},L{2},'QN',1);
                 obj.f{1}=obj.f{1}+surfload(obj.model{1},L{4},'QN',-1);
@@ -137,14 +137,14 @@ classdef THERMALHOMOGNBC
                 P{7}=POINT([x y 0]);
                 P{8}=POINT([x y z]);
                 
-                H{1}=PLAN(P{1},P{2},P{3});
-                H{4}=PLAN(P{5},P{6},P{7});
+                H{1}=PLANE(P{1},P{2},P{3});
+                H{4}=PLANE(P{5},P{6},P{7});
                 
-                H{2}=PLAN(P{1},P{2},P{5});
-                H{5}=PLAN(P{3},P{4},P{7});
+                H{2}=PLANE(P{1},P{2},P{5});
+                H{5}=PLANE(P{3},P{4},P{7});
                 
-                H{3}=PLAN(P{1},P{3},P{5});
-                H{6}=PLAN(P{2},P{4},P{6});
+                H{3}=PLANE(P{1},P{3},P{5});
+                H{6}=PLANE(P{2},P{4},P{6});
                 
                 for i=1:obj.dim
                     obj.f{i}=surfload(obj.model{i},H{i},'QN',-1)+surfload(obj.model{i},H{i+3},'QN',1);

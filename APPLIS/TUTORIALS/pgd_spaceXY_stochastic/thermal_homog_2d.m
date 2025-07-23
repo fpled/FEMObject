@@ -94,10 +94,10 @@ P{2}=POINT([size_img(1) 0]);
 P{3}=POINT([size_img(1) size_img(2)]);
 P{4}=POINT([0 size_img(2)]);
 
-L{1}=LIGNE(P{1},P{2});
-L{2}=LIGNE(P{2},P{3});
-L{3}=LIGNE(P{3},P{4});
-L{4}=LIGNE(P{4},P{1});
+L{1}=LINE(P{1},P{2});
+L{2}=LINE(P{2},P{3});
+L{3}=LINE(P{3},P{4});
+L{4}=LINE(P{4},P{1});
 
 f=calc_nonhomogeneous_vector(S1n,A);
 

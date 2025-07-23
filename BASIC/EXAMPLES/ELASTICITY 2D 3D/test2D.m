@@ -27,7 +27,7 @@ S=setmaterial(S,mat{1},2);
 %S = concatgroupelem(S);
 %S = splitgroupelem(S,2000);
 
-%S=MODEL('PLAN');
+%S=MODEL('PLANE');
 %S=addelem(S,'QUA4',S1,'mat',mat{1});
 %S=addelem(S,'QUA4',S2,'mat',mat{2});
 %S=addelem(S,'QUA4',S3,'mat',mat{3});
@@ -35,8 +35,8 @@ S=setmaterial(S,mat{1},2);
 
 S=final(S);
 
-D1  = DROITE(P1,P7);
-D3  = DROITE(P6,VECTEUR([1;0]));
+D1  = STRAIGHTLINE(P1,P7);
+D3  = STRAIGHTLINE(P6,VECTOR([1;0]));
 
 S=addcl(S,D1,'U');
 

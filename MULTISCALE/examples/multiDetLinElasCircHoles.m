@@ -123,10 +123,10 @@ if setProblem
     end
     
     %% Dirichlet boundary conditions
-    LU = LIGNE([0.0,L],[L,L]);
-    LL = LIGNE([0.0,0.0],[L,0.0]);
-    LMH = LIGNE([0.0,L/2],[L,L/2]);
-    LMV = LIGNE([L/2,0.0],[L/2,L]);
+    LU = LINE([0.0,L],[L,L]);
+    LL = LINE([0.0,0.0],[L,0.0]);
+    LMH = LINE([0.0,L/2],[L,L/2]);
+    LMV = LINE([L/2,0.0],[L/2,L]);
     
     % Global
     glob.S = final(glob.S);

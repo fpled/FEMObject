@@ -7,9 +7,9 @@ b = MYDOUBLEND(reshape(full(b),[1,1,1,numel(b)]));
 vx = MYDOUBLEND(reshape(full(vx),[1,1,1,numel(vx)]));
 vy = MYDOUBLEND(reshape(full(vy),[1,1,1,numel(vy)]));
 
-v1 = VECTEUR([vx;vy]);
+v1 = VECTOR([vx;vy]);
 v1 = normalize(v1);
-v2 = VECTEUR([-vy;vx]);
+v2 = VECTOR([-vy;vx]);
 v2 = normalize(v2);
 
 delta = POINT(x)-POINT([cx,cy]);

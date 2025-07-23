@@ -10,7 +10,7 @@ else
     u = struct();
     if isa(varargin{1},'NODE')
         coord = getcoord(varargin{1});
-    elseif isa(varargin{1},'VECTEUR')
+    elseif isa(varargin{1},'VECTOR')
         coord = getcompo(varargin{1})';
     else
         coord = varargin{1};
@@ -25,7 +25,7 @@ else
     end
     
     
-    if isa(varargin{1},'VECTEUR') || isa(varargin{1},'NODE')
+    if isa(varargin{1},'VECTOR') || isa(varargin{1},'NODE')
         syscoord = getsyscoord(varargin{1});
     else
         if nargin==1
@@ -37,6 +37,6 @@ else
     
     u.syscoord = syscoord;
     u = class(u,'POINT',coord,GEOMOBJECT(0,getindim(syscoord)));
-    superiorto('MYDOUBLE','MYDOUBLEND','VECTEUR','SYSCOORD');
+    superiorto('MYDOUBLE','MYDOUBLEND','VECTOR','SYSCOORD');
     
 end

@@ -9,8 +9,8 @@ mat = ELAS_BEAM('E',E,'NU',0.3,'RHO',7600,'S',Sec,'IZ',I,'IY',I,'IX',I*2);
 P1=POINT([0,0]);
 P2=POINT([L,0]);
 P3=POINT([L/2,0]);
-S1=mesh(LIGNE(P1,P2),r);
-S=MODEL('PLAN');
+S1=mesh(LINE(P1,P2),r);
+S=MODEL('PLANE');
 S=addelem(S,'BEAM',S1,'mat',mat);
 S=final(S,'norenum');
 
@@ -21,7 +21,7 @@ K=calc_rigi(S);
 ampl=2e6; 
 % fun = inline('ones(size(x,1),1)','x');
 fun = @(x) ones(size(x,1),1);
-f=bodyload(S,LIGNE(P1,P2),{'FY'},fun);
+f=bodyload(S,LINE(P1,P2),{'FY'},fun);
 
 figure(1)
 q=K\f;
@@ -37,7 +37,7 @@ norm(a-b)/norm(a)
 
 % fun = inline('[x(:,1),ones(size(x,1),1)]','x');
 fun = @(x) [x(:,1),ones(size(x,1),1)];
-f=bodyload(S,LIGNE(P1,P2),{'FX'},fun);
+f=bodyload(S,LINE(P1,P2),{'FX'},fun);
 ampl=1e9; 
 figure(1)
 q=K\f;
@@ -50,7 +50,7 @@ norm(a-b)/norm(a)
 
 % fun = inline('x(:,1)','x');
 fun = @(x) x(:,1);
-f=bodyload(S,LIGNE(P1,P2),{'MZ'},fun);
+f=bodyload(S,LINE(P1,P2),{'MZ'},fun);
 ampl=1e6; 
 figure(1)
 q=K\f;

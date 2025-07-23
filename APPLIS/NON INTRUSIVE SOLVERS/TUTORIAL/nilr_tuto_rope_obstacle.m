@@ -1,7 +1,7 @@
 clear all
 
 n = 40;
-Sx = mesh(LIGNE(0,1),n);
+Sx = mesh(LINE(0,1),n);
 x = getcoord(getnode(Sx));
 Sx = createddlnode(Sx,DDL('U'));
 Sx = addcl(Sx,POINT([0;1]),'U');

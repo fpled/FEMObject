@@ -13,9 +13,9 @@ vbx = MYDOUBLEND(reshape(full(vbx),[1,1,1,numel(vbx)]));
 vby = MYDOUBLEND(reshape(full(vby),[1,1,1,numel(vby)]));
 vbz = MYDOUBLEND(reshape(full(vbz),[1,1,1,numel(vbz)]));
 
-va = VECTEUR([vax;vay;vaz]);
+va = VECTOR([vax;vay;vaz]);
 va = normalize(va);
-vb = VECTEUR([vbx;vby;vbz]);
+vb = VECTOR([vbx;vby;vbz]);
 vb = normalize(vb);
 vc = cross(va,vb);
 

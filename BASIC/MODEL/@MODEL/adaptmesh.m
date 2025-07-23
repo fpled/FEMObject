@@ -74,6 +74,6 @@ if contain(options,'.mesh')
     G = exportfile(G,'.mesh','msh2',varargin{:});
 end
 
-n=max(nargout,1);
+n = max(nargout,1);
 varargout = cell(1,n);
 [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});

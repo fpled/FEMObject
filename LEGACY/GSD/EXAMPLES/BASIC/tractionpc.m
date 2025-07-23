@@ -1,7 +1,7 @@
 r=100;
 L = 1;
 P=POINT([0;L]);
-M = mesh(LIGNE(P(1),P(2)),r);
+M = mesh(LINE(P(1),P(2)),r);
 
 RV = RANDVARS();
 RV{1}=RVUNIFORM(0.5,1.5);

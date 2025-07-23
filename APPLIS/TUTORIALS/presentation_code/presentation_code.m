@@ -38,7 +38,7 @@ plot(S,'group')
 title('groupes d''elements')
 
 %% Importation de maillage depuis castem
-% Scast = cast2matlab_model('PLAN','C:\PROGS\CASTEM\EXAMPLES\Lshape_domain.txt');
+% Scast = cast2matlab_model('PLANE','C:\PROGS\CASTEM\EXAMPLES\Lshape_domain.txt');
 % figure(70)
 % plot(Scast);
 
@@ -56,8 +56,8 @@ plot(S)
 plot(B,'node','Color','r')
 title('boundary of a mesh (MODEL)')
 
-L1 = LIGNE(P(4),POINT([2,1]));
-L2 = DROITE(P(1),POINT([1,0]));
+L1 = LINE(P(4),POINT([2,1]));
+L2 = STRAIGHTLINE(P(1),POINT([1,0]));
 figure(7)
 clf
 plot(S)
@@ -85,7 +85,7 @@ S = final(S);
 
 %% APPLY BOUNDARY CONDITIONS
 S = addcl(S,L2,'U');
-S = addcl(S,LIGNE(P(2),P(4)),'UY');
+S = addcl(S,LINE(P(2),P(4)),'UY');
 K = calc_rigi(S);
 
 f = surfload(S,L1,'FX',1);

@@ -159,14 +159,14 @@ P{6}=POINT([x 0 z]);
 P{7}=POINT([x y 0]);
 P{8}=POINT([x y z]);
 
-H{1}=PLAN(P{1},P{2},P{3});
-H{4}=PLAN(P{5},P{6},P{7});
+H{1}=PLANE(P{1},P{2},P{3});
+H{4}=PLANE(P{5},P{6},P{7});
 
-H{2}=PLAN(P{1},P{2},P{5});
-H{5}=PLAN(P{3},P{4},P{7});
+H{2}=PLANE(P{1},P{2},P{5});
+H{5}=PLANE(P{3},P{4},P{7});
 
-H{3}=PLAN(P{1},P{3},P{5});
-H{6}=PLAN(P{2},P{4},P{6});
+H{3}=PLANE(P{1},P{3},P{5});
+H{6}=PLANE(P{2},P{4},P{6});
 
 f=cell(3,1);
 

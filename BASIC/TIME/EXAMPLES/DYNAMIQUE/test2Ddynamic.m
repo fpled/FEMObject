@@ -3,7 +3,7 @@
 % D = mesh(DOMAIN(2,P(1),P(3)),2*n,2*n);
 % DD = mesh(DOMAIN(2,P(5),P(7)),n,n);
 % D = union(D,DD);
-% S = MODEL('PLAN');
+% S = MODEL('PLANE');
 % S = addnode(S,D.node);
 % S = addelem(S,'QUA4',D,'option','CONT','mat',MAT);
 
@@ -16,8 +16,8 @@ switch probtype
         
         S = setmaterial(S,MAT);
     case 2
-        S = cast2matlab_model('PLAN','C:\PROGRAMMES\CASTEM\EXAMPLES\mesh2Ddyna_model.txt',MAT);
-        % S = cast2matlab_model('PLAN','E:\PROGRAMMES\CASTEM\EXAMPLES\mesh2Ddyna_model_gros_1.txt',MAT);
+        S = cast2matlab_model('PLANE','C:\PROGRAMMES\CASTEM\EXAMPLES\mesh2Ddyna_model.txt',MAT);
+        % S = cast2matlab_model('PLANE','E:\PROGRAMMES\CASTEM\EXAMPLES\mesh2Ddyna_model_gros_1.txt',MAT);
 end
 xnode = getcoord(S.node);
 xmax = max(xnode(:,1));
@@ -27,8 +27,8 @@ ymin = min(xnode(:,2));
 
 P = POINT([xmin,ymin;xmax,ymin;xmax,ymax;xmin,ymax]);
 
-D1 = LIGNE(P(1),P(4));
-D2 = LIGNE(P(2),P(3));
+D1 = LINE(P(1),P(4));
+D2 = LINE(P(2),P(3));
 
 % S = convertelem(S,'TRI3');
 S = final(S);

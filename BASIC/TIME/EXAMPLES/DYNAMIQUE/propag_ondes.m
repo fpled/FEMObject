@@ -2,11 +2,11 @@ n=10;
 P=POINT([0,0;1,0;1,1;0,1;1,1/4;1,3/4]);
 
 MAT = ELAS_ISOT('E',1,'NU',0.,'RHO',1,'DIM3',1);
-D1=LIGNE(P(1),P(2));
-D2=LIGNE(P(2),P(3));
-D3=LIGNE(P(3),P(4));
-D4=LIGNE(P(4),P(1));
-D5=LIGNE(P(5),P(6));
+D1=LINE(P(1),P(2));
+D2=LINE(P(2),P(3));
+D3=LINE(P(3),P(4));
+D4=LINE(P(4),P(1));
+D5=LINE(P(5),P(6));
 
 S=mesh(DOMAIN(2,P(1),P(3)),2*n,2*n,MAT);
 S=final(S);

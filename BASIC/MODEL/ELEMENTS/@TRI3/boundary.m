@@ -41,9 +41,9 @@ systri = getsyscoord(elem,numlocal);
 sysseg = getsyscoordlocal(segbord);
 basetri = getbase(systri);
 baseseg = getbase(sysseg);
-eY = VECTEUR(baseseg(:,1));
+eY = VECTOR(baseseg(:,1));
 if getindim(systri)==3
-    eZ = VECTEUR(basetri(:,3));
+    eZ = VECTOR(basetri(:,3));
     eX = cross(eY,eZ);
     syscoord = CARTESIAN3D(eX,eY,eZ);
     % syscoord = systri;

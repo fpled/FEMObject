@@ -38,8 +38,8 @@ else
     P5=POINT([L,l/2,0]);
 end
 
-D1 = DROITE(P1,P4);
-D2 = DROITE(P2,P3);
+D1 = STRAIGHTLINE(P1,P4);
+D2 = STRAIGHTLINE(P2,P3);
 
 S = mesh(QUADRANGLE(P1,P2,P3,P4),r,r,mat{1});
 S = convertelem(S,elemtype);

@@ -20,12 +20,12 @@ p=8;
 X = PCMODEL(RV,'order',p,RANDPOLYS(RV));
 
 
-L1 = LIGNE(P(6),P(7));
-L2 = LIGNE(P(1),P(3));
-L3 = LIGNE(P(3),P(7));
-L4 = LIGNE(P(6),P(5));
-L5 = LIGNE(P(2),P(5));
-L6 = LIGNE(P(1),P(2));
+L1 = LINE(P(6),P(7));
+L2 = LINE(P(1),P(3));
+L3 = LINE(P(3),P(7));
+L4 = LINE(P(6),P(5));
+L5 = LINE(P(2),P(5));
+L6 = LINE(P(1),P(2));
 
 mat=FOUR_ISOT('k',1);
 S = setmaterial(S,mat);

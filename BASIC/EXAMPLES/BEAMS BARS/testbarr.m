@@ -14,7 +14,7 @@ MAT = ELAS_ISOT('E',E,'NU',0.3,'RHO',1,'S',1);
 
 P1 = POINT([0]);
 P2 = POINT([L]);
-S1 = mesh(LIGNE(P1,P2),n,MAT);
+S1 = mesh(LINE(P1,P2),n,MAT);
 S = MODEL('UNID');
 S = addelem(S,'BARR',S1,'mat',MAT);
 

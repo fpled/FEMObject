@@ -27,8 +27,8 @@ end
 S = setmaterial(S,MAT);
 S = final(S);
 
-PL1 = PLAN(P1,P2,P3);
-PL2 = PLAN(P4,P5,P6);
+PL1 = PLANE(P1,P2,P3);
+PL2 = PLANE(P4,P5,P6);
 
 S = addcl(S,PL1,'U',0);
 

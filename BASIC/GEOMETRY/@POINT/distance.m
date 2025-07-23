@@ -5,8 +5,8 @@ function w = distance(u,v,varargin)
 % u et v peuvent etre des POINT ou des GEOMOBJECT
 %
 % See also POINT/distance, POINT/minus, POINT/mtimes, POINT/mrdivide, POINT/ne, POINT/eq,
-% POINT/plus, POINT/uminus, POINT/norm, VECTEUR/ne,
-% PLAN/distance, HYPERPLAN/distance, DROITE/distance
+% POINT/plus, POINT/uminus, POINT/norm, VECTOR/ne,
+% PLANE/distance, HYPERPLANE/distance, STRAIGHTLINE/distance
 
 if isa(v,'POINT')
     w = norm(POINT(u)-v,varargin{:})';

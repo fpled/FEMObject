@@ -5,14 +5,14 @@ H = 1;
 P = POINT([0,0,0;L,0,0;L,L,0;0,L,0;0,0,H;L,0,H;L,L,H;0,L,H]);
 
 clear LI;
-LI{1} = mesh(LIGNE(P(1),P(5)),r);
-LI{2} = mesh(LIGNE(P(2),P(6)),r);
-LI{3} = mesh(LIGNE(P(3),P(7)),r);
-LI{4} = mesh(LIGNE(P(4),P(8)),r);
-LI{5} = mesh(LIGNE(P(5),P(6)),r);
-LI{6} = mesh(LIGNE(P(6),P(7)),r);
-LI{7} = mesh(LIGNE(P(7),P(8)),r);
-LI{8} = mesh(LIGNE(P(8),P(5)),r);
+LI{1} = mesh(LINE(P(1),P(5)),r);
+LI{2} = mesh(LINE(P(2),P(6)),r);
+LI{3} = mesh(LINE(P(3),P(7)),r);
+LI{4} = mesh(LINE(P(4),P(8)),r);
+LI{5} = mesh(LINE(P(5),P(6)),r);
+LI{6} = mesh(LINE(P(6),P(7)),r);
+LI{7} = mesh(LINE(P(7),P(8)),r);
+LI{8} = mesh(LINE(P(8),P(5)),r);
 
 LI = union(LI{:});
 ray = 0.1;
@@ -21,7 +21,7 @@ mat = ELAS_BEAM('RHO',7600,'E',70e9,'NU',0,'S',pi*ray^2,'IY',pi*ray^4/4,'IZ',pi*
 S = convertelem(LI,'BEAM',mat);
 S = final(S);
 
-PL1 = PLAN(P(1),P(2),P(3));
+PL1 = PLANE(P(1),P(2),P(3));
 S = addcl(S,PL1,{'U','R'},0);
 
 K = calc_rigi(S);

@@ -40,10 +40,10 @@ sysqua = getsyscoord(elem,numlocal);
 sysseg = getsyscoordlocal(segbord);
 basequa = getbase(sysqua);
 baseseg = getbase(sysseg);
-eY = VECTEUR(baseseg(:,1));
+eY = VECTOR(baseseg(:,1));
 
 if getindim(sysqua)==3
-    eZ = VECTEUR(basequa(:,3));
+    eZ = VECTOR(basequa(:,3));
     eX = cross(eY,eZ);
     syscoord = CARTESIAN3D(eX,eY,eZ);
     syscoord = sysqua;

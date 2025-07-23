@@ -103,8 +103,8 @@ if setProblem
     mat = setnumber(mat,1);
     Sadv = setmaterial(Sadv,mat);
     P = @(i) POINT(getnode(getridge(Sadv,i)));
-    L1 = LIGNE(P(5),P(6));
-    L2 = LIGNE(P(15),P(16));
+    L1 = LINE(P(5),P(6));
+    L2 = LINE(P(15),P(16));
     Sadv = final(Sadv);
     Sadv = addcl(Sadv,P(1),'T',0);
     A = calc_rigi(Sadv);

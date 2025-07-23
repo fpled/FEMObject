@@ -38,9 +38,9 @@ P4 = POINT([0,l,0]);
 P5 = POINT([L,0,H]);
 P6 = POINT([L,l,H]);
 
-D1 = DROITE(P1,P4);
-D2 = DROITE(P2,P3);
-D3 = DROITE(P5,P6);
+D1 = STRAIGHTLINE(P1,P4);
+D2 = STRAIGHTLINE(P2,P3);
+D3 = STRAIGHTLINE(P5,P6);
 
 S = mesh(QUADRANGLE(P1,P2,P3,P4),r,r,mat{1});
 S = convertelem(S,elemtype);

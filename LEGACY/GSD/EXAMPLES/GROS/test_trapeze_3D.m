@@ -58,7 +58,7 @@ lc = 0.5;
 
 x = getcoord(getnode(S));
 
-D = mesh(LIGNE(0,2),100);
+D = mesh(LINE(0,2),100);
 [V,L] = KL(RFGAUSSIANEXP2(1,0.2,lc),m,D,'modes');
 fprintf('\nmode #')
 for i=1:m

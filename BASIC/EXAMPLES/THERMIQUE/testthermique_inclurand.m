@@ -1,5 +1,5 @@
 
-S = cast2matlab_model('PLAN','E:\PROGRAMMES\CASTEM\mesh_inclu_rand_0.txt');
+S = cast2matlab_model('PLANE','E:\PROGRAMMES\CASTEM\mesh_inclu_rand_0.txt');
 mat=ELAS_ISOT('E',1,'NU',.3);
 S = setmaterial(S,mat);
 S = final(S);
@@ -12,10 +12,10 @@ plot(S)
 
 P  =POINT([0,0;1,0;1,1;0,1]);
 
-L1 = LIGNE(P(1),P(2));
-L2 = LIGNE(P(2),P(3));
-L3 = LIGNE(P(3),P(4));
-L4 = LIGNE(P(4),P(1));
+L1 = LINE(P(1),P(2));
+L2 = LINE(P(2),P(3));
+L3 = LINE(P(3),P(4));
+L4 = LINE(P(4),P(1));
 
 S = addcl(S,P(1),'U',0);
 S = addcl(S,P(2),'UY',0);

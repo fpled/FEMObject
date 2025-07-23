@@ -63,7 +63,7 @@ if setProblem
     for k=1:n
         C_patch = getcenter(D_patch{k});
         c_patch = double(C_patch);
-        B_patch{k} = LIGNE(c_patch-[a/2,0.0],c_patch+[a/2,0.0]);
+        B_patch{k} = LINE(c_patch-[a/2,0.0],c_patch+[a/2,0.0]);
     end
     
     cl_patch_D = 0.02;
@@ -123,8 +123,8 @@ if setProblem
     end
     
     %% Dirichlet boundary conditions
-    LU = LIGNE([0.0,L],[L,L]);
-    LL = LIGNE([0.0,0.0],[L,0.0]);
+    LU = LINE([0.0,L],[L,L]);
+    LL = LINE([0.0,0.0],[L,0.0]);
     
     % Global
     glob.S = final(glob.S);

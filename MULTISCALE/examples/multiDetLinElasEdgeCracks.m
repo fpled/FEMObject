@@ -51,7 +51,7 @@ if setProblem
     switch n
         case 1
             P_patch{1} = [a,0.0];
-            B_patch{1} = LIGNE([0.0,0.0],P_patch{1});
+            B_patch{1} = LINE([0.0,0.0],P_patch{1});
             D_patch{1} = DOMAIN(2,[0.0,-l],P_patch{1}+[l,l]);
         otherwise
             error('Wrong number of patches')
@@ -114,8 +114,8 @@ if setProblem
     end
     
     %% Dirichlet boundary conditions
-    LU = LIGNE([0.0,L/2],[w,L/2]);
-    LL = LIGNE([0.0,-L/2],[w,-L/2]);
+    LU = LINE([0.0,L/2],[w,L/2]);
+    LL = LINE([0.0,-L/2],[w,-L/2]);
     
     % Global
     glob.S = final(glob.S);

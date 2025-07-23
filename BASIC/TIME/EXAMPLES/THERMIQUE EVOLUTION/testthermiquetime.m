@@ -25,12 +25,12 @@ S=mesh(DOMAIN(2,P1,P3),r1,r2,mat);
 S=final(S);
 
 
-D1  = DROITE(P1,P4);
-D2  = DROITE(P2,P3);
-D3  = DROITE(P1,P2);
-D4  = DROITE(P4,P3);
-L1  = LIGNE(P1,P5);
-L2  = LIGNE(P1,P6);
+D1  = STRAIGHTLINE(P1,P4);
+D2  = STRAIGHTLINE(P2,P3);
+D3  = STRAIGHTLINE(P1,P2);
+D4  = STRAIGHTLINE(P4,P3);
+L1  = LINE(P1,P5);
+L2  = LINE(P1,P6);
 
 %S=addcl(S,D2,'T',0);
 S=addcl(S,D4,'T',0);

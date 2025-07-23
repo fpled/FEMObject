@@ -114,10 +114,10 @@ if solveProblem
     S = setmaterial(S,mat);
     
     %% Dirichlet boundary conditions
-    % L{1} = LIGNE([0.0,0.0,0.0],[a,0.0,0.0]);
-    % L{2} = LIGNE([a,0.0,0.0],[a,b,0.0]);
-    % L{3} = LIGNE([a,b,0.0],[0.0,b,0.0]);
-    % L{4} = LIGNE([0.0,b,0.0],[0.0,0.0,0.0]);
+    % L{1} = LINE([0.0,0.0,0.0],[a,0.0,0.0]);
+    % L{2} = LINE([a,0.0,0.0],[a,b,0.0]);
+    % L{3} = LINE([a,b,0.0],[0.0,b,0.0]);
+    % L{4} = LINE([0.0,b,0.0],[0.0,0.0,0.0]);
     L = getedges(Q);
     
     S = final(S);

@@ -18,7 +18,7 @@ switch method
         for j=1:cellNum(2)
             for i=1:cellNum(1)
                 newModel = cellModel + ...
-                    VECTEUR([cellSize(1)*(i-1) ; cellSize(2)*(j-1)]) ;
+                    VECTOR([cellSize(1)*(i-1) ; cellSize(2)*(j-1)]) ;
                 feModel = union(feModel,newModel) ;
                 ifprint(model,sprintf('Period %i out of %i completed\n',...
                     i+(j-1)*cellNum(1),cellNb))

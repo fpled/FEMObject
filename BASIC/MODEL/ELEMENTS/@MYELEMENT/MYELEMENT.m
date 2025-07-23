@@ -12,7 +12,7 @@ function elem = MYELEMENT(node,numelem,connec,mat,option,varargin)
 
 elemg = SEG2(node,numelem,connec,mat,option);
 
-eX = VECTEUR(getsyscoordlocal(elemg));
+eX = VECTOR(getsyscoordlocal(elemg));
 param.L = diameter(elemg,node);
 
 switch getindim(eX)

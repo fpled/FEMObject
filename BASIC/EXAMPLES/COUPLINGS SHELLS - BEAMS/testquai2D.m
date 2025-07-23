@@ -14,11 +14,11 @@ P = POINT([0,0;Ld,0]);
 rept = linspace(0,Ld,nbt+2)';
 Pt = POINT([rept(2:end-1),ones(nbt,1)*(-Lt)]);
 
-S1 = mesh(LIGNE(P(1),P(2)),(nbt+1)*r,mat{1});
+S1 = mesh(LINE(P(1),P(2)),(nbt+1)*r,mat{1});
 S1 = convertelem(S1,'BEAM');
 clear S2;
 for k=1:nbt
-    S2{k} = mesh(LIGNE(Pt(k),Pt(k)+VECTEUR([0;Lt])),1,mat{2});
+    S2{k} = mesh(LINE(Pt(k),Pt(k)+VECTOR([0;Lt])),1,mat{2});
     S2{k} = convertelem(S2{k},'BARR'); 
 end
 S = union(S1,S2{:});

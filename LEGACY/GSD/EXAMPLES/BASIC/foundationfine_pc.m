@@ -5,7 +5,7 @@ H1= 10.;
 H2 = 20;
 B = 5 ;
 
-M = cast2matlab_model('PLAN','E:\PROGRAMMES\CASTEM\EXAMPLES\foundationfine_model.txt');
+M = cast2matlab_model('PLANE','E:\PROGRAMMES\CASTEM\EXAMPLES\foundationfine_model.txt');
 
 RV = RANDVARS();
 RV{1}=RVBETA(3,3,30,70);
@@ -32,16 +32,16 @@ M=setoption(M,'CONT');
 M=final(M);
 plot(M)
 
-M=addcl(M,DROITE(POINT([0,-H]),POINT([L,-H])),'U',0);
-M=addcl(M,DROITE(POINT([0,0]),POINT([0,-H])),'UX',0);
-M=addcl(M,DROITE(POINT([L,0]),POINT([L,-H])),'UX',0);
+M=addcl(M,STRAIGHTLINE(POINT([0,-H]),POINT([L,-H])),'U',0);
+M=addcl(M,STRAIGHTLINE(POINT([0,0]),POINT([0,-H])),'UX',0);
+M=addcl(M,STRAIGHTLINE(POINT([L,0]),POINT([L,-H])),'UX',0);
 
 clear K
 
 Ksto = calc_rigipc(M,X);
 
-L1 = LIGNE(POINT([0,0]),POINT([B,0]));
-L2 = LIGNE(POINT([B,0]),POINT([L,0]));
+L1 = LINE(POINT([0,0]),POINT([B,0]));
+L2 = LINE(POINT([B,0]),POINT([L,0]));
 clear f
 f{1} = surfload(M,L1,'FY',-1);
 f{2} = surfload(M,L1,'FY',-1);

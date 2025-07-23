@@ -33,16 +33,16 @@ Ppieu2 = Ppieu1;
 Ptirant1 = POINT([l,pasL,0]);
 Ptirant2 = POINT([l+ltirant,pasL,proftirant]);
 for i=1:8
-    Ppieu2(i) = Ppieu1(i)+VECTEUR([0;0;profpieu(i)]);
+    Ppieu2(i) = Ppieu1(i)+VECTOR([0;0;profpieu(i)]);
 end
 
 Mpieu = MODEL('TRID');
 for i=1:8
-    Mpieu = union(Mpieu,mesh(LIGNE(Ppieu1(i),Ppieu2(i)),rpieu,mat{1}));    
+    Mpieu = union(Mpieu,mesh(LINE(Ppieu1(i),Ppieu2(i)),rpieu,mat{1}));    
 end
 Mpieu = concatgroupelem(Mpieu);
 Mpieu = convertelem(Mpieu,'BEAM');
-Mtirant = mesh(LIGNE(Ptirant1,Ptirant2),rtirant,mat{3});
+Mtirant = mesh(LINE(Ptirant1,Ptirant2),rtirant,mat{3});
 Mtirant = convertelem(Mtirant,'BARR');
 
 Pdalle = POINT([0,0,0;0,2*pasL,0;l,2*pasL,0;l,0,0]);
@@ -58,7 +58,7 @@ clf
 plot(M,'FaceColor','w','node')
 
 if nbblocelem>1
-    V = VECTEUR([0;2*pasL;0]);
+    V = VECTOR([0;2*pasL;0]);
     Mquai = M;
     Pbastirant = Ptirant2;
     Pbaspieu = Ppieu2;
@@ -81,7 +81,7 @@ if nbblocelem>1
     M = concatgroupelem(M);
 end
 
-V = VECTEUR([0;nbblocelem*2*pasL;0]);
+V = VECTOR([0;nbblocelem*2*pasL;0]);
 Mquai = M;
 Pbastirant = Ptirant2;
 Pbaspieu = Ppieu2;
@@ -103,7 +103,7 @@ Mquai = final(Mquai);
 Mquai = addcl(Mquai,Pbaspieu,{'U','R'});
 Mquai = addcl(Mquai,Pbastirant,{'U'});
 
-D = DROITE(POINT([0,0,0]),POINT([0,L,0]));
+D = STRAIGHTLINE(POINT([0,0,0]),POINT([0,L,0]));
 F = surfload(Mquai,D,'FX',-100000);
 
 RV = RANDVARS(RVLOGNORMAL(Epieu,Epieu*0.3,'stat'));

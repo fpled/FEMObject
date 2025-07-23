@@ -15,9 +15,9 @@ S=setoption(S,'CONT');
 S=final(S);
 
 
-D1  = DROITE(P1,P4);
-D2  = DROITE(P2,P3);
-D3  = DROITE(P1,P2);
+D1  = STRAIGHTLINE(P1,P4);
+D2  = STRAIGHTLINE(P2,P3);
+D3  = STRAIGHTLINE(P1,P2);
 S=addcl(S,P1,'U',[0;0]);
 S=addcl(S,P2,'UY',0);
 

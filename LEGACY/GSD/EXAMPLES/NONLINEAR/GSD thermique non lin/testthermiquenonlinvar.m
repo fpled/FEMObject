@@ -28,8 +28,8 @@ switch dim
         r=15;
         P = POINT([ 0,0 ; 1,0 ; 0,2 ; 1,2 ; 1,1 ; 2,1 ; 2,2 ; 0,1 ]);
         if choixmail==2
-            S1 = cast2matlab_model('PLAN',['C:\PROGRAMMES\CASTEM\EXAMPLES\Lshape_domain1_' typemesh '.txt']);
-            S2 = cast2matlab_model('PLAN',['C:\PROGRAMMES\CASTEM\EXAMPLES\Lshape_domain2_' typemesh '.txt']);
+            S1 = cast2matlab_model('PLANE',['C:\PROGRAMMES\CASTEM\EXAMPLES\Lshape_domain1_' typemesh '.txt']);
+            S2 = cast2matlab_model('PLANE',['C:\PROGRAMMES\CASTEM\EXAMPLES\Lshape_domain2_' typemesh '.txt']);
             S = union(S1,S2);
             S=splitgroupelem(S,5000);
             if choixboun==1
@@ -39,7 +39,7 @@ switch dim
             if choixboun==1
                 S = addcl(S,create_boundary(S),'u',0);
             else
-                S = addcl(S,LIGNE(P(6),P(7)),'u',0);
+                S = addcl(S,LINE(P(6),P(7)),'u',0);
             end
         else
             S1 = mesh(DOMAIN(2,P(1),P(5)),r,r);
@@ -53,7 +53,7 @@ switch dim
             if choixboun==1
                 S = addcl(S,create_boundary(S),'u',0);
             else
-                S = addcl(S,LIGNE(P(6),P(7)),'u',0);
+                S = addcl(S,LINE(P(6),P(7)),'u',0);
             end
         end
         
@@ -1399,12 +1399,12 @@ qplotquan = unfreevector(S,uM);
 choixdroite=2;
 switch choixdroite
     case 1
-        D10 = LIGNE(POINT([1,0]),POINT([1,2]));
+        D10 = LINE(POINT([1,0]),POINT([1,2]));
         [rep,P10]=ispointin(D10,POINT(getnode(S)));
         t=double(getcoord(P10));t=t(1,2,:);t=t(:);t=sort(t);
         P10 = POINT([ones(length(t),1),t]);
     case 2
-        D10 = LIGNE(POINT([0,0]),POINT([0,2]));
+        D10 = LINE(POINT([0,0]),POINT([0,2]));
         [rep,P10]=ispointin(D10,POINT(getnode(S)));
         t=double(getcoord(P10));t=t(1,2,:);t=t(:);t=sort(t);
         P10 = POINT([zeros(length(t),1),t]);

@@ -8,8 +8,8 @@ mat{1}=ELAS_ISOT('E',a1,'S',1);
 mat{2}=ELAS_ISOT('E',a2,'S',1);
 
 P = POINT([0;a;1]);
-L1 = mesh(LIGNE(P(1),P(2)),n/2,mat{1});
-L2 = mesh(LIGNE(P(2),P(3)),n/2,mat{2});
+L1 = mesh(LINE(P(1),P(2)),n/2,mat{1});
+L2 = mesh(LINE(P(2),P(3)),n/2,mat{2});
 
 S = union(L1,L2) ;
 S=final(S,'norenum');

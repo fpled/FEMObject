@@ -5,7 +5,7 @@ function [P,repelim,repreplace] = unique(P)
 % P(rep2) sont les noeuds supprimes
 %
 % See also POINT/distance, POINT/minus, POINT/mtimes, POINT/mrdivide, POINT/ne, POINT/eq,
-% POINT/plus, POINT/uminus, POINT/norm, VECTEUR/ne
+% POINT/plus, POINT/uminus, POINT/norm, VECTOR/ne
 
 prec = getfemobjectoptions('tolerancepoint');
 coord = permute(double(getcoord(P)),[3 2 1]);

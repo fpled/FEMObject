@@ -24,7 +24,7 @@ end
 % RENUMEROTATION POUR REDUIRE LA LARGEUR DE BANDE
 if ischarin('renum',varargin)
     warning('Renumerotation avec symrcm');
-    % essayer le cas 2D domaine [0,1]^2, PLAN CONT avec poisson 0.3
+    % essayer le cas 2D domaine [0,1]^2, PLANE CONT avec poisson 0.3
     nodenum = getnumber(M.node);
     num = symrcm(M.connec.node2node); % reduire la largeur de bande
     [r,renum]=sort(num);

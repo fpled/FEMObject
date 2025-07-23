@@ -48,8 +48,8 @@ end
 S=final(S);
 
 
-D1  = DROITE(P1,P7);
-D3  = DROITE(P6,VECTEUR([1;0]));
+D1  = STRAIGHTLINE(P1,P7);
+D3  = STRAIGHTLINE(P6,VECTOR([1;0]));
 
 if strcmp(type,'meca')
     S=addcl(S,D1,{'U'},[0;0]);

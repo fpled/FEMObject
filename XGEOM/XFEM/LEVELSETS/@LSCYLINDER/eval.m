@@ -12,6 +12,6 @@ for i=1:2*dim
 end
 
 P = POINT([varargin{repP}]);
-V = VECTEUR([varargin{repV}]');
+V = VECTOR([varargin{repV}]');
 
-lsx=distance(x,DROITE(P,V),normtype)-r;
+lsx=distance(x,STRAIGHTLINE(P,V),normtype)-r;

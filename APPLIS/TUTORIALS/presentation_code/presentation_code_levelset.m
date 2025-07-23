@@ -72,8 +72,8 @@ figure(1000)
 clf
 lsplot(S);
 
-S = addcl(S,LIGNE([0,0],[0,1]),'U');
-f = surfload(S,LIGNE([1,0],[1,1]),'FX',1);
+S = addcl(S,LINE([0,0],[0,1]),'U');
+f = surfload(S,LINE([1,0],[1,1]),'FX',1);
 K = calc_rigi(S);
 u = K\f;
 s = calc_sigma(S,u);

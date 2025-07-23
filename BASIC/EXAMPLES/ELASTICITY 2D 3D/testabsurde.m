@@ -1,8 +1,8 @@
 P=POINT([0,0;1,0;1,1;0,1]);
 n=51;
 MAT = ELAS_ISOT('E',1,'NU',0.3,'RHO',1);
-D1=LIGNE(P(2),P(3));
-D2=LIGNE(P(1),P(4));
+D1=LINE(P(2),P(3));
+D2=LINE(P(1),P(4));
 S=mesh(DOMAIN(2,[0,0],[1,1]),n,n,MAT);
 S=final(S,'renum');
 S=addcl(S,D2,'U',0);

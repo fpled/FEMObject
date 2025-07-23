@@ -104,8 +104,8 @@ if setProblem
     
     %% Dirichlet boundary conditions
     % Global
-    L1 = LIGNE(getvertex(D,1),getvertex(D,4));
-    L2 = LIGNE(getvertex(D,2),getvertex(D,3));
+    L1 = LINE(getvertex(D,1),getvertex(D,4));
+    L2 = LINE(getvertex(D,2),getvertex(D,3));
     
     glob.S = final(glob.S);
     glob.S = addcl(glob.S,L1);

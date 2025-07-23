@@ -1,7 +1,7 @@
 function M = MODEL(mode)
 %function M = MODEL(mode)
 % constructeur de la classe MODEL
-% mode : UNID, PLAN, TRID
+% mode : UNID, PLANE, TRID
 if nargin==0
     M = MODEL(2);
 elseif nargin==1 && isa(mode,'MODEL')
@@ -19,7 +19,7 @@ else
     switch M.mode
         case 'UNID'
             M.syscoord = CARTESIAN1D();
-        case 'PLAN'
+        case 'PLANE'
             M.syscoord = CARTESIAN2D();
         case 'TRID'
             M.syscoord = CARTESIAN3D();
@@ -51,7 +51,7 @@ function indim = getindim(mode)
 switch mode
     case 'UNID'
         indim = 1;
-    case 'PLAN'
+    case 'PLANE'
         indim = 2;
     case 'TRID'
         indim = 3;
@@ -63,7 +63,7 @@ switch indim
     case 1
         mode = 'UNID';
     case 2
-        mode = 'PLAN';
+        mode = 'PLANE';
     case 3
         mode = 'TRID';
 end

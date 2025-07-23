@@ -8,8 +8,8 @@ nbddl = 2*6;
 
 sys = getsyscoord(elem);
 base = getbase(sys);
-eX = VECTEUR(base(:,1));
-eY = VECTEUR(base(:,2));
+eX = VECTOR(base(:,1));
+eY = VECTOR(base(:,2));
 sys = CARTESIAN2D(eX,eY);
 xnode = xnode*sys;
 

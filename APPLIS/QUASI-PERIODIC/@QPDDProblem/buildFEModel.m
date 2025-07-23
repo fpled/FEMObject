@@ -48,7 +48,7 @@ if method == 1
                 continue
             end
             newModel = newModel + ...
-                VECTEUR([cellSize(1)*(i-1) ; cellSize(2)*(j-1)]) ;
+                VECTOR([cellSize(1)*(i-1) ; cellSize(2)*(j-1)]) ;
             feModel = union(feModel,newModel) ;
             ifprint(pb.model.verbose,sprintf('Cell %i out of %i completed\n',...
                 ind,cellNb))
@@ -89,7 +89,7 @@ elseif method == 2
         % Get coordinates of lower left corner
         ll = patchLLCellList(p,:) ;
         ll = (formatIndex(3,cellNum,ll)-1)*diag(getCellSize(pb.model)) ;
-        patchModel = patchModel + VECTEUR(ll(:)) ;
+        patchModel = patchModel + VECTOR(ll(:)) ;
         ifprint(pb.model.verbose,' Done.\n')
         % Substitute
         ifprint(pb.model.verbose,'Substituting mesh on patch...')

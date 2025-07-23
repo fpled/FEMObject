@@ -5,7 +5,7 @@ cy= MYDOUBLEND(reshape(full(cy),[1,1,1,numel(cy)]));
 vx= MYDOUBLEND(reshape(full(vx),[1,1,1,numel(vx)]));
 vy= MYDOUBLEND(reshape(full(vy),[1,1,1,numel(vy)]));
 
-v = VECTEUR([vx;vy]);
+v = VECTOR([vx;vy]);
 v2 = rot2D(v,pi/2);
 
 c = POINT([cx,cy]);

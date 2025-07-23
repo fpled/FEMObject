@@ -22,13 +22,13 @@ profpieu = [-l,-l,-l,-l];
 
 Ppieu2 = Ppieu1;
 for i=1:4
-    Ppieu2(i) = Ppieu1(i)+VECTEUR([0;0;profpieu(i)]);
+    Ppieu2(i) = Ppieu1(i)+VECTOR([0;0;profpieu(i)]);
 end
 
 rpieu = 7;
 Mpieu = MODEL('TRID');
 for i=1:4
-    Mpieu = union(Mpieu,mesh(LIGNE(Ppieu1(i),Ppieu2(i)),rpieu,mat{1}));
+    Mpieu = union(Mpieu,mesh(LINE(Ppieu1(i),Ppieu2(i)),rpieu,mat{1}));
 end
 Mpieu = concatgroupelem(Mpieu);
 Mpieu = convertelem(Mpieu,'BEAM');
@@ -44,7 +44,7 @@ figure(1)
 clf
 plot(M,'FaceColor','w','node')
 
-V = VECTEUR([pasL;0;0]);
+V = VECTOR([pasL;0;0]);
 Mquai = M;
 Pbaspieu = Ppieu2;
 for k=1:nbtroncons-1
@@ -61,7 +61,7 @@ plot(Mquai,'FaceColor','w')
 Mquai = final(Mquai);
 Mquai = addcl(Mquai,Pbaspieu,{'U','R'});
 
-D = DROITE(POINT([0,0,0]),POINT([L,0,0]));
+D = STRAIGHTLINE(POINT([0,0,0]),POINT([L,0,0]));
 F = surfload(Mquai,D,'FX',-100000);
 F = F + surfload(Mquai,D,'FY',-200000);
 

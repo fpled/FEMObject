@@ -5,6 +5,6 @@ function w = eq(u,v)
 % u et v peuvent etre des multipoints
 %
 % See also POINT/distance, POINT/minus, POINT/mtimes, POINT/mrdivide, POINT/ne, POINT/eq,
-% POINT/plus, POINT/uminus, POINT/norm, VECTEUR/eq
+% POINT/plus, POINT/uminus, POINT/norm, VECTOR/eq
 
 w = (distance(u,v)<=eps);    

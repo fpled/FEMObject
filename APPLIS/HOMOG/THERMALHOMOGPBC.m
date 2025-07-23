@@ -147,24 +147,24 @@ classdef THERMALHOMOGPBC
             obj.macro_mode_unfree=cell(obj.dim,1);
             obj.macro_mode_free=cell(obj.dim,1);
             if obj.dim==2
-                ls=LSHYPERPLAN(2,0,0,1,0);
+                ls=LSHYPERPLANE(2,0,0,1,0);
                 ls=lseval(ls,obj.model);
                 obj.macro_mode_unfree{1}=getvalue(ls);
                 obj.macro_mode_free{1}=freevector(obj.model,obj.macro_mode_unfree{1});
-                ls=LSHYPERPLAN(2,0,0,0,1);
+                ls=LSHYPERPLANE(2,0,0,0,1);
                 ls=lseval(ls,obj.model);
                 obj.macro_mode_unfree{2}=getvalue(ls);
                 obj.macro_mode_free{2}=freevector(obj.model,obj.macro_mode_unfree{2});
             else
-                ls=LSHYPERPLAN(3,0,0,0,1,0,0);
+                ls=LSHYPERPLANE(3,0,0,0,1,0,0);
                 ls=lseval(ls,obj.model);
                 obj.macro_mode_unfree{1}=getvalue(ls);
                 obj.macro_mode_free{1}=freevector(obj.model,obj.macro_mode_unfree{1});
-                ls=LSHYPERPLAN(3,0,0,0,0,1,0);
+                ls=LSHYPERPLANE(3,0,0,0,0,1,0);
                 ls=lseval(ls,obj.model);
                 obj.macro_mode_unfree{2}=getvalue(ls);
                 obj.macro_mode_free{2}=freevector(obj.model,obj.macro_mode_unfree{2});
-                ls=LSHYPERPLAN(3,0,0,0,0,0,1);
+                ls=LSHYPERPLANE(3,0,0,0,0,0,1);
                 ls=lseval(ls,obj.model);
                 obj.macro_mode_unfree{3}=getvalue(ls);
                 obj.macro_mode_free{3}=freevector(obj.model,obj.macro_mode_unfree{3});

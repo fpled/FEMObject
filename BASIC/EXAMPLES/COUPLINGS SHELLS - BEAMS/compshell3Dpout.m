@@ -37,12 +37,12 @@ P4 = POINT([0,l,H]);
 P5 = POINT([L/2,l/2,H]);
 P6 = POINT([L/2,l/2,0]);
 
-D1 = DROITE(P1,P2);
-D2 = DROITE(P2,P3);
-D3 = DROITE(P3,P4);
-D4 = DROITE(P4,P1);
+D1 = STRAIGHTLINE(P1,P2);
+D2 = STRAIGHTLINE(P2,P3);
+D3 = STRAIGHTLINE(P3,P4);
+D4 = STRAIGHTLINE(P4,P1);
 
-S1 = mesh(LIGNE(P5,P6),rb,mat{1});
+S1 = mesh(LINE(P5,P6),rb,mat{1});
 S1 = convertelem(S1,'BEAM');
 S2 = mesh(QUADRANGLE(P1,P2,P3,P4),2*rs,2*rs,mat{2});
 S2 = convertelem(S2,elemtype);

@@ -7,7 +7,7 @@ elseif nargin==1 && isa(varargin{1},'char')
     switch varargin{1}
         case 'UNID'
             dim = 1;
-        case 'PLAN'
+        case 'PLANE'
             dim = 2;
         case 'TRID'
             dim = 3;
