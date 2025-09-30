@@ -6,5 +6,5 @@ if nargin<3 || isempty(number)
 end
 
 u = stepcounter(u);
-s = ['MeshSize ' valuesintobraces(number) ' = ' num2str(value) ' ;\n'];
+s = ['MeshSize ' tagsintobraces(number) ' = ' tag2str(value) ';\n'];
 u = addstring(u,s);

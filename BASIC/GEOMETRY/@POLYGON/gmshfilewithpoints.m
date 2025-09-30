@@ -5,15 +5,15 @@ function varargout = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberembeddedp
 % clD, clP : characteristic length
 
 if ~iscell(P), P = {P}; end
-if nargin<=3 || isempty(clP), clP = clD; end
+if nargin<4 || isempty(clP), clP = clD; end
 if isscalar(clP), clP = repmat(clP,1,length(P)); end
 
 n = numel(D.P);
-if nargin<=4 || isempty(numberpoints), numberpoints = 1:n; end
-if nargin<=5 || isempty(numberembeddedpoints), numberembeddedpoints = n+(1:length(P)); end
-if nargin<=6 || isempty(numberlines), numberlines = 1:n; end
-if nargin<=7 || isempty(numberlineloop), numberlineloop = n+1; end
-if nargin<=8 || isempty(numbersurface), numbersurface = 1; end
+if nargin<5 || isempty(numberpoints), numberpoints = 1:n; end
+if nargin<6 || isempty(numberembeddedpoints), numberembeddedpoints = n+(1:length(P)); end
+if nargin<7 || isempty(numberlines), numberlines = 1:n; end
+if nargin<8 || isempty(numberlineloop), numberlineloop = n+1; end
+if nargin<9 || isempty(numbersurface), numbersurface = 1; end
 
 G = GMSHFILE();
 PD = getvertices(D);

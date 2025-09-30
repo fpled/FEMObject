@@ -1,12 +1,28 @@
-function u = createrectangle(u,point,extents,numbersurface,varargin)
+function u = createrectangle(u,point,extents,numbersurface,roundedradius)
 % function u = createrectangle(u,point,extents,numbersurface)
-% function u = createrectangle(u,point,extents,numbersurface,radius)
+% function u = createrectangle(u,point,extents,numbersurface,roundedradius)
 
-if length(point)~=3
-    error('A rectangle is defined by the 3 coordinates of its lower-left corner: point = [x,y,z].')
+if ~(isnumeric(point) && numel(point)==3)
+    error('createrectangle:PointInvalid', ...
+        'point must be a numeric 1x3 vector [x,y,z].');
 end
-if length(extents)~=2
-    error('A rectangle is defined by the 2 extents (width and height): extents = [dx,dy].')
+if ~(isnumeric(extents) && numel(extents)==2)
+    error('createrectangle:ExtentsInvalid', ...
+        'extents must be a numeric 1x2 vector [dx,dy].');
 end
 
-u = createentity(u,'Rectangle',[point(:)' extents(:)' varargin{:}],numbersurface);
+base = [point(:).' extents(:).'];
+
+if nargin<5 || isempty(roundedradius)
+    vals = base;
+else
+    if ~(isnumeric(roundedradius) && isscalar(roundedradius))
+        error('createrectangle:RoundedRadiusInvalid', ...
+            'roundedradius must be a numeric scalar.');
+    end
+    vals = [base roundedradius];
+end
+
+u = createentity(u,'Rectangle',vals,numbersurface);
+
+end

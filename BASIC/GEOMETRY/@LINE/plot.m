@@ -7,10 +7,18 @@ nodecoord = double([P1;P2]) ;
 n = size(nodecoord);
 nodecoord = [nodecoord,zeros(n(1),n(2)==1)];
 connec = 1:2;
-options = patchoptions(getdim(L),varargin{:});
+
+% Plot using patch
+options = patchoptions(L.dim,varargin{:});
+hs = ishold;
+hold on
 
 H = patch('Faces',connec,'Vertices',nodecoord,options{:});
 
-if nargout>=1
+if ~hs
+    hold off
+end
+
+if nargout
     varargout{1} = H;
 end

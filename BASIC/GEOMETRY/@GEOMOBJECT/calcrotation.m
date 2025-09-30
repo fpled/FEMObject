@@ -1,27 +1,27 @@
 function R = calcrotation(u,v,n)
 % function R = calcrotation(u,v,n)
 
+v = v(:).';
+v = v / norm(v); % unit tangent vector
+
 switch u.indim
     case 2
-        % Rotate in-plane around z = [0, 0, 1] by angle of rotation theta =
-        % atan2(vy, vx) using tangent vector v = [vx, vy]
-        v = v / norm(v); % unit tangent vector v = [cos(theta), sin(theta)]
+        % Rotate in-plane about z = [0, 0, 1] by angle theta = atan2(vy, vx)
+        % using tangent vector v = [vx, vy] = [cos(theta), sin(theta)]
         R = [v(1), -v(2);
              v(2),  v(1)];
         % theta = atan2(v(2), v(1)); % in-plane twist angle theta
         % R = [cos(theta), -sin(theta);
         %      sin(theta),  cos(theta)];
     case 3
+        n = n(:).';
+        n = n / norm(n); % unit normal vector
         %% Old version
-        % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-        % atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-        % rotation formula
-        % n = n / norm(n);
+        % Rotate about axis n = [nx, ny, nz] by angle phi = atan2(vy, vx)
+        % using tangent vector v = [vx, vy] = [cos(phi), sin(phi)] via Rodrigues' rotation formula
         % Q = [    0, -n(3),  n(2);
         %       n(3),     0, -n(1);
         %      -n(2),  n(1),    0]; % skew for n = [nx, ny, nz]
-        % v = [C.vx, C.vy];
-        % v = v / norm(v); % unit tangent vector v = [cos(phi), sin(phi)]
         % % R = eye(3) + v(2)*Q + (1-v(1))*Q^2;
         % R = v(1)*eye(3) + v(2)*Q + (1-v(1))*(n'*n);
         % % phi = atan2(v(2), v(1)); % in-plane twist angle phi
@@ -29,15 +29,14 @@ switch u.indim
         % % R = cos(phi)*eye(3) + sin(phi)*Q + (1-cos(phi))*(n'*n);
         
         %% New version
-        % Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-        % using tangent vector v = [vx, vy], then tilt from z axis to normal
-        % vector n = [nx, ny, nz] so that the circle's normal is n regardless
-        % of v = [vx, vy]
+        % Twist in XY-plane about z = [0, 0, 1] by angle phi = atan2(vy, vx)
+        % using tangent vector v = [vx, vy] = [cos(phi), sin(phi)], then 
+        % tilt from z axis to normal vector n = [nx, ny, nz] so that the 
+        % circle's normal is n regardless of v
         
-        % Twist XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
+        % Twist the XY-plane about z = [0, 0, 1] by angle phi = atan2(vy, vx)
         % using tangent vector v = [vx, vy] = [cos(phi), sin(phi)]
-        v = v / norm(v); % unit tangent vector v = [cos(phi), sin(phi)]
-        z = [0, 0, 1];
+        z = [0, 0, 1]; % unit z axis
         % Qz = [    0, -z(3),  z(2);
         %        z(3),     0, -z(1);
         %       -z(2),  z(1),    0]; % skew for z = [0, 0, 1]
@@ -51,26 +50,25 @@ switch u.indim
         % R_twist = cos(phi)*eye(3) + sin(phi)*Qz + (1-cos(phi))*(z'*z);
         
         % Tilt the XY-plane normal vector z = [0, 0, 1] into target
-        % normal vector n = [nx, ny, nz] using tilt axis k = z x n / ||z x n||
-        n = n / norm(n); % unit normal vector
+        % normal vector n = [nx, ny, nz] using unit tilt axis k = z x n / ||z x n||
         k = cross(z, n); % tilt axis k = z x n that is orthogonal to both z and n
         st = norm(k);    % sin(theta)
         ct = dot(z, n);  % cos(theta)
         if st > eps
-            k = k / st;  % unit tilt axis
+            k = k / st;                % unit tilt axis
             Qk = [    0, -k(3),  k(2);
                    k(3),     0, -k(1);
                   -k(2),  k(1),    0]; % skew for k = [kx, ky, kz]
             % R_tilt = eye(3) + st*Qk + (1-ct)*Qk^2;
             R_tilt = ct*eye(3) + st*Qk + (1-ct)*(k'*k);
-            % theta = acos(ct); % out-of-plane angle theta
+            % theta = atan2(st, ct);   % out-of-plane tilt angle theta
             % R_tilt = eye(3) + sin(theta)*Qk + (1-cos(theta))*Qk^2;
             % R_tilt = cos(theta)*eye(3) + sin(theta)*Qk + (1-cos(theta))*(k'*k);
-        else % n = [nx, ny, nz] exactly aligned or anti-aligned with z = [0, 0, 1]
-            if ct < 0 % n = [nx, ny, nz] aligned with -z = [0, 0, -1]
-                R_tilt = diag([1,-1,-1]);  % rotate by pi about x = [1, 0, 0] (or any in-plane axis)
-            else      % n = [nx, ny, nz] aligned with z = [0, 0, 1]
-                R_tilt = eye(3);
+        else                              % n = [nx, ny, nz] aligned or anti-aligned with z = [0, 0, 1]
+            if ct < 0                     % n = [nx, ny, nz] aligned with -z = [0, 0, -1]
+                R_tilt = diag([1,-1,-1]); % rotate by pi = 180° about x = [1, 0, 0] (or any in-plane axis)
+            else                          % n = [nx, ny, nz] aligned with +z = [0, 0, 1]
+                R_tilt = eye(3);          % identity
             end
         end
         

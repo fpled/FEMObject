@@ -1,36 +1,38 @@
-function varargout = surf(C,varargin)
-% function varargout = surf(C,varargin)
+function varargout = surf(T,varargin)
+% function varargout = surf(T,varargin)
 
-npts = getcharin('npts',varargin,200); % angular resolution
+% Major radius, minor radius, and opening angle
+r1 = T.r1;
+r2 = T.r2;
+angle = T.angle;
+if isstring(angle), angle = char(angle); end
+if ischar(angle),   angle = str2num(lower(angle)); end
 
-r = C.r;
-h = C.h;
+% Angular resolution: 200 points for full major circle (angle = 2*pi), scale for partial arc (angle < 2*pi)
+%                     100 points for minor circle
+npts = getcharin('npts',varargin,max(2,round(200*angle/(2*pi)))); % points along major circle
+mpts = getcharin('mpts',varargin,50);                            % points along minor circle
 
-% Build parametric cylinder
-[X,Y,Z] = cylinder(r,npts);
-Z = Z * h;
+% Major (u) and minor (v) angles
+tu = linspace(0,angle,npts+1)'; % parametric major angle
+tv = linspace(0,2*pi,mpts+1)';  % parametric minor angle
+[U, V] = meshgrid(tu, tv);
 
-% Flatten into vertex list
-nodecoord = [X(:), Y(:), Z(:)];
+% Build parametric torus
+X = (r1 + r2 * cos(V)) .* cos(U);
+Y = (r1 + r2 * cos(V)) .* sin(U);
+Z = r2 * sin(V);
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
-v = [C.vx, C.vy];
-n = [C.nx, C.ny, C.nz];
-R = calcrotation(C,v,n);
+% Rotation matrix
+v = [T.vx, T.vy];
+n = [T.nx, T.ny, T.nz];
+R = calcrotation(T,v,n);
 
-% Translate to center c = [cx, cy, cz]
-c = [C.cx, C.cy, C.cz];
+% Center
+c = [T.cx, T.cy, T.cz];
 
-% Rotate and translate
-nodecoord = nodecoord * R + c;
+% Rotate into global frame and translate to center
+nodecoord = [X(:), Y(:), Z(:)] * R + c;
 
 % Reshape back to 2D grids for surf
 sz = size(X);
@@ -38,9 +40,16 @@ X = reshape(nodecoord(:,1), sz);
 Y = reshape(nodecoord(:,2), sz);
 Z = reshape(nodecoord(:,3), sz);
 
-% Plot side using surf
-options = patchoptions(C.indim,varargin{:});
+% Plot using surf
+options = patchoptions(T.indim,varargin{:});
+hs = ishold;
+hold on
+
 H = surf(X, Y, Z, options{:});
+
+if ~hs
+    hold off
+end
 
 axis image
 
@@ -60,6 +69,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

@@ -11,6 +11,19 @@ function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,
 %             'r', 'rect' or 'rectangular' for rectangular notch
 %             'v', 'V' or 'triangular' for V notch
 
+Box         = getcharin('Box',varargin,[]);
+refinecrack = ischarin('refinecrack',varargin);
+recombine   = ischarin('recombine',varargin);
+isrect      = any(ischarin({'r','rect','rectangle'},varargin));
+istri       = any(ischarin({'v','V','triangular'},varargin));
+iscirc      = any(ischarin({'c','circ','circular'},varargin));
+
+varargin = delcharin('Box',varargin);
+varargin = delonlycharin({'refinecrack','recombine', ...
+                          'r','rect','rectangle', ...
+                          'v','V','triangular', ...
+                          'c','circ','circular'},varargin);
+
 if nargin<9 || isempty(indim)
     indim = 2;
 end
@@ -40,45 +53,55 @@ P{5} = [ L ,  h];
 P{6} = [ 0 ,  h];
 P{7} = [-L ,  h];
 
-H{1} = CIRCLE(-lh,h-ph-2*dh,r);
-H{2} = CIRCLE(-lh,h-ph-dh,r);
-H{3} = CIRCLE(-lh,h-ph,r);
+H{1} = CIRCLE(-lh, h-ph-2*dh, r);
+H{2} = CIRCLE(-lh, h-ph-dh  , r);
+H{3} = CIRCLE(-lh, h-ph     , r);
 
 G = GMSHFILE();
 if nargin>=8 && ischar(filename)
     G = setfile(G,filename);
 end
 
-if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
+if isrect
     % rectangular notch
     PC{1} = [-b-c/2, -h  ];
     PC{2} = [-b-c/2, -h+a];
     PC{3} = [-b+c/2, -h+a];
     PC{4} = [-b+c/2, -h  ];
-    G = createpoints(G,P,clD,[1:2,7:11]);
-    if ischarin('refinecrack',varargin)
-        clcrack = clC;
+    
+    if refinecrack
+        clCrack = clC;
     else
-        clcrack = [clD clC clC clD];
+        clCrack = [clD clC clC clD];
     end
-    G = createpoints(G,PC,clcrack,3:6);
-    G = createlines(G,[[1 2];[2 3];[3 4];[4 5];[5 6];...
-        [6 7];[7 8];[8 9];[9 10];[10 11];[11 1]],1:11);
-elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
+    
+    numpoints = 1:11;
+    numlines  = 1:11;
+    G = createpoints(G,P,clD,numpoints([1:2,7:11]));
+    G = createpoints(G,PC,clCrack,numpoints(3:6));
+    n = length(numpoints);
+    seg = [1:n; 2:n,1]';
+    G = createlines(G,numpoints(seg),numlines);
+elseif istri
     % V (triangular) notch
     PC{1} = [-b-c/2, -h  ];
     PC{2} = [-b    , -h+a];
     PC{3} = [-b+c/2, -h  ];
-    G = createpoints(G,P,clD,[1:2,6:10]);
-    if ischarin('refinecrack',varargin)
-        clcrack = clC;
+    
+    if refinecrack
+        clCrack = clC;
     else
-        clcrack = [clD clC clD];
+        clCrack = [clD clC clD];
     end
-    G = createpoints(G,PC,clcrack,3:5);
-    G = createlines(G,[[1 2];[2 3];[3 4];[4 5];[5 6];...
-        [6 7];[7 8];[8 9];[9 10];[10 1]],1:10);
-else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
+    
+    numpoints = 1:10;
+    numlines  = 1:10;
+    G = createpoints(G,P,clD,numpoints([1:2,6:10]));
+    G = createpoints(G,PC,clCrack,numpoints(3:5));
+    n = length(numpoints);
+    seg = [1:n; 2:n,1]';
+    G = createlines(G,numpoints(seg),numlines);
+else%if iscirc
     % circular notch
     PC{1} = [-b-c/2, -h      ];
     PC{2} = [-b-c/2, -h+a-c/2];
@@ -86,90 +109,86 @@ else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circula
     PC{4} = [-b+c/2, -h+a-c/2];
     PC{5} = [-b    , -h+a-c/2];
     PC{6} = [-b+c/2, -h      ];
-    G = createpoints(G,P,clD,[1:2,9:13]);
-    if ischarin('refinecrack',varargin)
-        clcrack = clC;
+    
+    if refinecrack
+        clCrack = clC;
     else
-        clcrack = [clD clC clC clC clC clD];
+        clCrack = [clD clC clC clC clC clD];
     end
-    G = createpoints(G,PC,clcrack,3:8);
-    G = createcirclearc(G,7,4:5,4);
-    G = createcirclearc(G,7,5:6,5);
-    G = createlines(G,[[1 2];[2 3];[3 4];...
-        [6 8];[8 9];[9 10];[10 11];[11 12];[12 13];[13 1]],[1:3,6:12]);
+    
+    numpoints = 1:13;
+    numlines  = 1:12;
+    G = createpoints(G,P,clD,numpoints([1:2,9:13]));
+    G = createpoints(G,PC,clCrack,numpoints(3:8));
+    G = createcirclearc(G,numpoints(7),numpoints(4:5),numlines(4));
+    G = createcirclearc(G,numpoints(7),numpoints(5:6),numlines(5));
+    seg = [1:3, 6, 8:13; 2:4, 8:13, 1]';
+    G = createlines(G,numpoints(seg),numlines([1:3,6:12]));
 end
 
-if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
-    % rectangular notch
-    numpoints = 12:16;
-    numlines = 12:16;
-    numlineloop = 1:11;
-elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
-    % V (triangular) notch
-    numpoints = 11:15;
-    numlines = 11:15;
-    numlineloop = 1:10;
-else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
-    % circular notch
-    numpoints = 14:18;
-    numlines = 13:17;
-    numlineloop = 1:12;
-end
+numlineloop = 0;
+numcurves = numlines;
 for j=1:length(H)
-    numlineloop = [numlineloop,-numlines(1:end-1)];
-    GH = gmshfile(H{j},clH,numpoints(1),numpoints(2:end),numlines(1:end-1),numlines(end));
+    numpoints = numpoints(end)+(1:5);
+    numlines = numlines(end)+(1:4);
+    numlineloop = numlineloop(end)+1;
+    GH = gmshfile(H{j},clH,numpoints(1),numpoints(2:end),numlines,numlineloop);
     G = G+GH;
-    numpoints = numpoints+5;
-    numlines = numlines+5;
+    numcurves = [numcurves,-numlines];
 end
-G = createcurveloop(G,numlineloop,numlines(end));
-G = createplanesurface(G,numlines(end),1);
-if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
+
+numlineloop = numlineloop(end)+1;
+numsurface = 1;
+G = createcurveloop(G,numcurves,numlineloop);
+G = createplanesurface(G,numlineloop,numsurface);
+
+if recombine
+    G = recombinesurface(G,numsurface);
 end
-if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
+
+if isrect
     % rectangular notch
     numlinecrack = 3:5;
-elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
+elseif istri
     % V (triangular) notch
     numlinecrack = 3:4;
-else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
+else%if iscirc
     % circular notch
     numlinecrack = 3:6;
 end
-G = createphysicalcurve(G,numlinecrack,1);
-G = createphysicalsurface(G,1,1);
-varargin = delonlycharin({'recombine','refinecrack'},varargin);
+numphysicalcurve = 1;
+numphysicalsurface = 1;
+G = createphysicalcurve(G,numlinecrack,numphysicalcurve);
+G = createphysicalsurface(G,numsurface,numphysicalsurface);
 
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = clC;
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

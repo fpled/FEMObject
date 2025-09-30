@@ -6,7 +6,10 @@ function varargout = gmshDomainWithInclusion(D,I,clD,clI,filename,indim,varargin
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(D) by default)
 
-isextruded = ischarin('extrude',varargin);
+Box       = getcharin('Box',varargin,[]);
+extrusion = ischarin('extrude',varargin);
+
+varargin = delcharin('Box',varargin);
 varargin = delonlycharin('extrude',varargin);
 
 if nargin<6 || isempty(indim)
@@ -23,6 +26,8 @@ if isscalar(clI)
     clI = repmat(clI,1,length(I));
 end
 
+br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
+
 dim = getdim(D);
 
 if dim==2
@@ -31,10 +36,17 @@ if dim==2
     numlineloop = 1;
     G = gmshfile(D,clD,numpoints,numlines,numlineloop);
 elseif dim==3
-    numpoints = 1:8;
-    numlines = 1:12;
-    numlineloop = 1:6;
-    numsurface = 1:6;
+    if extrusion
+        numpoints = 1:4;
+        numlines = 1:4;
+        numlineloop = 1;
+        numsurface = 1;
+    else
+        numpoints = 1:8;
+        numlines = 1:12;
+        numlineloop = 1:6;
+        numsurface = 1:6;
+    end
     numsurfaceloop = 1;
     G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,numsurfaceloop);
 end
@@ -44,12 +56,12 @@ end
 
 numembeddedpoints = [];
 numembeddedlines = [];
-if dim==2
+numembeddedsurfaces = [];
+if dim==2 || (dim==3 && extrusion)
     numcurves = numlines;
     numsurface = 1;
     numphysicalsurface = 1;
 elseif dim==3
-    numembeddedsurfaces = [];
     numsurfaces = numsurface;
     numvolume = 1;
     numphysicalvolume = 1;
@@ -71,10 +83,8 @@ for j=1:length(I)
                 numlines = numlines(end)+(1:4);
                 numlineloop = numlineloop(end)+1;
                 numsurface = numsurface(end)+1;
-                if dim==2
-                    GI = gmshfile(I{j},clI(j),numpoints,numlines,numlineloop,numsurface);
-                elseif dim==3
-                    GI = gmshfile(I{j},clI(j),numpoints,numlines,numlineloop,numsurface);
+                GI = gmshfile(I{j},clI(j),numpoints,numlines,numlineloop,numsurface);
+                if dim==3
                     numembeddedsurfaces = [numembeddedsurfaces,numsurface];
                 end
             elseif getdim(I{j})==3
@@ -91,10 +101,8 @@ for j=1:length(I)
             numlines = numlines(end)+(1:4);
             numlineloop = numlineloop(end)+1;
             numsurface = numsurface(end)+1;
-            if dim==2
-                GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines,numlineloop,numsurface);
-            elseif dim==3
-                GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines,numlineloop,numsurface);
+            GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines,numlineloop,numsurface);
+            if dim==3
                 numembeddedsurfaces = [numembeddedsurfaces,numsurface];
             end
         elseif isa(I{j},'SPHERE') || isa(I{j},'ELLIPSOID')
@@ -109,26 +117,80 @@ for j=1:length(I)
             P = getvertices(I{j});
             tol = getfemobjectoptions('tolerancepoint');
             angle = getangle(I{j});
+            if isstring(angle), angle = char(angle); end
+            if ischar(angle),   angle = str2num(lower(angle)); end
+            isfull = abs(angle - 2*pi) < tol;
             n = numel(P)/2; % number of points at base/top
-            numpoints = numpoints(end)+(1:(2+2*n)); % 1 base center + 1 top center + n base points + n top points
-            if abs(angle - 2*pi) < tol
-                % Full cylinder: closed contour
-                numlines = numlines(end)+(1:3*n); % n base arcs + n top arcs + n verticals
-                numlineloop = numlineloop(end)+(1:(n+2)); % 1 base circle + 1 top circle + n lateral faces
-                numsurface = numsurface(end)+(1:(n+2)); % same as numlineloop
+            if extrusion
+                numpoints = numpoints(end)+(1:(1+n)); % 1 base center + n base points
+                if isfull, numlines = numlines(end)+(1:n); % n base arcs
+                else,      numlines = numlines(end)+(1:(n+1)); % (n-1) base arcs + 2 base radials
+                end
+                numlineloop = numlineloop(end)+1; % 1 base circle
+                numsurface = numsurface(end)+1; % same as numlineloop
+                center = getc(I{j});
+                GI = GMSHFILE();
+                GI = createpoint(GI,center,clI(j),numpoints(1));
+                GI = createpoints(GI,P(1:n),clI(j),numpoints(2:end));
+                if isfull
+                    % Full cylinder base: closed circle contour
+                    GI = createcirclecontour(GI,numpoints(1),numpoints(2:end),numlines,numlineloop);
+                else
+                    % Partial cylinder base: open circle arc + two radial lines
+                    GI = createcirclearccontour(GI,numpoints(1),numpoints(2:end),numlines,numlineloop);
+                end
+                GI = createplanesurface(GI,numlineloop,numsurface);
+                numembeddedsurfaces = [numembeddedsurfaces,numsurface];
+                I{j} = setdim(I{j},2);
             else
-                % Partial cylinder: open arc
-                numlines = numlines(end)+(1:(3*n+3)); % (n-1) base arcs + 2 base radials + (n-1) top arcs + 2 top radials + n verticals + 1 center vertical
-                numlineloop = numlineloop(end)+(1:(n+3)); % 1 base circle + 1 top circle + (n-1) lateral faces +  2 radial faces
-                numsurface = numsurface(end)+(1:(n+3)); % same as numlineloop
+                numpoints = numpoints(end)+(1:(2+2*n)); % 1 base center + 1 top center + n base points + n top points
+                if isfull
+                    % Full cylinder
+                    numlines = numlines(end)+(1:3*n); % n base arcs + n top arcs + n verticals
+                    numlineloop = numlineloop(end)+(1:(n+2)); % 1 base circle + 1 top circle + n lateral faces
+                    numsurface = numsurface(end)+(1:(n+2)); % same as numlineloop
+                else
+                    % Partial cylinder
+                    numlines = numlines(end)+(1:(3*n+3)); % (n-1) base arcs + 2 base radials + (n-1) top arcs + 2 top radials + n verticals + 1 center vertical
+                    numlineloop = numlineloop(end)+(1:(n+3)); % 1 base circle + 1 top circle + (n-1) lateral faces +  2 radial faces
+                    numsurface = numsurface(end)+(1:(n+3)); % same as numlineloop
+                end
+                numsurfaceloop = numsurfaceloop(end)+1;
+                numvolume = numvolume(end)+1;
+                GI = gmshfile(I{j},clI(j),numpoints(1:2),numpoints(3:end),numlines,numlineloop,numsurface,numsurfaceloop,numvolume);
+            end
+        elseif isa(I{j},'TORUS')
+            P = getvertices(I{j});
+            tol = getfemobjectoptions('tolerancepoint');
+            angle = getangle(I{j});
+            if isstring(angle), angle = char(angle); end
+            if ischar(angle),   angle = str2num(lower(angle)); end
+            isfull = abs(angle - 2*pi) < tol;
+            n = numel(P)/4; % number of minor-circle rings
+            numpoints = numpoints(end)+(1:(3+5*n)); % 3 major centers + n minor centers + 4*n minor points
+            if isfull
+                % Full torus
+                numlines = numlines(end)+(1:8*n); % 4*n minor arcs + 4*n major arcs
+                numlineloop = numlineloop(end)+(1:4*n); % 4*n major circle arcs
+                numsurface = numsurface(end)+(1:4*n); % same as numlineloop
+            else
+                % Partial torus
+                numlines = numlines(end)+(1:(8*n-4)); % 4*n minor arcs + 4*(n-1) major arcs
+                numlineloop = numlineloop(end)+(1:(4*n-2)); % 4*(n-1) major circle arcs + 2 end minor circles
+                numsurface = numsurface(end)+(1:(4*n-2)); % same as numlineloop
             end
             numsurfaceloop = numsurfaceloop(end)+1;
             numvolume = numvolume(end)+1;
-            GI = gmshfile(I{j},clI(j),numpoints(1:2),numpoints(3:end),numlines,numlineloop,numsurface,numsurfaceloop,numvolume);
+            GI = gmshfile(I{j},clI(j),numpoints(1:3+n),numpoints(3+n+1:end),numlines,numlineloop,numsurface,numsurfaceloop,numvolume);
         end
-        if dim==2 && getdim(I{j})==2
-            numphysicalsurface = numphysicalsurface(end)+1;
-            GI = createphysicalsurface(GI,numsurface,numphysicalsurface);
+        if (dim==2 || (dim==3 && extrusion)) && getdim(I{j})==2
+            if dim==2
+                if ischarin('recombine',varargin)
+                    GI = recombinesurface(GI,numsurface);
+                end
+                numphysicalsurface = numphysicalsurface(end)+1;
+                GI = createphysicalsurface(GI,numsurface,numphysicalsurface);
+            end
             numcurves = [numcurves,-numlines];
         elseif dim==3 && getdim(I{j})==3
             numphysicalvolume = numphysicalvolume(end)+1;
@@ -139,48 +201,96 @@ for j=1:length(I)
     G = G+GI;
 end
 
-if dim==2
+if dim==2 || (dim==3 && extrusion)
     numlineloop = numlineloop(end)+1;
     numsurface = 1;
     G = createcurveloop(G,numcurves,numlineloop);
     G = createplanesurface(G,numlineloop,numsurface);
-elseif dim==3
-    if isextruded
-        P = getvertices(D);
-        vect = P{5}-P{1};
-        [G,out] = extrude(G,vect,'Surface',1,varargin{:});
-        numvolume = [out,'[1]'];
-    else
-        numsurfaceloop = numsurfaceloop(end)+1;
-        numvolume = 1;
-        G = createsurfaceloop(G,numsurfaces,numsurfaceloop);
-        G = createvolume(G,numsurfaceloop,numvolume);
-    end
+elseif dim==3 && ~extrusion
+    numsurfaceloop = numsurfaceloop(end)+1;
+    numvolume = 1;
+    G = createsurfaceloop(G,numsurfaces,numsurfaceloop);
+    G = createvolume(G,numsurfaceloop,numvolume);
 end
 
 if ~isempty(numembeddedpoints)
-    if dim==2
+    if dim==2 || (dim==3 && extrusion)
         G = embedpointsinsurface(G,numembeddedpoints,numsurface);
-    elseif dim==3
+    elseif dim==3 && ~extrusion
         G = embedpointsinvolume(G,numembeddedpoints,numvolume);
     end
 end
 
 if ~isempty(numembeddedlines)
-    if dim==2
+    if dim==2 || (dim==3 && extrusion)
         G = embedcurvesinsurface(G,numembeddedlines,numsurface);
-    elseif dim==3
+    elseif dim==3 && ~extrusion
         G = embedcurvesinvolume(G,numembeddedlines,numvolume);
     end
 end
 
-if dim==3 && ~isempty(numembeddedsurfaces)
+if dim==3 && ~extrusion && ~isempty(numembeddedsurfaces)
     G = embedsurfacesinvolume(G,numembeddedsurfaces,numvolume);
 end
 
-if ischarin('recombine',varargin)
-    G = recombinesurface(G);
+if dim==3 && extrusion
+    % Extrude domain without inclusions
+    P = getvertices(D);
+    vect = P{5}-P{1};
+    if ischarin('recombine',varargin) && ~ischarin('Layers',varargin)
+        numlayers = max(1, round(vect(3)/mean([clD,clI(:)'])));
+        varargin = [varargin, {'Layers',numlayers}];
+    end
+    [G,tag] = extrude(G,vect,'Surface',numsurface,varargin{:});
+    numtopsurface = br(tag,0); % top surface
+    numvolume     = br(tag,1); % volume
+    % Extrude embedded lines
+    if ~isempty(numembeddedlines)
+        N = numel(numembeddedlines);
+        % numtoppoints = cell(1,N);
+        numtoplines = cell(1,N);
+        numsurfaces = cell(1,N);
+        for i=1:N
+            tag = ['outline' num2str(i)];
+            G = extrude(G,vect,'Curve',numembeddedlines(i),tag,varargin{:});
+            numtoplines{i} = br(tag,0); % top line
+            numsurfaces{i} = br(tag,1); % surface
+            % numtoppoints{i} = ['p' num2str(i)];
+            % G = pointsofcurve(G,numtoplines{i},numtoppoints{i});
+        end
+        G = embedcurvesinsurface(G,numtoplines,numtopsurface);
+        G = embedsurfacesinvolume(G,numsurfaces,numvolume);
+    end
+    % Extrude embedded surfaces
+    if ~isempty(numembeddedsurfaces)
+        N = numel(numembeddedsurfaces);
+        numtopsurfaces = cell(1,N);
+        numvolumes     = cell(1,N);
+        for i=1:N
+            tag = ['outsurf' num2str(i)];
+            G = extrude(G,vect,'Surface',numembeddedsurfaces(i),tag,varargin{:});
+            numtopsurfaces{i} = br(tag,0); % top surface
+            numvolumes{i}     = br(tag,1); % volume
+        end
+        numvolume = [{numvolume},numvolumes];
+        if ischarin('recombine',varargin)
+            G = recombinesurface(G,[{numembeddedsurfaces},numtopsurfaces]);
+        end
+    end
+    if ischarin('recombine',varargin)
+        G = recombinesurface(G,{numsurface,numtopsurface});
+    end
 end
+
+if ischarin('recombine',varargin)
+    if dim==2
+        G = recombinesurface(G,numsurface);
+    elseif dim==3 && ~extrusion
+        G = recombinesurface(G);
+    end
+end
+
+varargin = delonlycharin('recombine',varargin);
 
 if dim==2
     numphysicalsurface = 1;
@@ -190,37 +300,34 @@ elseif dim==3
     G = createphysicalvolume(G,numvolume,numphysicalvolume);
 end
 
-varargin = delonlycharin('recombine',varargin);
-
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = min(clI);
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

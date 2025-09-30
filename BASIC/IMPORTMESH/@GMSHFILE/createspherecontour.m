@@ -1,9 +1,8 @@
 function u = createspherecontour(u,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop,varargin)
 % function u = createspherecontour(u,numcenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop)
 
-if nargin<6
-    numbersurfaces = [];
-end
+if nargin<6, numbersurfaces = []; end
+if nargin<7, numbersurfaceloop = []; end
 
 % Naming convention for main points on the sphere (order: +x, +y, +z, -x, -y, -z)
 xp = numberpoints(1); % +x
@@ -55,4 +54,6 @@ for k=1:size(octants,1)
     end
 end
 
-u = createsurfaceloop(u,numbersurfaces,numbersurfaceloop);
+if ~isempty(numbersurfaces) && ~isempty(numbersurfaceloop)
+    u = createsurfaceloop(u,numbersurfaces,numbersurfaceloop);
+end

@@ -7,6 +7,6 @@ hold on
 
 H = plot3(u(:,1),u(:,2),u(:,3),varargin{:});
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

@@ -32,6 +32,9 @@ end
 u = double(u);
 v = double(v);
 
+hs = ishold;
+hold on
+
 switch length(v)
     case 2
         H = quiver(v(1),v(2),u(1),u(2),ampl,plotoptions);
@@ -41,6 +44,10 @@ switch length(v)
         error('Wrong space dimension')
 end
 
-if nargout>=1
+if ~hs
+    hold off
+end
+
+if nargout
     varargout{1} = H;
 end

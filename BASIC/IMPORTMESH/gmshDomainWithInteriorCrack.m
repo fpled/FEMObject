@@ -29,19 +29,27 @@ if indim==2
     numlineloop = 1;
     numsurface = 1;
     G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,varargin{:});
-    numpoints = numpoints(end)+(1:2*length(C));
-    numlines = numlines(end)+(1:length(C));
+    % numembeddedpoints = [];
+    numembeddedcurves = [];
     for j=1:length(C)
-        GC = gmshfile(C{j},clC(j),numpoints([2*j-1,2*j]),numlines(j));
+        numpoints = numpoints(end)+(1:2);
+        numlines = numlines(end)+1;
+        GC = gmshfile(C{j},clC(j),numpoints,numlines);
         G = G+GC;
-        G = embedcurveinsurface(G,numlines(j),numsurface);
+        G = embedcurveinsurface(G,numlines,numsurface);
+        % numembeddedpoints = [numembeddedpoints,numpoints];
+        numembeddedcurves = [numembeddedcurves,numlines];
     end
+    
     if ~noduplicate
         physicalgroup = 1;
-        % G = createphysicalpoint(G,numpoints,1);
-        G = createphysicalcurve(G,numlines,physicalgroup);
+        % G = createphysicalpoint(G,numembeddedpoints,1);
+        G = createphysicalcurve(G,numembeddedcurves,physicalgroup);
     end
-    G = createphysicalsurface(G,1,1);
+    
+    numphysicalsurface = 1;
+    G = createphysicalsurface(G,numsurface,numphysicalsurface);
+
 elseif indim==3
     numpoints = 1:8;
     numlines = 1:12;
@@ -50,22 +58,34 @@ elseif indim==3
     numsurfaceloop = 1;
     numvolume = 1;
     G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,numsurfaceloop,numvolume,varargin{:});
-    numpoints = numpoints(end)+(1:4*length(C));
-    numlines = numlines(end)+(1:4*length(C));
-    numlineloop = numsurfaceloop(end)+(1:length(C));
-    numsurface = numsurface(end)+(1:length(C));
-    for j=1:length(C)    
-        GC = gmshfile(C{j},clC(j),numpoints(4*j-3:4*j),numlines(4*j-3:4*j),numlineloop(j),numsurface(j),varargin{:});
+    % numembeddedpoints = [];
+    % numembeddedcurves = [];
+    numembeddedsurfaces = [];
+    for j=1:length(C)
+        numpoints = numpoints(end)+(1:4);
+        numlines = numlines(end)+(1:4);
+        numlineloop = numsurfaceloop(end)+1;
+        numsurface = numsurface(end)+1;
+        GC = gmshfile(C{j},clC(j),numpoints,numlines,numlineloop,numsurface,varargin{:});
         G = G+GC;
-        G = embedsurfaceinvolume(G,numsurface(j),numvolume);
+        G = embedsurfaceinvolume(G,numsurface,numvolume);
+        % numembeddedpoints = [numembeddedpoints,numpoints];
+        % numembeddedcurves = [numembeddedcurves,numlines];
+        numembeddedsurfaces = [numembeddedsurfaces,numsurface];
     end
+    
     if ~noduplicate
         physicalgroup = 1;
-        % G = createphysicalcurve(G,numlines,1);
-        G = createphysicalsurface(G,numsurface,physicalgroup);
+        % G = createphysicalpoint(G,numembeddedpoints,1);
+        % G = createphysicalcurve(G,numembeddedcurves,1);
+        G = createphysicalsurface(G,numembeddedsurfaces,physicalgroup);
     end
-    G = createphysicalvolume(G,1,1);
+    
+    numphysicalvolume = 1;
+    G = createphysicalvolume(G,numvolume,numphysicalvolume);
+
 end
+
 varargin = delonlycharin('recombine',varargin);
 
 if nargin>=5 && ischar(filename)

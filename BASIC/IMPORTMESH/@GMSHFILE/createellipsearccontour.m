@@ -1,11 +1,10 @@
 function u = createellipsearccontour(u,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,varargin)
 % function u = createellipsearccontour(u,numcenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,reverse)
 
-if nargin<7
-    reverse = 1;
-else
-    reverse = getcharin('reverse',varargin,1);
-end
+if nargin<6, numbercurveloop = []; end
+
+reverse = getcharin('reverse',varargin,1);
+assert(ismember(reverse,[-1,1]),'''reverse'' must be +1 or -1');
 
 % Open arc
 n = length(numberpoints);
@@ -24,8 +23,11 @@ if length(numbermajorpoints)~=length(numberarcs)
 end
 
 u = createlines(u,seg_line,numberlines); % radial lines
-u = createellipsearcs(u,numbercenter,numbermajorpoints,seg_arc,numberarcs); % middle arcs
-if reverse==-1
-    numbercurves = fliplr(numbercurves);
+u = createellipsearcs(u,numbercenter,numbermajorpoints,seg_arc,numberarcs); % ellipse arcs
+
+if ~isempty(numbercurveloop)
+    if reverse==-1
+        numbercurves = fliplr(numbercurves);
+    end
+    u = createcurveloop(u,numbercurves,numbercurveloop);
 end
-u = createcurveloop(u,numbercurves,numbercurveloop);

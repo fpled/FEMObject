@@ -3,13 +3,23 @@ function varargout = gmshfile_occ_circle(C,cl,numbercurve,numbercurveloop,number
 % C : CIRCLE
 % cl : characteristic length
 
-if nargin<=2 || isempty(numbercurve), numbercurve = 1; end
-if nargin<=3 || isempty(numbercurveloop), numbercurveloop = 1; numbersurface = 1; end
-if nargin==4, numbersurface = []; end
+if nargin<3 || isempty(numbercurve), numbercurve = 1; end
+if nargin<4 || isempty(numbercurveloop), numbercurveloop = 1; end
+if nargin<5, numbersurface = []; elseif isempty(numbersurface), numbersurface = 1; end
+
+center = [C.cx,C.cy,C.cz];
+radius = C.r;
+
+v = [C.vx,C.vy];
+n = [C.nx,C.ny,C.nz];
+[dir,ang] = calcrotation_direction_angle(C,v,n);
 
 G = GMSHFILE();
 G = setfactory(G,"OpenCASCADE");
-G = createcircle(G,[C.cx,C.cy,C.cz],C.r,numbercurve);
+G = createcircle(G,center,radius,numbercurve);
+if abs(ang) > eps
+    G = rotate(G,dir,center,ang,'Curve',numbercurve);
+end
 G = setmeshsize(G,cl);
 G = createcurveloop(G,numbercurve,numbercurveloop);
 if ~isempty(numbersurface)

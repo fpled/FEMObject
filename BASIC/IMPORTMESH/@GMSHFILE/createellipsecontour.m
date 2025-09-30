@@ -1,11 +1,10 @@
 function u = createellipsecontour(u,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,varargin)
 % function u = createellipsecontour(u,numcenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,reverse)
 
-if nargin<7
-    reverse = 1;
-else
-    reverse = getcharin('reverse',varargin,1);
-end
+if nargin<6, numbercurveloop = []; end
+
+reverse = getcharin('reverse',varargin,1);
+assert(ismember(reverse,[-1,1]),'''reverse'' must be +1 or -1');
 
 if length(numbermajorpoints)~=length(numbercurves)
     error('numbermajorpoints must be the same length as numbercurves.');
@@ -17,4 +16,8 @@ seg = [1:n; 2:n,1]';
 seg = numberpoints(seg);
 
 u = createellipsearcs(u,numbercenter,seg,numbermajorpoints,numbercurves);
-u = createcurveloop(u,reverse*numbercurves,numbercurveloop);
+
+if ~isempty(numbercurveloop)
+    numbercurves = reverse * numbercurves;
+    u = createcurveloop(u,numbercurves,numbercurveloop);
+end

@@ -4,10 +4,10 @@ function varargout = gmshfile(D,cl,numberpoints,numberlines,numberlineloop,numbe
 % cl : characteristic length
 
 n = numel(D.P);
-if nargin<=2 || isempty(numberpoints), numberpoints = 1:n; end
-if nargin<=3 || isempty(numberlines), numberlines = 1:n; end
-if nargin<=4 || isempty(numberlineloop), numberlineloop = 1; numbersurface = 1; end
-if nargin==5, numbersurface = []; end
+if nargin<3 || isempty(numberpoints), numberpoints = 1:n; end
+if nargin<4 || isempty(numberlines), numberlines = 1:n; end
+if nargin<5 || isempty(numberlineloop), numberlineloop = 1; end
+if nargin<6, numbersurface = []; elseif isempty(numbersurface), numbersurface = 1; end
 
 G = GMSHFILE();
 P = getvertices(D);

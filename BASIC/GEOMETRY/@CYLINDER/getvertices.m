@@ -7,56 +7,66 @@ tol = getfemobjectoptions('tolerancepoint');
 r = C.r;
 h = C.h;
 angle = C.angle;
+if isstring(angle), angle = char(angle); end
+if ischar(angle),   angle = str2num(lower(angle)); end
 
-% Vertices for full cylinder
-% P = cell(1,8);
-% P{1} = [ r,  0, 0]; % +x, base
-% P{2} = [ 0,  r, 0]; % +y, base
-% P{3} = [-r,  0, 0]; % -x, base
-% P{4} = [ 0, -r, 0]; % -y, base
-% P{5} = [ r,  0, h]; % +x, top
-% P{6} = [ 0,  r, h]; % +y, top
-% P{7} = [-r,  0, h]; % -x, top
-% P{8} = [ 0, -r, h]; % -y, top
+isfull = abs(angle - 2*pi) < tol;
 
-% Canonical order: (+x, +y, -x, -y)
-base_angles = [0, pi/2, pi, 3*pi/2];
-angles = base_angles(base_angles < angle + tol); % include only up to angle
-if abs(angle - 2*pi) >= tol && angle > 0
-    angles = [angles, angle];
+if isfull
+    % Full cylinder
+    % Vertices at base (z = 0) and top (z = h)
+    P = cell(1,8);
+    % base (z = 0)
+    P{1} = [ r,  0, 0]; % +x
+    P{2} = [ 0,  r, 0]; % +y
+    P{3} = [-r,  0, 0]; % -x
+    P{4} = [ 0, -r, 0]; % -y
+    % top (z = h)
+    P{5} = [ r,  0, h]; % +x
+    P{6} = [ 0,  r, h]; % +y
+    P{7} = [-r,  0, h]; % -x
+    P{8} = [ 0, -r, h]; % -y
+else
+    % Partial cylinder
+    base_angles = [0, pi/2, pi, 3*pi/2]; % canonical angles
+    angles = base_angles(base_angles + tol < angle); % keep only canonical angles strictly before angle (within tol) 
+    if angle > tol && (isempty(angles) || abs(angle - angles(end)) > tol)
+        angles(end+1) = angle; % append endpoint at angle
+    end
+    N = numel(angles);
+    
+    % Vertices at base (z = 0) and top (z = h)
+    P = cell(1,2*N);
+    for i=1:N
+        t = angles(i);
+        [ct,st] = cos_sin_snap(t,tol); % snap to canonical to avoid roundoff
+        x = r * ct;
+        y = r * st;
+        P{i}   = [x, y, 0]; % base (z = 0)
+        P{N+i} = [x, y, h]; % top  (z = h)
+    end
 end
-% angles = 0; % always include start point at +x
-% if angle > pi/2 - tol  , angles(end+1) = pi/2;   end
-% if angle > pi - tol    , angles(end+1) = pi;     end
-% if angle > 3*pi/2 - tol, angles(end+1) = 3*pi/2; end
-% if abs(angle - 2*pi) >= tol && angle > 0
-%     angles(end+1) = angle; % add endpoint at angle if not a full circle
-% end
 
-% Vertices at base and top
-P = cell(1, 2*length(angles));
-for i=1:length(angles)
-    a = angles(i); % angle
-    P{i} = [r*cos(a), r*sin(a), 0]; % base vertex
-    P{i+length(angles)} = [r*cos(a), r*sin(a), h]; % top vertex
-end
-
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
+% Rotation matrix
 v = [C.vx, C.vy];
 n = [C.nx, C.ny, C.nz];
 R = calcrotation(C,v,n);
 
-% Translate to center c = [cx, cy, cz]
+% Center
 c = [C.cx, C.cy, C.cz];
 
-for i=1:length(P)
+% Rotate into global frame and translate to center
+for i=1:numel(P)
     P{i} = P{i}*R + c;
+end
+
+end
+
+function [ct,st] = cos_sin_snap(t,tol)
+if abs(t-0) < tol,        ct = 1;      st = 0;  % +x
+elseif abs(t-pi/2) < tol, ct = 0;      st = 1;  % +y
+elseif abs(t-pi) < tol,   ct = -1;     st = 0;  % -x
+elseif abs(t-3*pi/2)<tol, ct = 0;      st = -1; % -y
+else,                     ct = cos(t); st = sin(t);
+end
 end

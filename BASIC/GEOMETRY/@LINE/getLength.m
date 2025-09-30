@@ -1,6 +1,6 @@
-function l = getLength(Ligne)
-% function l = getLength(Ligne)
+function l = getLength(L)
+% function l = getLength(L)
 
-l = Ligne.L ;
+l = L.L ;
 
 end

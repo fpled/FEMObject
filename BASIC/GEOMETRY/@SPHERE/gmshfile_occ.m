@@ -3,11 +3,21 @@ function varargout = gmshfile_occ(S,cl,numbervolume,varargin)
 % S : SPHERE
 % cl : characteristic length
 
-if nargin<=2 || isempty(numbervolume), numbervolume = 1; end
+if nargin<3 || isempty(numbervolume), numbervolume = 1; end
+
+center = [S.cx,S.cy,S.cz];
+radius = S.r;
+
+v = [S.vx,S.vy];
+n = [S.nx,S.ny,S.nz];
+[dir,ang] = calcrotation_direction_angle(S,v,n);
 
 G = GMSHFILE();
 G = setfactory(G,"OpenCASCADE");
-G = createsphere(G,[S.cx,S.cy,S.cz],S.r,numbervolume,varargin{:});
+G = createsphere(G,center,radius,numbervolume);
+if abs(ang) > eps
+    G = rotate(G,dir,center,ang,'Volume',numbervolume);
+end
 G = setmeshsize(G,cl);
 
 if ischarin('recombine',varargin)

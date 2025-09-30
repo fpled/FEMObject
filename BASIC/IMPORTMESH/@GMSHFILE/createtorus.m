@@ -1,12 +1,29 @@
-function u = createtorus(u,center,radii,numbervolume,varargin)
+function u = createtorus(u,center,radii,numbervolume,angle)
 % function u = createtorus(u,center,radii,numbervolume)
 % function u = createtorus(u,center,radii,numbervolume,angle)
 
-if length(center)~=3
-    error('A torus is defined by the 3 coordinates of its center: center = [cx,cy,cz].')
+if ~(isnumeric(center) && numel(center)==3)
+    error('createtorus:CenterInvalid', ...
+        'center must be a numeric 1x3 vector [cx,cy,cz].');
 end
-if length(radii)~=2
-    error('A torus is defined by its 2 radii: radii = [r1,r2].')
+if ~(isnumeric(radii) && numel(radii)==2)
+    error('createtorus:RadiiInvalid', ...
+        'radii must be a numeric 1x2 vector [r1,r2].');
 end
 
-u = createentity(u,'Torus',[center(:)' radii(:)' varargin{:}],numbervolume);
+base = [center(:).' radii(:).'];
+
+if nargin<5 || isempty(angle)
+    vals = base;
+elseif isnumeric(angle) && isscalar(angle)
+    vals = [base angle];
+elseif isstring(angle) || ischar(angle)
+    vals = [num2cell(base) {tag2str(angle)}];
+else
+    error('createtorus:AngleInvalid', ...
+        'angle must be [], a numeric scalar, or a char/string tag.');
+end
+
+u = createentity(u,'Torus',vals,numbervolume);
+
+end

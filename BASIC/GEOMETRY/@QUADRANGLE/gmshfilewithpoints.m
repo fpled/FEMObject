@@ -5,17 +5,18 @@ function varargout = gmshfilewithpoints(D,P,clD,clP,numberpoints,numberembeddedp
 % clD, clP : characteristic length
 
 if ~iscell(P), P = {P}; end
-if nargin<=3 || isempty(clP), clP = clD; end
+if nargin<4 || isempty(clP), clP = clD; end
 if isscalar(clP), clP = repmat(clP,1,length(P)); end
 
-if nargin<=4 || isempty(numberpoints), numberpoints = 1:4; end
-if nargin<=5 || isempty(numberembeddedpoints), numberembeddedpoints = 4+(1:length(P)); end
-if nargin<=6 || isempty(numberlines), numberlines = 1:4; end
-if nargin<=7 || isempty(numberlineloop), numberlineloop = 1; end
-if nargin<=8 || isempty(numbersurface), numbersurface = 1; end
+if nargin<5 || isempty(numberpoints), numberpoints = 1:4; end
+if nargin<6 || isempty(numberembeddedpoints), numberembeddedpoints = max(numberpoints)+(1:length(P)); end
+if nargin<7 || isempty(numberlines), numberlines = 1:4; end
+if nargin<8 || isempty(numberlineloop), numberlineloop = 1; end
+if nargin<9 || isempty(numbersurface), numbersurface = 1; end
+
+PD = getvertices(D);
 
 G = GMSHFILE();
-PD = getvertices(D);
 G = createpoints(G,PD,clD,numberpoints);
 G = createcontour(G,numberpoints,numberlines,numberlineloop);
 G = createplanesurface(G,numberlineloop,numbersurface);

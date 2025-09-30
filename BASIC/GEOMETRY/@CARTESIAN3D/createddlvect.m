@@ -4,7 +4,7 @@ function ddl = createddlvect(S,name,type)
 % S : systeme de coordonnes
 % type : 'ROTA' ou 'TRANS'
 
-if nargin<=2
+if nargin<3 || isempty(type)
     type = 'TRANS';
 end
 switch type

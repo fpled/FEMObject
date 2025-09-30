@@ -6,5 +6,5 @@ if nargin<3 || isempty(number)
 end
 
 u = stepcounter(u);
-s = ['Compound ' name ' ' valuesintobraces(number) ' ;\n'];
+s = ['Compound ' name tagsintobraces(number) ';\n'];
 u = addstring(u,s);

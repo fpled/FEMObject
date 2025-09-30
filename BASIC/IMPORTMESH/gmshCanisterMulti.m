@@ -71,25 +71,36 @@ if ischarin('recombine',varargin)
     G = recombinesurface(G,3);
 end
 
-numpoints = 16+(1:5);
-numlines = 18+(1:5);
-numlineloop = 1:12;
+numpoints = 16;
+numlines = 18;
+numlineloop = 3;
+numsurface = 3;
+numcurves = 1:12;
 for j=1:length(I)
     if isa(I{j},'DOMAIN') || isa(I{j},'QUADRANGLE')
-        GI = gmshfile(I{j},clI(j),numpoints(1:end-1),numlines(1:end-1),numlines(end),j+3,varargin{:});
+        numpoints = numpoints(end)+(1:4);
+        numlines = numlines(end)+(1:4);
+        numlineloop = numlineloop(end)+1;
+        numsurface = numsurface(end)+1;
+        GI = gmshfile(I{j},clI(j),numpoints,numlines,numlineloop,numsurface,varargin{:});
     elseif isa(I{j},'CIRCLE') || isa(I{j},'ELLIPSE')
-        GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines(1:end-1),numlines(end),j+3,varargin{:});
+        numpoints = numpoints(end)+(1:5);
+        numlines = numlines(end)+(1:4);
+        numlineloop = numlineloop(end)+1;
+        numsurface = numsurface(end)+1;
+        GI = gmshfile(I{j},clI(j),numpoints(1),numpoints(2:end),numlines,numlineloop,numsurface,varargin{:});
     end
-    numlineloop = [numlineloop,-numlines(1:end-1)];
+    numcurves = [numcurves,-numlines];
     G = G+GI;
-    numpoints = numpoints+5;
-    numlines = numlines+5;
 end
-G = createcurveloop(G,numlineloop,numlines(end));
-G = createplanesurface(G,numlines(end),1);
+
+numlineloop = numlineloop(end)+1;
+G = createcurveloop(G,numcurves,numlineloop);
+G = createplanesurface(G,numlineloop,1);
 if ischarin('recombine',varargin)
     G = recombinesurface(G,1);
 end
+
 varargin = delonlycharin('recombine',varargin);
 
 n = max(nargout,1);

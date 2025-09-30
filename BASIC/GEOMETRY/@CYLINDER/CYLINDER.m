@@ -23,9 +23,9 @@ elseif nargin==2
     elseif isa(varargin{1},'CIRCLE')
         C = varargin{1};
         c = getc(C);
+        r = getr(C);
         n = getn(C);
         v = getv(C);
-        r = getr(C);
         u.dim = 3;
         u.cx = c(1);
         u.cy = c(2);
@@ -50,9 +50,9 @@ elseif nargin==3
     elseif isa(varargin{1},'CIRCLE')
         C = varargin{1};
         c = getc(C);
+        r = getr(C);
         n = getn(C);
         v = getv(C);
-        r = getr(C);
         u.dim = 3;
         u.cx = c(1);
         u.cy = c(2);

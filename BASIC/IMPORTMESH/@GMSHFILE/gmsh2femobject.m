@@ -15,10 +15,12 @@ end
 
 if ~iswritten(file) && ~ismesh(file)
     file = writefile(file);
+    % file = openfile(file,'.geo');
 end
 
 if ~ismesh(file)
     file = mesh(file,max(dim),varargin{:});
+    % file = openfile(file,'.msh');
 end
 
 M = gmsh2femobject_model(indim,getfile(file,'.msh'),dim,varargin{:});

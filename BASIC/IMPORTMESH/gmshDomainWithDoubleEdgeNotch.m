@@ -10,6 +10,19 @@ function varargout = gmshDomainWithDoubleEdgeNotch(D,Ca,Cb,c,clD,clC,filename,in
 %             'r', 'rect' or 'rectangular' for rectangular notch
 %             'v', 'V' or 'triangular' for V notch
 
+Box         = getcharin('Box',varargin,[]);
+refinecrack = ischarin('refinecrack',varargin);
+recombine = ischarin('recombine',varargin);
+isrect  = any(ischarin({'r','rect','rectangle'},varargin));
+istri   = any(ischarin({'v','V','triangular'},varargin));
+iscirc  = any(ischarin({'c','circ','circular'},varargin));
+
+varargin = delcharin('Box',varargin);
+varargin = delonlycharin({'refinecrack','recombine', ...
+                          'r','rect','rectangle', ...
+                          'v','V','triangular', ...
+                          'c','circ','circular'},varargin);
+
 if nargin<8 || isempty(indim)
     indim = getindim(D);
 end
@@ -28,38 +41,39 @@ if indim==2
     PB{2} = PCa1 - [0, c/2];
     PB{3} = PCb2 - [0, c/2];
     PB{4} = PCb2 + [0, c/2];
-    G = GMSHFILE();
-    if ischarin('refinecrack',varargin)
+    if refinecrack
         clB = clC;
     else
         clB = clD;
     end
     PCa2 = max(PCa{:});
     PCb1 = min(PCb{:});
-    if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
+    
+    G = GMSHFILE();
+    if isrect
         % rectangular notch
-        G = createpoints(G,PB,clB,[11,2,5,8]);
-        G = createpoints(G,PD,clD,[3:4,9:10]);
         P{1} = PCa2 + [0, c/2];
         P{2} = PCa2 - [0, c/2];
         P{3} = PCb1 - [0, c/2];
         P{4} = PCb1 + [0, c/2];
+        
+        G = createpoints(G,PB,clB,[11,2,5,8]);
+        G = createpoints(G,PD,clD,[3:4,9:10]);
         G = createpoints(G,P,clC,[12,1,6,7]);
         G = createcontour(G,1:12,1:12,1);
         % G = createphysicalcurve(G,[1 5:7 11 12],1);
-    elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
+    elseif istri
         % V (triangular) notch
-        G = createpoints(G,PB,clB,[10,2,5,7]);
-        G = createpoints(G,PD,clD,[3:4,8:9]);
         P{1} = PCa2;
         P{2} = PCb1;
+        
+        G = createpoints(G,PB,clB,[10,2,5,7]);
+        G = createpoints(G,PD,clD,[3:4,8:9]);
         G = createpoints(G,P,clC,[1,6]);
         G = createcontour(G,1:10,1:10,1);
         % G = createphysicalcurve(G,[1 5 6 10],1);
-    else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
+    else%if iscirc
         % circular (rounded) notch
-        G = createpoints(G,PB,clB,[12,2,5,9]);
-        G = createpoints(G,PD,clD,[3:4,10:11]);
         P{1} = PCa2 + [-c/2,  c/2];
         P{2} = PCa2;
         P{3} = PCa2 - [ c/2,  c/2];
@@ -68,6 +82,9 @@ if indim==2
         P{6} = PCb1;
         P{7} = PCb1 + [ c/2,  c/2];
         P{8} = PCb1 + [ c/2,    0];
+        
+        G = createpoints(G,PB,clB,[12,2,5,9]);
+        G = createpoints(G,PD,clD,[3:4,10:11]);
         G = createpoints(G,P,clC,[13,14,1,15,6,7,8,16]);
         G = createcirclearc(G,15,13:14,1);
         G = createcirclearc(G,15,[14,1],2);
@@ -75,12 +92,14 @@ if indim==2
         G = createcirclearc(G,16,7:8,9);
         G = createlines(G,[1:5 8:12;2:6 9:13]',[3:7 10:14]);
         G = createcurveloop(G,1:14,1);
-        G = createphysicalcurve(G,[1:3 7:10 14],1);
+        % G = createphysicalcurve(G,[1:3 7:10 14],1);
     end
     G = createplanesurface(G,1,1);
-    if ischarin('recombine',varargin)
+    
+    if recombine
         G = recombinesurface(G,1);
     end
+    
     G = createphysicalsurface(G,1,1);
     
 elseif indim==3
@@ -92,15 +111,15 @@ elseif indim==3
     PB{6} = PCb{1} - [0, c/2, 0];
     PB{7} = PCb{4} + [0, c/2, 0];
     PB{8} = PCb{4} - [0, c/2, 0];
-    G = GMSHFILE();
-    if ischarin('refinecrack',varargin)
+    if refinecrack
         clB = clC;
     else
         clB = clD;
     end
-    if ischarin('r',varargin) || ischarin('rect',varargin) || ischarin('rectangular',varargin)
+    
+    G = GMSHFILE();
+    if isrect
         % rectangular cuboid notch
-        G = createpoints(G,PB,clB,[6 4 5 3 14 12 13 11]);
         P{1} = PCa{2} + [0, c/2, 0];
         P{2} = PCa{2} - [0, c/2, 0];
         P{3} = PCa{3} + [0, c/2, 0];
@@ -110,6 +129,7 @@ elseif indim==3
         P{7} = PCb{3} + [0, c/2, 0];
         P{8} = PCb{3} - [0, c/2, 0];
         
+        G = createpoints(G,PB,clB,[6 4 5 3 14 12 13 11]);
         G = createpoints(G,PD,clD,17:24);
         G = createpoints(G,P,clC,[7 1 8 2 15 9 16 10]);
         G = createcontour(G,[2 1 4 3],1:4,1);
@@ -131,7 +151,7 @@ elseif indim==3
         G = createlines(G,[[15 9];[10 16]],19:20);
         G = createcurveloop(G,-[19 17 20 11],6);
         G = createplanesurface(G,6,6);
-
+        
         G = createlines(G,[[3 21];[21 22];[22 11];[13 23];[23 24];[24 5]],21:26);
         G = createcurveloop(G,[-4 21:23 -12 20 -16 24:26 -8 -10],7);
         G = createplanesurface(G,7,7);
@@ -160,26 +180,14 @@ elseif indim==3
         G = createcurveloop(G,[33 -30 -13 -23],14);
         G = createplanesurface(G,14,14);
         
-        if ischarin('recombine',varargin)
-            G = recombinesurface(G,1);
-            G = recombinesurface(G,2);
-            G = recombinesurface(G,3);
-            G = recombinesurface(G,4);
-            G = recombinesurface(G,5);
-            G = recombinesurface(G,6);
-            G = recombinesurface(G,7);
-            G = recombinesurface(G,8);
-            G = recombinesurface(G,9);
-            G = recombinesurface(G,10);
-            G = recombinesurface(G,11);
-            G = recombinesurface(G,12);
-            G = recombinesurface(G,13);
-            G = recombinesurface(G,14);
+        if recombine
+            G = recombinesurface(G);
         end
+        
         G = createsurfaceloop(G,1:14,1);
         % G = createphysicalsurface(G,[1 2 3 4 5 6],1);
-
-    elseif ischarin('v',varargin) || ischarin('V',varargin)|| ischarin('triangular',varargin)
+        
+    elseif istri
         % V (triangular) notch
         G = createpoints(G,PB,clB,[6 4 5 3 12 10 11 9]);
         G = createpoints(G,PD,clD,13:20);
@@ -226,27 +234,16 @@ elseif indim==3
         G = createcurveloop(G,[27 -24 -10 -17],12);
         G = createplanesurface(G,12,12);
         
-        if ischarin('recombine',varargin)
-            G = recombinesurface(G,1);
-            G = recombinesurface(G,2);
-            G = recombinesurface(G,3);
-            G = recombinesurface(G,4);
-            G = recombinesurface(G,5);
-            G = recombinesurface(G,6);
-            G = recombinesurface(G,7);
-            G = recombinesurface(G,8);
-            G = recombinesurface(G,9);
-            G = recombinesurface(G,10);
-            G = recombinesurface(G,11);
-            G = recombinesurface(G,12);
+        if recombine
+            G = recombinesurface(G);
         end
+
         G = createsurfaceloop(G,1:12,1);
         % G = createphysicalcurve(G,[1 8],1);
         % G = createphysicalsurface(G,[1 2 3 4],1);
-
-    else%if ischarin('c',varargin) || ischarin('circ',varargin) || ischarin('circular',varargin)
+        
+    else%if iscirc
         % circular (rounded) cuboid notch
-        G = createpoints(G,PB,clB,[6 4 5 3 14 12 13 11]);
         P{1} = PCa{2}  + [-c/2,  c/2, 0];
         P{2} = PCa{2};
         P{3} = PCa{2}  - [ c/2,  c/2, 0];
@@ -264,6 +261,7 @@ elseif indim==3
         P{15} = PCb{3} + [ c/2, -c/2, 0];
         P{16} = PCb{3} + [ c/2,    0, 0];
         
+        G = createpoints(G,PB,clB,[6 4 5 3 14 12 13 11]);
         G = createpoints(G,PD,clD,17:24);
         G = createpoints(G,P,clC,[7 25 1 26 8 27 2 28 15 29 9 30 16 31 10 32]);
         G = createcontour(G,[2 1 4 3],1:4,1);
@@ -328,63 +326,48 @@ elseif indim==3
         G = createcurveloop(G,[33 -30 -13 -23],16);
         G = createplanesurface(G,16,16);
         
-        if ischarin('recombine',varargin)
-            G = recombinesurface(G,1);
-            G = recombinesurface(G,2);
-            G = recombinesurface(G,3);
-            G = recombinesurface(G,4);
-            G = recombinesurface(G,5);
-            G = recombinesurface(G,6);
-            G = recombinesurface(G,7);
-            G = recombinesurface(G,8);
-            G = recombinesurface(G,9);
-            G = recombinesurface(G,10);
-            G = recombinesurface(G,11);
-            G = recombinesurface(G,12);
-            G = recombinesurface(G,13);
-            G = recombinesurface(G,14);
-            G = recombinesurface(G,15);
-            G = recombinesurface(G,16);
+        if recombine
+            G = recombinesurface(G);
         end
+        
         G = createsurfaceloop(G,1:16,1);
         % G = createphysicalsurface(G,[1 2 3 4 5 6 7 8],1);
-
+        
     end
+    
     G = createvolume(G,1,1);
     G = createphysicalvolume(G,1,1);
     
 end
-varargin = delonlycharin({'recombine','refinecrack'},varargin);
 
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = clC;
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

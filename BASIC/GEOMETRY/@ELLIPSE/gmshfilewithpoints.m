@@ -5,19 +5,21 @@ function varargout = gmshfilewithpoints(E,P,clE,clP,numbercenter,numberpoints,nu
 % clE, clP : characteristic length
 
 if ~iscell(P), P = {P}; end
-if nargin<=3 || isempty(clP), clP = clE; end
+if nargin<4 || isempty(clP), clP = clE; end
 if isscalar(clP), clP = repmat(clP,1,length(P)); end
 
-if nargin<=4 || isempty(numbercenter), numbercenter = 1; end
-if nargin<=5 || isempty(numberpoints), numberpoints = 2:5; end
-if nargin<=6 || isempty(numberembeddedpoints), numberembeddedpoints = numberpoints(end)+(1:length(P)); end
-if nargin<=7 || isempty(numbercurves), numbercurves = 1:4; end
-if nargin<=8 || isempty(numbercurveloop), numbercurveloop = 1; end
-if nargin<=9 || isempty(numbersurface), numbersurface = 1; end
+if nargin<5 || isempty(numbercenter), numbercenter = 1; end
+if nargin<6 || isempty(numberpoints), numberpoints = numbercenter+(1:4); end
+if nargin<7 || isempty(numberembeddedpoints), numberembeddedpoints = max([numbercenter,numberpoints])+(1:length(P)); end
+if nargin<8 || isempty(numbercurves), numbercurves = 1:4; end
+if nargin<9 || isempty(numbercurveloop), numbercurveloop = 1; end
+if nargin<10 || isempty(numbersurface), numbersurface = 1; end
 
-semiaxes_lengths = [abs(E.a), abs(E.b)];
-[~,maxidx] = max(semiaxes_lengths);
+center = [E.cx,E.cy,E.cz];
+radii  = [E.a,E.b];
+PE = getvertices(E);
 
+[~,maxidx] = max(abs(radii));
 switch maxidx
     case 1  % a is major (x-axis)
         numbermajorpoint = numberpoints(1); % -x
@@ -29,10 +31,9 @@ end
 numbermajorpoints = repmat(numbermajorpoint,1,4); % Use the same major axis point for all 4 curves/arcs
 
 G = GMSHFILE();
-PE = getvertices(E);
-G = createpoint(G,[E.cx,E.cy,E.cz],clE,numbercenter);
+G = createpoint(G,center,clE,numbercenter);
 G = createpoints(G,PE,clE,numberpoints);
-G = createellipsecontour(G,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop,varargin{:});
+G = createellipsecontour(G,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloop);
 G = createplanesurface(G,numbercurveloop,numbersurface);
 
 G = createpoints(G,P,clP,numberembeddedpoints);

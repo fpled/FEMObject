@@ -16,10 +16,10 @@ elseif nargin==2
     if isa(varargin{1},'ELLIPSE')
         E = varargin{1};
         c = getc(E);
-        n = getn(E);
-        v = getv(E);
         a = geta(E);
         b = getb(E);
+        n = getn(E);
+        v = getv(E);
         u.dim = 3;
         u.cx = c(1);
         u.cy = c(2);

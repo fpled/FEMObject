@@ -2,8 +2,9 @@ function u = ELLIPSE(varargin)
 % function E = ELLIPSE(C)
 % function E = ELLIPSE(E)
 % function E = ELLIPSE(E,a,b)
+% function E = ELLIPSE(E,a,b,angle)
 % function E = ELLIPSE(cx,cy,a,b)
-% function E = ELLIPSE(cx,cy,a,b,vx,vy)
+% function E = ELLIPSE(cx,cy,a,b,vx,vy,angle)
 % function E = ELLIPSE(cx,cy,cz,a,b)
 % function E = ELLIPSE(cx,cy,cz,a,b,vx,vy)
 % function E = ELLIPSE(cx,cy,cz,a,b,nx,ny,nz)
@@ -17,9 +18,9 @@ elseif nargin==1
     elseif isa(varargin{1},'CIRCLE')
         C = varargin{1};
         c = getc(C);
+        r = getr(C);
         n = getn(C);
         v = getv(C);
-        r = getr(C);
         u.dim = getdim(C);
         u.cx = c(1);
         u.cy = c(2);

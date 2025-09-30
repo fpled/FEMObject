@@ -5,17 +5,27 @@ function varargout = gmshfilewithpoints_occ_circle(C,P,clC,clP,numberembeddedpoi
 % clC, clP : characteristic length
 
 if ~iscell(P), P = {P}; end
-if nargin<=3 || isempty(clP), clP = clC; end
+if nargin<4 || isempty(clP), clP = clC; end
 if isscalar(clP), clP = repmat(clP,1,length(P)); end
 
-if nargin<=4 || isempty(numberembeddedpoints), numberembeddedpoints = 1+(1:length(P)); end
-if nargin<=5 || isempty(numbercurve), numbercurve = 1; end
-if nargin<=6 || isempty(numbercurveloop), numbercurveloop = 1; end
-if nargin<=7 || isempty(numbersurface), numbersurface = 1; end
+if nargin<5 || isempty(numberembeddedpoints), numberembeddedpoints = 1+(1:length(P)); end
+if nargin<6 || isempty(numbercurve), numbercurve = 1; end
+if nargin<7 || isempty(numbercurveloop), numbercurveloop = 1; end
+if nargin<8 || isempty(numbersurface), numbersurface = 1; end
+
+center = [C.cx,C.cy,C.cz];
+radius = C.r;
+
+v = [C.vx,C.vy];
+n = [C.nx,C.ny,C.nz];
+[dir,ang] = calcrotation_direction_angle(C,v,n);
 
 G = GMSHFILE();
 G = setfactory(G,"OpenCASCADE");
-G = createcircle(G,[C.cx,C.cy,C.cz],C.r,numbercurve);
+G = createcircle(G,center,radius,numbercurve);
+if abs(ang) > eps
+    G = rotate(G,dir,center,ang,'Curve',numbercurve);
+end
 G = setmeshsize(G,clC);
 G = createcurveloop(G,numbercurve,numbercurveloop);
 G = createplanesurface(G,numbercurveloop,numbersurface);

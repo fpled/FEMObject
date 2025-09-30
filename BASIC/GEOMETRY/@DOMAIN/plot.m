@@ -34,12 +34,20 @@ switch D.indim
         
 end
 
+% Plot using patch
 options = patchoptions(D.indim,'FaceVertexCData',1,varargin{:});
+hs = ishold;
+hold on
 
 H = patch('Faces',connec,'Vertices',nodecoord,options{:});
 
+if ~hs
+    hold off
+end
+
 axis image
 
+% Optional view or camera controls
 numview = getcharin('view',varargin);
 up_vector = getcharin('camup',varargin);
 camera_position = getcharin('campos',varargin);
@@ -55,6 +63,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

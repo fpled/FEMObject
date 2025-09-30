@@ -1,68 +1,126 @@
-function varargout = plot(C,varargin)
-% function varargout = plot(C,varargin)
+function varargout = plot(T,varargin)
+% function varargout = plot(T,varargin)
 
-npts = getcharin('npts',varargin,200); % angular resolution
-% t = linspace(0,2*pi,npts+1)'; % parametric angle
-% t(end) = []; % remove duplicate
+tol = getfemobjectoptions('tolerancepoint');
 
-% Radius and height
-r = C.r;
-h = C.h;
+% Major radius, minor radius, and opening angle
+r1 = T.r1;
+r2 = T.r2;
+angle = T.angle;
+if isstring(angle), angle = char(angle); end
+if ischar(angle),   angle = str2num(lower(angle)); end
 
-% Build parametric cylinder
-% x = r * cos(t);
-% y = r * sin(t);
-% z_bot = zeros(npts,1);
-% z_top = h * ones(npts,1);
-% nodecoord_bot = [x, y, z_bot];
-% nodecoord_top = [x, y, z_top];
+isfull = abs(angle - 2*pi) < tol;
 
-% Build parametric cylinder
-[X,Y,Z] = cylinder(r,npts);
-Z = Z * h;
-nodecoord_bot = [X(1,:)', Y(1,:)', Z(1,:)'];
-nodecoord_top = [X(2,:)', Y(2,:)', Z(2,:)'];
+% Angular resolution: 200 points for full major circle (angle = 2*pi), scale for partial arc (angle < 2*pi)
+%                      50 points for minor circle
+npts = getcharin('npts',varargin,max(2,round(200*angle/(2*pi)))); % points along major circle
+mpts = getcharin('mpts',varargin,50);                             % points along minor circle
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
-v = [C.vx, C.vy];
-n = [C.nx, C.ny, C.nz];
-R = calcrotation(C,v,n);
+% Major (u) and minor (v) angles
+tu = linspace(0,angle,npts+1)'; % parametric major angle
+tv = linspace(0,2*pi,mpts+1)';  % parametric minor angle
+if isfull, tu(end) = []; end % remove duplicate
+tv(end) = []; % remove duplicate
+% [U, V] = meshgrid(tu, tv);
 
-% Translate to center c = [cx, cy, cz]
-c = [C.cx, C.cy, C.cz];
+% Minor circle locations along the major ring
+base_angles = [0, pi/2, pi, 3*pi/2];
+minor_angles = base_angles(base_angles < angle + tol); % include only up to angle
+% minor_angles = 0; % always include start point at +x
+% if angle > pi/2 - tol  , minor_angles(end+1) = pi/2;   end
+% if angle > pi - tol    , minor_angles(end+1) = pi;     end
+% if angle > 3*pi/2 - tol, minor_angles(end+1) = 3*pi/2; end
+if ~isfull && angle > 0
+    minor_angles(end+1) = angle; % add endpoint at angle if not a full major circle
+end
 
-% Rotate and translate
-nodecoord_bot = nodecoord_bot * R + c;
-nodecoord_top = nodecoord_top * R + c;
+% Build parametric torus
+% X = (r1 + r2 * cos(V)) .* cos(U);
+% Y = (r1 + r2 * cos(V)) .* sin(U);
+% Z = r2 * sin(V);
 
-% Connectivity for a closed loop
-connec = [1:npts,1];
+% Rotation matrix
+v = [T.vx, T.vy];
+n = [T.nx, T.ny, T.nz];
+R = calcrotation(T,v,n);
+
+% Center
+c = [T.cx, T.cy, T.cz];
+
+% Rotate into global frame and translate to center
+% nodecoord = [X(:), Y(:), Z(:)] * R + c;
+
+% Reshape back to 2D grids for surf
+% sz = size(X);
+% X = reshape(nodecoord(:,1), sz);
+% Y = reshape(nodecoord(:,2), sz);
+% Z = reshape(nodecoord(:,3), sz);
+
+% Connectivity for major circle and major rings
+if isfull
+    % Full torus
+    connec_major = [1:npts,1]; % closed loop
+else
+    % Partial torus
+    connec_major = [(1:npts)' (2:npts+1)']; % polyline
+end
+% Connectivity for minor circles
+connec_minor = [1:mpts,1]; % closed loop
 
 % Plot using patch
-options = patchoptions(C.indim,varargin{:});
-holdState = ishold;
+options = patchoptions(T.indim,varargin{:});
+hs = ishold;
 hold on
-% bottom ring
-Hb = patch('Faces',connec,'Vertices',nodecoord_bot,options{:});
-% top ring
-Ht = patch('Faces',connec,'Vertices',nodecoord_top,options{:});
-% four vertical spokes at t = 0, pi/2, pi, 3*pi/2
-idx = round(linspace(1,npts,5));  idx(end)=[];  % [0, pi/2, pi, 3*pi/2]
-Hs = gobjects(4,1);
-for k=1:4
-    nodecoord = [nodecoord_bot(idx(k),:);
-                 nodecoord_top(idx(k),:)];
-    Hs(k) = patch('Faces',[1 2],'Vertices',nodecoord,options{:});
+
+H = struct();
+
+% Major circle at tube centerline
+x0 = r1 * cos(tu);
+y0 = r1 * sin(tu);
+z0 = zeros(size(tu));
+nodecoord_major = [x0, y0, z0] * R + c;
+H.major = patch('Faces',connec_major,'Vertices',nodecoord_major,options{:},'LineStyle',':');
+
+% Major rings at the 4 canonical minor angles
+H.rings = gobjects(4,1);
+for i=1:4
+    v = base_angles(i);
+    xr = (r1 + r2*cos(v)) * cos(tu);
+    yr = (r1 + r2*cos(v)) * sin(tu);
+    zr = r2 * sin(v) * ones(size(tu));
+    nodecoord_ring = [xr, yr, zr] * R + c;
+    H.rings(i) = patch('Faces',connec_major,'Vertices',nodecoord_ring,options{:});
 end
-if ~holdState
+
+% Minor circles and diameters
+H.minor = gobjects(numel(minor_angles),1);
+H.diameters = gobjects(numel(minor_angles),2);
+for i=1:numel(minor_angles)
+    % Minor circles
+    u = minor_angles(i);
+    xc = (r1 + r2*cos(tv)) .* cos(u);
+    yc = (r1 + r2*cos(tv)) .* sin(u);
+    zc = r2 * sin(tv);
+    nodecoord_minor = [xc, yc, zc] * R + c;
+    H.minor(i) = patch('Faces',connec_minor,'Vertices',nodecoord_minor,options{:});
+    
+    % Two orthogonal diameters (tv=0,pi) and (pi/2,3pi/2)
+    [~,i1] = min(abs(tv - 0));
+    [~,i2] = min(abs(tv - pi));
+    [~,i3] = min(abs(tv - pi/2));
+    [~,i4] = min(abs(tv - 3*pi/2));
+    p1 = nodecoord_minor(i1,:);
+    p2 = nodecoord_minor(i2,:);
+    p3 = nodecoord_minor(i3,:);
+    p4 = nodecoord_minor(i4,:);
+    H.diameters(i,1) = patch('Faces',[1,2],'Vertices',[p1; p2],options{:},'LineStyle',':');
+    H.diameters(i,2) = patch('Faces',[1,2],'Vertices',[p3; p4],options{:},'LineStyle',':');
+end
+
+H = [H.major; H.rings(:); H.minor(:); H.diameters(:)];
+
+if ~hs
     hold off
 end
 
@@ -84,6 +142,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

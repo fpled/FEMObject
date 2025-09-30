@@ -1,4 +1,4 @@
-function u = compoundcurve(u,numberline)
-% function u = compoundcurve(u,numberline)
+function u = compoundcurve(u,numbercurve)
+% function u = compoundcurve(u,numbercurve)
 
-u = compound(u,'Curve',numberline);
+u = compound(u,'Curve',numbercurve);

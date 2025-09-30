@@ -13,12 +13,11 @@ switch C.indim
         P{3} = [-r,  0]; % -x
         P{4} = [ 0, -r]; % -y
         
-        % Rotate in-plane around z = [0, 0, 1] by angle of rotation theta =
-        % atan2(vy, vx) using tangent vector v = [vx, vy]
+        % Rotation matrix
         v = [C.vx, C.vy];
         R = calcrotation(C,v);
         
-        % Translate to center c = [cx, cy]
+        % Center
         c = [C.cx, C.cy];
         
     case 3
@@ -28,26 +27,19 @@ switch C.indim
         P{3} = [-r,  0, 0]; % -x
         P{4} = [ 0, -r, 0]; % -y
         
-        %% Old version
-        % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-        % atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-        % rotation formula
-        %% New version
-        % Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-        % using tangent vector v = [vx, vy], then tilt from z axis to normal
-        % vector n = [nx, ny, nz] so that the circle's normal is n regardless
-        % of v = [vx, vy]
+        % Rotation matrix
         v = [C.vx, C.vy];
         n = [C.nx, C.ny, C.nz];
         R = calcrotation(C,v,n);
         
-        % Translate to center c = [cx, cy, cz]
+        % Center
         c = [C.cx, C.cy, C.cz];
         
     otherwise
         error('Wrong space dimension');
 end
 
+% Rotate into global frame and translate to center
 for i=1:4
     P{i} = P{i}*R + c;
 end

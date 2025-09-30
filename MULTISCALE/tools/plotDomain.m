@@ -4,7 +4,12 @@ function plotDomain(D,varargin)
 % D: GEOMOBJECT or MODEL
 % D_patch: cell of GEOMOBJECT
 
+if ~iscell(D)
+    D = {D};
+end
+
 p = ImprovedInputParser;
+addParameter(p,'facecolor',getfacecolor(1),@(x) isnumeric(x) || ischar(x) || iscell(x));
 addParameter(p,'legend',true,@islogical);
 addParameter(p,'solid',false,@islogical);
 addParameter(p,'surface',false,@islogical);
@@ -21,28 +26,29 @@ end
 
 varargin = delcharin({'legend','solid','surface','view','camup','campos','FontSize','Interpreter'},varargin);
 
-if ~iscell(D)
-    D = {D};
-end
-
 if nargin==1 || isempty(varargin) || ischar(varargin{1})
     figure('Name','Domain')
     % set(gcf,'Name','Domain')
     clf
     for l=1:length(D)
+        if l==1
+            facecolor = p.Results.facecolor;
+        else
+            facecolor = 'w';
+        end
         if isa(D{l},'POINT')
             h = plot(D{l},'.');
         elseif isa(D{l},'GEOMOBJECT')
             if p.Results.solid
-                h = plot(D{l},'FaceColor',getfacecolor(1),'solid',varargin{:});
+                h = plot(D{l},'FaceColor',facecolor,'solid',varargin{:});
             else
-                h = plot(D{l},'FaceColor',getfacecolor(1),varargin{:});
+                h = plot(D{l},'FaceColor',facecolor,varargin{:});
             end
         elseif isa(D{l},'MODEL')
             if p.Results.solid
-                h = plot(D{l},'FaceColor',getfacecolor(1),'EdgeColor','none','solid',varargin{:});
+                h = plot(D{l},'FaceColor',facecolor,'EdgeColor','none','solid',varargin{:});
             else
-                h = plot(D{l},'FaceColor',getfacecolor(1),'EdgeColor','none',varargin{:});
+                h = plot(D{l},'FaceColor',facecolor,'EdgeColor','none',varargin{:});
             end
         end
         hg = hggroup;
@@ -64,20 +70,25 @@ else
     hg = cell(1,1+n);
     leg = cell(1,1+n);
     for l=1:length(D)
+        if l==1
+            facecolor = p.Results.facecolor;
+        else
+            facecolor = 'w';
+        end
         if isa(D{l},'POINT')
             h = plot(D{l},'.');
         elseif isa(D{l},'GEOMOBJECT')
             if p.Results.solid
-                h = plot(D{l},'FaceColor',getfacecolor(1),'solid',varargin{2:end});
+                h = plot(D{l},'FaceColor',facecolor,'solid',varargin{2:end});
             else
-                h = plot(D{l},'FaceColor',getfacecolor(1),varargin{2:end});
+                h = plot(D{l},'FaceColor',facecolor,varargin{2:end});
             end
         elseif isa(D{l},'MODEL')
             plot(create_boundary(D{l}));
             if p.Results.solid
-                h = plot(D{l},'FaceColor',getfacecolor(1),'EdgeColor','none','solid',varargin{2:end});
+                h = plot(D{l},'FaceColor',facecolor,'EdgeColor','none','solid',varargin{2:end});
             else
-                h = plot(D{l},'FaceColor',getfacecolor(1),'EdgeColor','none',varargin{2:end});
+                h = plot(D{l},'FaceColor',facecolor,'EdgeColor','none',varargin{2:end});
             end
         end
         hg{1} = hggroup;

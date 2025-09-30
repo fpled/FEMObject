@@ -5,19 +5,22 @@ function varargout = gmshfilewithpoints(E,P,clE,clP,numbercenter,numberpoints,nu
 % clE, clP : characteristic length
 
 if ~iscell(P), P = {P}; end
-if nargin<=3 || isempty(clP), clP = clE; end
+if nargin<4 || isempty(clP), clP = clE; end
 if isscalar(clP), clP = repmat(clP,1,length(P)); end
 
-if nargin<=4 || isempty(numbercenter), numbercenter = 1; end
-if nargin<=5 || isempty(numberpoints), numberpoints = 2:7; end
-if nargin<=6 || isempty(numberembeddedpoints), numberembeddedpoints = numberpoints(end)+(1:length(P)); end
-if nargin<=7 || isempty(numbercurves), numbercurves = 1:12; end
-if nargin<=8 || isempty(numbercurveloops), numbercurveloops = 1:8; end
-if nargin<=9 || isempty(numbersurfaces), numbersurfaces = 1:8; end
-if nargin<=10 || isempty(numbersurfaceloop), numbersurfaceloop = 1; end
-if nargin<=11 || isempty(numbervolume), numbervolume = 1; end
+if nargin<5 || isempty(numbercenter), numbercenter = 1; end
+if nargin<6 || isempty(numberpoints), numberpoints = numbercenter+(1:6); end
+if nargin<7 || isempty(numberembeddedpoints), numberembeddedpoints = max([numbercenter,numberpoints])+(1:length(P)); end
+if nargin<8 || isempty(numbercurves), numbercurves = 1:12; end
+if nargin<9 || isempty(numbercurveloops), numbercurveloops = 1:8; end
+if nargin<10 || isempty(numbersurfaces), numbersurfaces = 1:8; end
+if nargin<11 || isempty(numbersurfaceloop), numbersurfaceloop = 1; end
+if nargin<12 || isempty(numbervolume), numbervolume = 1; end
 
-semiaxes_lengths = [abs(E.a), abs(E.b), abs(E.c)];
+center = [E.cx,E.cy,E.cz];
+PE = getvertices(E);
+
+semiaxes_lengths = [abs(E.a),abs(E.b),abs(E.c)];
 [~,maxidx] = max(semiaxes_lengths);
 
 switch maxidx
@@ -34,8 +37,7 @@ end
 numbermajorpoints = repmat(numbermajorpoint,1,12); % Use the same major axis point for all 12  curves/arcs
 
 G = GMSHFILE();
-PE = getvertices(E);
-G = createpoint(G,[E.cx,E.cy,E.cz],clE,numbercenter);
+G = createpoint(G,center,clE,numbercenter);
 G = createpoints(G,PE,clE,numberpoints);
 G = createellipsoidcontour(G,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop);
 G = createvolume(G,numbersurfaceloop,numbervolume);

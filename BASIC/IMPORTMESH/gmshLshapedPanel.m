@@ -7,6 +7,9 @@ function varargout = gmshLshapedPanel(a,b,t,clD,clC,filename,indim,varargin)
 % filename : file name (optional)
 % indim : space dimension (optional, 2 by default)
 
+Box = getcharin('Box',varargin,[]);
+varargin = delcharin('Box',varargin);
+
 if nargin<7 || isempty(indim)
     indim = 2;
 end
@@ -32,66 +35,78 @@ elseif indim==3
     P{7} = [  0, -a, 0];
 end
 
+br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
+
 G = GMSHFILE();
 if nargin>=2 && ischar(filename)
     G = setfile(G,filename);
 end
 
-% G = createpoints(G,P(1),clC,1);
-% G = createpoints(G,P(2:7),clD,2:7);
-G = createpoints(G,P(1:3),clC,1:3);
-G = createpoints(G,P(4:7),clD,4:7);
-G = createcontour(G,1:7,1:7,8);
-G = createplanesurface(G,8,1);
+numpoints = 1:7;
+numlines = 1:7;
+numlineloop = 1;
+numsurface = 1;
+% G = createpoints(G,P(1),clC,numpoints(1));
+% G = createpoints(G,P(2:7),clD,numpoints(2:7));
+G = createpoints(G,P(1:3),clC,numpoints(1:3));
+G = createpoints(G,P(4:7),clD,numpoints(4:7));
+G = createcontour(G,numpoints,numlines,numlineloop);
+G = createplanesurface(G,numlineloop,1);
 if indim==3
     vect = [0,0,t];
-    [G,out] = extrude(G,vect,'Surface',1,varargin{:});
-    numbervolume = [out,'[1]'];
+    if ischarin('recombine',varargin) && ~ischarin('Layers',varargin)
+        numlayers = max(1, round(t/min(clD,clC)));
+        varargin = [varargin, {'Layers',numlayers}];
+    end
+    [G,tag] = extrude(G,vect,'Surface',numsurface,varargin{:});
+    numtopsurface = br(tag,0); % top surface
+    numvolume     = br(tag,1); % volume
 end
 if ischarin('recombine',varargin)
     if indim==2
-        G = recombinesurface(G,1);
+        G = recombinesurface(G,numsurface);
     elseif indim==3
-        G = recombinesurface(G);
+        G = recombinesurface(G,{numsurface,numtopsurface});
     end
 end
 if indim==2
-    G = createphysicalsurface(G,1,1);
+    numphysicalsurface = 1;
+    G = createphysicalsurface(G,numsurface,numphysicalsurface);
 elseif indim==3
-    G = createphysicalvolume(G,numbervolume,1);
+    numphysicalvolume = 1;
+    G = createphysicalvolume(G,numvolume,numphysicalvolume);
 end
 
 varargin = delonlycharin('recombine',varargin);
 
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = clC;
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

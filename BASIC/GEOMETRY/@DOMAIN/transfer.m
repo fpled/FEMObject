@@ -13,7 +13,7 @@ b1 = double(getcoord(D1.P2));
 a2 = double(getcoord(D2.P1));
 b2 = double(getcoord(D2.P2));
 
-if nargin<=3
+if nargin<4 || isempty(dim)
     dim = 1:getdim(D1);
 end
 

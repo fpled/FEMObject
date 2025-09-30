@@ -1,5 +1,5 @@
-function u = hypot(u,v)
-% function u = hypot(u,v)
+function w = hypot(u,v)
+% function w = hypot(u,v)
 
 if isa(u,'MYDOUBLEND')
     w = u;

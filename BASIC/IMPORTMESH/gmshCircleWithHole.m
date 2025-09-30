@@ -6,7 +6,10 @@ function varargout = gmshCircleWithHole(C,H,clC,clH,filename,indim,varargin)
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(C) by default)
 
+Box         = getcharin('Box',varargin,[]);
 noduplicate = ischarin('noduplicate',varargin);
+
+varargin = delcharin('Box',varargin);
 varargin = delonlycharin('noduplicate',varargin);
 
 if nargin<6 || isempty(indim)
@@ -23,11 +26,13 @@ if isscalar(clH)
     clH = repmat(clH,1,length(H));
 end
 
+br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
+
 if isa(C,'CIRCLE')
     dim = getdim(C);
 elseif isa(C,'CYLINDER')
     dim = getdim(C);
-    h = geth(C);
+    height = geth(C);
     C = getcircle(C);
 end
 
@@ -77,10 +82,18 @@ G = createcurveloop(G,numcurves,numlineloop);
 G = createplanesurface(G,numlineloop,numsurface);
 
 if dim==3
-    n = getnormal(C);
-    vect = C.h * n;
-    [G,out] = extrude(G,vect,'Surface',numsurface,varargin{:});
-    numvolume = [out,'[1]'];
+    normal = getnormal(C);
+    axis   = height * normal;
+    if ischarin('recombine',varargin) && ~ischarin('Layers',varargin)
+        numlayers = max(1, round(height/clC));
+        varargin = [varargin, {'Layers',numlayers}];
+    end
+    [G,tag] = extrude(G,axis,'Surface',numsurface,varargin{:});
+    numtopsurface = br(tag,0); % top surface
+    numvolume     = br(tag,1); % volume
+    if ischarin('recombine',varargin)
+        G = recombinesurface(G,{numsurface,numtopsurface});
+    end
 end
 
 if ~isempty(numembeddedpoints)
@@ -105,8 +118,14 @@ if ~isempty(numembeddedlines)
 end
 
 if ischarin('recombine',varargin)
-    G = recombinesurface(G);
+    if dim==2
+        G = recombinesurface(G,numsurface);
+    elseif dim==3 && ~extrusion
+        G = recombinesurface(G);
+    end
 end
+
+varargin = delonlycharin('recombine',varargin);
 
 if dim==2
     numphysicalsurface = 1;
@@ -116,37 +135,34 @@ elseif dim==3
     G = createphysicalvolume(G,numvolume,numphysicalvolume);
 end
 
-varargin = delonlycharin('recombine',varargin);
-
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = min(clH);
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clC;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

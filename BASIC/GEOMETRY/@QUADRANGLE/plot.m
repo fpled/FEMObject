@@ -4,9 +4,17 @@ function varargout = plot(D,varargin)
 P = vertcat(D.P{:});
 nodecoord = permute(double(getcoord(P)),[3,2,1]);
 connec = 1:4;
+
+% Plot using patch
 options = patchoptions(3,varargin{:});
+hs = ishold;
+hold on
 
 H = patch('Faces',connec,'Vertices',nodecoord,options{:});
+
+if ~hs
+    hold off
+end
 
 axis image
 
@@ -25,6 +33,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

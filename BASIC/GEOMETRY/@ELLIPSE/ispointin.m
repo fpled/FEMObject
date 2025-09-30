@@ -16,21 +16,15 @@ switch E.indim
         rep = find(inEllipse);
         
     case 3
-        %% Old version
-        % Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-        % atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-        % rotation formula
-        %% New version
-        % Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-        % using tangent vector v = [vx, vy], then tilt from z axis to normal
-        % vector n = [nx, ny, nz] so that the circle's normal is n regardless
-        % of v = [vx, vy]
+        % Rotation matrix
         v = [E.vx, E.vy];
         n = [E.nx, E.ny, E.nz];
         R = calcrotation(E,v,n);
         
-        % Apply inverse transform to point: project into the ellipse local frame
+        % Center
         center = [E.cx, E.cy, E.cz];
+        
+        % Apply inverse transform to point: project into the ellipse local frame
         vec = c - center; % vector from center to point
         vec = vec * R';
         

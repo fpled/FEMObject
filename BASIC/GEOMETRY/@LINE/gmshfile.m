@@ -3,8 +3,8 @@ function G = gmshfile(L,cl,numberpoints,numberline)
 % L : LINE
 % cl : characteristic length
 
-if nargin<=2 || isempty(numberpoints), numberpoints = 1:2; end
-if nargin<=3 || isempty(numberline), numberline = 1; end
+if nargin<3 || isempty(numberpoints), numberpoints = 1:2; end
+if nargin<4 || isempty(numberline), numberline = 1; end
 
 G = GMSHFILE();
 P = getvertices(L);

@@ -9,9 +9,17 @@ nodecoord = [nodecoord,zeros(n(1),n(2)==1)];
 connec = 1:2;
 edgecolor = getcharin('Color',varargin,'k') ;
 
+% Plot using patch
+hs = ishold;
+hold on
+
 H = patch('Faces',connec,'Vertices',nodecoord,'EdgeColor',edgecolor);
 
-if nargout>=1
+if ~hs
+    hold off
+end
+
+if nargout
     varargout{1} = H;
 end
   

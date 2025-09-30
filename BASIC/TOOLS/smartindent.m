@@ -199,7 +199,7 @@ for i=1:length(token)
     if token(i)==char(39)
         isstr= ~isstr;
         dots = 0;
-    elseif token(i)=='%' & ~isstr
+    elseif token(i)=='%' && ~isstr
         iscomm = 1;
         break
     elseif token(i)=='.'

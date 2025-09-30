@@ -55,10 +55,9 @@ G = createcurveloop(G,[-14,16:18],3);
 G = createplanesurface(G,1,1);
 G = createplanesurface(G,2,2);
 G = createplanesurface(G,3,3);
+
 if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
-    G = recombinesurface(G,2);
-    G = recombinesurface(G,3);
+    G = recombinesurface(G);
 end
 varargin = delonlycharin('recombine',varargin);
 

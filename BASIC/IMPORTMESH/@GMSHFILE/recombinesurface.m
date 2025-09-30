@@ -1,10 +1,10 @@
 function u = recombinesurface(u,number)
 % function u = recombinesurface(u,number)
 
-u = stepcounter(u);
-if nargin==1 || isempty(number)
-    s = 'Recombine Surface{:} ;\n';
-else
-    s = ['Recombine Surface{' num2str(number) '} ;\n'];
+if nargin<2 || isempty(number)
+    number = ':';
 end
+
+u = stepcounter(u);
+s = ['Recombine Surface' tagsintobraces(number) ';\n'];
 u = addstring(u,s);

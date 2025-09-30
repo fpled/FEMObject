@@ -18,7 +18,8 @@ elemtypetemp = '';
 
 repelemingroup = zeros(nbelem,2);
 
-tableelem = fscanf(fid,'%f',[12*nbelem])';
+% tableelem = fscanf(fid,'%f',[33*nbelem])';
+tableelem = fscanf(fid,'%f')';
 physicaltemp = 0;
 geometricaltemp = 0;
 partition = 0;
@@ -31,16 +32,16 @@ for p=1:nbelem
     c = c+1;
     nbtags = tableelem(c+1);
     c = c+1;
-    tags = tableelem([c+1:c+nbtags]);
+    tags = tableelem(c+(1:nbtags));
     physical = tags(1);
     geometrical = tags(2);
-    if(nbtags>=3)
+    if nbtags>=3
         partition = tags(3);
     else
         partition = geometrical;
     end
     c = c+nbtags;
-    connec = tableelem([c+1:c+nbnodep]);
+    connec = tableelem(c+(1:nbnodep));
     c = c+nbnodep;
     
     if ~strcmp(elemtype,elemtypetemp) || (physical~=physicaltemp) || (geometrical~=geometricaltemp) || (partitiontemp~=partition)
@@ -123,11 +124,11 @@ switch number
         dim = 3;
     case 5
         nbnode = 8;
-        name = 'CUB8';
+        name = 'CUB8'; % 'HEXA8'
         dim = 3;
     case 6
         nbnode = 6;
-        name = 'PRI6';
+        name = 'PRI6'; % 'WEDGE6'
         dim = 3;
     case 7
         nbnode = 5;
@@ -151,7 +152,15 @@ switch number
         dim = 3;
     case 12
         nbnode = 27;
-        name = 'CUB27';
+        name = 'CUB27'; % 'HEXA27'
+        dim = 3;
+    case 13
+        nbnode = 18;
+        name = 'PRI18'; % 'WEDGE18'
+        dim = 3;
+    case 14
+        nbnode = 14;
+        name = 'PYR14';
         dim = 3;
     case 15
         nbnode = 1;
@@ -163,7 +172,15 @@ switch number
         dim = 2;
     case 17
         nbnode = 20;
-        name = 'CUB20';
+        name = 'CUB20'; % 'HEXA20'
+        dim = 3;
+    case 18
+        nbnode = 15;
+        name = 'PRI15'; % 'WEDGE15'
+        dim = 3;
+    case 19
+        nbnode = 13;
+        name = 'PYR13';
         dim = 3;
     otherwise
         error('pas defini')

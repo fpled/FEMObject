@@ -14,23 +14,15 @@ c = E.c;
 % Flatten into vertex list
 nodecoord = [X(:), Y(:), Z(:)];
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
+% Rotation matrix
 v = [E.vx, E.vy];
 n = [E.nx, E.ny, E.nz];
 R = calcrotation(E,v,n);
 
-% Translate to center ct = [cx, cy, cz]
+% Center
 ct = [E.cx, E.cy, E.cz];
 
-% Rotate and translate
+% Rotate into global frame and translate to center
 nodecoord = nodecoord * R + ct;
 
 % Reshape back to 2D grids for surf
@@ -41,7 +33,14 @@ Z = reshape(nodecoord(:,3), sz);
 
 % Plot side using surf
 options = patchoptions(E.indim,varargin{:});
+hs = ishold;
+hold on
+
 H = surf(X, Y, Z, options{:});
+
+if ~hs
+    hold off
+end
 
 axis image
 
@@ -61,6 +60,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

@@ -10,90 +10,76 @@ a = E.a;
 b = E.b;
 c = E.c;
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
+% Rotation matrix
 v = [E.vx, E.vy];
 n = [E.nx, E.ny, E.nz];
 R = calcrotation(E,v,n);
 
-% Translate to center c = [cx, cy, cz]
+% Center
 ct = [E.cx, E.cy, E.cz];
-
-% Define three/six plane normals
-N = [1 0 0;
-     0 1 0;
-     0 0 1];
-% N = [1  0  0;
-%      0  1  0;
-%      0  0  1;
-%      1  1  0;
-%      0  1  1;
-%      1  0  1 ];
-N = N ./ vecnorm(N,2,2); % normalize each plane normal
 
 % Connectivity for a closed loop
 connec = [1:npts,1];
 
 % Plot using patch
 options = patchoptions(E.indim, varargin{:});
-holdState = ishold;
+hs = ishold;
 hold on
 
-% Rings
-H.rings = gobjects(size(N,1),1);
-for i = 1:size(N,1)
-    ni = N(i,:);
+H = struct();
 
-    % Arbitrary vector not parallel to ni
-    if abs(ni(1))<0.9
-        vec = [1 0 0];
-    else
-        vec = [0 1 0];
-    end
-    
-    % Local orthonormal basis (ui, wi) in plane orthogonal to ni
-    ui = cross(vec, ni);
-    ui = ui / norm(ui);
-    wi = cross(ni, ui);
-    
-    % Parametric directions in local plane
-    D = cos(t)*ui + sin(t)*wi;
-    
-    % Project onto the ellipsoid surface
-    S = 1./sqrt( (D(:,1)/a).^2 + (D(:,2)/b).^2 + (D(:,3)/c).^2 );
-    nodecoord = D .* S;
+% Three principal-section ellipses
+% First ellipse
+x1 = a * cos(t);
+y1 = b * sin(t);
+z1 = zeros(npts,1);
+nodecoord1 = [x1, y1, z1];
 
-    % Rotate and translate
-    nodecoord = nodecoord * R + ct;
-    
-    % draw closed ring
-    H.rings(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
-end
+% Second ellipse
+x2 = a * cos(t);
+y2 = zeros(npts,1);
+z2 = c * sin(t);
+nodecoord2 = [x2, y2, z2];
 
-% Main diameters (radial lines)
-diam_pts = [ a  0  0;
-            -a  0  0;
-             0  b  0;
-             0 -b  0;
-             0  0  c;
-             0  0 -c];
+% Third ellipse
+x3 = zeros(npts,1);
+y3 = b * cos(t);
+z3 = c * sin(t);
+nodecoord3 = [x3, y3, z3];
 
-% Rotate and translate endpoints
+% Rotate into global frame and translate to center
+nodecoord1 = nodecoord1 * R + ct;
+nodecoord2 = nodecoord2 * R + ct;
+nodecoord3 = nodecoord3 * R + ct;
+
+% Draw ellipses
+H.ellipses = gobjects(3,1);
+H.ellipses(1) = patch('Faces',connec,'Vertices',nodecoord1,options{:});
+H.ellipses(2) = patch('Faces',connec,'Vertices',nodecoord2,options{:});
+H.ellipses(3) = patch('Faces',connec,'Vertices',nodecoord3,options{:});
+
+% Diameters
+diamcoord = [ a  0  0;
+             -a  0  0;
+              0  b  0;
+              0 -b  0;
+              0  0  c;
+              0  0 -c];
+
+% Rotate into global frame and translate to center
+diamcoord = diamcoord * R + ct;
+
 H.diameters = gobjects(3,1);
 for i = 1:3
-    p1 = diam_pts(2*i-1,:) * R + ct; % +axis
-    p2 = diam_pts(2*i,:)   * R + ct; % -axis
+    p1 = diamcoord(2*i-1,:);
+    p2 = diamcoord(2*i,:);
+    % Draw diameters
     H.diameters(i) = patch('Faces',[1 2],'Vertices',[p1; p2],options{:},'LineStyle',':');
 end
 
-if ~holdState
+H = [H.ellipses(:); H.diameters(:)];
+
+if ~hs
     hold off
 end
 
@@ -115,6 +101,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

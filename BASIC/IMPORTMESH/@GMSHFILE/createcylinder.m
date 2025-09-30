@@ -1,15 +1,33 @@
-function u = createcylinder(u,center,axis,radius,numbervolume,varargin)
+function u = createcylinder(u,center,axis,radius,numbervolume,angle)
 % function u = createcylinder(u,center,axis,radius,numbervolume)
 % function u = createcylinder(u,center,axis,radius,numbervolume,angle)
 
-if length(center)~=3
-    error('A cylinder is defined by the 3 coordinates of its base center: center = [cx,cy,cz].')
+if ~(isnumeric(center) && numel(center)==3)
+    error('createcylinder:CenterInvalid', ...
+        'center must be a numeric 1x3 vector [cx,cy,cz].');
 end
-if isempty(radius) || ~isscalar(radius)
-    error('A cylinder is defined by its scalar radius.');
+if ~(isnumeric(axis) && numel(axis)==3)
+    error('createcylinder:AxisInvalid', ...
+        'axis must be a numeric 1x3 vector [dx,dy,dz].');
 end
-if length(axis)~=3
-    error('A cylinder is defined by the 3 components of its axis vector: axis = [dx,dy,dz].')
+if ~(isnumeric(radius) && isscalar(radius))
+    error('createcylinder:RadiusInvalid', ...
+        'radius must be a numeric scalar.');
 end
 
-u = createentity(u,'Cylinder',[center(:)' axis(:)' radius varargin{:}],numbervolume);
+base = [center(:).' axis(:).' radius];
+
+if nargin<6 || isempty(angle)
+    vals = base;
+elseif isnumeric(angle) && isscalar(angle)
+    vals = [base angle];
+elseif isstring(angle) || ischar(angle)
+    vals = [num2cell(base) {tag2str(angle)}];
+else
+    error('createcylinder:AngleInvalid', ...
+        'angle must be [], a numeric scalar, or a char/string tag.');
+end
+
+u = createentity(u,'Cylinder',vals,numbervolume);
+
+end

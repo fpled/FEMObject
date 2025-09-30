@@ -1,20 +1,28 @@
 function varargout = surf(C,varargin)
 % function varargout = surf(C,varargin)
 
-% Radius, height and opening angle
+tol = getfemobjectoptions('tolerancepoint');
+
+% Radius, height, and opening angle
 r = C.r;
 h = C.h;
 angle = C.angle;
+if isstring(angle), angle = char(angle); end
+if ischar(angle),   angle = str2num(lower(angle)); end
 
-% Angular resolution: 200 points for full circle (angle = 2*pi), scale for partial arc
+isfull = abs(angle - 2*pi) < tol;
+
+% Angular resolution: 200 points for full cylinder (angle = 2*pi), scale for partial cylinder (angle < 2*pi)
 npts = getcharin('npts',varargin,max(2,round(200*angle/(2*pi))));
 
 % Build parametric cylinder
-if angle==2*pi
+if isfull
+    % Full cylinder
     [X,Y,Z] = cylinder(r,npts);
     Z = Z * h;
 else
-    t = linspace(0,angle,npts+1)';  % parametric angle
+    % Partial cylinder
+    t = linspace(0,angle,npts+1)'; % parametric angle
     z = [0, h];
     [T,Z] = meshgrid(t,z);
     X = r * cos(T);
@@ -24,23 +32,15 @@ end
 % Flatten into vertex list
 nodecoord = [X(:), Y(:), Z(:)];
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
+% Rotation matrix
 v = [C.vx, C.vy];
 n = [C.nx, C.ny, C.nz];
 R = calcrotation(C,v,n);
 
-% Translate to center c = [cx, cy, cz]
+% Center
 c = [C.cx, C.cy, C.cz];
 
-% Rotate and translate
+% Rotate into global frame and translate to center
 nodecoord = nodecoord * R + c;
 
 % Reshape back to 2D grids for surf
@@ -49,9 +49,16 @@ X = reshape(nodecoord(:,1), sz);
 Y = reshape(nodecoord(:,2), sz);
 Z = reshape(nodecoord(:,3), sz);
 
-% Plot side using surf
+% Plot using surf
 options = patchoptions(C.indim,varargin{:});
+hs = ishold;
+hold on
+
 H = surf(X, Y, Z, options{:});
+
+if ~hs
+    hold off
+end
 
 axis image
 
@@ -71,6 +78,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

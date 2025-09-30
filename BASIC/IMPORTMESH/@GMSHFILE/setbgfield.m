@@ -6,5 +6,5 @@ if nargin<2 || isempty(number)
 end
 
 u = stepcounter(u);
-s = ['Background Field = ' num2str(number) ' ;\n'];
+s = ['Background Field = ' num2str(number) ';\n'];
 u = addstring(u,s);

@@ -6,8 +6,13 @@ function varargout = gmshDomainWithDoubleEdgeCrack(D,Ca,Cb,clD,clC,filename,indi
 % filename : file name (optional)
 % indim : space dimension (optional, getindim(D) by default)
 
+Box         = getcharin('Box',varargin,[]);
 noduplicate = ischarin('noduplicate',varargin);
-varargin = delonlycharin('noduplicate',varargin);
+refinecrack = ischarin('refinecrack',varargin);
+recombine   = ischarin('recombine',varargin);
+
+varargin = delcharin('Box',varargin);
+varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 
 if nargin<7 || isempty(indim)
     indim = getindim(D);
@@ -23,31 +28,34 @@ if indim==2
     PCb = getvertices(Cb);
     Ca = LINE(min(PCa{:}),max(PCa{:}));
     Cb = LINE(min(PCb{:}),max(PCb{:}));
-    if ischarin('refinecrack',varargin)
+    if refinecrack
         Ga = gmshfile(Ca,clC,[2 1],1);
         Gb = gmshfile(Cb,clC,[8 5],8);
     else
         Ga = gmshfile(Ca,[clD clC],[2 1],1);
-        Gb = gmshfile(Cb,[clD clC],[8 5],8);
+        Gb = gmshfile(Cb,[clC clD],[8 5],8);
     end
     G = Ga+Gb;
     G = createpoints(G,PD,clD,[3:4,6:7]);
     G = createcontour(G,2:7,2:7,1);
     G = createplanesurface(G,1,1);
     G = embedcurvesinsurface(G,[1,8],1);
+    
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
         G = createphysicalpoint(G,[2,5],openboundaryphysicalgroup);
         G = createphysicalcurve(G,[1,8],physicalgroup);
     end
-    if ischarin('recombine',varargin)
+    
+    if recombine
         G = recombinesurface(G,1);
     end
+    
     G = createphysicalsurface(G,1,1);
     
 elseif indim==3
-    if ischarin('refinecrack',varargin)
+    if refinecrack
         Ga = gmshfile(Ca,clC,1:4,1:4,1,1);
         Gb = gmshfile(Cb,clC,5:8,5:8,2,2);
     else
@@ -80,18 +88,14 @@ elseif indim==3
     G = createplanesurface(G,8,8);
     G = embedcurveinsurface(G,8,8);
     
-    if ischarin('recombine',varargin)
-        G = recombinesurface(G,1);
-        G = recombinesurface(G,2);
-        G = recombinesurface(G,3);
-        G = recombinesurface(G,4);
-        G = recombinesurface(G,5);
-        G = recombinesurface(G,6);
-        G = recombinesurface(G,7);
+    if recombine
+        G = recombinesurface(G);
     end
+    
     G = createsurfaceloop(G,3:8,1);
     G = createvolume(G,1,1);
     G = embedsurfacesinvolume(G,[1 2],1);
+    
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
@@ -99,40 +103,39 @@ elseif indim==3
         G = createphysicalcurve(G,[1 3 4 5 6 7],openboundaryphysicalgroup);
         G = createphysicalsurface(G,1,physicalgroup);
     end
+    
     G = createphysicalvolume(G,1,1);
     
 end
-varargin = delonlycharin({'recombine','refinecrack'},varargin);
 
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = clC;
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

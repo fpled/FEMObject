@@ -1,93 +1,81 @@
 function varargout = plot(S,varargin)
 % function varargout = plot(S,varargin)
 
-npts = getcharin('npts',varargin,100); % angular resolution
+npts = getcharin('npts',varargin,200); % angular resolution
 t = linspace(0,2*pi,npts+1)'; % parametric angle
 t(end) = []; % remove duplicate
 
 % Radius
 r = S.r;
 
-%% Old version
-% Rotate around axis n = [nx, ny, nz] by angle of rotation phi =
-% atan2(vy, vx) using tangent vector v = [vx, vy] via Rodrigues'
-% rotation formula
-%% New version
-% Twist the XY plane about z = [0, 0, 1] by phi = atan2(vy, vx)
-% using tangent vector v = [vx, vy], then tilt from z axis to normal
-% vector n = [nx, ny, nz] so that the circle's normal is n regardless
-% of v = [vx, vy]
+% Rotation matrix
 v = [S.vx, S.vy];
 n = [S.nx, S.ny, S.nz];
 R = calcrotation(S,v,n);
 
-% Translate to center c = [cx, cy, cz]
+% Center
 c = [S.cx, S.cy, S.cz];
-
-% Define three/six plane normals
-N = [1 0 0;
-     0 1 0;
-     0 0 1];
-% N = [1  0  0;
-%      0  1  0;
-%      0  0  1;
-%      1  1  0;
-%      0  1  1;
-%      1  0  1 ];
-N = N ./ vecnorm(N,2,2);  % normalize each plane normal
 
 % Connectivity for a closed loop
 connec = [1:npts,1];
 
 % Plot using patch
 options = patchoptions(S.indim, varargin{:});
-holdState = ishold;
+hs = ishold;
 hold on
 
-% Rings
-H.rings = gobjects(size(N,1),1);
-for i = 1:size(N,1)
-    ni = N(i,:);
+% Three principal-section circles
+% First circle
+x1 = r * cos(t);
+y1 = r * sin(t);
+z1 = zeros(npts,1);
+nodecoord1 = [x1, y1, z1];
 
-    % Pick arbitrary vector not parallel to ni
-    if abs(ni(1))<0.9
-        vec = [1 0 0];
-    else
-        vec = [0 1 0];
-    end
-    
-    % Build local orthonormal basis (ui, wi) in plane orthogonal to ni
-    ui = cross(vec, ni);
-    ui = ui/norm(ui);
-    wi = cross(ni, ui);
-    
-    % Parametric circle in local plane
-    nodecoord = r * (cos(t)*ui + sin(t)*wi);
-    
-    % Rotate and translate
-    nodecoord = nodecoord * R + c;
-    
-    % draw closed ring
-    H.rings(i) = patch('Faces',connec,'Vertices',nodecoord,options{:});
-end
+% Second circle
+x2 = r * cos(t);
+y2 = zeros(npts,1);
+z2 = r * sin(t);
+nodecoord2 = [x2, y2, z2];
 
-% Main diameters (radial lines)
-diam_pts = [ r  0  0;
-            -r  0  0;
-             0  r  0;
-             0 -r  0;
-             0  0  r;
-             0  0 -r];
+% Third circle
+x3 = zeros(npts,1);
+y3 = r * cos(t);
+z3 = r * sin(t);
+nodecoord3 = [x3, y3, z3];
 
-% Rotate and translate endpoints
+% Rotate into global frame and translate to center
+nodecoord1 = nodecoord1 * R + c;
+nodecoord2 = nodecoord2 * R + c;
+nodecoord3 = nodecoord3 * R + c;
+
+% Draw circles
+H.circles = gobjects(3,1);
+H.circles(1) = patch('Faces',connec,'Vertices',nodecoord1,options{:});
+H.circles(2) = patch('Faces',connec,'Vertices',nodecoord2,options{:});
+H.circles(3) = patch('Faces',connec,'Vertices',nodecoord3,options{:});
+
+% Diameters
+diamcoord = [ r  0  0;
+             -r  0  0;
+              0  r  0;
+              0 -r  0;
+              0  0  r;
+              0  0 -r];
+
+% Rotate into global frame and translate to center
+diamcoord = diamcoord * R + c;
+
+% Draw diameters
 H.diameters = gobjects(3,1);
 for i = 1:3
-    p1 = diam_pts(2*i-1,:) * R + c; % +axis
-    p2 = diam_pts(2*i,:)   * R + c; % -axis
+    p1 = diamcoord(2*i-1,:);
+    p2 = diamcoord(2*i,:);
     H.diameters(i) = patch('Faces',[1 2],'Vertices',[p1; p2],options{:},'LineStyle',':');
 end
 
-if ~holdState
+H = [H.circles(:); H.diameters(:)];
+
+if ~hs
     hold off
 end
 
@@ -109,6 +97,6 @@ if ~isempty(camera_position)
     campos(camera_position);
 end
 
-if nargout>=1
+if nargout
     varargout{1} = H;
 end

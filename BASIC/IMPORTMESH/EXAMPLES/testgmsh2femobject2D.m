@@ -1,4 +1,8 @@
-%% Dimension 2
+% clc
+clearvars
+close all
+
+%% 2D geometric objects
 D = DOMAIN(2);
 P1 = POINT([0.3,0.5]);
 P2 = POINT([0.1,0.2]);
@@ -7,6 +11,8 @@ r1 = 0.3;
 r2 = 0.7;
 C1 = CIRCLE(0.5,0.5,r1);
 C2 = CIRCLE(0.5,0.5,r2);
+% C1 = CIRCLE(0.5,0.5,r1,1,1);
+% C2 = CIRCLE(0.5,0.5,r2,1,1);
 
 L1 = LINE([0.0,0.5],P1);
 L2 = LINE([0.2,0.3],[0.6,0.7]);
@@ -14,7 +20,8 @@ L3 = LINE([0.7,0.2],[0.9,0.1]);
 
 a = 0.4;
 b = 0.2;
-E = ELLIPSE(0.5,0.5,a,b);
+E1 = ELLIPSE(0.5,0.5,a,b);
+% E1 = ELLIPSE(0.5,0.5,a,b,1,1);
 
 b = 1; % domain length
 a = 0.2*b; % crack length
@@ -66,7 +73,6 @@ subplot(1,2,2)
 plotparamelem(Sq,'group')
 
 %% Domain with point using OpenCASCADE
-
 fprintf('\n2D Domain with point using OpenCASCADE\n');
 fprintf('\n');
 St = gmsh(D,P1,0.05,0.01,'filename','gmsh_domain_with_point_tri_occ','occ');
@@ -134,8 +140,8 @@ plotparamelem(Sq,'group')
 %% Ellipse
 fprintf('\n2D Ellipse\n');
 fprintf('\n');
-St = gmsh(E,0.05,'filename','gmsh_ellipse_tri');
-Sq = gmsh(E,0.05,'filename','gmsh_ellipse_quad','recombine');
+St = gmsh(E1,0.05,'filename','gmsh_ellipse_tri');
+Sq = gmsh(E1,0.05,'filename','gmsh_ellipse_quad','recombine');
 
 figure('Name','Ellipse')
 clf
@@ -147,8 +153,8 @@ plotparamelem(Sq,'group')
 %% Ellipse using OpenCASCADE
 fprintf('\n2D Ellipse using OpenCASCADE\n');
 fprintf('\n');
-St = gmsh(E,0.05,'filename','gmsh_ellipse_tri_occ','occ');
-Sq = gmsh(E,0.05,'filename','gmsh_ellipse_quad_occ','occ','recombine');
+St = gmsh(E1,0.05,'filename','gmsh_ellipse_tri_occ','occ');
+Sq = gmsh(E1,0.05,'filename','gmsh_ellipse_quad_occ','occ','recombine');
 
 figure('Name','Ellipse using OpenCASCADE')
 clf
@@ -160,8 +166,8 @@ plotparamelem(Sq,'group')
 %% Ellipse with point
 fprintf('\n2D Ellipse with point\n');
 fprintf('\n');
-St = gmsh(E,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_tri');
-Sq = gmsh(E,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_quad','recombine');
+St = gmsh(E1,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_tri');
+Sq = gmsh(E1,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_quad','recombine');
 
 figure('Name','Ellipse with point')
 clf
@@ -173,8 +179,8 @@ plotparamelem(Sq,'group')
 %% Ellipse with point using OpenCASCADE
 fprintf('\n2D Ellipse with point using OpenCASCADE\n');
 fprintf('\n');
-St = gmsh(E,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_tri_occ','occ');
-Sq = gmsh(E,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_quad_occ','occ','recombine');
+St = gmsh(E1,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_tri_occ','occ');
+Sq = gmsh(E1,P1,0.05,0.005,'filename','gmsh_ellipse_with_point_quad_occ','occ','recombine');
 
 figure('Name','Ellipse with point using OpenCASCADE')
 clf
@@ -199,8 +205,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal hole
 fprintf('\n2D Domain with ellipsoidal hole\n');
 fprintf('\n');
-St = gmshDomainWithHole(D,E,0.05,0.02,'gmsh_domain_with_ellipsoidal_hole_tri');
-Sq = gmshDomainWithHole(D,E,0.05,0.02,'gmsh_domain_with_ellipsoidal_hole_quad',2,'recombine');
+St = gmshDomainWithHole(D,E1,0.05,0.02,'gmsh_domain_with_ellipsoidal_hole_tri');
+Sq = gmshDomainWithHole(D,E1,0.05,0.02,'gmsh_domain_with_ellipsoidal_hole_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal hole')
 clf
@@ -225,8 +231,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal hole and point
 fprintf('\n2D Domain with ellipsoidal hole and point\n');
 fprintf('\n');
-St = gmshDomainWithHole(D,{E,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_hole_point_tri');
-Sq = gmshDomainWithHole(D,{E,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_hole_point_quad',2,'recombine');
+St = gmshDomainWithHole(D,{E1,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_hole_point_tri');
+Sq = gmshDomainWithHole(D,{E1,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_hole_point_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal hole and point')
 clf
@@ -251,8 +257,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal hole, crack and point
 fprintf('\n2D Domain with ellipsoidal hole, crack and point\n');
 fprintf('\n');
-St = gmshDomainWithHole(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_crack_point_tri');
-Sq = gmshDomainWithHole(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_crack_point_quad',2,'recombine');
+St = gmshDomainWithHole(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_crack_point_tri');
+Sq = gmshDomainWithHole(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_crack_point_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal hole, crack and point')
 clf
@@ -277,8 +283,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal hole, line and point
 fprintf('\n2D Domain with ellipsoidal hole, line and point\n');
 fprintf('\n');
-St = gmshDomainWithHole(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_line_point_tri',2,'noduplicate');
-Sq = gmshDomainWithHole(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_line_point_quad',2,'noduplicate','recombine');
+St = gmshDomainWithHole(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_line_point_tri',2,'noduplicate');
+Sq = gmshDomainWithHole(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_hole_line_point_quad',2,'noduplicate','recombine');
 
 figure('Name','Domain with ellipsoidal hole, line and point')
 clf
@@ -303,8 +309,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal inclusion
 fprintf('\n2D Domain with ellipsoidal inclusion\n');
 fprintf('\n');
-St = gmshDomainWithInclusion(D,E,0.05,0.02,'gmsh_domain_with_ellipsoidal_inclusion_tri');
-Sq = gmshDomainWithInclusion(D,E,0.05,0.02,'gmsh_domain_with_ellipsoidal_inclusion_quad',2,'recombine');
+St = gmshDomainWithInclusion(D,E1,0.05,0.02,'gmsh_domain_with_ellipsoidal_inclusion_tri');
+Sq = gmshDomainWithInclusion(D,E1,0.05,0.02,'gmsh_domain_with_ellipsoidal_inclusion_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal inclusion')
 clf
@@ -329,8 +335,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal inclusion and point
 fprintf('\n2D Domain with ellipsoidal inclusion and point\n');
 fprintf('\n');
-St = gmshDomainWithInclusion(D,{E,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_inclusion_point_tri');
-Sq = gmshDomainWithInclusion(D,{E,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_inclusion_point_quad',2,'recombine');
+St = gmshDomainWithInclusion(D,{E1,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_inclusion_point_tri');
+Sq = gmshDomainWithInclusion(D,{E1,P2},0.05,[0.02,0.005],'gmsh_domain_with_ellipsoidal_inclusion_point_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal inclusion and point')
 clf
@@ -355,8 +361,8 @@ plotparamelem(Sq,'group')
 %% Domain with ellipsoidal inclusion, line and point
 fprintf('\n2D Domain with ellipsoidal inclusion, line and point\n');
 fprintf('\n');
-St = gmshDomainWithInclusion(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_inclusion_line_point_tri');
-Sq = gmshDomainWithInclusion(D,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_inclusion_line_point_quad',2,'recombine');
+St = gmshDomainWithInclusion(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_inclusion_line_point_tri');
+Sq = gmshDomainWithInclusion(D,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_domain_with_ellipsoidal_inclusion_line_point_quad',2,'recombine');
 
 figure('Name','Domain with ellipsoidal inclusion, line and point')
 clf
@@ -381,8 +387,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal hole
 fprintf('\n2D Circle with ellipsoidal hole\n');
 fprintf('\n');
-St = gmshCircleWithHole(C2,E,0.05,0.02,'gmsh_circle_with_ellipsoidal_hole_tri');
-Sq = gmshCircleWithHole(C2,E,0.05,0.02,'gmsh_circle_with_ellipsoidal_hole_quad',2,'recombine');
+St = gmshCircleWithHole(C2,E1,0.05,0.02,'gmsh_circle_with_ellipsoidal_hole_tri');
+Sq = gmshCircleWithHole(C2,E1,0.05,0.02,'gmsh_circle_with_ellipsoidal_hole_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal hole')
 clf
@@ -407,8 +413,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal hole and point
 fprintf('\n2D Circle with ellipsoidal hole and point\n');
 fprintf('\n');
-St = gmshCircleWithHole(C2,{E,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_hole_point_tri');
-Sq = gmshCircleWithHole(C2,{E,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_hole_point_quad',2,'recombine');
+St = gmshCircleWithHole(C2,{E1,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_hole_point_tri');
+Sq = gmshCircleWithHole(C2,{E1,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_hole_point_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal hole and point')
 clf
@@ -433,8 +439,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal hole, crack and point
 fprintf('\n2D Circle with ellipsoidal hole, crack and point\n');
 fprintf('\n');
-St = gmshCircleWithHole(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_tri');
-Sq = gmshCircleWithHole(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_quad',2,'recombine');
+St = gmshCircleWithHole(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_tri');
+Sq = gmshCircleWithHole(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal hole, crack and point')
 clf
@@ -459,8 +465,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal hole, line and point
 fprintf('\n2D Circle with ellipsoidal hole, line and point\n');
 fprintf('\n');
-St = gmshCircleWithHole(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_tri',2,'noduplicate');
-Sq = gmshCircleWithHole(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_quad',2,'noduplicate','recombine');
+St = gmshCircleWithHole(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_tri',2,'noduplicate');
+Sq = gmshCircleWithHole(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_hole_crack_point_quad',2,'noduplicate','recombine');
 
 figure('Name','Circle with ellipsoidal hole, line and point')
 clf
@@ -485,8 +491,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal inclusion
 fprintf('\n2D Circle with ellipsoidal inclusion\n');
 fprintf('\n');
-St = gmshCircleWithInclusion(C2,E,0.05,0.02,'gmsh_circle_with_ellipsoidal_inclusion_tri');
-Sq = gmshCircleWithInclusion(C2,E,0.05,0.02,'gmsh_circle_with_ellipsoidal_inclusion_quad',2,'recombine');
+St = gmshCircleWithInclusion(C2,E1,0.05,0.02,'gmsh_circle_with_ellipsoidal_inclusion_tri');
+Sq = gmshCircleWithInclusion(C2,E1,0.05,0.02,'gmsh_circle_with_ellipsoidal_inclusion_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal inclusion')
 clf
@@ -511,8 +517,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal inclusion and point
 fprintf('\n2D Circle with ellipsoidal inclusion and point\n');
 fprintf('\n');
-St = gmshCircleWithInclusion(C2,{E,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_inclusion_point_tri');
-Sq = gmshCircleWithInclusion(C2,{E,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_inclusion_point_quad',2,'recombine');
+St = gmshCircleWithInclusion(C2,{E1,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_inclusion_point_tri');
+Sq = gmshCircleWithInclusion(C2,{E1,P2},0.05,[0.02,0.005],'gmsh_circle_with_ellipsoidal_inclusion_point_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal inclusion and point')
 clf
@@ -537,8 +543,8 @@ plotparamelem(Sq,'group')
 %% Circle with ellipsoidal inclusion, line and point
 fprintf('\n2D Circle with ellipsoidal inclusion, line and point\n');
 fprintf('\n');
-St = gmshCircleWithInclusion(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_inclusion_line_point_tri');
-Sq = gmshCircleWithInclusion(C2,{E,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_inclusion_line_point_quad',2,'recombine');
+St = gmshCircleWithInclusion(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_inclusion_line_point_tri');
+Sq = gmshCircleWithInclusion(C2,{E1,L3,P2},0.05,[0.02,0.01,0.005],'gmsh_circle_with_ellipsoidal_inclusion_line_point_quad',2,'recombine');
 
 figure('Name','Circle with ellipsoidal inclusion, line and point')
 clf

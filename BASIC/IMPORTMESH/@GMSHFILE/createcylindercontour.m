@@ -1,7 +1,13 @@
-function u = createcylindercontour(u,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop)
+function u = createcylindercontour(u,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop,varargin)
 % function u = createcylindercontour(u,numbercenter,numberpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop)
 
-n = length(numberpoints)/2;  % number of points per circle
+if nargin<6, numbersurfaces = []; end
+if nargin<7, numbersurfaceloop = []; end
+
+n = numel(numberpoints)/2; % number of points per circle
+if mod(numel(numberpoints),2)~=0
+    error('createcylindercontour:PointCount', 'numberpoints length must be 2*n.');
+end
 
 % Points indices
 numberbasepoints = numberpoints(1:n);     % n base points
@@ -14,17 +20,21 @@ numbervertlines  = numbercurves(2*n+1:3*n); % n vertical lines between base and 
 
 % Base circle (closed, reverse orientation for outward normal)
 u = createcirclecontour(u,numbercenter(1),numberbasepoints,numberbasecurves,numbercurveloops(1),'reverse',-1);
-u = createplanesurface(u,numbercurveloops(1),numbersurfaces(1));
+if ~isempty(numbersurfaces)
+    u = createplanesurface(u,numbercurveloops(1),numbersurfaces(1));
+end
 
 % Top circle (closed)
 u = createcirclecontour(u,numbercenter(2),numbertoppoints,numbertopcurves,numbercurveloops(2));
-u = createplanesurface(u,numbercurveloops(2),numbersurfaces(2));
+if ~isempty(numbersurfaces)
+    u = createplanesurface(u,numbercurveloops(2),numbersurfaces(2));
+end
 
 % Vertical lines (n generatrices between base and top)
-% segvert = [(1:n); (1:n)+n]';
-% segvert = numberpoints(segvert);
-segvert = [numberbasepoints(:), numbertoppoints(:)];
-u = createlines(u,segvert,numbervertlines);
+% seg_vert = [(1:n); (1:n)+n]';
+% seg_vert = numberpoints(segvert);
+seg_vert = [numberbasepoints(:), numbertoppoints(:)];
+u = createlines(u,seg_vert,numbervertlines);
 
 % Lateral faces (n quadrilaterals along the circle)
 for i=1:n
@@ -40,6 +50,11 @@ for i=1:n
               -numbervertlines(i)];     % vertical down (i, reversed)
     k = 2+i;
     u = createcurveloop(u,curves,numbercurveloops(k));
-    u = createsurface(u,numbercurveloops(k),numbersurfaces(k));
+    if ~isempty(numbersurfaces)
+        u = createsurface(u,numbercurveloops(k),numbersurfaces(k));
+    end
 end
-u = createsurfaceloop(u,numbersurfaces,numbersurfaceloop);
+
+if ~isempty(numbersurfaces) && ~isempty(numbersurfaceloop)
+    u = createsurfaceloop(u,numbersurfaces,numbersurfaceloop);
+end

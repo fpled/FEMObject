@@ -7,13 +7,13 @@ end
 
 npts = length(P);
 
-if nargin < 3 || isempty(cl)
+if nargin<3 || isempty(cl)
     cl = [];
 elseif isscalar(cl)
     cl = repmat(cl,1,npts);
 end
 
-if nargin < 4 || isempty(numberpoints)
+if nargin<4 || isempty(numberpoints)
     numberpoints = [];
 end
 
@@ -22,12 +22,16 @@ for k=1:npts
     if isempty(cl)
         if isempty(numberpoints)
             u = createpoint(u,Pk);
+        elseif iscell(numberpoints)
+            u = createpoint(u,Pk,[],numberpoints{k});
         else
             u = createpoint(u,Pk,[],numberpoints(k));
         end
     else
         if isempty(numberpoints)
             u = createpoint(u,Pk,cl(k));
+        elseif iscell(numberpoints)
+            u = createpoint(u,Pk,cl(k),numberpoints{k});
         else
             u = createpoint(u,Pk,cl(k),numberpoints(k));
         end

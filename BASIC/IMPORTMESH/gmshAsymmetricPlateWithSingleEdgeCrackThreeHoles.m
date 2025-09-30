@@ -7,8 +7,13 @@ function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,cl
 % filename : file name (optional)
 % indim : space dimension (optional, 2 by default)
 
+Box         = getcharin('Box',varargin,[]);
 noduplicate = ischarin('noduplicate',varargin);
-varargin = delonlycharin('noduplicate',varargin);
+refinecrack = ischarin('refinecrack',varargin);
+recombine   = ischarin('recombine',varargin);
+
+varargin = delcharin('Box',varargin);
+varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 
 if nargin<8 || isempty(indim)
     indim = 2;
@@ -41,74 +46,83 @@ P{7} = [-L ,  h];
 
 C = LINE([-b,-h],[-b,-h+a]);
 
-H{1} = CIRCLE(-lh,h-ph-2*dh,r);
-H{2} = CIRCLE(-lh,h-ph-dh,r);
-H{3} = CIRCLE(-lh,h-ph,r);
+H{1} = CIRCLE(-lh, h-ph-2*dh, r);
+H{2} = CIRCLE(-lh, h-ph-dh  , r);
+H{3} = CIRCLE(-lh, h-ph     , r);
 
-if ischarin('refinecrack',varargin)
-    clcrack = clC;
+if refinecrack
+    clCrack = clC;
 else
-    clcrack = [clD clC];
+    clCrack = [clD clC];
 end
-G = gmshfile(C,clcrack,[3 9],1);
-G = createpoints(G,P,clD,[1:2,4:8]);
-G = createcontour(G,1:8,2:9,10);
 
-numpoints = 10:14;
-numlines = 11:15;
-numlineloop = 2:9;
+numpoints = 1:9;
+numlinecrack = 1;
+numlines = 2:9;
+numpointscrack = numpoints([2,1]);
+G = gmshfile(C,clCrack,numpointscrack,numlinecrack);
+G = createpoints(G,P,clD,numpoints([8,9,3:7]));
+G = createcontour(G,numpoints(2:9),numlines);
+
+numlineloop = 0;
+numcurves = numlines;
 for j=1:length(H)
-    numlineloop = [numlineloop,-numlines(1:end-1)];
-    GH = gmshfile(H{j},clH,numpoints(1),numpoints(2:end),numlines(1:end-1),numlines(end));
+    numpoints = numpoints(end)+(1:5);
+    numlines = numlines(end)+(1:4);
+    numlineloop = numlineloop(end)+1;
+    GH = gmshfile(H{j},clH,numpoints(1),numpoints(2:end),numlines,numlineloop);
     G = G+GH;
-    numpoints = numpoints+5;
-    numlines = numlines+5;
+    numcurves = [numcurves,-numlines];
 end
-G = createcurveloop(G,numlineloop,numlines(end));
-G = createplanesurface(G,numlines(end),1);
-G = embedcurveinsurface(G,1,1);
-if ischarin('recombine',varargin)
-    G = recombinesurface(G,1);
+
+numlineloop = numlineloop(end)+1;
+numsurface = 1;
+G = createcurveloop(G,numcurves,numlineloop);
+G = createplanesurface(G,numlineloop,numsurface);
+G = embedcurveinsurface(G,numlinecrack,numsurface);
+
+if recombine
+    G = recombinesurface(G,numsurface);
 end
+
 if ~noduplicate
     openboundaryphysicalgroup = 1;
     physicalgroup = 1;
-    G = createphysicalpoint(G,3,openboundaryphysicalgroup);
-    G = createphysicalcurve(G,1,physicalgroup);
+    G = createphysicalpoint(G,numpointscrack(1),openboundaryphysicalgroup);
+    G = createphysicalcurve(G,numlinecrack,physicalgroup);
 end
-G = createphysicalsurface(G,1,1);
 
-varargin = delonlycharin({'recombine','refinecrack'},varargin);
+numphysicalsurface = 1;
+G = createphysicalsurface(G,numsurface,numphysicalsurface);
 
 % Box field
-B = getcharin('Box',varargin,[]);
-if ~isempty(B) && isstruct(B)
-    if isfield(B,'VIn')
-        VIn = B.VIn;
+if ~isempty(Box) && isstruct(Box)
+    if isfield(Box,'VIn')
+        VIn = Box.VIn;
     else
         VIn = clC;
     end
-    if isfield(B,'VOut')
-        VOut = B.VOut;
+    if isfield(Box,'VOut')
+        VOut = Box.VOut;
     else
         VOut = clD;
     end
-    XMin = B.XMin;
-    XMax = B.XMax;
-    YMin = B.YMin;
-    YMax = B.YMax;
-    if indim==3 || isfield(B,'ZMin')
-        ZMin = B.ZMin;
+    XMin = Box.XMin;
+    XMax = Box.XMax;
+    YMin = Box.YMin;
+    YMax = Box.YMax;
+    if indim==3 || isfield(Box,'ZMin')
+        ZMin = Box.ZMin;
     else
         ZMin = 0;
     end
-    if indim==3 || isfield(B,'ZMax')
-        ZMax = B.ZMax;
+    if indim==3 || isfield(Box,'ZMax')
+        ZMax = Box.ZMax;
     else
         ZMax = 0;
     end
-    if isfield(B,'Thickness')
-        Thickness = B.Thickness;
+    if isfield(Box,'Thickness')
+        Thickness = Box.Thickness;
     else
         Thickness = 0;
     end

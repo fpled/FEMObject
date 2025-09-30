@@ -7,15 +7,18 @@ end
 
 u = stepcounter(u);
 
-if ischar(value) || (isstring(value) && isscalar(value))
-    valstr = ['"' char(value) '"'];
-elseif isnumeric(value) && numel(value)>1
-    valstr = valuesintobraces(value);
-elseif isnumeric(value) && isscalar(value)
-    valstr = num2str(value);
+if ischar(value)
+    val = value;
+elseif isstring(value) && isscalar(value)
+    val = ['"' char(value) '"'];
+elseif (isnumeric(value) || islogical(value)) && isscalar(value)
+    val = num2str(value);
+elseif (isnumeric(value) || islogical(value)) && ~isscalar(value)
+    val = tagsintobraces(value);
 else
-    error('Unsupported value type for setfieldattribute.');
+    error('setfieldattribute:UnsupportedType', ...
+        'Unsupported value type for setfieldattribute.');
 end
 
-s = ['Field[' num2str(number) '].' name ' = ' valstr ' ;\n'];
+s = ['Field[' num2str(number) '].' name ' = ' val ';\n'];
 u = addstring(u,s);

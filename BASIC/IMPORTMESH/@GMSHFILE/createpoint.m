@@ -8,4 +8,5 @@ end
 if ~isempty(cl)
     P = [P,cl];
 end
+
 u = createentity(u,'Point',P,varargin{:});

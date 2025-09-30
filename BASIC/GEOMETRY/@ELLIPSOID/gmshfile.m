@@ -3,15 +3,18 @@ function varargout = gmshfile(E,cl,numbercenter,numberpoints,numbercurves,number
 % E : ELLIPSOID
 % cl : characteristic length
 
-if nargin<=2 || isempty(numbercenter), numbercenter = 1; end
-if nargin<=3 || isempty(numberpoints), numberpoints = 2:7; end
-if nargin<=4 || isempty(numbercurves), numbercurves = 1:12; end
-if nargin<=5 || isempty(numbercurveloops), numbercurveloops = 1:8; end
-if nargin<=6 || isempty(numbersurfaces), numbersurfaces = 1:8; end
-if nargin<=7 || isempty(numbersurfaceloop), numbersurfaceloop = 1; numbervolume = 1; end
-if nargin==8, numbervolume = []; end
+if nargin<3 || isempty(numbercenter), numbercenter = 1; end
+if nargin<4 || isempty(numberpoints), numberpoints = numbercenter+(1:6); end
+if nargin<5 || isempty(numbercurves), numbercurves = 1:12; end
+if nargin<6 || isempty(numbercurveloops), numbercurveloops = 1:8; end
+if nargin<7 || isempty(numbersurfaces), numbersurfaces = 1:8; end
+if nargin<8 || isempty(numbersurfaceloop), numbersurfaceloop = 1; end
+if nargin<9, numbervolume = []; elseif isempty(numbervolume), numbervolume = 1; end
 
-semiaxes_lengths = [abs(E.a), abs(E.b), abs(E.c)];
+center = [E.cx,E.cy,E.cz];
+P = getvertices(E);
+
+semiaxes_lengths = [abs(E.a),abs(E.b),abs(E.c)];
 [~,maxidx] = max(semiaxes_lengths);
 
 switch maxidx
@@ -28,8 +31,7 @@ end
 numbermajorpoints = repmat(numbermajorpoint,1,12); % Use the same major axis point for all 12  curves/arcs
 
 G = GMSHFILE();
-P = getvertices(E);
-G = createpoint(G,[E.cx,E.cy,E.cz],cl,numbercenter);
+G = createpoint(G,center,cl,numbercenter);
 G = createpoints(G,P,cl,numberpoints);
 G = createellipsoidcontour(G,numbercenter,numberpoints,numbermajorpoints,numbercurves,numbercurveloops,numbersurfaces,numbersurfaceloop);
 if ~isempty(numbervolume)

@@ -6,10 +6,10 @@ function optionsout=patchoptions(dim,varargin)
 % 'EdgeColor'        'k', ..., 'flat', 'interp'        voir patch
 % 'LineWidth'        a                      taille des edges (ne fonctionne pas avec edgecolor interp) 
 
-if nargin==2 && isa(varargin{1},'double')
-    indim=varargin{1};
+if nargin>=2 && isa(varargin{1},'double')
+    indim = varargin{1};
 else
-    indim=dim;
+    indim = dim;
 end
 
 facecolor = getcharin('FaceColor',varargin,'none');

@@ -1,11 +1,17 @@
 function u = createbox(u,point,extents,numbervolume)
 % function u = createbox(u,point,extents,numbervolume)
 
-if length(point)~=3
-    error('A box is defined by the 3 coordinates of its lower-left corner: point = [x,y,z].')
+if ~(isnumeric(point) && numel(point)==3)
+    error('createbox:PointInvalid', ...
+        'point must be a numeric 1x3 vector [x,y,z].');
 end
-if length(extents)~=3
-    error('A box is defined by the 3 extents (width, height and depth): extents = [dx,dy,dz].')
+if ~(isnumeric(extents) && numel(extents)==3)
+    error('createbox:ExtentsInvalid', ...
+        'extents must be a numeric 1x3 vector [dx,dy,dz].');
 end
 
-u = createentity(u,'Box',[point(:)' extents(:)'],numbervolume);
+vals = [point(:).' extents(:).'];
+
+u = createentity(u,'Box',vals,numbervolume);
+
+end
