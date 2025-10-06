@@ -1,6 +1,7 @@
 .svn
 *.mexa64
 *.mexmaci64
+*.mexmaca64
 *.mexw64
 .DS_Store
 MYCODE
