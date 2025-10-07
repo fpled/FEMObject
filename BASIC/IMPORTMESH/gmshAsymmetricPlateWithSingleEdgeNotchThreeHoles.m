@@ -14,13 +14,13 @@ function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,
 Box         = getcharin('Box',varargin,[]);
 refinecrack = ischarin('refinecrack',varargin);
 recombine   = ischarin('recombine',varargin);
-isrect      = any(ischarin({'r','rect','rectangle'},varargin));
+isrect      = any(ischarin({'r','rect','rectangular'},varargin));
 istri       = any(ischarin({'v','V','triangular'},varargin));
 iscirc      = any(ischarin({'c','circ','circular'},varargin));
 
 varargin = delcharin('Box',varargin);
 varargin = delonlycharin({'refinecrack','recombine', ...
-                          'r','rect','rectangle', ...
+                          'r','rect','rectangular', ...
                           'v','V','triangular', ...
                           'c','circ','circular'},varargin);
 
