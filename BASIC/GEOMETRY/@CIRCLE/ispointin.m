@@ -1,6 +1,8 @@
 function [rep,P] = ispointin(C,P)
 % function [rep,P] = ispointin(C,P)
 
+tol = getfemobjectoptions('tolerancepoint');
+
 c = getcoord(P);
 
 % Radius
@@ -11,7 +13,7 @@ switch C.indim
         % Radial condition: point lies within circle radius
         % d = sqrt((c(:,1)-C.cx).^2 + (c(:,2)-C.cy).^2); % Euclidian distance to center
         d = hypot(c(:,1)-C.cx, c(:,2)-C.cy);           % Euclidian distance to center
-        inCircle = d <= r + eps;
+        inCircle = d <= r + tol;
         rep = find(inCircle);
         
     case 3
@@ -26,13 +28,12 @@ switch C.indim
         vec = vec * R';
         
         % In-plane condition: point lies in the local z=0 plane
-        tol = getfemobjectoptions('tolerancepoint');
         inPlane = abs(vec(:,3)) < tol;
         
         % Radial condition: point lies within circle radius
         % d = sqrt(vec(:,1).^2 + vec(:,2).^2); % radial distance in the plane
         d = hypot(vec(:,1), vec(:,2));       % radial distance in the plane
-        inCircle = d <= r + eps;
+        inCircle = d <= r + tol;
         
         % Both conditions: point lies in the plane and within circle radius
         rep = find(inPlane & inCircle);

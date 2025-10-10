@@ -1,6 +1,8 @@
 function [rep,P] = ispointin(E,P)
 % function [rep,P] = ispointin(E,P)
 
+tol = getfemobjectoptions('tolerancepoint');
+
 coord = getcoord(P);
 
 % Semi-axes
@@ -24,7 +26,7 @@ vec = vec * R';
 xc = vec(:,1)/a;
 yc = vec(:,2)/b;
 zc = vec(:,2)/c;
-inEllipsoid = (xc.^2 + yc.^2 + zc.^2) <= 1 + eps;
+inEllipsoid = (xc.^2 + yc.^2 + zc.^2) <= 1 + tol;
 rep = find(inEllipsoid);
 
 if nargout==2

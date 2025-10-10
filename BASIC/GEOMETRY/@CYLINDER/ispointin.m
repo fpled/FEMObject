@@ -1,6 +1,8 @@
 function [rep,P] = ispointin(C,P)
 % function [rep,P] = ispointin(C,P)
 
+tol = getfemobjectoptions('tolerancepoint');
+
 c = getcoord(P);
 
 % Radius and height
@@ -18,13 +20,12 @@ vec = c - center; % vector from center to point
 vec = vec * R';
 
 % Height condition: point lies between base and top along cylinder axis
-tol = getfemobjectoptions('tolerancepoint');
 inHeight = (vec(:,3) >= -tol) & (vec(:,3) <= h + tol);
 
 % Radial condition: point lies within cylinder radius
 % d = sqrt(vec(:,1).^2 + vec(:,2).^2);
 d = hypot(vec(:,1), vec(:,2));
-inRadius = d <= r + eps;
+inRadius = d <= r + tol;
 
 % Both conditions: point lies between base and top along cylinder axis and within circle radius
 rep = find(inHeight & inRadius);

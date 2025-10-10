@@ -1,6 +1,8 @@
 function [rep,P] = ispointin(E,P)
 % function [rep,P] = ispointin(E,P)
 
+tol = getfemobjectoptions('tolerancepoint');
+
 c = getcoord(P);
 
 % Semi-axes
@@ -12,7 +14,7 @@ switch E.indim
         % Radial condition: point lies within ellipse semi-axes
         xc = (c(:,1)-E.cx)/a;
         yc = (c(:,2)-E.cy)/b;
-        inEllipse = xc.^2 + yc.^2 <= 1 + eps;
+        inEllipse = xc.^2 + yc.^2 <= 1 + tol;
         rep = find(inEllipse);
         
     case 3
@@ -29,13 +31,12 @@ switch E.indim
         vec = vec * R';
         
         % In-plane condition: point lies in the local z=0 plane
-        tol = getfemobjectoptions('tolerancepoint');
         inPlane = abs(vec(:,3)) < tol;
         
         % Radial condition: point lies within ellipse semi-axes
         xc = vec(:,1)/a;
         yc = vec(:,2)/b;
-        inEllipse = (xc.^2 + yc.^2) <= 1 + eps;
+        inEllipse = (xc.^2 + yc.^2) <= 1 + tol;
         
         % Both conditions: point lies in the plane and within ellipse semi-axes
         rep = find(inPlane & inEllipse);
