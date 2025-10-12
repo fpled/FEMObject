@@ -99,9 +99,9 @@ elseif indim==3
     if ~noduplicate
         physicalgroup = 1;
         openboundaryphysicalgroup = 1;
-        G = createphysicalpoint(G,[1 4 5 8],openboundaryphysicalgroup);
-        G = createphysicalcurve(G,[1 3 4 5 6 7],openboundaryphysicalgroup);
-        G = createphysicalsurface(G,1,physicalgroup);
+        G = createphysicalpoint(G,[1,4,5,8],openboundaryphysicalgroup);
+        G = createphysicalcurve(G,[1,3,4,5,7,8],openboundaryphysicalgroup);
+        G = createphysicalsurface(G,[1,2],physicalgroup);
     end
     
     G = createphysicalvolume(G,1,1);

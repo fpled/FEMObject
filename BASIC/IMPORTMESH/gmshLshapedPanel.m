@@ -46,10 +46,10 @@ numpoints = 1:7;
 numlines = 1:7;
 numlineloop = 1;
 numsurface = 1;
-% G = createpoints(G,P(1),clC,numpoints(1));
-% G = createpoints(G,P(2:7),clD,numpoints(2:7));
-G = createpoints(G,P(1:3),clC,numpoints(1:3));
-G = createpoints(G,P(4:7),clD,numpoints(4:7));
+G = createpoints(G,P(1),clC,numpoints(1));
+G = createpoints(G,P(2:7),clD,numpoints(2:7));
+% G = createpoints(G,P(1:3),clC,numpoints(1:3));
+% G = createpoints(G,P(4:7),clD,numpoints(4:7));
 G = createcontour(G,numpoints,numlines,numlineloop);
 G = createplanesurface(G,numlineloop,1);
 if indim==3
