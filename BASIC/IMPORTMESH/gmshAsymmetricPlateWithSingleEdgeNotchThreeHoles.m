@@ -156,9 +156,9 @@ else%if iscirc
     % circular notch
     numlinecrack = 3:6;
 end
-numphysicalcurve = 1;
+% numphysicalcurve = 1;
 numphysicalsurface = 1;
-G = createphysicalcurve(G,numlinecrack,numphysicalcurve);
+% G = createphysicalcurve(G,numlinecrack,numphysicalcurve);
 G = createphysicalsurface(G,numsurface,numphysicalsurface);
 
 % Box field
