@@ -24,7 +24,12 @@ if isfield(param,'d')
         param.PFS = 'Strain';
     end
     if ~isfield(param,'g')
-        param.g = @(d) (1-d).^2;
+        if isfield(param,'h')
+            % param.g = @(d,h) (1-d.*(1-h)).^2;
+            param.g = @(d,h) (1-d+h).^2;
+        else
+            param.g = @(d) (1-d).^2;
+        end
     end
     if ~isfield(param,'k')
         param.k = 0;

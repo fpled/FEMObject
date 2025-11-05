@@ -17,8 +17,8 @@ mat = struct();
 param = struct(varargin{:});
 
 mat.k2 = ischarin('k2',varargin);
-mat.b = ischarin('b',varargin);
-mat.r = ischarin('r',varargin);
+mat.b  = ischarin('b',varargin);
+mat.r  = ischarin('r',varargin);
 mat.r2 = ischarin('r2',varargin);
 mat.r3 = ischarin('r3',varargin);
 

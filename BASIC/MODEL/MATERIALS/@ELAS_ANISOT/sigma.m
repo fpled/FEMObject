@@ -37,15 +37,23 @@ if isparam(mat,'d')
         D = Dm;
     else
         d = evalparam(mat,'d',elem,xnode,xgauss); % phase field
+        if isparam(mat,'h')
+            h = evalparam(mat,'h',elem,xnode,xgauss); % healing field
+        end
         g = getparam(mat,'g'); % energetic degradation function
         k = evalparam(mat,'k',elem,xnode,xgauss); % small artificial residual stiffness
         
         N = calc_N(elem,xnode,xgauss,'nbddlpernode',1);
         de = localize(elem,d,'scalar');
         de = N*de;
-        D = (g(de)+k)*Dp + Dm;
+        if isparam(mat,'h')
+            he = localize(elem,h,'scalar');
+            he = N*he;
+            D = (g(de,he)+k)*Dp + Dm;
+        else
+            D = (g(de)+k)*Dp + Dm;
+        end
     end
-    
 else
     D = calc_opmat(mat,elem,xnode,xgauss);
 end
