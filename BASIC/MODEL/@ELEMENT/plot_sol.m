@@ -50,8 +50,12 @@ if ischarin('sigma',varargin) || ischarin('epsilon',varargin) || ischarin('energ
         se = calc_B(elem,xnode,mid)*qe;
         k = getcharin('epsilon',varargin);
     elseif ischarin('energyint',varargin)
-        k = getcharin('energyint',varargin);
-        se = energyint(mat,elem,xnode,mid,qe,k);
+        opts = getcharin('energyint',varargin);
+        if iscell(opts)
+            se = energyint(mat,elem,xnode,mid,qe,opts{:});
+        else
+            se = energyint(mat,elem,xnode,mid,qe,opts);
+        end
         k = 1;
     end
     se = double(sigmacompo(se,k,elem));
