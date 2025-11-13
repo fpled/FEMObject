@@ -12,7 +12,7 @@ function u = exportfile(u,ext,format,varargin)
 
 % function u = exportfile(u,ext,[],'gmshoptions',options)
 % options: char containing gmsh options
-% launch gmsh [u ext] -save options
+% launch gmsh [u ext] -save -format msh2 options
 
 % function u = exportfilemsh(u,ext,format,'gmshoptions',options)
 % options: char containing gmsh options
