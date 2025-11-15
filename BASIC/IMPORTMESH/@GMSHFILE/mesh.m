@@ -1,10 +1,14 @@
 function u = mesh(u,options,varargin)
 % function u = mesh(u,dim)
-% launch gmsh u -dim
+% launch gmsh u.geo -dim
+
+% function u = mesh(u,dim,'gmshoptions',options)
+% options: char containing gmsh options
+% launch gmsh u.geo -dim options
 
 % function u = mesh(u,[],'gmshoptions',options)
-% options: char
-% launch gmsh u options
+% options: char containing gmsh options
+% launch gmsh u.geo options
 
 if nargin==1
     error('rentrer les options de gsmh')

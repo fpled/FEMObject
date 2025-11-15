@@ -4,19 +4,19 @@ function u = exportfile(u,ext,format,varargin)
 
 % function u = exportfile(u,ext)
 % ext: char containing file extension
-% launch gmsh [u ext] -save -format msh2
+% launch gmsh u.ext -save -format msh2
 
 % function u = exportfile(u,ext,format)
 % format: char containing file format
-% launch gmsh [u ext] -save -format format
+% launch gmsh u.ext -save -format format
 
 % function u = exportfile(u,ext,[],'gmshoptions',options)
 % options: char containing gmsh options
-% launch gmsh [u ext] -save -format msh2 options
+% launch gmsh u.ext -save -format msh2 options
 
 % function u = exportfilemsh(u,ext,format,'gmshoptions',options)
 % options: char containing gmsh options
-% launch gmsh [u ext] -save -format format options
+% launch gmsh u.ext -save -format format options
 
 if nargin<2 || isempty(ext)
     ext = '.msh';

@@ -1,6 +1,6 @@
 function u = updatenodedata(u,q,metrictype,file)
 % function u = updatenodedata(u,q,metrictype,file)
-% Replace or append NodeData named "<meshname>:metric" in Gmsh file with MSH2 ASCII file format.
+% Replace or append NodeData named "filename:metric" in Gmsh file with MSH2 ASCII file format.
 
 if verLessThan('matlab','9.1') % compatibility (<R2016b)
     strstrip = @strtrim;

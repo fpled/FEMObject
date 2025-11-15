@@ -7,7 +7,7 @@ else
     contain = @contains;
 end
 
-if nargin==1 || isempty(ext)
+if nargin<2 || isempty(ext)
     ext = '.geo';
 end
 command = ['gmsh ' getfile(u,ext)];
