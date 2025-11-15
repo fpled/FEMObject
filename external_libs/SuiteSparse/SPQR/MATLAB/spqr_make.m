@@ -56,6 +56,11 @@ if (~verLessThan ('matlab', '8.3.0'))
     flags = ['-silent ' flags] ;
 end
 
+arch = computer('arch');
+if ismac && strcmp(arch,'maca64')
+    flags = ['LDFLAGS="$LDFLAGS -ld_classic" ' flags] ;
+end
+
 include = '-DNMATRIXOPS -DNMODIFY -I. -I../../AMD/Include -I../../COLAMD/Include -I../../CHOLMOD/Include -I../Include -I../../SuiteSparse_config' ;
 
 % Determine if METIS is available
