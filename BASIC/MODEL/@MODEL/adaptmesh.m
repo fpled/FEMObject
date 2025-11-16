@@ -7,12 +7,6 @@ if ~isa(M,'MODEL')
     return
 end
 
-if verLessThan('matlab','9.1') % compatibility (<R2016b)
-    contain = @(str,pat) ~isempty(strfind(str,pat));
-else
-    contain = @contains;
-end
-
 if israndom(q)
     error('la solution est aleatoire')
 end
@@ -26,11 +20,13 @@ if nargin>=3 && ischar(filename)
     G = setfile(G,filename);
 end
 
-%% MMG mesh adaptation
-% G = adaptmesh_mmg(G,q,dim,varargin{:});
-
-%% GMSH mesh adaptation using a NodeData field in .msh file (gmsh file format)
-G = adaptmesh_gmsh(G,q,dim,varargin{:});
+if ischarin('mmgoptions',varargin)
+    % Mesh adaptation using Mmg
+    G = adaptmesh_mmg(G,q,dim,varargin{:});
+else
+    % Mesh adaptation using Gmsh
+    G = adaptmesh_gmsh(G,q,dim,varargin{:});
+end
 
 n = max(nargout,1);
 varargout = cell(1,n);
