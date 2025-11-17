@@ -23,4 +23,5 @@ if ~ismesh(file)
     % file = openfile(file,'.msh');
 end
 
-M = gmsh2femobject_model(indim,getfile(file,'.msh'),dim,varargin{:});
+filemsh = getfile(file,'.msh');
+M = gmsh2femobject_model(indim,filemsh,dim,varargin{:});

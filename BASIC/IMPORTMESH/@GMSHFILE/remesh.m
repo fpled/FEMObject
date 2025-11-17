@@ -34,4 +34,14 @@ if ~contain(options,'-format')
     options = [options ' -format msh2'];
 end
 
+filegeo = getfile(u,'.geo','post');
+if exist(filegeo,'file')
+    options = [filegeo options];
+end
+
 u = runfile(u,'.msh',options);
+
+fileopt = getfile(u,'.msh.opt');
+if exist(fileopt,'file')
+    u = deletefile(u,'.msh.opt');
+end

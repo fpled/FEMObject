@@ -177,7 +177,6 @@ varargout = cell(1,n);
 if ~noduplicate && ~isempty(numembeddedlines)
     G = createcrack(G,getdim(C)-1,physicalgroup);
     G = remesh(G,getdim(C),varargin{:});
-    G = deleteoptfile(G);
     
     [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 end

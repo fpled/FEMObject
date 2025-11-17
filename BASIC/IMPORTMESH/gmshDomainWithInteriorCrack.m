@@ -101,7 +101,6 @@ varargout = cell(1,n);
 if ~noduplicate
     G = createcrack(G,dim-1,physicalgroup);
     G = remesh(G,dim,varargin{:});
-    G = deleteoptfile(G);
     
     [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 end

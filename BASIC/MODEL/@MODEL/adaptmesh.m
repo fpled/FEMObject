@@ -26,6 +26,12 @@ if ischarin('mmgoptions',varargin)
 else
     % Mesh adaptation using Gmsh
     G = adaptmesh_gmsh(G,q,dim,varargin{:});
+    
+    % Remesh for crack opening
+    filegeo = getfile(G,'.geo','post');
+    if exist(filegeo,'file')
+        G = remesh(G,dim,varargin{:});
+    end
 end
 
 n = max(nargout,1);

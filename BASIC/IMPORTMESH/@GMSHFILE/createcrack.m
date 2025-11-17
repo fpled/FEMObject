@@ -31,7 +31,8 @@ end
 if nargin==11
     u = setfile(u,file);
 end
-file = getfile(u,'.msh.opt');
+% file = getfile(u,'.msh.opt');
+file = getfile(u,'.geo','post');
 
 fid = fopen(file,'w');
 fprintf(fid,'Plugin(Crack).Dimension = %u;\n',dim);

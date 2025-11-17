@@ -345,7 +345,6 @@ if ~noduplicate && ...
         G = createcrack(G,dim-1,physicalgroup,openboundaryphysicalgroup);
     end
     G = remesh(G,dim,varargin{:});
-    G = deleteoptfile(G);
     
     [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 end
