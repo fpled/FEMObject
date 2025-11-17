@@ -30,6 +30,8 @@ if nargin<6 || isempty(clC)
     clC = clD;
 end
 
+dim = getdim(D);
+
 PD = getvertices(D);
 PCa = getvertices(Ca);
 PCb = getvertices(Cb);
@@ -381,4 +383,4 @@ end
 
 n = max(nargout,1);
 varargout = cell(1,n);
-[varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});
+[varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});

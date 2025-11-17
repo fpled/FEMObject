@@ -8,6 +8,8 @@ if nargin<3 || isempty(indim)
     indim = 2;
 end
 
+dim = indim;
+
 P{1} = [0, 0, 0];
 P{2} = [1, 0, 0];
 P{3} = [1, 1, 0];
@@ -59,4 +61,4 @@ varargin = delonlycharin('recombine',varargin);
 
 n = max(nargout,1);
 varargout = cell(1,n);
-[varargout{:}] = gmsh2femobject(indim,G,indim:-1:indim-n+1,varargin{:});
+[varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});

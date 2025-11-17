@@ -17,15 +17,17 @@ if nargin<5 || isempty(clC)
     clC = clD;
 end
 
-if indim==2
-    P{1} = [  0,  0];
-    P{2} = [a-b,  0];
-    P{3} = [  a,  0];
-    P{4} = [  a,  a];
-    P{5} = [ -a,  a];
-    P{6} = [ -a, -a];
-    P{7} = [  0, -a];
-elseif indim==3
+dim = indim;
+
+% if indim==2
+%     P{1} = [  0,  0];
+%     P{2} = [a-b,  0];
+%     P{3} = [  a,  0];
+%     P{4} = [  a,  a];
+%     P{5} = [ -a,  a];
+%     P{6} = [ -a, -a];
+%     P{7} = [  0, -a];
+% elseif indim==3
     P{1} = [  0,  0, 0];
     P{2} = [a-b,  0, 0];
     P{3} = [  a,  0, 0];
@@ -33,7 +35,7 @@ elseif indim==3
     P{5} = [ -a,  a, 0];
     P{6} = [ -a, -a, 0];
     P{7} = [  0, -a, 0];
-end
+% end
 
 br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
 
@@ -116,4 +118,4 @@ end
 
 n = max(nargout,1);
 varargout = cell(1,n);
-[varargout{:}] = gmsh2femobject(indim,G,indim:-1:indim-n+1,varargin{:});
+[varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});

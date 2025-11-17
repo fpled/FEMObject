@@ -445,14 +445,14 @@ plotparamelem(St,'group')
 fprintf('\n3D Extruded Partial Cylinder\n');
 fprintf('\n');
 St = gmsh(CY2,0.05,'filename','gmsh_cylinder_partial_extrude_tet','extrude');
-Sq = gmsh(CY2,0.05,'filename','gmsh_cylinder_partial_extrude_cub','extrude','recombine');
+% Sq = gmsh(CY2,0.05,'filename','gmsh_cylinder_partial_extrude_cub','extrude','recombine');
 
 figure('Name','Extruded Partial Cylinder')
 clf
-subplot(1,2,1)
+% subplot(1,2,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
-plotparamelem(Sq,'group')
+% subplot(1,2,2)
+% plotparamelem(Sq,'group')
 
 %% Extruded Partial Cylinder using OpenCASCADE
 fprintf('\n3D Extruded Partial Cylinder using OpenCASCADE\n');

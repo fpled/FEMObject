@@ -28,6 +28,8 @@ if nargin<4 || isempty(clC)
     clC = clD;
 end
 
+dim = 2;
+
 L = 10*unit; % half-length
 h = 4*unit; % half-height
 ls = 9*unit; % location of the support from the centerline
@@ -136,12 +138,12 @@ end
 
 n = max(nargout,1);
 varargout = cell(1,n);
-[varargout{:}] = gmsh2femobject(indim,G,2:-1:2-n+1,varargin{:});
+[varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 
 if ~noduplicate
-    G = createcrack(G,2-1,physicalgroup,openboundaryphysicalgroup);
-    G = remesh(G,2,varargin{:});
+    G = createcrack(G,dim-1,physicalgroup,openboundaryphysicalgroup);
+    G = remesh(G,dim,varargin{:});
     G = deleteoptfile(G);
     
-    [varargout{:}] = gmsh2femobject(indim,G,2:-1:2-n+1,varargin{:});
+    [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 end

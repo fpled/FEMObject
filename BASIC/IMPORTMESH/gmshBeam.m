@@ -9,6 +9,8 @@ if nargin<4 || isempty(indim)
     indim = max(cellfun(@(x) size(x,2),P));
 end
 
+dim = 1;
+
 G = GMSHFILE();
 if nargin>=3 && ischar(filename)
     G = setfile(G,filename);
@@ -21,4 +23,4 @@ seg = numberpoints(seg);
 G = createpoints(G,P,cl,numberpoints);
 G = createlines(G,seg,numberlines);
 
-G = gmsh2femobject(indim,G,1,varargin{:});
+G = gmsh2femobject(indim,G,dim,varargin{:});

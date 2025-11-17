@@ -23,6 +23,8 @@ if isscalar(clC)
     clC = repmat(clC,1,length(C));
 end
 
+dim = getdim(D);
+
 if indim==2
     numpoints = 1:4;
     numlines = 1:4;
@@ -94,12 +96,12 @@ end
 
 n = max(nargout,1);
 varargout = cell(1,n);
-[varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});
+[varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 
 if ~noduplicate
-    G = createcrack(G,getdim(D)-1,physicalgroup);
-    G = remesh(G,getdim(D),varargin{:});
+    G = createcrack(G,dim-1,physicalgroup);
+    G = remesh(G,dim,varargin{:});
     G = deleteoptfile(G);
     
-    [varargout{:}] = gmsh2femobject(indim,G,getdim(D):-1:getdim(D)-n+1,varargin{:});
+    [varargout{:}] = gmsh2femobject(indim,G,dim:-1:dim-n+1,varargin{:});
 end
