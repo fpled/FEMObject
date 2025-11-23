@@ -1,14 +1,8 @@
-function f = getfilemsh(u,iter)
-% function u = getfilemsh(u,iter)
+function f = getfilemsh(u,suffix)
+% function u = getfilemsh(u,suffix)
 
-% if nargin==1 || isempty(iter)
-%     f = [u.file '.msh'];
-% else
-%     f = [u.file '_' num2str(iter) '.msh'];
-% end
-
-if nargin==1 || isempty(iter)
+if nargin==1 || isempty(suffix)
     f = getfile(u,'.msh');
 else
-    f = getfile(u,'.msh',iter);
+    f = getfile(u,'.msh',suffix);
 end

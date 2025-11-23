@@ -1,14 +1,14 @@
-function f = getfile(u,ext,iter)
-% function f = getfile(u,ext,iter)
+function f = getfile(u,ext,suffix)
+% function f = getfile(u,ext,suffix)
 % ext : character array containing file extension
-% iter : iteration number or character array containing suffix
+% suffix : numeric array or character array containing suffix
 
 f = u.file;
-if nargin==3 && ~isempty(iter)
-    if isnumeric(iter)
-        f = [f '_' num2str(iter)];
+if nargin==3 && ~isempty(suffix)
+    if isnumeric(suffix)
+        f = [f '_' num2str(suffix)];
     else
-        f = [f '_' char(iter)];
+        f = [f '_' char(suffix)];
     end
 end
 if nargin>=2 && ~isempty(ext) && ischar(ext)

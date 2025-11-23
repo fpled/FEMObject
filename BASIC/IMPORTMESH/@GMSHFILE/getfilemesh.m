@@ -1,14 +1,8 @@
-function f = getfilemesh(u,iter)
-% function u = getfilemesh(u,iter)
+function f = getfilemesh(u,suffix)
+% function u = getfilemesh(u,suffix)
 
-% if nargin==1 || isempty(iter)
-%     f = [u.file '.mesh'];
-% else
-%     f = [u.file '_' num2str(iter) '.mesh'];
-% end
-
-if nargin==1 || isempty(iter)
+if nargin==1 || isempty(suffix)
     f = getfile(u,'.mesh');
 else
-    f = getfile(u,'.mesh',iter);
+    f = getfile(u,'.mesh',suffix);
 end

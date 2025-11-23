@@ -29,53 +29,55 @@ end
 options = getcharin('mmgoptions',varargin);
 
 %% Use a .sol file as size map for .mesh file (Medit file format)
-u = exportfile(u,'.msh','mesh',varargin{:});
-
-u = writefilesol(u,3,q); % indim=3 for 2D .mesh file generated using Gmsh (coordinates in 3D), indim=2 for 2D .mesh file generated using Medit (coordinates in 2D)
-
-options = [' -sol ' getfile(u,'.sol') ' ' options];
-
-if ~contain(options,'-out')
-    options = [options ' -out ' getfile(u,'.mesh')]; % output .mesh file
-    % options = [options ' -out ' getfile(u,'.msh')]; % output .msh file
-end
-
-switch dim
-    case 2
-        if ~contain(options,'3dMedit')
-            options = [options ' -3dMedit 2']; % to load a 2D .mesh file created with Gmsh (coordinates in 3D) and to produce a Gmsh 2D .mesh file (coordinates in 3D)
-        end
-        u = runfilemmg2d(u,'.mesh',options);
-    case 3
-        u = runfilemmg3d(u,'.mesh',options);
-end
-
-if contain(options,'.mesh')
-    u = exportfile(u,'.mesh','msh2',varargin{:});
-elseif contain(options,'.msh')
-    u = exportfile(u,'.msh','msh2',varargin{:});
-    u = exportfile(u,'.msh','msh2',varargin{:}); % export twice for renumbering of mesh nodes/elements
-end
-
-%% Use a NodeData field in .msh file (gmsh file format)
-% u = updatenodedata(u,q);
+% u = exportfile(u,'.msh','mesh',varargin{:});
+% 
+% u = writefilesol(u,3,q); % indim=3 for 2D .mesh file generated using Gmsh (coordinates in 3D), indim=2 for 2D .mesh file generated using Medit (coordinates in 2D)
+% 
+% options = [' -sol ' getfile(u,'.sol') ' ' options];
 % 
 % if ~contain(options,'-out')
-%     % options = [options ' -out ' getfile(u,'.mesh')]; % output .mesh file
-%     options = [options ' -out ' getfile(u,'.msh')]; % output .msh file
+%     options = [options ' -out ' getfile(u,'.mesh')]; % output .mesh file
+%     % options = [options ' -out ' getfile(u,'.msh')]; % output .msh file
 % end
 % 
 % switch dim
 %     case 2
-%         if contain(options,'.mesh') && ~contain(options,'-3dMedit')
-%             options = [options ' -3dMedit 1']; % to force mmg2d to produce a 2D .mesh file readable by Gmsh (not anymore compatible with Medit)
-%             % options = [options ' -3dMedit 2']; % it also works
+%         if ~contain(options,'3dMedit')
+%             options = [options ' -3dMedit 2']; % to load a 2D .mesh file created with Gmsh (coordinates in 3D) and to produce a Gmsh 2D .mesh file (coordinates in 3D)
 %         end
-%         u = runfilemmg2d(u,'.msh',options);
+%         u = runfilemmg2d(u,'.mesh',options);
 %     case 3
-%         u = runfilemmg3d(u,'.msh',options);
+%         u = runfilemmg3d(u,'.mesh',options);
 % end
 % 
 % if contain(options,'.mesh')
 %     u = exportfile(u,'.mesh','msh2',varargin{:});
+% elseif contain(options,'.msh')
+%     u = exportfile(u,'.msh','msh2',varargin{:});
+%     u = exportfile(u,'.msh','msh2',varargin{:}); % export twice for renumbering of mesh nodes/elements
 % end
+
+%% Use a NodeData field in .msh file (gmsh file format)
+u = updatenodedata(u,q);
+
+if ~contain(options,'-out')
+    % options = [options ' -out ' getfile(u,'.mesh')]; % output .mesh file
+    options = [options ' -out ' getfile(u,'.msh')]; % output .msh file
+end
+
+switch dim
+    case 2
+        if contain(options,'.mesh') && ~contain(options,'-3dMedit')
+            options = [options ' -3dMedit 1']; % to force mmg2d to produce a 2D .mesh file readable by Gmsh (not anymore compatible with Medit)
+            % options = [options ' -3dMedit 2']; % it also works
+        end
+        u = runfilemmg2d(u,'.msh',options);
+    case 3
+        u = runfilemmg3d(u,'.msh',options);
+end
+
+if contain(options,'.mesh')
+    u = exportfile(u,'.mesh','msh2',varargin{:});
+elseif contain(options,'.msh') && ischarin('export',varargin)
+    u = exportfile(u,'.msh','msh2',varargin{:});
+end

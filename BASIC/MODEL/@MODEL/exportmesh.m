@@ -9,10 +9,10 @@ if nargin>=2 && ischar(filename)
     G = setfile(G,filename);
 end
 
-if nargin<3
+if nargin<3 || isempty(ext)
     ext = '.msh';
 end
-if nargin<4
+if nargin<4 || isempty(format)
     format = 'msh2';
 end
 
