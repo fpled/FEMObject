@@ -4,7 +4,7 @@ function [M,nodeelim,nodereplace]=unique(M,fununique,display)
 % noeuds distincts. Si les distances de plusieurs points aux 2 noeuds de
 % reference sont egales, on ne conserve qu'un des noeuds sur cet ensemble.
 if nargin<2
-    display = false ;
+    display = false;
     if nargin==1
         fununique=@(x)unique(x);
     end
