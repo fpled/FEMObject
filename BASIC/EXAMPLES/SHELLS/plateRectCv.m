@@ -141,7 +141,7 @@ if solveProblem
             p = RHO*g*h; % surface load (body load for plates) [N/m2]
         case 'concentrated' % Concentrated transverse load applied at point P_load
             Sec = a*b;
-            p = RHO*g*h*Sec; % pointwise load [N]
+            p = RHO*g*h*Sec; % point load [N]
     end
     
     A = calc_rigi(S);
@@ -307,7 +307,8 @@ err_Ry(i) = err_Ry_i;
 time(i) = time_i;
 Nbelem(i) = getnbelem(S);
 
-fprintf('\nRectangular plate\n');
+fprintf('Rectangular plate\n');
+fprintf('\n');
 fprintf(['boundary : ' boundary '\n']);
 fprintf(['load     : ' loading '\n']);
 fprintf(['mesh     : ' elemtype ' ' meshtype ' elements\n']);
@@ -319,22 +320,21 @@ fprintf('error = %.3e for Uz\n',err_Uz(i));
 fprintf('      = %.3e for Rx\n',err_Rx(i));
 fprintf('      = %.3e for Ry\n',err_Ry(i));
 fprintf('elapsed time = %f s\n',time(i));
-fprintf('\n');
 
+fprintf('\n');
 fprintf('Displacement u at point (%g,%g,%g)\n',double(P));
 fprintf('ux    = %g\n',ux);
 fprintf('uy    = %g\n',uy);
 fprintf('uz    = %g\n',uz);
 fprintf('uz_ex = %g, error = %.3e\n',uz_ex,err_uz);
-fprintf('\n');
 
+fprintf('\n');
 fprintf('Rotation r at point (%g,%g,%g)\n',double(P));
 fprintf('rx    = %g\n',rx);
 fprintf('rx_ex = %g, error = %.3e\n',rx_ex,err_rx);
 fprintf('ry    = %g\n',ry);
 fprintf('ry_ex = %g, error = %.3e\n',ry_ex,err_ry);
 fprintf('rz    = %g\n',rz);
-fprintf('\n');
 
 %% Display
 if displaySolution

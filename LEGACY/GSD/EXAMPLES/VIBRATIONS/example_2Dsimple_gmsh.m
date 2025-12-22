@@ -1,6 +1,6 @@
 %% importation du modele
 Dom = DOMAIN(2,[0,0],[2,1]);
-S = gmsh(Dom,0.1);
+S = gmsh(Dom,0.1,'all');
 
 %% construction du modele EF et CL
 facesdirichlet = 4; 

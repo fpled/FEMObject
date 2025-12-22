@@ -7,11 +7,12 @@ function varargout = gmsh(D,varargin)
 filename    = getcharin('filename',varargin, 'gmsh_file');
 indim       = getcharin('indim',varargin, getindim(D));
 opencascade = any(ischarin({'occ','OpenCASCADE'},varargin));
+allelements = ischarin('all',varargin); % no physical surface/volume created in 2D/3D
 extrude     = ischarin('extrude',varargin);
 recombine   = ischarin('recombine',varargin);
 
 varargin = delcharin({'filename','indim'},varargin);
-varargin = delonlycharin({'extrude','recombine', ...
+varargin = delonlycharin({'all','extrude','recombine', ...
                           'occ','OpenCASCADE'},varargin);
 
 flags = {};
@@ -58,11 +59,13 @@ pads = repmat({[]}, 1, max(0, n_pos - n_take));
 % Call the correct class‐method via feval
 [G, number] = feval(fn, D, fixed_args{:}, pads{:}, flags{:});
 
-switch D.dim
-    case 2
-        G = createphysicalsurface(G,number,1);
-    case 3
-        G = createphysicalvolume(G,number,1);
+if ~allelements
+    switch D.dim
+        case 2
+            G = createphysicalsurface(G,number,1);
+        case 3
+            G = createphysicalvolume(G,number,1);
+    end
 end
 
 G = setfile(G, filename);

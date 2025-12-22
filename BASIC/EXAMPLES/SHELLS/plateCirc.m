@@ -60,8 +60,10 @@ if solveProblem
     switch lower(loading)
         case 'uniform'
             S = build_model(C,'cl',cl,'elemtype',elemtype,'filename',fullfile(pathname,['gmsh_plate_circ_' elemtype]));
+            % S = build_model(C,'cl',cl,'elemtype',elemtype,'filename',fullfile(pathname,['gmsh_plate_circ_' elemtype '_cl_' num2str(cl)]),'all'); % option 'all' for facets, ridges, peaks
         case 'concentrated'
             S = build_model(C,'cl',cl,'elemtype',elemtype,'filename',fullfile(pathname,['gmsh_plate_circ_' elemtype]),'points',x_load);
+            % S = build_model(C,'cl',cl,'elemtype',elemtype,'filename',fullfile(pathname,['gmsh_plate_circ_' elemtype '_cl_' num2str(cl)]),'points',x_load,'all'); % option 'all' for facets, ridges, peaks
     end
     
     %% Materials
@@ -117,7 +119,7 @@ if solveProblem
             p = RHO*g*h; % surface load (body load for plates) [N/m2]
         case 'concentrated' % Concentrated transverse load applied at point P_load
             Sec = pi*r^2;
-            p = RHO*g*h*Sec; % pointwise load [N]
+            p = RHO*g*h*Sec; % point load [N]
     end
     % Moment per unit length applied on the plate boundary
     % (only for simply supported plate)
@@ -303,7 +305,8 @@ else
 end
 
 %% Outputs
-fprintf('\nCircular plate\n');
+fprintf('Circular plate\n');
+fprintf('\n');
 fprintf(['boundary : ' boundary '\n']);
 fprintf(['load     : ' loading '\n']);
 fprintf(['mesh     : ' elemtype ' elements\n']);
@@ -316,8 +319,8 @@ fprintf('      = %.3e for Rt\n',err_Rt);
 fprintf('      = %.3e for Rx\n',err_Rx);
 fprintf('      = %.3e for Ry\n',err_Ry);
 fprintf('elapsed time = %f s\n',time);
-fprintf('\n');
 
+fprintf('\n');
 fprintf('Displacement u at point (%g,%g,%g)\n',double(P));
 fprintf('ux    = %g\n',ux);
 fprintf('uy    = %g\n',uy);
@@ -325,8 +328,8 @@ fprintf('uz    = %g\n',uz);
 fprintf('uz_ex = %g, error = %.3e\n',uz_ex,err_uz);
 fprintf('ur    = %g\n',ur);
 fprintf('ut    = %g\n',ut);
-fprintf('\n');
 
+fprintf('\n');
 fprintf('Rotation r at point (%g,%g,%g)\n',double(P));
 fprintf('rx    = %g\n',rx);
 fprintf('rx_ex = %g, error = %.3e\n',rx_ex,err_rx);
@@ -336,7 +339,6 @@ fprintf('rz    = %g\n',rz);
 fprintf('rr    = %g\n',rr);
 fprintf('rt    = %g\n',rt);
 fprintf('rt_ex = %g, error = %.3e\n',rt_ex,err_rt);
-fprintf('\n');
 
 %% Display
 if displaySolution

@@ -1,6 +1,6 @@
 %% importation du modele
 Dom = QUADRANGLE([0,0,0],[1,0,0],[1,0.2,0],[0,0.4,0]);
-S = gmsh(Dom,0.03);
+S = gmsh(Dom,0.03,'all');
 
 %% construction du modele EF et CL
 facesdirichlet = 4;

@@ -56,15 +56,15 @@ elseif ischarin('cl',varargin)
         P = getcharin('points',varargin);
         varargin = delcharin('points',varargin);
         if ~strcmp(elemtype,'QUA4') && ~strcmp(elemtype,'CUB8') && ~strcmp(elemtype,'DKQ') && ~strcmp(elemtype,'DSQ') && ~strcmp(elemtype,'COQ4') && ~strcmp(elemtype,'STOKES')
-            S = gmsh(D,P,cl,'filename',filename,'indim',indim);
+            S = gmsh(D,P,cl,'filename',filename,'indim',indim,varargin{:});
         else
-            S = gmsh(D,P,cl,'filename',filename,'indim',indim,'recombine');
+            S = gmsh(D,P,cl,'filename',filename,'indim',indim,'recombine',varargin{:});
         end
     else
         if ~strcmp(elemtype,'QUA4') && ~strcmp(elemtype,'CUB8') && ~strcmp(elemtype,'DKQ') && ~strcmp(elemtype,'DSQ') && ~strcmp(elemtype,'COQ4') && ~strcmp(elemtype,'STOKES')
-            S = gmsh(D,cl,'filename',filename,'indim',indim);
+            S = gmsh(D,cl,'filename',filename,'indim',indim,varargin{:});
         else
-            S = gmsh(D,cl,'filename',filename,'indim',indim,'recombine');
+            S = gmsh(D,cl,'filename',filename,'indim',indim,'recombine',varargin{:});
         end
     end
     mat = getclassin('MATERIAL',varargin);

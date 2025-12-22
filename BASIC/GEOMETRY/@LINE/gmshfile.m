@@ -1,4 +1,4 @@
-function G = gmshfile(L,cl,numberpoints,numberline)
+function varargout = gmshfile(L,cl,numberpoints,numberline)
 % function G = gmshfile(L,cl,numberpoints,numberline)
 % L : LINE
 % cl : characteristic length
@@ -10,3 +10,6 @@ G = GMSHFILE();
 P = getvertices(L);
 G = createpoints(G,P(1:2),cl,numberpoints);
 G = createline(G,numberpoints,numberline);
+
+varargout{1} = G;
+varargout{2} = numberline;
