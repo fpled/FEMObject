@@ -1,6 +1,7 @@
-Sini = gmsh2femobject(3,'C:\PROGRAMMES\FEMOBJECT\GSD\EXAMPLES\GROS\trapezegros.geo');
-savepath = 'C:\trashmatlab\trapeze3D\';
-S = Sini
+% filename = 'trapezegros.geo';
+filename = 'trapezegros.msh';
+Sini = gmsh2femobject(3,fullfile(getfemobjectoptions('path'),'LEGACY','GSD','EXAMPLES','GROS',filename));
+savepath = fileparts(mfilename('fullpath'));
 %%
 S = Sini;
 facesefforts = [4];

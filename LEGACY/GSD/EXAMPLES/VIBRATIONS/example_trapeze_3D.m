@@ -1,6 +1,8 @@
 %% importation du modele
-S = gmsh2femobject(3,'C:\PROGRAMMES\FEMOBJECT\GSD\EXAMPLES\GROS\trapeze.geo');
-savepath = 'C:\trashmatlab\trapeze3D\';
+% filename = 'trapezegros.geo';
+filename = 'trapezegros.msh';
+Sini = gmsh2femobject(3,fullfile(getfemobjectoptions('path'),'LEGACY','GSD','EXAMPLES','GROS',filename));
+savepath = fileparts(mfilename('fullpath'));
 
 %% construction du modele EF et CL
 facesefforts = [3];

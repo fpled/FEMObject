@@ -2,10 +2,11 @@ function varargout = plotfaces(faces,varargin)
 
 islegend = getcharin('legend',varargin,false);
 
-if nargin==1 || ~isa(varargin{1},'double') || (length(varargin{1})==1 && varargin{1}==0)
+if nargin==1 || ~isa(varargin{1},'double') || (isscalar(varargin{1}) && varargin{1}==0)
     scanfaces = 1:length(faces);
 else
-    scanfaces=varargin{1};
+    scanfaces = varargin{1};
+    varargin = varargin(2:end);
 end
 
 options = varargin;
