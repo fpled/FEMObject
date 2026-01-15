@@ -10,7 +10,7 @@ switch getdim(elem)
         trSe = se(1)+se(2)+se(3);
 end
 
-Rp = (1+sign(trSe))/2;
-Rm = (1+sign(-trSe))/2;
+Rp = heaviside(trSe);  % Rp = (1+sign(trSe))/2;
+Rm = heaviside(-trSe); % Rm = (1+sign(-trSe))/2;
 
 end
