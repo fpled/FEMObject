@@ -43,7 +43,7 @@ function [V,order,state] = shinozukaRand(x,lcorr,nU,N,varargin)
 [nx,d] = size(x);
 lcorr = lcorr(:);
 
-if length(lcorr)==1
+if isscalar(lcorr)
     lcorr = repmat(lcorr,d,1);
 else
     assert(length(lcorr)==d,'lcorr must be of same length as the number of columns (spatial dimensions) in x')
@@ -62,7 +62,7 @@ if ischarin('order',varargin)
 else
     domainExtent = max(x) - min(x);
     nu = ceil(max(domainExtent./lcorr')); % one-dimensional order nu 
-    % such that domainExtent(j) <= period(j)/2 = nu*lcorr(j) for all spatial dimensions j=1,...,dim
+    % such that domainExtent(j) <= period(j)/2 = nu*lcorr(j) for all spatial dimensions j=1,...,d
     nu = 2*floor((nu+1)/2); % ensure one-dimensional order nu is even
     order = nu^d; % d-dimensional order of the spectral representation
 end
@@ -116,6 +116,7 @@ if nargout>2
     state = rng;
 end
 
+%% Test progress bar
 function nUpdateProgressBar(~)
 p = p+1;
 textprogressbar(p/nV*100,sprintf('(%d/%d)',p,nV));
