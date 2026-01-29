@@ -54,7 +54,7 @@ if isempty(xiy)
     xiy = linspace(min(y)-foldwidth*bwy,max(y)+foldwidth*bwy,m)';
 end
 
-%% Parfor loop version for computing fyx and fx (faster efficiency)
+%% Parallel (parfor loop) implementation for computing fyx and fx (faster efficiency)
 fy = zeros(m,n);
 if ~verLessThan('matlab','9.2') % introduced in R2017a
     q = parallel.pool.DataQueue;
@@ -83,7 +83,7 @@ parfor i=1:n
 end
 textprogressbar(' done');
 
-%% For loop version for computing fyx (lesser efficiency)
+%% Sequential (for loop) implementation for computing fyx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
 %     fyx = mymvksdensity([y,x],[repmat(xiy,n,1),kron(x,ones(m,1))],'Bandwidth',[bwy,bwx]);
 % else
@@ -91,7 +91,7 @@ textprogressbar(' done');
 % end
 % fyx = reshape(fyx,[m,n]);
 
-%% Parfor loop version for computing fyx
+%% Parallel (parfor loop) implementation for computing fyx
 % fyx = zeros(m,n);
 % if ~verLessThan('matlab','9.2') % introduced in R2017a
 %     q = parallel.pool.DataQueue;
@@ -114,7 +114,7 @@ textprogressbar(' done');
 % end
 % textprogressbar(' done');
 
-%% For loop version for computing fx (lesser efficiency)
+%% Sequential (for loop) implementation for computing fx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
 %     fx = mymvksdensity(x,x,'Bandwidth',bwx);
 % else

@@ -30,7 +30,7 @@ sigy = mad(y,1) / 0.6745; % robust estimate of std
 bwx = bw(sigx,1+d,n); % multivariate bandwiths
 bwy = bw(sigy,1+d,n); % multivariate bandwiths
 
-%% Parfor loop version for computing myx and fx (faster efficiency)
+%% Parallel (parfor loop) implementation for computing myx and fx (faster efficiency)
 my = zeros(1,n);
 if ~verLessThan('matlab','9.2') % introduced in R2017a
     q = parallel.pool.DataQueue;
@@ -56,11 +56,11 @@ parfor i=1:n
 end
 textprogressbar(' done');
 
-%% For loop version for computing myx (lesser efficiency)
+%% Sequential (for loop) implementation for computing myx (lesser efficiency)
 % myx = meanmvksdensity(y,x,x,'Bandwidth',bwx);
 % myx = reshape(myx,[1,n]);
 
-%% Parfor loop version for computing myx
+%% Parallell (parfor loop) implementation for computing myx
 % myx = zeros(1,n);
 % if ~verLessThan('matlab','9.2') % introduced in R2017a
 %     q = parallel.pool.DataQueue;
@@ -79,7 +79,7 @@ textprogressbar(' done');
 % end
 % textprogressbar(' done');
 
-%% For loop version for computing fx (lesser efficiency)
+%% Sequential (for loop) implementation for computing fx (lesser efficiency)
 % if verLessThan('matlab','9.0') % compatibility (<R2016a)
 %     fx = mymvksdensity(x,x,'Bandwidth',bwx);
 % else
