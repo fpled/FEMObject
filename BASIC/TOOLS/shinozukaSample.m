@@ -59,8 +59,8 @@ if ischarin('order',varargin)
     end
 else
     domainExtent = max(x) - min(x);
-    nu = ceil(max(domainExtent./lcorr')); % one-dimensional order nu 
-    % such that domainExtent(j) <= period(j)/2 = nu*lcorr(j) for all spatial dimensions j=1,...,d
+    nu = ceil(max(domainExtent./lcorr')); % one-dimensional order nu such that 
+    % domainExtent(j) <= period(j)/2 = nu*lcorr(j) for all spatial dimensions j=1,...,d
     nu = 2*floor((nu+1)/2); % ensure one-dimensional order nu is even
 end
 order = nu^d; % d-dimensional order of the spectral representation for all spatial dimensions
