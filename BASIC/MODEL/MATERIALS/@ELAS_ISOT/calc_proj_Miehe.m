@@ -186,8 +186,10 @@ switch dim
         % P = calc_proj_notation(elem);
         % Id = P'\eye(3)/P;
         Id = diag([1,1,1/2]);
-        Pp = betap*Id + gammap(1)*(m1*m1') + gammap(2)*(m2*m2');
-        Pm = betam*Id + gammam(1)*(m1*m1') + gammam(2)*(m2*m2');
+        M11 = m1*m1';
+        M22 = m2*m2';
+        Pp = betap*Id + gammap(1)*M11 + gammap(2)*M22;
+        Pm = betam*Id + gammam(1)*M11 + gammam(2)*M22;
         
     case 3
         m1 = [M1(1,1) M1(2,2) M1(3,3) M1(1,2) M1(1,3) M1(2,3)]';
@@ -205,12 +207,15 @@ switch dim
         thetap(3,:,k) = (valp(2,:,k)-valp(3,:,k))/(val(2,:,k)-val(3,:,k))/2;
         thetam(3,:,k) = (valm(2,:,k)-valm(3,:,k))/(val(2,:,k)-val(3,:,k))/2;
         
+        M11 = m1*m1';
+        M22 = m2*m2';
+        M33 = m3*m3';
         G12 = construct_G(m1,m2);
         G13 = construct_G(m1,m3);
         G23 = construct_G(m2,m3);
         
-        Pp = dvalp(1)*(m1*m1') + dvalp(2)*(m2*m2') + dvalp(3)*(m3*m3') + thetap(1)*G12 + thetap(2)*G13 + thetap(3)*G23;
-        Pm = dvalm(1)*(m1*m1') + dvalm(2)*(m2*m2') + dvalm(3)*(m3*m3') + thetam(1)*G12 + thetam(2)*G13 + thetam(3)*G23;
+        Pp = dvalp(1)*M11 + dvalp(2)*M22 + dvalp(3)*M33 + thetap(1)*G12 + thetap(2)*G13 + thetap(3)*G23;
+        Pm = dvalm(1)*M11 + dvalm(2)*M22 + dvalm(3)*M33 + thetam(1)*G12 + thetam(2)*G13 + thetam(3)*G23;
         
 end
 
