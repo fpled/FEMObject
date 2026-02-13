@@ -4,7 +4,7 @@ function [se,B] = sigma(mat,elem,xnode,xgauss,qe,varargin)
 B = calc_B(elem,xnode,xgauss);
 
 if isparam(mat,'d')
-    model = getparam(mat,'PFM'); % phase field model 
+    model = getparam(mat,'PFM'); % phase field model
     
     switch lower(model)
         case 'bourdin'

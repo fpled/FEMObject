@@ -7,13 +7,13 @@ if nargin<=2
 end
 
 dim = getdim(elem);
-model = getparam(mat,'PFM'); % phase field model
-split = getparam(mat,'PFS'); % phase field split
+% model = getparam(mat,'PFM'); % phase field model
+% split = getparam(mat,'PFS'); % phase field split
 
 D = calc_opmat(mat,elem,xnode,xgauss); % stiffness operator in Voigt notation
 
-P = calc_proj_notation(elem);
-B = P*P';
+% P = calc_proj_notation(elem);
+% P2 = P*P;
 
 %% Numerical spectral (eigenvalue) decomposition of elasticity tensor
 % Eigenvalues and eigenvectors
@@ -248,13 +248,13 @@ for i=1:size(Ve,2)
     [Ui,Li] = eig(MYDOUBLEND(Vi),'vector','sort');
     
     %% Check numerical spectral (eigenvalue) decomposition of eigenmatrix #i
-%     tol = 1e-12;
-%     if verLessThan('matlab','9.1') % compatibility (<R2016b)
-%         Vinum = Ui*diag(Li)*Ui';
-%     else
-%         Vinum = Ui*(Li.*Ui');
-%     end
-%     decompVi = max(norm(Vi - Vinum)/norm(Vi),[],'all'); if decompVi>tol, decompVi, end
+    % tol = 1e-12;
+    % if verLessThan('matlab','9.1') % compatibility (<R2016b)
+    %     Vinum = Ui*diag(Li)*Ui';
+    % else
+    %     Vinum = Ui*(Li.*Ui');
+    % end
+    % decompVi = max(norm(Vi - Vinum)/norm(Vi),[],'all'); if decompVi>tol, decompVi, end
     
     % Eigentensors for eigenvector #i
     ni = zerosND([size(vi,1),size(Ui,2),sizeND(Ui)]);
@@ -276,28 +276,28 @@ for i=1:size(Ve,2)
     end
     
     %% Check numerical spectral (eigenvalue) decomposition of eigenvector #i
-%     tol = 1e-12;
-%     switch dim
-%         case 1
-%             vinum = Li(1)*ni(:,1);
-%         case 2
-%             if isaxi(elem)
-%                 vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2) + Li(3)*ni(:,3);
-%             else
-%                 vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2);
-%             end
-%         case 3
-%             vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2) + Li(3)*ni(:,3);
-%     end
-%     vinum = ni*Li; 
-%     % vinum = sum(Li'.*ni);
-%     decompvi = max(norm(vinum-vi)/norm(vi),[],'all'); if decompvi>tol, decompvi, end
+    % tol = 1e-12;
+    % switch dim
+    %     case 1
+    %         vinum = Li(1)*ni(:,1);
+    %     case 2
+    %         if isaxi(elem)
+    %             vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2) + Li(3)*ni(:,3);
+    %         else
+    %             vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2);
+    %         end
+    %     case 3
+    %         vinum = Li(1)*ni(:,1) + Li(2)*ni(:,2) + Li(3)*ni(:,3);
+    % end
+    % vinum = ni*Li; 
+    % % vinum = sum(Li'.*ni);
+    % decompvi = max(norm(vinum-vi)/norm(vi),[],'all'); if decompvi>tol, decompvi, end
     
     %% Check numerical spectral (eigenvalue) decomposition of eigentensor #i
-%     Mi = vi*vi';
-%     L2i = Li*Li';
-%     Minum = ni*L2i*ni';
-%     decompMi = max(norm(Minum-Mi)/norm(Mi),[],'all'); if decompMi>tol, decompMi, end
+    % Mi = vi*vi';
+    % L2i = Li*Li';
+    % Minum = ni*L2i*ni';
+    % decompMi = max(norm(Minum-Mi)/norm(Mi),[],'all'); if decompMi>tol, decompMi, end
     
     N(:,:,i) = ni;
     L(:,i) = Li;
@@ -371,6 +371,8 @@ switch dim
 end
 
 %% Check stiffness/compliance operator decomposition
-% tol = 1e-12;
-% D = calc_opmat(mat,elem,xnode,xgauss); % stiffness operator in Voigt notation
-% decompD = max(norm(D - (Dp+Dm))/norm(D),[],'all'); if decompD>tol, decompD, end
+if ischarin('check',varargin)
+    tol = 1e-12;
+    D = calc_opmat(mat,elem,xnode,xgauss); % stiffness operator in Voigt notation
+    decompD = max(norm(D - (Dp+Dm))/norm(D),[],'all'); if decompD>tol, decompD, end
+end

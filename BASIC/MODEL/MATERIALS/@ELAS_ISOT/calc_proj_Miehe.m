@@ -6,8 +6,8 @@ split = getparam(mat,'PFS'); % phase field split
 
 if strcmpi(split,'stress')
     P = calc_proj_notation(elem);
-    B = P*P';
-    se = B*se; % stress tensor converted as strain tensor in Voigt notation
+    P2 = P*P;
+    se = P2*se; % stress tensor converted as strain tensor in Voigt notation
 end
 
 %% Strain/Stress tensor
@@ -220,13 +220,15 @@ switch dim
 end
 
 %% Check orthogonality condition and strain/stress decomposition
-% tol = 1e-12;
-% P = calc_proj_notation(elem);
-% sep = P*(Pp*se); % positive part of strain/stress tensor in Kelvin-Mandel notation
-% sem = P*(Pm*se); % negative part of strain/stress tensor in Kelvin-Mandel notation
-% se = P\se; % strain/stress tensor in Kelvin-Mandel notation
-% orthpm = max(abs(sep'*sem)/abs(se'*se),[],'all'); if orthpm>tol, orthpm, end
-% orthmp = max(abs(sem'*sep)/abs(se'*se),[],'all'); if orthmp>tol, orthmp, end
-% decomp = max(norm(se - (sep+sem))/norm(se),[],'all'); if decomp>tol, decomp, end
+if ischarin('check',varargin)
+    tol = 1e-12;
+    P = calc_proj_notation(elem);
+    sep = P*(Pp*se); % positive part of strain/stress tensor in Kelvin-Mandel notation
+    sem = P*(Pm*se); % negative part of strain/stress tensor in Kelvin-Mandel notation
+    se = P\se; % strain/stress tensor in Kelvin-Mandel notation
+    orthpm = max(abs(sep'*sem)/abs(se'*se),[],'all'); if orthpm>tol, orthpm, end
+    orthmp = max(abs(sem'*sep)/abs(se'*se),[],'all'); if orthmp>tol, orthmp, end
+    decomp = max(norm(se - (sep+sem))/norm(se),[],'all'); if decomp>tol, decomp, end
+end
 
 end
