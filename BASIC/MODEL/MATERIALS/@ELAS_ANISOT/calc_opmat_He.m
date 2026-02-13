@@ -20,6 +20,8 @@ if dim==1
         C = inv(D); % compliance operator in Voigt notation
         Cp = (C+abs(C))./2;
         Cm = (C-abs(C))./2;
+        Dp = D'*Cp*D; % damaged part of stiffness operator in Voigt notation
+        Dm = D'*Cm*D; % undamaged part of stiffness operator in Voigt notation
     else
         Dp = (D+abs(D))./2;
         Dm = (D-abs(D))./2;
