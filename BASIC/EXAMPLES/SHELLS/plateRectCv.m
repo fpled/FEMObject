@@ -22,7 +22,7 @@ elemtypes = {'DKT','DKQ'}; % Kirchhoff-Love (classical) plate theory
 % meshtypes = {'Structured'};
 % meshtypes = {'Unstructured'};
 meshtypes = {'Structured','Unstructured'};
-nbelems = 2.^(1:6);
+nbelems = 2.^(1:7);
 
 fontsize = 16;
 linewidth = 1;
@@ -37,13 +37,13 @@ for il=1:length(loadings)
     loading = loadings{il};
     filename = ['plateRectDetLinElas' boundary loading];
     if displayCv
-        hcvUz = figure('Name','Evolution of error indicator for Uz w.r.t number of elements');
+        hcvUz = figure('Name','Evolution of error indicator for Uz w.r.t. number of elements');
         clf
-        hcvRx = figure('Name','Evolution of error indicator for Rx w.r.t number of elements');
+        hcvRx = figure('Name','Evolution of error indicator for Rx w.r.t. number of elements');
         clf
-        hcvRy = figure('Name','Evolution of error indicator for Ry w.r.t number of elements');
+        hcvRy = figure('Name','Evolution of error indicator for Ry w.r.t. number of elements');
         clf
-        htime = figure('Name','Evolution of CPU time w.r.t number of elements');
+        htime = figure('Name','Evolution of CPU time w.r.t. number of elements');
         clf
         leg = cell(1,length(elemtypes)*length(meshtypes));
     end
@@ -177,7 +177,7 @@ if solveProblem
     switch lower(boundary)
         case 'clamped'
             % Galerkin approximation (based on weak formulation)
-            n = 1:10;
+            n = 1:20;
             switch lower(loading)
                 case 'uniform'
                     A = - p/(4*D_rig*pi^4*(3*(1/a^4+1/b^4)+2/(a^2*b^2))) ./ n.^4;
@@ -204,8 +204,8 @@ if solveProblem
             % end
         case 'simplysupported'
             % Fourier series representation (based on strong formulation)
-            m = 1:10;
-            n = 1:10;
+            m = 1:20;
+            n = 1:20;
             switch lower(loading)
                 case 'uniform'
                     A = - 16*p/(D_rig*pi^6) ./ (m'*n .* (repmat(m,length(n),1)'.^2/a^2+repmat(n,length(m),1).^2/b^2).^2) .* (sin(m*pi/2)'.^2 * sin(n*pi/2).^2);
@@ -275,7 +275,7 @@ if solveProblem
     err_ry = norm(ry-ry_ex)/norm(ry_ex);
     
     %% Save variables
-    save(fullfile(pathname,['problem_' num2str(i) '.mat']),'S','Q','a','b','h','f','-v7.3');
+    save(fullfile(pathname,['problem_' num2str(i) '.mat']),'S','Q','a','b','h','f');
     save(fullfile(pathname,['solution_' num2str(i) '.mat']),'u','time_i',...
         'Uz','Rx','Ry');
     save(fullfile(pathname,['reference_solution_' num2str(i) '.mat']),'u_ex',...
@@ -483,7 +483,7 @@ if displayCv
     ylabel('CPU time [s]')
     %xlabel('Nombre d''éléments')
     %ylabel('Temps CPU [s]')
-    legend(leg{:})
+    legend(leg{:},'Location','SouthEast')
     mysaveas(pathname,'cputime',formats,renderer);
     mymatlab2tikz(pathname,'cputime.tex');
 end

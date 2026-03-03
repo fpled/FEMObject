@@ -12,8 +12,8 @@ addParameter(p,'LineWidth',1,@isscalar);
 addParameter(p,'Interpreter','latex',@ischar);
 parse(p,varargin{:})
 
-figure('Name','Evolution of dimension of stochastic basis w.r.t number of iterations')
-% set(gcf,'Name','Evolution of dimension of stochastic basis w.r.t number of iterations')
+figure('Name','Evolution of dimension of stochastic basis w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of dimension of stochastic basis w.r.t. number of iterations')
 clf
 hold on
 iter = 1:output.iteration;

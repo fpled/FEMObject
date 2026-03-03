@@ -25,11 +25,11 @@ n = numel(patches);
 
 if ischarin('displ',varargin)
     i = getcharin('displ',varargin);
-    figure('Name',['Relative error in variance of u_' num2str(i) '=(U_' num2str(i) ',w_' num2str(i) '), U_' num2str(i) ', w_' num2str(i) ', lambda_' num2str(i) ' w.r.t u_ref_' num2str(i) '=(U_ref_' num2str(i) ',w_ref_' num2str(i) '), U_ref_' num2str(i) ', w_ref_' num2str(i) ', lambda_ref_' num2str(i)])
-    % set(gcf,'Name',['Relative error in variance of u_' num2str(i) '=(U_' num2str(i) ',w_' num2str(i) '), U_' num2str(i) ', w_' num2str(i) ', lambda_' num2str(i) ' w.r.t u_ref_' num2str(i) '=(U_ref_' num2str(i) ',w_ref_' num2str(i) '), U_ref_' num2str(i) ', w_ref_' num2str(i) ', lambda_ref_' num2str(i)])
+    figure('Name',['Relative error in variance of u_' num2str(i) '=(U_' num2str(i) ',w_' num2str(i) '), U_' num2str(i) ', w_' num2str(i) ', lambda_' num2str(i) ' w.r.t. u_ref_' num2str(i) '=(U_ref_' num2str(i) ',w_ref_' num2str(i) '), U_ref_' num2str(i) ', w_ref_' num2str(i) ', lambda_ref_' num2str(i)])
+    % set(gcf,'Name',['Relative error in variance of u_' num2str(i) '=(U_' num2str(i) ',w_' num2str(i) '), U_' num2str(i) ', w_' num2str(i) ', lambda_' num2str(i) ' w.r.t. u_ref_' num2str(i) '=(U_ref_' num2str(i) ',w_ref_' num2str(i) '), U_ref_' num2str(i) ', w_ref_' num2str(i) ', lambda_ref_' num2str(i)])
 else
-    figure('Name','Relative error in variance of u=(U,w), U, w, lambda w.r.t u_ref=(U_ref,w_ref), U_ref, w_ref, lambda_ref')
-    % set(gcf,'Name','Relative error in variance of u=(U,w), U, w, lambda w.r.t u_ref=(U_ref,w_ref), U_ref, w_ref, lambda_ref')
+    figure('Name','Relative error in variance of u=(U,w), U, w, lambda w.r.t. u_ref=(U_ref,w_ref), U_ref, w_ref, lambda_ref')
+    % set(gcf,'Name','Relative error in variance of u=(U,w), U, w, lambda w.r.t. u_ref=(U_ref,w_ref), U_ref, w_ref, lambda_ref')
 end
 clf
 

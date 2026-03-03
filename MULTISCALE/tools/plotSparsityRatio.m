@@ -11,8 +11,8 @@ addParameter(p,'LineWidth',1,@isscalar);
 addParameter(p,'Interpreter','latex',@ischar);
 parse(p,varargin{:})
 
-figure('Name','Evolution of sparsity ratio w.r.t number of iterations')
-% set(gcf,'Name','Evolution of sparsity ratio w.r.t number of iterations')
+figure('Name','Evolution of sparsity ratio w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of sparsity ratio w.r.t. number of iterations')
 clf
 iter = 1:output.iteration;
 plot(iter,output.sparsityRatio_U(iter),'-k','LineWidth',p.Results.LineWidth)

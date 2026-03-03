@@ -13,8 +13,8 @@ parse(p,varargin{:})
 
 n = numel(output.dimBasisLocalSolution);
 iter = 1:output.iteration;
-figure('Name','Evolution of dimension of stochastic basis w.r.t number of iterations')
-% set(gcf,'Name','Evolution of dimension of stochastic basis w.r.t number of iterations')
+figure('Name','Evolution of dimension of stochastic basis w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of dimension of stochastic basis w.r.t. number of iterations')
 clf
 hold on
 for k=1:n

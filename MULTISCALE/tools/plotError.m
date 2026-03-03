@@ -14,8 +14,8 @@ parse(p,varargin{:})
 
 israndom = isfield(output,'nbSamples');
 
-figure('Name','Evolution of error indicators w.r.t number of iterations')
-% set(gcf,'Name','Evolution of error indicators w.r.t number of iterations')
+figure('Name','Evolution of error indicators w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of error indicators w.r.t. number of iterations')
 clf
 iter = 1:output.iteration;
 semilogy([0,iter],[output.errorGlobalSolutionInit,output.errorGlobalSolution(iter)],'-k','LineWidth',p.Results.LineWidth)

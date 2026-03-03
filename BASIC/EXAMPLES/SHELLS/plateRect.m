@@ -153,7 +153,7 @@ if solveProblem
     switch lower(boundary)
         case 'clamped'
             % Galerkin approximation (based on weak formulation)
-            n = 1:10;
+            n = 1:20;
             switch lower(loading)
                 case 'uniform'
                     A = - p/(4*D_rig*pi^4*(3*(1/a^4+1/b^4)+2/(a^2*b^2))) ./ n.^4;
@@ -180,8 +180,8 @@ if solveProblem
             % end
         case 'simplysupported'
             % Fourier series representation (based on strong formulation)
-            m = 1:10;
-            n = 1:10;
+            m = 1:20;
+            n = 1:20;
             switch lower(loading)
                 case 'uniform'
                     A = - 16*p/(D_rig*pi^6) ./ (m'*n .* (repmat(m,length(n),1)'.^2/a^2+repmat(n,length(m),1).^2/b^2).^2) .* (sin(m*pi/2)'.^2 * sin(n*pi/2).^2);

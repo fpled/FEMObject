@@ -13,8 +13,8 @@ parse(p,varargin{:})
 
 israndom = isfield(output,'nbSamples');
 
-figure('Name','Evolution of stagnation indicators w.r.t number of iterations')
-% set(gcf,'Name','Evolution of stagnation indicators w.r.t number of iterations')
+figure('Name','Evolution of stagnation indicators w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of stagnation indicators w.r.t. number of iterations')
 clf
 iter = 1:output.iteration;
 semilogy(iter,output.stagnationGlobalSolution(iter),'-k','LineWidth',p.Results.LineWidth)

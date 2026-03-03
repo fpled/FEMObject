@@ -28,7 +28,7 @@ loadings = {'Uniform','Concentrated'};
 % elemtypes = {'DKT','DKQ'}; % Kirchhoff-Love (classical) plate theory
 % elemtypes = {'DST','DSQ','COQ4'}; % Reissner-Mindlin (first-order shear) plate theory
 elemtypes = {'DKT','DKQ','DST','DSQ','COQ4'}; % Both plate theories
-nbelems = 2.^(1:6);
+nbelems = 2.^(1:7);
 
 fontsize = 16;
 linewidth = 1;
@@ -43,15 +43,15 @@ for il=1:length(loadings)
     loading = loadings{il};
     filename = ['plateCircDetLinElas' boundary loading];
     if displayCv
-        hcvUz = figure('Name','Evolution of error indicator for Uz w.r.t number of elements');
+        hcvUz = figure('Name','Evolution of error indicator for Uz w.r.t. number of elements');
         clf
-        hcvRt = figure('Name','Evolution of error indicator for Rt w.r.t number of elements');
+        hcvRt = figure('Name','Evolution of error indicator for Rt w.r.t. number of elements');
         clf
-        hcvRx = figure('Name','Evolution of error indicator for Rx w.r.t number of elements');
+        hcvRx = figure('Name','Evolution of error indicator for Rx w.r.t. number of elements');
         clf
-        hcvRy = figure('Name','Evolution of error indicator for Ry w.r.t number of elements');
+        hcvRy = figure('Name','Evolution of error indicator for Ry w.r.t. number of elements');
         clf
-        htime = figure('Name','Evolution of CPU time w.r.t number of elements');
+        htime = figure('Name','Evolution of CPU time w.r.t. number of elements');
         clf
         leg = cell(1,length(elemtypes));
     end
@@ -535,7 +535,7 @@ if displayCv
     ylabel('CPU time [s]')
     %xlabel('Nombre d''éléments')
     %ylabel('Temps CPU [s]')
-    legend(leg{:})
+    legend(leg{:},'Location','SouthEast')
     mysaveas(pathname,'cputime',formats,renderer);
     mymatlab2tikz(pathname,'cputime.tex');
 end

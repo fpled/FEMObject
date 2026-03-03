@@ -10,8 +10,8 @@ addParameter(p,'FontSize',16,@isscalar);
 addParameter(p,'LineWidth',1,@isscalar);
 parse(p,varargin{:})
 
-figure('Name','Evolution of relaxation parameter w.r.t number of iterations')
-% set(gcf,'Name','Evolution of relaxation parameter w.r.t number of iterations')
+figure('Name','Evolution of relaxation parameter w.r.t. number of iterations')
+% set(gcf,'Name','Evolution of relaxation parameter w.r.t. number of iterations')
 clf
 iter = 1:output.iteration;
 plot(iter,output.relaxationParameter(iter),'-b','LineWidth',p.Results.LineWidth)

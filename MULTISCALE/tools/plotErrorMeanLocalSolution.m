@@ -17,11 +17,11 @@ n = numel(patches);
 
 if ischarin('displ',varargin)
     i = getcharin('displ',varargin);
-    figure('Name',['Relative error in mean of w_' num2str(i) ' w.r.t w_ref_' num2str(i)])
-    % set(gcf,'Name',['Relative error in mean of w_' num2str(i) ' w.r.t w_ref_' num2str(i)])
+    figure('Name',['Relative error in mean of w_' num2str(i) ' w.r.t. w_ref_' num2str(i)])
+    % set(gcf,'Name',['Relative error in mean of w_' num2str(i) ' w.r.t. w_ref_' num2str(i)])
 else
-    figure('Name','Relative error in mean of w w.r.t w_ref')
-    % set(gcf,'Name','Relative error in mean of w w.r.t w_ref')
+    figure('Name','Relative error in mean of w w.r.t. w_ref')
+    % set(gcf,'Name','Relative error in mean of w w.r.t. w_ref')
 end
 clf
 
