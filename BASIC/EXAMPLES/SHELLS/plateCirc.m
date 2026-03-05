@@ -307,9 +307,9 @@ end
 %% Outputs
 fprintf('Circular plate\n');
 fprintf('\n');
-fprintf(['boundary : ' boundary '\n']);
-fprintf(['load     : ' loading '\n']);
-fprintf(['mesh     : ' elemtype ' elements\n']);
+fprintf('boundary = %s\n',boundary);
+fprintf('load     = %s\n',loading);
+fprintf('mesh     = %s elements\n',elemtype);
 fprintf('nb elements = %g\n',getnbelem(S));
 fprintf('nb nodes    = %g\n',getnbnode(S));
 fprintf('nb dofs     = %g\n',getnbddl(S));

@@ -279,9 +279,9 @@ end
 %% Outputs
 fprintf('Rectangular plate\n');
 fprintf('\n');
-fprintf(['boundary : ' boundary '\n']);
-fprintf(['load     : ' loading '\n']);
-fprintf(['mesh     : ' elemtype ' ' meshtype ' elements\n']);
+fprintf('boundary = %s\n',boundary);
+fprintf('load     = %s\n',loading);
+fprintf('mesh     = %s %s elements\n',elemtype,meshtype);
 fprintf('nb elements = %g\n',getnbelem(S));
 fprintf('nb nodes    = %g\n',getnbnode(S));
 fprintf('nb dofs     = %g\n',getnbddl(S));
