@@ -19,8 +19,9 @@ pathname = fullfile(getfemobjectoptions('path'),'MULTISCALE',...
 if ~exist(pathname,'dir')
     mkdir(pathname);
 end
+
 fontsize = 16;
-formats = {'fig','epsc'};
+formats = {'epsc'};
 renderer = 'OpenGL';
 
 %% Problem
