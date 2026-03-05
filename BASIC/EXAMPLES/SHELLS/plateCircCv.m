@@ -33,7 +33,7 @@ nbelems = 2.^(1:7);
 fontsize = 16;
 linewidth = 1;
 interpreter = 'latex';
-formats = {'fig','epsc'};
+formats = {'epsc','png'};
 renderer = 'OpenGL';
 
 for ib=1:length(boundaries)
