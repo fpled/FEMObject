@@ -372,6 +372,7 @@ fprintf('rz    = %g\n',rz);
 fprintf('rr    = %g\n',rr);
 fprintf('rt    = %g\n',rt);
 fprintf('rt_ex = %g, error = %.3e\n',rt_ex,err_rt);
+fprintf('\n');
 
 %% Display
 if displaySolution

@@ -335,6 +335,7 @@ fprintf('rx_ex = %g, error = %.3e\n',rx_ex,err_rx);
 fprintf('ry    = %g\n',ry);
 fprintf('ry_ex = %g, error = %.3e\n',ry_ex,err_ry);
 fprintf('rz    = %g\n',rz);
+fprintf('\n');
 
 %% Display
 if displaySolution
