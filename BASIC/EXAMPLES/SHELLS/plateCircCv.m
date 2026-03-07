@@ -17,9 +17,11 @@ displayCv = true;
 % boundaries = {'SimplySupported'};
 % boundaries = {'Clamped'};
 boundaries = {'SimplySupported','Clamped'};
+
 % loadings = {'Uniform'};
 % loadings = {'Concentrated'};
 loadings = {'Uniform','Concentrated'};
+
 % elemtypes = {'DKT'};
 % elemtypes = {'DKQ'};
 % elemtypes = {'DST'};
@@ -28,6 +30,7 @@ loadings = {'Uniform','Concentrated'};
 % elemtypes = {'DKT','DKQ'}; % Kirchhoff-Love (classical) plate theory
 % elemtypes = {'DST','DSQ','COQ4'}; % Reissner-Mindlin (first-order shear) plate theory
 elemtypes = {'DKT','DKQ','DST','DSQ','COQ4'}; % Both plate theories
+
 nbelems = 2.^(1:7);
 
 fontsize = 16;

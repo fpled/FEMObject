@@ -12,12 +12,15 @@ displaySolution = true;
 % boundaries = {'SimplySupported'};
 % boundaries = {'Clamped'};
 boundaries = {'SimplySupported','Clamped'};
+
 % loadings = {'Uniform'};
 % loadings = {'Concentrated'};
 loadings = {'Uniform','Concentrated'};
+
 % elemtypes = {'DKT'};
 % elemtypes = {'DKQ'};
 elemtypes = {'DKT','DKQ'}; % Kirchhoff-Love (classical) plate theory
+
 % meshtypes = {'Structured'};
 % meshtypes = {'Unstructured'};
 meshtypes = {'Structured','Unstructured'};
