@@ -15,9 +15,9 @@ switch getdim(elem)
     case 2
         E = evalparam(mat,'E',elem,xnode,xgauss); % Young modulus
         nu = evalparam(mat,'NU',elem,xnode,xgauss); % Poisson ratio
-        mu = E/(1+nu)/2; % second Lamé coefficient (shear modulus)
+        mu = E/(1+nu)/2; % second Lame coefficient (shear modulus)
         if isaxi(elem)
-            lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+            lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
             kappa = E/(1-2*nu)/3; % bulk modulus
             % kappa = lambda+2/3*mu; % bulk modulus
             sqrtD = [sqrt(kappa/3)+2/3*sqrt(2*mu),sqrt(kappa/3)-sqrt(2*mu)/3,sqrt(kappa/3)-sqrt(2*mu)/3,0;...
@@ -32,10 +32,10 @@ switch getdim(elem)
             e = evalparam(mat,'DIM3',elem,xnode,xgauss); % thickness
             switch getoption(elem)
                 case 'DEFO'
-                    lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+                    lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
                     % kappa = E/(1+nu)/(1-2*nu)/2; % bulk modulus
                 otherwise
-                    lambda = E*nu/(1-nu^2); % first Lamé coefficient
+                    lambda = E*nu/(1-nu^2); % first Lame coefficient
                     % kappa = E/(1-nu)/2; % bulk modulus
             end
             kappa = lambda+mu; % bulk modulus
@@ -52,8 +52,8 @@ switch getdim(elem)
     case 3
         E = evalparam(mat,'E',elem,xnode,xgauss); % Young modulus
         nu = evalparam(mat,'NU',elem,xnode,xgauss); % Poisson ratio
-        mu = E/(1+nu)/2; % second Lamé coefficient (shear modulus)
-        lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+        mu = E/(1+nu)/2; % second Lame coefficient (shear modulus)
+        lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
         kappa = E/(1-2*nu)/3; % bulk modulus
         % kappa = lambda+2/3*mu; % bulk modulus
         sqrtD = [sqrt(kappa/3)+2/3*sqrt(2*mu),sqrt(kappa/3)-sqrt(2*mu)/3,sqrt(kappa/3)-sqrt(2*mu)/3,0,0,0;...

@@ -38,7 +38,7 @@ switch dim
     case 2
         E = evalparam(mat,'E',elem,xnode,xgauss); % Young modulus
         nu = evalparam(mat,'NU',elem,xnode,xgauss); % Poisson ratio
-        mu = E/(1+nu)/2; % second Lamé coefficient (shear modulus)
+        mu = E/(1+nu)/2; % second Lame coefficient (shear modulus)
         if isaxi(elem)
             v = [1,1,1,0]';
             I = v*v';
@@ -48,7 +48,7 @@ switch dim
                 Cp = P'*Cp*P; % damaged part of compliance operator in Voigt notation
                 Cm = P'*Cm*P; % undamaged part of compliance operator in Voigt notation
             else
-                lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+                lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
                 Dp = lambda*Rp*I + 2*mu*Pp; % damaged part of stiffness operator in Voigt notation
                 Dm = lambda*Rm*I + 2*mu*Pm; % undamaged part of stiffness operator in Voigt notation
             end
@@ -67,9 +67,9 @@ switch dim
             else
                 switch getoption(elem)
                     case 'DEFO'
-                        lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+                        lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
                     otherwise
-                        lambda = E*nu/(1-nu^2); % first Lamé coefficient
+                        lambda = E*nu/(1-nu^2); % first Lame coefficient
                 end
                 Dp = e*(lambda*Rp*I + 2*mu*Pp); % damaged part of stiffness operator in Voigt notation
                 Dm = e*(lambda*Rm*I + 2*mu*Pm); % undamaged part of stiffness operator in Voigt notation
@@ -79,7 +79,7 @@ switch dim
     case 3
         E = evalparam(mat,'E',elem,xnode,xgauss); % Young modulus
         nu = evalparam(mat,'NU',elem,xnode,xgauss); % Poisson ratio
-        mu = E/(1+nu)/2; % second Lamé coefficient (shear modulus)
+        mu = E/(1+nu)/2; % second Lame coefficient (shear modulus)
         v = [1,1,1,0,0,0]';
         I = v*v';
         if strcmpi(split,'stress')
@@ -88,7 +88,7 @@ switch dim
             Cp = P'*Cp*P; % damaged part of compliance operator in Voigt notation
             Cm = P'*Cm*P; % undamaged part of compliance operator in Voigt notation
         else
-            lambda = E*nu/(1+nu)/(1-2*nu); % first Lamé coefficient
+            lambda = E*nu/(1+nu)/(1-2*nu); % first Lame coefficient
             Dp = lambda*Rp*I + 2*mu*Pp; % damaged part of stiffness operator in Voigt notation
             Dm = lambda*Rm*I + 2*mu*Pm; % undamaged part of stiffness operator in Voigt notation
         end
