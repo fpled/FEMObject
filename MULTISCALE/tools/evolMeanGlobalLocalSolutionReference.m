@@ -280,7 +280,7 @@ end
 mov = cell(1,length(p.Results.formats));
 for i=1:length(p.Results.formats)
     if strcmp(p.Results.formats{i},'avi')
-        mov{i} = VideoWriter(fullfile(p.Results.pathname,p.Results.filename));
+        mov{i} = VideoWriter(fullfile(p.Results.pathname,p.Results.filename),'Motion JPEG AVI');
     elseif strcmp(p.Results.formats{i},'mp4')
         mov{i} = VideoWriter(fullfile(p.Results.pathname,p.Results.filename),'MPEG-4');
     elseif strcmp(p.Results.formats{i},'mj2')
