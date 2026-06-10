@@ -1,10 +1,17 @@
-function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,filename,indim,varargin)
-% function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,filename,indim,notchtype)
+function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,t,clD,clC,clH,filename,indim,varargin)
+% function varargout = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,t,clD,clC,clH,filename,indim,notchtype)
+% L : half-length
+% h : half-height
+% ls : location of the supports from the centerline
+% lh : location of the holes from the centerline
+% dh : distance between the holes
+% ph : location of the top hole from the top
+% r : radius of the holes
 % a : length of the edge crack (or notch)
 % b : location of the edge crack (or notch) from the centerline
 % c : width of the edge crack (or notch)
+% t : thickness
 % clD, clC, clH : characteristic lengths
-% unit : unit in m (optional) (1e-3 for mm, 25.4e-3 for inch)
 % filename : file name (optional)
 % indim : space dimension (optional, 2 by default)
 % notchtype : 'c', 'circ' or 'circular' for circular notch (by default)
@@ -24,28 +31,20 @@ varargin = delonlycharin({'refinecrack','recombine', ...
                           'v','V','triangular', ...
                           'c','circ','circular'},varargin);
 
-if nargin<9 || isempty(indim)
+if nargin<16 || isempty(indim)
     indim = 2;
 end
-if nargin<7 || isempty(unit)
-    unit = 1;
-end
-if nargin<6 || isempty(clH)
+if nargin<14 || isempty(clH)
     clH = clD;
 end
-if nargin<5 || isempty(clC)
+if nargin<13 || isempty(clC)
     clC = clD;
+end
+if nargin<11 || isempty(t)
+    t = 1;
 end
 
 dim = 2;
-
-L = 10*unit; % half-length
-h = 4*unit; % half-height
-ls = 9*unit; % location of the support from the centerline
-lh = 4*unit; % location of the holes from the centerline
-dh = 2*unit; % distance between the holes
-ph = 1.25*unit; % location of the top hole from the top
-r = 0.25*unit; % radius of the holes
 
 P{1} = [-L , -h];
 P{2} = [-ls, -h];
@@ -60,7 +59,7 @@ H{2} = CIRCLE(-lh, h-ph-dh  , r);
 H{3} = CIRCLE(-lh, h-ph     , r);
 
 G = GMSHFILE();
-if nargin>=8 && ischar(filename)
+if nargin>=15 && ischar(filename)
     G = setfile(G,filename);
 end
 

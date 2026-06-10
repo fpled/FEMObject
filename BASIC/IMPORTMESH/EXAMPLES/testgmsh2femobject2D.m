@@ -728,14 +728,22 @@ plotparamelem(Sq,'group')
 fprintf('\n2D Asymmetric plate with single edge crack and three holes\n');
 fprintf('\n');
 unit = 1e-3; % [mm]
-a = 1*unit; % crack length
-b = 6*unit; % crack offset from the centerline
+L = 10*unit; % half-length
+h = 4*unit; % half-height
+ls = 9*unit; % location of the supports from the centerline
+lh = 4*unit; % location of the holes from the centerline
+dh = 2*unit; % distance between the holes
+ph = 1.25*unit; % location of the top hole from the top edge
+r = 0.25*unit; % radius of the holes
+a = 1*unit; % crack (or notch) length
+b = 6*unit; % crack (or notch) offset from the centerline
 c = 0.025*unit; % notch width
+e = 1*unit; % thickness
 clD = 0.2*unit; % characteristic length for domain
 clC = c; % characteristic length for edge crack/notch
 clH = c; % characteristic length for circular holes
-St = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_tri');
-Sq = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_quad',2,'recombine');
+St = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_tri');
+Sq = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_quad',2,'recombine');
 
 figure('Name','Asymmetric plate with single edge crack and three holes')
 clf
@@ -747,8 +755,8 @@ plotparamelem(Sq,'group')
 %% Asymmetric plate with single edge circular notch and three holes
 fprintf('\n2D Asymmetric plate with single edge circular notch and three holes\n');
 fprintf('\n');
-St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_circular_notch_three_holes_tri',2,'c');
-Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_circular_notch_three_holes_quad',2,'c','recombine');
+St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_circular_notch_three_holes_tri',2,'c');
+Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_circular_notch_three_holes_quad',2,'c','recombine');
 
 figure('Name','Asymmetric plate with single edge circular notch and three holes')
 clf
@@ -760,8 +768,8 @@ plotparamelem(Sq,'group')
 %% Asymmetric plate with single edge rectangular notch and three holes
 fprintf('\n2D Asymmetric plate with single edge rectangular notch and three holes\n');
 fprintf('\n');
-St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_rectangular_notch_three_holes_tri',2,'r');
-Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_rectangular_notch_three_holes_quad',2,'r','recombine');
+St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_rectangular_notch_three_holes_tri',2,'r');
+Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_rectangular_notch_three_holes_quad',2,'r','recombine');
 
 figure('Name','Asymmetric plate with single edge rectangular notch and three holes')
 clf
@@ -773,8 +781,8 @@ plotparamelem(Sq,'group')
 %% Asymmetric plate with single edge V notch and three holes
 fprintf('\n2D Asymmetric plate with single edge V notch and three holes\n');
 fprintf('\n');
-St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_V_notch_three_holes_tri',2,'v');
-Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(a,b,c,clD,clC,clH,unit,'gmsh_asymmetric_plate_with_single_edge_V_notch_three_holes_quad',2,'v','recombine');
+St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_V_notch_three_holes_tri',2,'v');
+Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_V_notch_three_holes_quad',2,'v','recombine');
 
 figure('Name','Asymmetric plate with single edge V notch and three holes')
 clf

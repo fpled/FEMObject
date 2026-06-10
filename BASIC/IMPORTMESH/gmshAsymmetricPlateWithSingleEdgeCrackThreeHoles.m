@@ -1,9 +1,16 @@
-function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,filename,indim,varargin)
-% function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(a,b,clD,clC,clH,unit,filename,indim)
+function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,t,clD,clC,clH,filename,indim,varargin)
+% function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,t,clD,clC,clH,filename,indim)
+% L : half-length
+% h : half-height
+% ls : location of the supports from the centerline
+% lh : location of the holes from the centerline
+% dh : distance between the holes
+% ph : location of the top hole from the top
+% r : radius of the holes
 % a : length of the edge crack (or notch)
 % b : location of the edge crack (or notch) from the centerline
+% t : thickness
 % clD, clC, clH : characteristic lengths
-% unit : unit in m (optional) (1e-3 for mm, 25.4e-3 for inch)
 % filename : file name (optional)
 % indim : space dimension (optional, 2 by default)
 
@@ -15,28 +22,20 @@ recombine   = ischarin('recombine',varargin);
 varargin = delcharin('Box',varargin);
 varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 
-if nargin<8 || isempty(indim)
+if nargin<15 || isempty(indim)
     indim = 2;
 end
-if nargin<6 || isempty(unit)
-    unit = 1e-3;
-end
-if nargin<5 || isempty(clH)
+if nargin<13 || isempty(clH)
     clH = clD;
 end
-if nargin<4 || isempty(clC)
+if nargin<12 || isempty(clC)
     clC = clD;
+end
+if nargin<10 || isempty(t)
+    t = 1;
 end
 
 dim = 2;
-
-L = 10*unit; % half-length
-h = 4*unit; % half-height
-ls = 9*unit; % location of the support from the centerline
-lh = 4*unit; % location of the holes from the centerline
-dh = 2*unit; % distance between the holes
-ph = 1.25*unit; % location of the top hole from the top
-r = 0.25*unit; % radius of the holes
 
 P{1} = [-L,  -h];
 P{2} = [-ls, -h];
@@ -132,7 +131,7 @@ if ~isempty(Box) && isstruct(Box)
     G = setbgfield(G);
 end
 
-if nargin>=7 && ischar(filename)
+if nargin>=14 && ischar(filename)
     G = setfile(G,filename);
 end
 
