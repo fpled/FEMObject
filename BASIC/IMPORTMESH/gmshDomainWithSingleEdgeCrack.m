@@ -29,10 +29,11 @@ if indim==2
     PC = getvertices(C);
     C = LINE(min(PC{:}),max(PC{:}));
     if refinecrack
-        G = gmshfile(C,clC,[2,1],1);
+        clCrack = clC;
     else
-        G = gmshfile(C,[clD clC],[2,1],1);
+        clCrack = [clD clC];
     end
+    G = gmshfile(C,clCrack,[2,1],1);
     G = createpoints(G,PD,clD,3:6);
     G = createcontour(G,2:6,2:6,1);
     G = createplanesurface(G,1,1);
@@ -53,10 +54,11 @@ if indim==2
     
 elseif indim==3
     if refinecrack
-        G = gmshfile(C,clC,1:4,1:4,1,1);
+        clCrack = clC;
     else
-        G = gmshfile(C,[clD clC clC clD],1:4,1:4,1,1);
+        clCrack = [clD clC clC clD];
     end
+    G = gmshfile(C,clCrack,1:4,1:4,1,1);
     G = createpoints(G,PD,clD,5:12);
     G = createcontour(G,[1 8 7 6 5],5:9,2);
     G = createplanesurface(G,2,2);
