@@ -739,7 +739,7 @@ a = 1*unit; % crack (or notch) length
 b = 6*unit; % crack (or notch) offset from the centerline
 c = 0.025*unit; % notch width
 e = 1*unit; % thickness
-clD = 0.2*unit; % characteristic length for domain
+clD = 0.25*unit; % characteristic length for domain
 clC = c; % characteristic length for edge crack/notch
 clH = c; % characteristic length for circular holes
 St = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_crack_three_holes_tri');
@@ -785,6 +785,69 @@ St = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,
 Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,clD,clC,clH,'gmsh_asymmetric_plate_with_single_edge_V_notch_three_holes_quad',2,'v','recombine');
 
 figure('Name','Asymmetric plate with single edge V notch and three holes')
+clf
+subplot(1,2,1)
+plotparamelem(St,'group')
+subplot(1,2,2)
+plotparamelem(Sq,'group')
+
+%% Symmetric plate with single edge crack under three-point bending
+fprintf('\n2D Symmetric plate with single edge crack under three-point bending\n');
+fprintf('\n');
+L = 160e-3; % length
+H = 40e-3; % height
+ls = L/4; % location of the supports from the outer edges
+w = 5e-3; % flat punch width
+% w = 10e-3; % flat punch width
+a = 10e-3; % crack length
+b = L/2; % crack offset from the left outer edge
+c = 0.5e-3; % notch width
+e = 40e-3; % thickness
+clD = 2e-3; % characteristic length for domain
+clC = c; % characteristic length for edge crack/notch
+St = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,'gmsh_three_point_bending_with_single_edge_crack_tri',2);
+Sq = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,'gmsh_three_point_bending_with_single_edge_crack_quad',2,'recombine');
+
+figure('Name','Symmetric plate with single edge crack under three-point bending')
+clf
+subplot(1,2,1)
+plotparamelem(St,'group')
+subplot(1,2,2)
+plotparamelem(Sq,'group')
+
+%% Symmetric plate with single edge circular notch under three-point bending
+fprintf('\n2D Symmetric plate with single edge circular notch under three-point bending\n');
+fprintf('\n');
+St = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_circular_notch_tri',2,'c');
+Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_circular_notch_quad',2,'c','recombine');
+
+figure('Name','Symmetric plate with single edge circular notch under three-point bending')
+clf
+subplot(1,2,1)
+plotparamelem(St,'group')
+subplot(1,2,2)
+plotparamelem(Sq,'group')
+
+%% Symmetric plate with single edge rectangular notch under three-point bending
+fprintf('\n2D Symmetric plate with single edge rectangular notch under three-point bending\n');
+fprintf('\n');
+St = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_rectangular_notch_tri',2,'r');
+Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_rectangular_notch_quad',2,'r','recombine');
+
+figure('Name','Symmetric plate with single edge rectangular notch under three-point bending')
+clf
+subplot(1,2,1)
+plotparamelem(St,'group')
+subplot(1,2,2)
+plotparamelem(Sq,'group')
+
+%% Symmetric plate with single edge V notch under three-point bending
+fprintf('\n2D Symmetric plate with single edge V notch under three-point bending\n');
+fprintf('\n');
+St = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_V_notch_tri',2,'v');
+Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,'gmsh_three_point_bending_with_single_edge_V_notch_quad',2,'v','recombine');
+
+figure('Name','Symmetric plate with single edge V notch under three-point bending')
 clf
 subplot(1,2,1)
 plotparamelem(St,'group')

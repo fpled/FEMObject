@@ -31,12 +31,14 @@ if indim==2
     Ca = LINE(min(PCa{:}),max(PCa{:}));
     Cb = LINE(min(PCb{:}),max(PCb{:}));
     if refinecrack
-        Ga = gmshfile(Ca,clC,[2 1],1);
-        Gb = gmshfile(Cb,clC,[8 5],8);
+        clCa = clC;
+        clCb = clC;
     else
-        Ga = gmshfile(Ca,[clD clC],[2 1],1);
-        Gb = gmshfile(Cb,[clC clD],[8 5],8);
+        clCa = [clD clC];
+        clCb = [clC clD];
     end
+    Ga = gmshfile(Ca,clCa,[2 1],1);
+    Gb = gmshfile(Cb,clCb,[8 5],8);
     G = Ga+Gb;
     G = createpoints(G,PD,clD,[3:4,6:7]);
     G = createcontour(G,2:7,2:7,1);
@@ -58,12 +60,14 @@ if indim==2
     
 elseif indim==3
     if refinecrack
-        Ga = gmshfile(Ca,clC,1:4,1:4,1,1);
-        Gb = gmshfile(Cb,clC,5:8,5:8,2,2);
+        clCa = clC;
+        clCb = clC;
     else
-        Ga = gmshfile(Ca,[clD clC clC clD],1:4,1:4,1,1);
-        Gb = gmshfile(Cb,[clD clC clC clD],5:8,5:8,2,2);
+        clCa = [clD clC clC clD];
+        clCb = [clD clC clC clD];
     end
+    Ga = gmshfile(Ca,clCa,1:4,1:4,1,1);
+    Gb = gmshfile(Cb,clCb,5:8,5:8,2,2);
     G = Ga+Gb;
     G = createpoints(G,PD,clD,9:16);
     G = createcontour(G,[1 12 11 5 10 9],9:14,3);

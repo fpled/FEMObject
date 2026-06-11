@@ -21,24 +21,24 @@ end
 
 dim = 2;
 
-lin = 0.3;
+lin  = 0.3;
 lmid = 0.5;
 lout = 0.3;
 t = 0.02;
-hin = 0.15;
+hin  = 0.15;
 hout = 0.3;
 h1 = 1;
 h0 = 0.1;
 h2 = 0.5;
-P{1} =  [0            , 0       , 0];
-P{2} =  [lout+lmid-t  , 0       , 0];
-P{3} =  [lout+lmid-t  , h1-hin  , 0];
-P{4} =  [lout+lmid    , h1-hin  , 0];
-P{5} =  [lout+lmid    , 0       , 0];
-P{6} =  [lout+lmid+lin, 0       , 0];
-P{7} =  [lout+lmid+lin, h1      , 0];
-P{8} =  [lout+t       , h1      , 0];
-P{9} =  [lout+t       , hout    , 0];
+P{1}  = [0            , 0       , 0];
+P{2}  = [lout+lmid-t  , 0       , 0];
+P{3}  = [lout+lmid-t  , h1-hin  , 0];
+P{4}  = [lout+lmid    , h1-hin  , 0];
+P{5}  = [lout+lmid    , 0       , 0];
+P{6}  = [lout+lmid+lin, 0       , 0];
+P{7}  = [lout+lmid+lin, h1      , 0];
+P{8}  = [lout+t       , h1      , 0];
+P{9}  = [lout+t       , hout    , 0];
 P{10} = [lout         , hout    , 0];
 P{11} = [lout         , h1      , 0];
 P{12} = [0            , h1      , 0];
