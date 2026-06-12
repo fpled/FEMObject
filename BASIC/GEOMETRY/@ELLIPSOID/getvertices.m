@@ -15,7 +15,7 @@ P{4} = [-a,  0,  0]; % -x
 P{5} = [ 0, -b,  0]; % -y
 P{6} = [ 0,  0, -c]; % -z
 
-% Rotation matrix
+% Rotation matrix from ellipsoid local frame to global frame
 v = [E.vx, E.vy];
 n = [E.nx, E.ny, E.nz];
 R = calcrotation(E,v,n);

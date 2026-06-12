@@ -17,7 +17,7 @@ switch E.indim
     case 2
         nodecoord = [x, y];
         
-        % Rotation matrix
+        % Rotation matrix from ellipse local frame to global frame
         v = [E.vx, E.vy];
         R = calcrotation(E,v);
         
@@ -28,7 +28,7 @@ switch E.indim
         z = zeros(npts,1);
         nodecoord = [x, y, z];
         
-        % Rotation matrix
+        % Rotation matrix from ellipse local frame to global frame
         v = [E.vx, E.vy];
         n = [E.nx, E.ny, E.nz];
         R = calcrotation(E,v,n);

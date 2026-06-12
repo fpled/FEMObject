@@ -13,7 +13,7 @@ switch C.indim
         P{3} = [-r,  0]; % -x
         P{4} = [ 0, -r]; % -y
         
-        % Rotation matrix
+        % Rotation matrix from circle local frame to global frame
         v = [C.vx, C.vy];
         R = calcrotation(C,v);
         
@@ -27,7 +27,7 @@ switch C.indim
         P{3} = [-r,  0, 0]; % -x
         P{4} = [ 0, -r, 0]; % -y
         
-        % Rotation matrix
+        % Rotation matrix from circle local frame to global frame
         v = [C.vx, C.vy];
         n = [C.nx, C.ny, C.nz];
         R = calcrotation(C,v,n);

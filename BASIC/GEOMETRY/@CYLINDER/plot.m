@@ -34,7 +34,7 @@ else
     nodecoord_top  = [x, y, z_top];
 end
 
-% Rotation matrix
+% Rotation matrix from cylinder local frame to global frame
 v = [C.vx, C.vy];
 n = [C.nx, C.ny, C.nz];
 R = calcrotation(C,v,n);

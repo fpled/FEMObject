@@ -12,7 +12,7 @@ r = S.r;
 % Flatten into vertex list and scale
 nodecoord = [X(:), Y(:), Z(:)] * r;
 
-% Rotation matrix
+% Rotation matrix from sphere local frame to global frame
 v = [S.vx, S.vy];
 n = [S.nx, S.ny, S.nz];
 R = calcrotation(S,v,n);

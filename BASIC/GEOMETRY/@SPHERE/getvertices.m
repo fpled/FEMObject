@@ -13,7 +13,7 @@ P{4} = [-r,  0,  0]; % -x
 P{5} = [ 0, -r,  0]; % -y
 P{6} = [ 0,  0, -r]; % -z
 
-% Rotation matrix
+% Rotation matrix from sphere local frame to global frame
 v = [S.vx, S.vy];
 n = [S.nx, S.ny, S.nz];
 R = calcrotation(S,v,n);

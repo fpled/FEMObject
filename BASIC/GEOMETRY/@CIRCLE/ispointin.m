@@ -17,12 +17,12 @@ switch C.indim
         rep = find(inCircle);
         
     case 3
-        % Rotation matrix
+        % Rotation matrix from circle local frame to global frame
         v = [C.vx, C.vy];
         n = [C.nx, C.ny, C.nz];
         R = calcrotation(C,v,n);
         
-        % Apply inverse transform to point: project into the circle local frame
+        % Apply inverse transform to point: project into circle local frame
         center = [C.cx, C.cy, C.cz];
         vec = c - center; % vector from center to point
         vec = vec * R';

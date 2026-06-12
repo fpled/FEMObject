@@ -16,7 +16,7 @@ switch C.indim
     case 2
         nodecoord = [x, y];
         
-        % Rotation matrix
+        % Rotation matrix from circle local frame to global frame
         v = [C.vx, C.vy];
         R = calcrotation(C,v);
         
@@ -27,7 +27,7 @@ switch C.indim
         z = zeros(npts,1);
         nodecoord = [x, y, z];
         
-        % Rotation matrix
+        % Rotation matrix from circle local frame to global frame
         v = [C.vx, C.vy];
         n = [C.nx, C.ny, C.nz];
         R = calcrotation(C,v,n);

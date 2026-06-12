@@ -10,7 +10,7 @@ a = E.a;
 b = E.b;
 c = E.c;
 
-% Rotation matrix
+% Rotation matrix from ellipsoid local frame to global frame
 v = [E.vx, E.vy];
 n = [E.nx, E.ny, E.nz];
 R = calcrotation(E,v,n);
@@ -18,7 +18,7 @@ R = calcrotation(E,v,n);
 % Center
 center = [E.cx, E.cy, E.cz];
 
-% Apply inverse transform to point: project into the ellipsoid local frame
+% Apply inverse transform to point: project into ellipsoid local frame
 vec = coord - center; % vector from center to point
 vec = vec * R';
 

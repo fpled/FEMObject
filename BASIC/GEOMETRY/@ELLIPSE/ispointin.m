@@ -18,7 +18,7 @@ switch E.indim
         rep = find(inEllipse);
         
     case 3
-        % Rotation matrix
+        % Rotation matrix from ellipse local frame to global frame
         v = [E.vx, E.vy];
         n = [E.nx, E.ny, E.nz];
         R = calcrotation(E,v,n);
@@ -26,7 +26,7 @@ switch E.indim
         % Center
         center = [E.cx, E.cy, E.cz];
         
-        % Apply inverse transform to point: project into the ellipse local frame
+        % Apply inverse transform to point: project into ellipse local frame
         vec = c - center; % vector from center to point
         vec = vec * R';
         

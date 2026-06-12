@@ -1,34 +1,52 @@
-function [rep,P] = ispointin(C,P)
-% function [rep,P] = ispointin(C,P)
+function [rep,P] = ispointin(T,P)
+% function [rep,P] = ispointin(T,P)
 
 tol = getfemobjectoptions('tolerancepoint');
 
 c = getcoord(P);
 
-% Radius and height
-r = C.r;
-h = C.h;
+% Major radius, minor radius, and opening angle
+r1 = T.r1;
+r2 = T.r2;
+angle = T.angle;
 
-% Rotation matrix
-v = [C.vx, C.vy];
-n = [C.nx, C.ny, C.nz];
-R = calcrotation(C,v,n);
+if isstring(angle), angle = char(angle); end
+if ischar(angle),   angle = str2num(lower(angle)); end
 
-% Apply inverse transform to point: project into the cylinder local frame
-center = [C.cx, C.cy, C.cz];
+isfull = abs(angle - 2*pi) < tol;
+
+% Rotation matrix from torus local frame to global frame
+v = [T.vx, T.vy];
+n = [T.nx, T.ny, T.nz];
+R = calcrotation(T,v,n);
+
+% Apply inverse transform to point: project into torus local frame
+center = [T.cx, T.cy, T.cz];
 vec = c - center; % vector from center to point
 vec = vec * R';
 
-% Height condition: point lies between base and top along cylinder axis
-inHeight = (vec(:,3) >= -tol) & (vec(:,3) <= h + tol);
+% Torus local coordinates
+% d = sqrt(vec(:,1).^2 + vec(:,2).^2); % radial distance
+d = hypot(vec(:,1),vec(:,2));        % radial distance
+z = vec(:,3);                        % axial coordinate
 
-% Radial condition: point lies within cylinder radius
-% d = sqrt(vec(:,1).^2 + vec(:,2).^2);
-d = hypot(vec(:,1), vec(:,2));
-inRadius = d <= r + tol;
+% Tube condition: point lies within tube
+inTube = (d - r1).^2 + z.^2 <= (r2 + tol)^2;
 
-% Both conditions: point lies between base and top along cylinder axis and within circle radius
-rep = find(inHeight & inRadius);
+% Angular condition for partial torus
+if isfull
+    inAngle = true(size(inTube));
+else
+    theta = atan2(vec(:,2),vec(:,1));
+    theta(theta < 0) = theta(theta < 0) + 2*pi;
+
+    tolAngle = tol / max(r1,eps);
+    inAngle = (theta <= angle + tolAngle) | ...
+              (theta >= 2*pi - tolAngle);
+end
+
+% Both conditions: point lies within tube with angular opening (only for partial torus)
+rep = find(inTube & inAngle);
 
 if nargout==2
     P = P(rep);

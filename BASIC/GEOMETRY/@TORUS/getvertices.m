@@ -61,7 +61,7 @@ else
     end
 end
 
-% Rotation matrix
+% Rotation matrix from local torus frame to global frame
 v = [T.vx, T.vy];
 n = [T.nx, T.ny, T.nz];
 R = calcrotation(T,v,n);

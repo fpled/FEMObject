@@ -32,7 +32,7 @@ end
 % Flatten into vertex list
 nodecoord = [X(:), Y(:), Z(:)];
 
-% Rotation matrix
+% Rotation matrix from cylinder local frame to global frame
 v = [C.vx, C.vy];
 n = [C.nx, C.ny, C.nz];
 R = calcrotation(C,v,n);

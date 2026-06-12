@@ -8,7 +8,7 @@ t(end) = []; % remove duplicate
 % Radius
 r = S.r;
 
-% Rotation matrix
+% Rotation matrix from sphere local frame to global frame
 v = [S.vx, S.vy];
 n = [S.nx, S.ny, S.nz];
 R = calcrotation(S,v,n);

@@ -14,7 +14,7 @@ switch E.indim
         P{3} = [-a,  0]; % -x
         P{4} = [ 0, -b]; % -y
         
-        % Rotation matrix
+        % Rotation matrix from ellipse local frame to global frame
         v = [E.vx, E.vy];
         R = calcrotation(E,v);
         
@@ -28,7 +28,7 @@ switch E.indim
         P{3} = [-a,  0, 0]; % -x
         P{4} = [ 0, -b, 0]; % -y
         
-        % Rotation matrix
+        % Rotation matrix from ellipse local frame to global frame
         v = [E.vx, E.vy];
         n = [E.nx, E.ny, E.nz];
         R = calcrotation(E,v,n);

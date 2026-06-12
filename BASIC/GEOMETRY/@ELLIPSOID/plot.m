@@ -10,7 +10,7 @@ a = E.a;
 b = E.b;
 c = E.c;
 
-% Rotation matrix
+% Rotation matrix from ellipsoid local frame to global frame
 v = [E.vx, E.vy];
 n = [E.nx, E.ny, E.nz];
 R = calcrotation(E,v,n);

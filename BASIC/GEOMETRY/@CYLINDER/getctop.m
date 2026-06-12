@@ -7,7 +7,7 @@ h = C.h;
 % Top center
 ctop = [0, 0, h];
 
-% Rotation matrix
+% Rotation matrix from cylinder local frame to global frame
 v = [C.vx, C.vy];
 n = [C.nx, C.ny, C.nz];
 R = calcrotation(C,v,n);
