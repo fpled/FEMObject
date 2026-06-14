@@ -5,10 +5,10 @@ function varargout = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,
 % ls : location of the supports from the centerline
 % lh : location of the holes from the centerline
 % dh : distance between the holes
-% ph : location of the top hole from the top
+% ph : location of the top hole from the top edge
 % r : radius of the holes
-% a : length of the edge crack (or notch)
-% b : location of the edge crack (or notch) from the centerline
+% a : length of the edge crack
+% b : location of the edge crack from the centerline
 % t : thickness
 % clD, clC, clH : characteristic lengths
 % filename : file name (optional)

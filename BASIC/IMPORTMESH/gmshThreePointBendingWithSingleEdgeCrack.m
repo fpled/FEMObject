@@ -3,9 +3,9 @@ function varargout = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,t,clD
 % L : length
 % H : height
 % ls : location of the supports from the outer edges
-% w : flat punch width
-% a : length of the edge crack (or notch)
-% b : location of the edge crack (or notch) from the left outer edge
+% w : flat punch / support width
+% a : length/depth of the edge crack
+% b : location of the edge crack from the left outer edge
 % t : thickness
 % clD, clC, clS : characteristic lengths
 % filename : file name (optional)
@@ -30,6 +30,9 @@ if nargin<9 || isempty(clC)
 end
 if nargin<7 || isempty(t)
     t = 1;
+end
+if nargin<6 || isempty(b)
+    b = L/2;
 end
 
 dim = 2;

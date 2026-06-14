@@ -20,5 +20,5 @@ else
         'Unsupported value type for setfieldattribute.');
 end
 
-s = ['Field[' num2str(number) '].' name ' = ' val ';\n'];
+s = ['Field[' tag2str(number) '].' name ' = ' val ';\n'];
 u = addstring(u,s);

@@ -12,11 +12,7 @@ end
 % Output capture
 prefix = '';
 if nargin>3 && ~isempty(varargin)
-    if ischar(varargin{1})
-        p = varargin{1};
-    else
-        p = num2str(varargin{1});
-    end
+    p = tag2str(varargin{1});
     prefix = [p ' = '];
 end
 

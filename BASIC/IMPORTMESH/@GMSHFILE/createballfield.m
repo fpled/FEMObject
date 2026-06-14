@@ -26,7 +26,7 @@ if nargin<9 || isempty(number)
     number = 1;
 end
 
-u = createfield(u,'Box',number);
+u = createfield(u,'Ball',number);
 u = setfieldattribute(u,'VIn',VIn,number);
 u = setfieldattribute(u,'VOut',VOut,number);
 u = setfieldattribute(u,'XCenter',XCenter,number);

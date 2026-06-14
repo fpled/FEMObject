@@ -32,7 +32,7 @@ entities = [name tagsintobraces(number) ';'];
 
 options = '';
 if ~isempty(layers)
-    options = [options ' Layers{' num2str(layers) '};'];
+    options = [options ' Layers{' tag2str(layers) '};'];
 end
 if recombine
     options = [options ' Recombine;'];
