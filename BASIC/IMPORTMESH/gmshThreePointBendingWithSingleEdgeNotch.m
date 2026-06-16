@@ -31,6 +31,9 @@ varargin = delonlycharin({'refinecrack','recombine', ...
 if nargin<13 || isempty(indim)
     indim = 2;
 end
+if nargin<12 || isempty(filename)
+    filename = 'gmsh_three_point_bending_with_single_edge_notch';
+end
 if nargin<11 || isempty(clC)
     clS = clD;
 end
@@ -76,7 +79,7 @@ PS{8} = [L/2     , H];
 PS{9} = [L/2-w/2 , H];
 
 G = GMSHFILE();
-if nargin>=12 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

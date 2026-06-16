@@ -34,6 +34,9 @@ varargin = delonlycharin({'refinecrack','recombine', ...
 if nargin<16 || isempty(indim)
     indim = 2;
 end
+if nargin<15 || isempty(filename)
+    filename = 'gmsh_asymmetric_plate_with_single_edge_notch_three_holes';
+end
 if nargin<14 || isempty(clH)
     clH = clD;
 end
@@ -59,7 +62,7 @@ H{2} = CIRCLE(-lh, h-ph-dh  , r);
 H{3} = CIRCLE(-lh, h-ph     , r);
 
 G = GMSHFILE();
-if nargin>=15 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

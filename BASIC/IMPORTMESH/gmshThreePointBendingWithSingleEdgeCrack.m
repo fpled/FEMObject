@@ -22,6 +22,9 @@ varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 if nargin<12 || isempty(indim)
     indim = 2;
 end
+if nargin<11 || isempty(filename)
+    filename = 'gmsh_three_point_bending_with_single_edge_crack';
+end
 if nargin<10 || isempty(clC)
     clS = clD;
 end
@@ -136,7 +139,7 @@ if ~isempty(Box) && isstruct(Box)
     G = setbgfield(G);
 end
 
-if nargin>=11 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

@@ -12,6 +12,9 @@ varargin = delcharin('Box',varargin);
 if nargin<6 || isempty(indim)
     indim = getindim(C);
 end
+if nargin<5 || isempty(filename)
+    filename = 'gmsh_circle_with_inclusion';
+end
 if nargin<4 || isempty(clI)
     clI = clC;
 end
@@ -37,7 +40,7 @@ numpoints = 1:5;
 numlines = 1:4;
 numlineloop = 1;
 G = gmshfile(C,clC,numpoints(1),numpoints(2:end),numlines,numlineloop);
-if nargin>=5 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

@@ -8,6 +8,9 @@ function varargout = gmshCanisterMulti(I,cl1,cl2,cl0,cltip,clI,filename,indim,va
 if nargin<8 || isempty(indim)
     indim = 2;
 end
+if nargin<7 || isempty(filename)
+    filename = 'gmsh_canister_multi';
+end
 if nargin<6 || isempty(clI)
     clI = cl1;
 end
@@ -48,7 +51,7 @@ P{15} = [lout         , h1+h0+h2, 0];
 P{16} = [0            , h1+h0+h2, 0];
 
 G = GMSHFILE();
-if nargin>=7 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

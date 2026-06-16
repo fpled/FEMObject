@@ -16,6 +16,9 @@ varargin = delonlycharin({'noduplicate','extrude'},varargin);
 if nargin<6 || isempty(indim)
     indim = getindim(D);
 end
+if nargin<5 || isempty(filename)
+    filename = 'gmsh_domain_with_hole';
+end
 if nargin<4 || isempty(clH)
     clH = clD;
 end
@@ -51,7 +54,7 @@ elseif dim==3
     numsurfaceloop = 1;
     G = gmshfile(D,clD,numpoints,numlines,numlineloop,numsurface,numsurfaceloop);
 end
-if nargin>=5 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

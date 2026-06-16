@@ -25,6 +25,9 @@ varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 if nargin<15 || isempty(indim)
     indim = 2;
 end
+if nargin<14 || isempty(filename)
+    filename = 'gmsh_asymmetric_plate_with_single_edge_crack_three_holes';
+end
 if nargin<13 || isempty(clH)
     clH = clD;
 end
@@ -131,7 +134,7 @@ if ~isempty(Box) && isstruct(Box)
     G = setbgfield(G);
 end
 
-if nargin>=14 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

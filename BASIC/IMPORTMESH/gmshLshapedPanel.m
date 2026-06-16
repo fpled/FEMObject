@@ -13,6 +13,9 @@ varargin = delcharin('Box',varargin);
 if nargin<7 || isempty(indim)
     indim = 2;
 end
+if nargin<6 || isempty(filename)
+    filename = 'gmsh_Lshaped_panel';
+end
 if nargin<5 || isempty(clC)
     clC = clD;
 end
@@ -40,7 +43,7 @@ dim = indim;
 br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
 
 G = GMSHFILE();
-if nargin>=2 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

@@ -11,6 +11,9 @@ varargin = delonlycharin('recombine',varargin);
 if nargin<4 || isempty(indim)
     indim = max(cellfun(@(x) getindim(x),I));
 end
+if nargin<3 || isempty(filename)
+    filename = 'gmsh_multi';
+end
 
 if ~iscell(I)
     I = {I};
@@ -20,7 +23,7 @@ if isscalar(cl)
 end
 
 G = GMSHFILE();
-if nargin>=3 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

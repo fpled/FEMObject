@@ -12,6 +12,9 @@ varargin = delonlycharin('noduplicate',varargin);
 if nargin<6 || isempty(indim)
     indim = getindim(D);
 end
+if nargin<5 || isempty(filename)
+    filename = 'gmsh_domain_with_interior_crack';
+end
 if nargin<4 || isempty(clC)
     clC = clD;
 end
@@ -90,7 +93,7 @@ end
 
 varargin = delonlycharin('recombine',varargin);
 
-if nargin>=5 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

@@ -7,6 +7,9 @@ function varargout = gmshLshape(cl,filename,indim,varargin)
 if nargin<3 || isempty(indim)
     indim = 2;
 end
+if nargin<2 || isempty(filename)
+    filename = 'gmsh_Lshape';
+end
 
 dim = indim;
 
@@ -30,7 +33,7 @@ dim = indim;
 br = @(tag,k) sprintf('%s[%d]', tag, k); % bracket reference helper
 
 G = GMSHFILE();
-if nargin>=2 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

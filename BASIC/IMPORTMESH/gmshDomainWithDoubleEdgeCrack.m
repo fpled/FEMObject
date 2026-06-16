@@ -17,6 +17,9 @@ varargin = delonlycharin({'noduplicate','refinecrack','recombine'},varargin);
 if nargin<7 || isempty(indim)
     indim = getindim(D);
 end
+if nargin<6 || isempty(filename)
+    filename = 'gmsh_domain_with_double_edge_crack';
+end
 if nargin<5 || isempty(clC)
     clC = clD;
 end
@@ -149,7 +152,7 @@ if ~isempty(Box) && isstruct(Box)
     G = setbgfield(G);
 end
 
-if nargin>=6 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

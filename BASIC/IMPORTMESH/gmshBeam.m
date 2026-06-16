@@ -8,11 +8,14 @@ function G = gmshBeam(P,cl,filename,indim,varargin)
 if nargin<4 || isempty(indim)
     indim = max(cellfun(@(x) size(x,2),P));
 end
+if nargin<3 || isempty(filename)
+    filename = 'gmsh_beam';
+end
 
 dim = 1;
 
 G = GMSHFILE();
-if nargin>=3 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 

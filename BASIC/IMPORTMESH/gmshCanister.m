@@ -7,6 +7,9 @@ function varargout = gmshCanister(cl1,cl2,cl0,cltip,filename,indim,varargin)
 if nargin<6 || isempty(indim)
     indim = 2;
 end
+if nargin<5 || isempty(filename)
+    filename = 'gmsh_canister';
+end
 
 dim = 2;
 
@@ -37,7 +40,7 @@ P{15} = [lout         , h1+h0+h2, 0];
 P{16} = [0            , h1+h0+h2, 0];
 
 G = GMSHFILE();
-if nargin>=5 && ischar(filename)
+if ischar(filename) && ~isempty(filename)
     G = setfile(G,filename);
 end
 
