@@ -1179,14 +1179,14 @@ plotparamelem(Strefcrack,'group')
 %% L-shaped panel
 fprintf('\n3D L-shaped panel\n');
 fprintf('\n');
-St = gmshLshape(0.1,'gmsh_L_shape_tet',3);
-Sq = gmshLshape(0.1,'gmsh_L_shape_cub',3,'recombine');
+St = gmshLshape(0.1,'gmsh_Lshape_tet',3);
+Sq = gmshLshape(0.1,'gmsh_Lshape_cub',3,'recombine');
 
 figure('Name','L-shaped panel')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% L-shaped panel
@@ -1195,12 +1195,12 @@ fprintf('\n');
 a = 250e-3; % half-length
 b = 30e-3; % distance of applied load from the right edge
 e = 100e-3; % thickness
-St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tet',3);
-Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_cub',3,'recombine');
+St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_Lshaped_panel_tet',3);
+Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_Lshaped_panel_cub',3,'recombine');
 
 figure('Name','L-shaped panel')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')

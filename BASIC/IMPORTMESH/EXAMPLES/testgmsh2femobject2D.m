@@ -747,9 +747,9 @@ Sq = gmshAsymmetricPlateWithSingleEdgeCrackThreeHoles(L,h,ls,lh,dh,ph,r,a,b,e,cl
 
 figure('Name','Asymmetric plate with single edge crack and three holes')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% Asymmetric plate with single edge circular notch and three holes
@@ -760,9 +760,9 @@ Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,
 
 figure('Name','Asymmetric plate with single edge circular notch and three holes')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% Asymmetric plate with single edge rectangular notch and three holes
@@ -773,9 +773,9 @@ Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,
 
 figure('Name','Asymmetric plate with single edge rectangular notch and three holes')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% Asymmetric plate with single edge V notch and three holes
@@ -786,9 +786,9 @@ Sq = gmshAsymmetricPlateWithSingleEdgeNotchThreeHoles(L,h,ls,lh,dh,ph,r,a,b,c,e,
 
 figure('Name','Asymmetric plate with single edge V notch and three holes')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% Symmetric plate with single edge crack under three-point bending
@@ -804,17 +804,37 @@ b = L/2; % crack offset from the left outer edge
 c = 0.5e-3; % notch width
 e = 40e-3; % thickness
 clD = 2e-3; % characteristic length for domain
-clC = c; % characteristic length for edge crack/notch
-clS = c; % characteristic length for the supports and flat punch
+clC = c/2; % characteristic length for edge crack/notch
+clS = c/2; % characteristic length for the supports and flat punch
 St = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_crack_tri',2);
 Sq = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_crack_quad',2,'recombine');
+Strefcrack = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_crack_refined_tri',2,'refinecrack');
+Sqrefcrack = gmshThreePointBendingWithSingleEdgeCrack(L,H,ls,w,a,b,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_crack_refined_quad',2,'recombine','refinecrack');
+St_struct = gmshThreePointBendingWithSingleEdgeCrackStructured(L,H,ls,w,a,b,e,clC,'gmsh_three_point_bending_with_single_edge_crack_tri_structured',2);
+Sq_struct = gmshThreePointBendingWithSingleEdgeCrackStructured(L,H,ls,w,a,b,e,clC,'gmsh_three_point_bending_with_single_edge_crack_quad_structured',2,'recombine');
 
 figure('Name','Symmetric plate with single edge crack under three-point bending')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
+
+figure('Name','Symmetric plate with single edge crack under three-point bending')
+clf
+subplot(2,1,1)
+plotparamelem(Strefcrack,'group')
+subplot(2,1,2)
+plotparamelem(Sqrefcrack,'group')
+
+figure('Name','Symmetric plate with single edge crack under three-point bending')
+clf
+subplot(2,1,1)
+% plotparamelem(St_struct,'group')
+plotparamelem(St_struct,'material')
+subplot(2,1,2)
+% plotparamelem(Sq_struct,'group')
+plotparamelem(Sq_struct,'material')
 
 %% Symmetric plate with single edge circular notch under three-point bending
 fprintf('\n2D Symmetric plate with single edge circular notch under three-point bending\n');
@@ -824,9 +844,9 @@ Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh
 
 figure('Name','Symmetric plate with single edge circular notch under three-point bending')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% Symmetric plate with single edge rectangular notch under three-point bending
@@ -834,13 +854,33 @@ fprintf('\n2D Symmetric plate with single edge rectangular notch under three-poi
 fprintf('\n');
 St = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_rectangular_notch_tri',2,'r');
 Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_rectangular_notch_quad',2,'r','recombine');
+Strefcrack = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_rectangular_notch_refined_tri',2,'r','refinecrack');
+Sqrefcrack = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh_three_point_bending_with_single_edge_rectangular_notch_refined_quad',2,'r','recombine','refinecrack');
+St_struct = gmshThreePointBendingWithSingleEdgeRectangularNotchStructured(L,H,ls,w,a,b,c,e,clC,'gmsh_three_point_bending_with_single_edge_rectangular_notch_tri_structured',2);
+Sq_struct = gmshThreePointBendingWithSingleEdgeRectangularNotchStructured(L,H,ls,w,a,b,c,e,clC,'gmsh_three_point_bending_with_single_edge_rectangular_notch_quad_structured',2,'recombine');
 
 figure('Name','Symmetric plate with single edge rectangular notch under three-point bending')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
+
+figure('Name','Symmetric plate with single edge rectangular notch under three-point bending')
+clf
+subplot(2,1,1)
+plotparamelem(Strefcrack,'group')
+subplot(2,1,2)
+plotparamelem(Sqrefcrack,'group')
+
+figure('Name','Symmetric plate with single edge rectangular notch under three-point bending')
+clf
+subplot(2,1,1)
+% plotparamelem(St_struct,'group')
+plotparamelem(St_struct,'material')
+subplot(2,1,2)
+% plotparamelem(Sq_struct,'group')
+plotparamelem(Sq_struct,'material')
 
 %% Symmetric plate with single edge V notch under three-point bending
 fprintf('\n2D Symmetric plate with single edge V notch under three-point bending\n');
@@ -850,16 +890,16 @@ Sq = gmshThreePointBendingWithSingleEdgeNotch(L,H,ls,w,a,b,c,e,clD,clC,clS,'gmsh
 
 figure('Name','Symmetric plate with single edge V notch under three-point bending')
 clf
-subplot(1,2,1)
+subplot(2,1,1)
 plotparamelem(St,'group')
-subplot(1,2,2)
+subplot(2,1,2)
 plotparamelem(Sq,'group')
 
 %% L-shaped panel
 fprintf('\n2D L-shaped panel\n');
 fprintf('\n');
-St = gmshLshape(0.05,'gmsh_L_shape_tri');
-Sq = gmshLshape(0.05,'gmsh_L_shape_quad',2,'recombine');
+St = gmshLshape(0.05,'gmsh_Lshape_tri');
+Sq = gmshLshape(0.05,'gmsh_Lshape_quad',2,'recombine');
 
 figure('Name','L-shaped panel')
 clf
@@ -874,8 +914,8 @@ fprintf('\n');
 a = 250e-3; % half-length
 b = 30e-3; % distance of applied load from the right edge
 e = 100e-3; % thickness
-St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_tri');
-Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_L_shaped_panel_quad',2,'recombine');
+St = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_Lshaped_panel_tri');
+Sq = gmshLshapedPanel(a,b,e,20e-3,5e-3,'gmsh_Lshaped_panel_quad',2,'recombine');
 
 figure('Name','L-shaped panel')
 clf
