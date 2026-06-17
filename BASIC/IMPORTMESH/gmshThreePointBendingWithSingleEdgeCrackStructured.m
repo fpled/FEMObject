@@ -182,13 +182,13 @@ if ~noduplicate
     physicalgroup = 1;
     
     iCrack = find(abs(x-b)<tol,1,'first');
-    jTip   = find(abs(y-a)<tol,1,'first');
+    jMouth = find(abs(y)<tol,1,'first');
     
-    if isempty(iCrack) || isempty(jTip) || isempty(numlinecrack)
-        error('Internal error: crack line or crack-tip point was not created.');
+    if isempty(iCrack) || isempty(jMouth) || isempty(numlinecrack)
+        error('Internal error: crack line or crack-mouth point was not created.');
     end
     
-    G = createphysicalpoint(G,P(jTip,iCrack),openboundaryphysicalgroup);
+    G = createphysicalpoint(G,P(jMouth,iCrack),openboundaryphysicalgroup);
     G = createphysicalcurve(G,numlinecrack,physicalgroup);
 end
 
