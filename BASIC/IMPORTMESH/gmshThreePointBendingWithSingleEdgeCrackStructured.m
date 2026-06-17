@@ -58,6 +58,11 @@ xSupportRight = [];
 xPunch        = [];
 
 if ~isempty(ls) && ~isempty(w) && w>0
+    if ls-w/2 < -tol || ls+w/2 > L+tol || ...
+       L-ls-w/2 < -tol || L-ls+w/2 > L+tol || ...
+       b-w/2 < -tol || b+w/2 > L+tol
+        error('Support or punch interval lies outside the domain.');
+    end
     xSupportLeft  = [ls-w/2, ls, ls+w/2];
     xSupportRight = [L-ls-w/2, L-ls, L-ls+w/2];
     xPunch        = [b-w/2, b, b+w/2];
