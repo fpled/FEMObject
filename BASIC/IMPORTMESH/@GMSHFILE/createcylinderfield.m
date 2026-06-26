@@ -23,7 +23,7 @@ if nargin<8 || isempty(YAxis)
     YAxis = 0;
 end
 if nargin<9 || isempty(ZAxis)
-    ZAxis = 0;
+    ZAxis = 1;
 end
 if nargin<10 || isempty(Radius)
     Radius = 0;
@@ -32,7 +32,7 @@ if nargin<11 || isempty(number)
     number = 1;
 end
 
-u = createfield(u,'Box',number);
+u = createfield(u,'Cylinder',number);
 u = setfieldattribute(u,'VIn',VIn,number);
 u = setfieldattribute(u,'VOut',VOut,number);
 u = setfieldattribute(u,'XCenter',XCenter,number);
